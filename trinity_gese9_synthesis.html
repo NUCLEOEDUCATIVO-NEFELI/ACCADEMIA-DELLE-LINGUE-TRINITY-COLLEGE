@@ -1,0 +1,1792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity College London - Grade 9 (B2.3) - Intermediate Preparation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1565c0;
+            --secondary: #455a64;
+            --accent: #d84315;
+            --light: #e3f2fd;
+            --dark: #263238;
+            --border: #bbdefb;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #f5f5f5;
+            --b2-color: #6a1b9a;
+            --warning: #ef6c00;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3e0;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--b2-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b2-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b2-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #0d47a1;
+        }
+
+        .btn-check {
+            background: var(--b2-color);
+            color: white;
+        }
+
+        .btn-check:hover {
+            background: #4a148c;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b2-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d47a1 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ffab91;
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .essay-section {
+            background: white;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .essay-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .essay-step {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--b2-color);
+        }
+
+        .essay-step h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin: 2rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .subject-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .subject-item {
+            background: var(--light);
+            padding: 0.75rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .topic-form-template {
+            background: #fafafa;
+            border: 2px dashed var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .topic-point {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 0.5rem;
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .topic-point::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+            .subject-list { grid-template-columns: 1fr; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity College London - Grade 9 (B2.3)</h1>
+            <p>Intermediate Level: Abstract Ideas, Hypothesising, and Complex Discourse</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity GESE</a>
+            <span>›</span>
+            <strong>Grade 9 (B2.3) - Intermediate Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Grade 9 Intermediate Grammar and Discourse</h1>
+            <p class="page-subtitle">Expressing Abstract Ideas, Regrets, Wishes, and Evaluating Options</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('grammar', this)">Grammar</button>
+            <button class="nav-tab" onclick="showSection('essay', this)">Topic Task</button>
+            <button class="nav-tab" onclick="showSection('video', this)">Video Example</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">60 Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">Grade 9 Overview (B2.3 Level)</div>
+                <div class="card-body">
+                    <p>Grade 9 of the Trinity College London GESE exam corresponds to level B2.3 (upper-intermediate) of the CEFR. At this level, candidates demonstrate the ability to communicate with spontaneity, engage in extended conversation, and handle complex language structures.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Key Features of Grade 9:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Duration:</strong> 15 minutes</li>
+                            <li><strong>Topic Discussion:</strong> Candidate-led discussion of prepared topic (5 minutes)</li>
+                            <li><strong>Interactive Task:</strong> Controlling interaction through questioning (4 minutes)</li>
+                            <li><strong>Conversation:</strong> Two subject areas from the prescribed list (5 minutes)</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Exam Tip:</strong> At Grade 9, you must demonstrate the ability to express abstract ideas, hypothesise, evaluate options, express regrets and wishes, and maintain discourse using paraphrasing and cohesive devices.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Subject Areas for Conversation</div>
+                <div class="card-body">
+                    <p>The examiner will select <strong>two</strong> subject areas from the following list. You must not choose your topic from these areas.</p>
+                    
+                    <div class="subject-list">
+                        <div class="subject-item"><strong>Dreams and nightmares</strong> — Sleep experiences, interpretations, recurring themes</div>
+                        <div class="subject-item"><strong>Crime and punishment</strong> — Justice system, rehabilitation, deterrence</div>
+                        <div class="subject-item"><strong>Technology</strong> — Innovation, dependence, future implications</div>
+                        <div class="subject-item"><strong>Habits and obsessions</strong> — Daily routines, compulsive behaviors, breaking habits</div>
+                        <div class="subject-item"><strong>Global environmental issues</strong> — Climate change, conservation, sustainability</div>
+                        <div class="subject-item"><strong>Design</strong> — Architecture, product design, aesthetics vs. function</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Language Functions at Grade 9</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        You must demonstrate these communicative functions:
+                    </div>
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Expressing abstract ideas</strong> — Discussing concepts beyond concrete experience</li>
+                        <li><strong>Expressing regrets, wishes and hopes</strong> — Using correct verb patterns</li>
+                        <li><strong>Expressing assumptions</strong> — Making educated guesses about situations</li>
+                        <li><strong>Paraphrasing</strong> — Rephrasing when communication breaks down</li>
+                        <li><strong>Evaluating options</strong> — Weighing advantages and disadvantages</li>
+                        <li><strong>Hypothesising</strong> — Discussing hypothetical situations</li>
+                        <li><strong>Evaluating past actions</strong> — Assessing decisions and consequences</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRAMMAR SECTION -->
+        <section id="grammar" class="section">
+            <div class="card">
+                <div class="card-header">Mixed Conditionals</div>
+                <div class="card-body">
+                    <p>At Grade 9, you must demonstrate mixed conditionals — combining different time references in conditional sentences.</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Structure</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Mixed 2nd/3rd</td>
+                                <td>If + past perfect, would + base</td>
+                                <td>If I <strong>had studied</strong> harder, I <strong>would be</strong> at university now.</td>
+                            </tr>
+                            <tr>
+                                <td>Mixed 3rd/2nd</td>
+                                <td>If + past simple, would have + pp</td>
+                                <td>If I <strong>were</strong> more confident, I <strong>would have applied</strong> for that job.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Advanced Examples:</strong><br>
+                        • If we <strong>had invested</strong> in renewable energy earlier, we <strong>wouldn't be facing</strong> this climate crisis now.<br>
+                        • If I <strong>didn't live</strong> in the city, I <strong>would have bought</strong> a car years ago.<br>
+                        • If she <strong>hadn't missed</strong> that flight, she <strong>would be sitting</strong> in the meeting right now.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Complex Passive with Modals</div>
+                <div class="card-body">
+                    <p>Grade 9 requires passive constructions with modal verbs to express possibility, obligation, and speculation.</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Structure</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Obligation/Advice</td>
+                                <td>should/ought to + be + pp</td>
+                                <td>The report <strong>should be submitted</strong> by Friday.</td>
+                            </tr>
+                            <tr>
+                                <td>Possibility</td>
+                                <td>may/might/could + be + pp</td>
+                                <td>The problem <strong>could be solved</strong> with better funding.</td>
+                            </tr>
+                            <tr>
+                                <td>Speculation (past)</td>
+                                <td>must/can't + have been + pp</td>
+                                <td>The theft <strong>must have been planned</strong> in advance.</td>
+                            </tr>
+                            <tr>
+                                <td>Expectation (unfulfilled)</td>
+                                <td>should + have been + pp</td>
+                                <td>The issue <strong>should have been addressed</strong> sooner.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Common Error:</strong> Don't confuse active and passive voice in modal perfect constructions.<br>
+                        ❌ The criminal must have caught. (Active meaning but passive construction needed)<br>
+                        ✅ The criminal <strong>must have been caught</strong> by now.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Gerunds vs. Infinitives: Meaning Changes</div>
+                <div class="card-body">
+                    <p>At B2.3 level, you must control verbs where the meaning changes depending on the form that follows.</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Verb</th>
+                                <th>+ Gerund (-ing)</th>
+                                <th>+ Infinitive (to)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>forget</td>
+                                <td>Forget <strong>meeting</strong> him. (past memory)</td>
+                                <td>Forget <strong>to meet</strong> him. (future obligation)</td>
+                            </tr>
+                            <tr>
+                                <td>remember</td>
+                                <td>Remember <strong>visiting</strong> Paris. (past experience)</td>
+                                <td>Remember <strong>to visit</strong> grandma. (don't forget)</td>
+                            </tr>
+                            <tr>
+                                <td>stop</td>
+                                <td>Stop <strong>smoking</strong>. (quit the habit)</td>
+                                <td>Stop <strong>to smoke</strong>. (pause in order to smoke)</td>
+                            </tr>
+                            <tr>
+                                <td>regret</td>
+                                <td>I regret <strong>telling</strong> him. (past action)</td>
+                                <td>I regret <strong>to inform</strong> you... (formal bad news)</td>
+                            </tr>
+                            <tr>
+                                <td>try</td>
+                                <td>Try <strong>eating</strong> less sugar. (experiment)</td>
+                                <td>Try <strong>to eat</strong> less. (make an effort)</td>
+                            </tr>
+                            <tr>
+                                <td>go on</td>
+                                <td>Go on <strong>talking</strong>. (continue)</td>
+                                <td>Go on <strong>to explain</strong>... (change to new subject)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Wish and Hope: Correct Patterns</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Wish + Past Perfect:</strong> Regrets about the past<br>
+                        • I wish I <strong>had studied</strong> medicine. (but I didn't)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Wish + Past Simple:</strong> Present/future desires (unreal)<br>
+                        • I wish I <strong>knew</strong> the answer. (but I don't)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Hope + Present/Future:</strong> Real possibilities<br>
+                        • I hope you <strong>feel</strong> better soon.<br>
+                        • I hope it <strong>doesn't rain</strong> tomorrow.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Common Error:</strong> Do not use "wish" + "would" for your own actions when you have control:<br>
+                        ❌ I wish I would study more.<br>
+                        ✅ I wish I studied more. / I wish I had studied more.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Modal Perfect: Should/Must/Might/Could + Perfect Infinitive</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Structure</th>
+                                <th>Meaning</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>should have + pp</td>
+                                <td>Regret/criticism (didn't happen)</td>
+                                <td>You <strong>should have told</strong> me earlier!</td>
+                            </tr>
+                            <tr>
+                                <td>must have + pp</td>
+                                <td>Strong deduction about past</td>
+                                <td>He <strong>must have forgotten</strong> the meeting.</td>
+                            </tr>
+                            <tr>
+                                <td>might have + pp</td>
+                                <td>Possibility in past</td>
+                                <td>She <strong>might have missed</strong> the train.</td>
+                            </tr>
+                            <tr>
+                                <td>could have + pp</td>
+                                <td>Past possibility/ability unused</td>
+                                <td>We <strong>could have won</strong> if we'd tried harder.</td>
+                            </tr>
+                            <tr>
+                                <td>can't have + pp</td>
+                                <td>Negative deduction</td>
+                                <td>He <strong>can't have stolen</strong> it — he wasn't there.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Discourse Connectors and Cohesive Devices</div>
+                <div class="card-body">
+                    <p>At Grade 9, you must use sophisticated connectors to organize discourse and recover from interruptions.</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Expressions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Recapping</td>
+                                <td>As I was saying..., To return to my point..., Where was I?</td>
+                            </tr>
+                            <tr>
+                                <td>Adding information</td>
+                                <td>Furthermore, Moreover, In addition to that, What's more</td>
+                            </tr>
+                            <tr>
+                                <td>Contrasting</td>
+                                <td>Nevertheless, However, On the other hand, Having said that</td>
+                            </tr>
+                            <tr>
+                                <td>Giving examples</td>
+                                <td>For instance, To illustrate this, A case in point is</td>
+                            </tr>
+                            <tr>
+                                <td>Concluding</td>
+                                <td>To sum up, All in all, Taking everything into account</td>
+                            </tr>
+                            <tr>
+                                <td>Hedging</td>
+                                <td>To some extent, Up to a point, In a way, Sort of</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Handling Interruptions:</strong><br>
+                        "That's an interesting point. <strong>As I was saying</strong> earlier, the main issue is..."<br>
+                        "<strong>To return to what I was saying</strong>, we need to consider..."<br>
+                        "<strong>Where was I?</strong> Oh yes, I was talking about..."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOPIC TASK SECTION -->
+        <section id="essay" class="section">
+            <div class="essay-section">
+                <h2 class="essay-title">How to Prepare the Grade 9 Topic Discussion</h2>
+                
+                <div class="instruction-box">
+                    <strong>Requirements:</strong> At Grade 9, you must prepare a <strong>Topic Form</strong> with <strong>six discussion points</strong>. The examiner will select from these points to facilitate a spontaneous, authentic discussion. You must NOT read from a script — this is a conversation, not a presentation.
+                </div>
+
+                <div class="essay-step">
+                    <h4>Step 1: Choose an Appropriate Topic</h4>
+                    <p>Your topic should be:</p>
+                    <ul>
+                        <li><strong>Personal and meaningful</strong> — something you genuinely care about</li>
+                        <li><strong>Complex enough</strong> to allow abstract discussion and evaluation</li>
+                        <li><strong>NOT from the subject area list</strong> (Dreams, Crime, Technology, Habits, Environment, Design)</li>
+                        <li><strong>Capable of generating six distinct discussion points</strong></li>
+                    </ul>
+                    <p><strong>Good topics:</strong> "My transition from high school to university," "How learning guitar changed my perspective on discipline," "The impact of moving countries on my identity"</p>
+                    <p><strong>Avoid:</strong> "My favorite hobby" (too simple), "My family" (too descriptive), "My country" (too general)</p>
+                </div>
+
+                <div class="essay-step">
+                    <h4>Step 2: Create Your Topic Form</h4>
+                    <p>Prepare a form with <strong>six discussion points</strong>. These should not be questions, but areas for exploration.</p>
+                    
+                    <div class="topic-form-template">
+                        <strong>Sample Topic Form: "My Decision to Become Vegan"</strong>
+                        <div class="topic-point">Initial skepticism and misconceptions about plant-based diets</div>
+                        <div class="topic-point">The documentary that triggered my research</div>
+                        <div class="topic-point">Challenges faced when changing eating habits</div>
+                        <div class="topic-point">How this choice affected my social relationships</div>
+                        <div class="topic-point">Evaluating the environmental vs. health benefits debate</div>
+                        <div class="topic-point">Regrets about not making this change earlier</div>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Important:</strong> The examiner will choose which points to discuss. You must be prepared to talk about ALL six points spontaneously. Do not write full sentences — just key words or short phrases.
+                    </div>
+                </div>
+
+                <div class="essay-step">
+                    <h4>Step 3: Structure Your Discussion</h4>
+                    <p><strong>Opening (30 seconds):</strong></p>
+                    <ul>
+                        <li>Briefly introduce your topic</li>
+                        <li>Explain why you chose it</li>
+                        <li>Hand the Topic Form to the examiner</li>
+                    </ul>
+                    
+                    <p><strong>Development (4-5 minutes):</strong></p>
+                    <ul>
+                        <li>Respond to the examiner's questions about your points</li>
+                        <li>Expand with examples, anecdotes, and reflections</li>
+                        <li>Use language functions: hypothesise, evaluate, express regrets</li>
+                        <li>Ask the examiner at least one question about your topic</li>
+                        <li>Handle interruptions by recapping: "As I was saying..."</li>
+                    </ul>
+                </div>
+
+                <div class="essay-step">
+                    <h4>Step 4: Practice Language Functions</h4>
+                    <p>Ensure you can naturally use:</p>
+                    <ul>
+                        <li><strong>Abstract ideas:</strong> "This represents a fundamental shift in..."</li>
+                        <li><strong>Hypothesising:</strong> "If I hadn't made that choice, I would probably..."</li>
+                        <li><strong>Evaluating:</strong> "Looking back, I should have..." / "In retrospect, I might have..."</li>
+                        <li><strong>Paraphrasing:</strong> "What I mean is..." / "In other words..."</li>
+                        <li><strong>Wishes:</strong> "I wish I had realised sooner that..."</li>
+                    </ul>
+                </div>
+
+                <div class="essay-step">
+                    <h4>Step 5: Interactive Skills</h4>
+                    <ul>
+                        <li>Maintain eye contact — don't look at notes</li>
+                        <li>Use cohesive devices to link your ideas</li>
+                        <li>If interrupted, acknowledge and return to your point</li>
+                        <li>Ask the examiner a genuine question to engage them</li>
+                        <li>Show enthusiasm and personal investment in the topic</li>
+                    </ul>
+                </div>
+
+                <div class="rule-box">
+                    <strong>Sample Opening:</strong><br>
+                    "I'd like to talk about my experience of moving from a small village to a big city for university. This was a pivotal moment for me because it challenged many assumptions I'd grown up with. I've prepared six aspects of this transition that I'd like to discuss with you."
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Language for Evaluating and Hypothesising</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Useful Phrases</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Evaluating past actions</td>
+                                <td>"In retrospect...", "Looking back...", "With hindsight...", "I now realise..."</td>
+                            </tr>
+                            <tr>
+                                <td>Hypothesising (present)</td>
+                                <td>"Suppose...", "Imagine...", "If that were the case...", "Assuming that..."</td>
+                            </tr>
+                            <tr>
+                                <td>Hypothesising (past)</td>
+                                <td>"If I had known...", "Had I realised...", "If things had been different..."</td>
+                            </tr>
+                            <tr>
+                                <td>Expressing assumptions</td>
+                                <td>"I assume that...", "I take it that...", "Presumably...", "I would imagine..."</td>
+                            </tr>
+                            <tr>
+                                <td>Paraphrasing</td>
+                                <td>"What I'm trying to say is...", "To put it another way...", "What I mean is..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SECTION -->
+        <section id="video" class="section">
+            <div class="card">
+                <div class="card-header">Official Trinity GESE Grade 9 Exam Example</div>
+                <div class="card-body">
+                    <p>Watch this official Trinity College London video showing a real Grade 9 exam. Pay attention to the candidate's use of language functions, how they handle the Topic phase, and their interactive skills.</p>
+                    
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/j_IwRiVfhKc" 
+                            title="Trinity GESE Grade 9 Sample Exam" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>What to observe in this video:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Topic Phase:</strong> How the candidate introduces their topic and handles the examiner's questions</li>
+                            <li><strong>Language Functions:</strong> Notice the use of mixed conditionals, modal perfects, and evaluation phrases</li>
+                            <li><strong>Interactive Phase:</strong> How the candidate asks questions to control the conversation</li>
+                            <li><strong>Recovery Strategies:</strong> How the candidate paraphrases when searching for words</li>
+                            <li><strong>Cohesive Devices:</strong> Listen for "furthermore," "nevertheless," "as I was saying"</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Examiner Assessment Focus:</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li>Range and accuracy of grammatical structures</li>
+                            <li>Ability to express abstract ideas clearly</li>
+                            <li>Discourse management and turn-taking</li>
+                            <li>Interactive communication skills</li>
+                            <li>Pronunciation, stress, and intonation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Additional Preparation Resources</div>
+                <div class="card-body">
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Official Trinity Website:</strong> <a href="https://www.trinitycollege.com/GESE">trinitycollege.com/GESE</a></li>
+                        <li><strong>GESE Exam Information Booklet:</strong> Download specifications and sample Topic forms</li>
+                        <li><strong>Teacher Guides:</strong> Available for Grades 7-9 with activity suggestions</li>
+                        <li><strong>Practice:</strong> Record yourself discussing your topic for 5 minutes</li>
+                        <li><strong>Peer Practice:</strong> Have a partner interrupt you and ask unexpected questions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 60</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Exercises loaded dynamically -->
+                </div>
+
+                <!-- FINAL SCORE SECTION -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>Congratulations! You've completed all 60 exercises!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        Try All Exercises Again
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London GESE - Grade 9 (B2.3) Preparation</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database of 60 exercises for Grade 9 (B2.3)
+        const exercises = [
+            // EXERCISES 1-12: Mixed Conditionals
+            {
+                id: 1,
+                type: 'choice',
+                question: 'If I __________ harder at school, I would have a better job now.',
+                options: ['had studied', 'studied', 'have studied', 'would study'],
+                correct: 'had studied',
+                explanation: 'Correct! Mixed conditional: If + past perfect (3rd conditional), would + base (2nd conditional) — past action affecting present result.',
+                errorExplanation: 'Use past perfect (had studied) for the if-clause in mixed 3rd/2nd conditionals'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'If I __________ (not/be) so shy, I would have asked her out. (mixed conditional)',
+                correct: ['weren\'t', 'was not'],
+                explanation: 'Correct! Mixed conditional: If + past simple (2nd conditional), would have + pp (3rd conditional) — present state affecting past result.'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'If we __________ earlier, we wouldn\'t be stuck in traffic now.',
+                options: ['had left', 'left', 'have left', 'would leave'],
+                correct: 'had left',
+                explanation: 'Correct! Past action (had left) affects present result (wouldn\'t be stuck).',
+                errorExplanation: 'Use past perfect for past actions affecting present situations'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'If the weather __________ (be) better yesterday, we would be at the beach today.',
+                correct: ['had been'],
+                explanation: 'Correct! Mixed conditional referring to past weather affecting present location.'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'If I __________ more confident, I would have applied for that position.',
+                options: ['were', 'had been', 'am', 'would be'],
+                correct: 'were',
+                explanation: 'Correct! Present state (were) affecting past action (would have applied).',
+                errorExplanation: 'Use past simple (were) for present hypothetical states'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'If she __________ (not/miss) the train, she would be in the meeting now.',
+                correct: ['hadn\'t missed', 'had not missed'],
+                explanation: 'Correct! Negative past perfect in mixed conditional.'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'If we __________ in renewable energy years ago, we wouldn\'t be facing this crisis.',
+                options: ['had invested', 'invested', 'have invested', 'would invest'],
+                correct: 'had invested',
+                explanation: 'Correct! Past perfect for past decision affecting present situation.',
+                errorExplanation: 'Use had invested for past actions with present consequences'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'If I __________ (know) about the party, I would have come. (present → past)',
+                correct: ['knew'],
+                explanation: 'Correct! Present knowledge affecting past action — mixed 2nd/3rd conditional.'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'If they __________ the warning signs, the accident wouldn\'t have happened.',
+                options: ['had noticed', 'noticed', 'have noticed', 'would notice'],
+                correct: 'had noticed',
+                explanation: 'Correct! Past perfect for past condition affecting past result.',
+                errorExplanation: 'Use had noticed for hypothetical past situations'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'If I __________ (live) closer to work, I would have walked today.',
+                correct: ['lived'],
+                explanation: 'Correct! Present situation (living far) affecting past choice (not walking).'
+            },
+            {
+                id: 11,
+                type: 'choice',
+                question: 'If the software __________ properly, we would be finished by now.',
+                options: ['had been working', 'was working', 'worked', 'have worked'],
+                correct: 'had been working',
+                explanation: 'Correct! Past perfect continuous for ongoing past situation affecting present.',
+                errorExplanation: 'Use past perfect continuous for ongoing past states'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'If he __________ (take) my advice, he would be much happier now.',
+                correct: ['had taken'],
+                explanation: 'Correct! Past advice not taken affecting present happiness.'
+            },
+
+            // EXERCISES 13-22: Complex Passive with Modals
+            {
+                id: 13,
+                type: 'choice',
+                question: 'The report __________ by Friday at the latest.',
+                options: ['should be submitted', 'should submit', 'should to be submitted', 'should being submitted'],
+                correct: 'should be submitted',
+                explanation: 'Correct! Modal passive: should + be + past participle.',
+                errorExplanation: 'Use modal + be + past participle for passive obligation'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'The problem __________ (could/solve) with more funding.',
+                correct: ['could be solved'],
+                explanation: 'Correct! Modal passive for possibility: could + be + pp.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'The theft __________ in advance; it was too well organised.',
+                options: ['must have been planned', 'must be planned', 'must have planned', 'must to be planned'],
+                correct: 'must have been planned',
+                explanation: 'Correct! Modal perfect passive for past deduction.',
+                errorExplanation: 'Use must have been + pp for strong past deduction'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'The issue __________ (should/address) sooner by management.',
+                correct: ['should have been addressed'],
+                explanation: 'Correct! Should have been + pp for unfulfilled past obligation.'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'These documents __________ immediately.',
+                options: ['must be shredded', 'must to shred', 'must have shredded', 'must being shredded'],
+                correct: 'must be shredded',
+                explanation: 'Correct! Must + be + pp for strong present obligation.',
+                errorExplanation: 'Use must be + past participle'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'The suspect __________ (may/question) by police already.',
+                correct: ['may have been questioned', 'might have been questioned'],
+                explanation: 'Correct! May/might have been + pp for past possibility.'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'The decision __________ by the committee next week.',
+                options: ['will be announced', 'will announce', 'will been announced', 'will being announced'],
+                correct: 'will be announced',
+                explanation: 'Correct! Future passive: will + be + pp.',
+                errorExplanation: 'Use will be + past participle for future passive'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'The error __________ (can\'t/make) by the machine; it was human error.',
+                correct: ['can\'t have been made', 'couldn\'t have been made'],
+                explanation: 'Correct! Negative deduction in passive: can\'t have been + pp.'
+            },
+            {
+                id: 21,
+                type: 'choice',
+                question: 'The new policy __________ by all employees.',
+                options: ['must be followed', 'must follow', 'must to follow', 'must following'],
+                correct: 'must be followed',
+                explanation: 'Correct! Must + be + pp for obligation.',
+                errorExplanation: 'Use must be + past participle'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'The data __________ (believe/corrupt) during transfer.',
+                correct: ['is believed to have been corrupted'],
+                explanation: 'Correct! Passive reporting structure: is believed to have been + pp.'
+            },
+
+            // EXERCISES 23-35: Gerund vs Infinitive
+            {
+                id: 23,
+                type: 'choice',
+                question: 'I regret __________ you that your application was unsuccessful.',
+                options: ['to tell', 'telling', 'tell', 'told'],
+                correct: 'to tell',
+                explanation: 'Correct! Regret + to-infinitive = formal announcement of bad news.',
+                errorExplanation: 'Use regret to + infinitive for formal bad news'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'I regret __________ (tell) him the secret; now everyone knows.',
+                correct: ['telling'],
+                explanation: 'Correct! Regret + gerund = regret about past action.'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Do you remember __________ him at the conference last year?',
+                options: ['meeting', 'to meet', 'meet', 'met'],
+                correct: 'meeting',
+                explanation: 'Correct! Remember + gerund = past memory.',
+                errorExplanation: 'Use remember + gerund for memories'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Please remember __________ (lock) the door when you leave.',
+                correct: ['to lock'],
+                explanation: 'Correct! Remember + to-infinitive = future obligation.'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'I meant __________ you yesterday, but I completely forgot.',
+                options: ['to call', 'calling', 'call', 'called'],
+                correct: 'to call',
+                explanation: 'Correct! Mean + to-infinitive = intend.',
+                errorExplanation: 'Use mean to + infinitive for intentions'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Working from home __________ (mean/spend) less time commuting.',
+                correct: ['means spending'],
+                explanation: 'Correct! Mean + gerund = involve/entail.'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'He stopped __________ when he realised the health risks.',
+                options: ['smoking', 'to smoke', 'smoke', 'smoked'],
+                correct: 'smoking',
+                explanation: 'Correct! Stop + gerund = quit an activity.',
+                errorExplanation: 'Use stop + gerund to quit an activity'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'We stopped __________ (ask) for directions because we were lost.',
+                correct: ['to ask'],
+                explanation: 'Correct! Stop + to-infinitive = pause in order to do something.'
+            },
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Why don\'t you try __________ less sugar? You might feel better.',
+                options: ['eating', 'to eat', 'eat', 'eaten'],
+                correct: 'eating',
+                explanation: 'Correct! Try + gerund = experiment/suggestion.',
+                errorExplanation: 'Use try + gerund when suggesting an experiment'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'I tried __________ (open) the jar, but it was completely stuck.',
+                correct: ['to open'],
+                explanation: 'Correct! Try + to-infinitive = make an effort.'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'She went on __________ about her trip for nearly an hour.',
+                options: ['talking', 'to talk', 'talk', 'talked'],
+                correct: 'talking',
+                explanation: 'Correct! Go on + gerund = continue same activity.',
+                errorExplanation: 'Use go on + gerund to continue'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'After discussing the budget, she went on __________ (present) the marketing plan.',
+                correct: ['to present'],
+                explanation: 'Correct! Go on + to-infinitive = change to new activity.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'I\'ll never forget __________ the Grand Canyon for the first time. It was breathtaking.',
+                options: ['seeing', 'to see', 'see', 'seen'],
+                correct: 'seeing',
+                explanation: 'Correct! Forget + gerund = loss of memory about past event.',
+                errorExplanation: 'Use forget + gerund for memories'
+            },
+
+            // EXERCISES 36-45: Modal Perfect
+            {
+                id: 36,
+                type: 'fill',
+                question: 'You __________ (should/tell) me earlier! I could have helped.',
+                correct: ['should have told'],
+                explanation: 'Correct! Should have + pp for regret/criticism about past.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'He __________ the meeting. He never forgets appointments.',
+                options: ['must have forgotten', 'must forget', 'must had forgotten', 'must forgotten'],
+                correct: 'must have forgotten',
+                explanation: 'Correct! Must have + pp for strong deduction about past.',
+                errorExplanation: 'Use must have + past participle'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'She __________ (might/miss) the train — that\'s why she\'s late.',
+                correct: ['might have missed', 'may have missed'],
+                explanation: 'Correct! Might/May have + pp for past possibility.'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'We __________ if we had practiced more regularly.',
+                options: ['could have won', 'could win', 'could had won', 'could winning'],
+                correct: 'could have won',
+                explanation: 'Correct! Could have + pp for unused past possibility.',
+                errorExplanation: 'Use could have + past participle'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'He __________ (can\'t/steal) the money — he was with me all day.',
+                correct: ['can\'t have stolen', 'couldn\'t have stolen'],
+                explanation: 'Correct! Can\'t/Couldn\'t have + pp for negative past deduction.'
+            },
+            {
+                id: 41,
+                type: 'choice',
+                question: 'You __________ so much money on that car. It\'s always breaking down.',
+                options: ['shouldn\'t have spent', 'shouldn\'t spend', 'shouldn\'t had spent', 'shouldn\'t spending'],
+                correct: 'shouldn\'t have spent',
+                explanation: 'Correct! Shouldn\'t have + pp for past criticism.',
+                errorExplanation: 'Use shouldn\'t have + past participle'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'I __________ (would/visit) you, but I didn\'t know you were home.',
+                correct: ['would have visited'],
+                explanation: 'Correct! Would have + pp for hypothetical past result.'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'The package __________ yesterday. Let me check the tracking.',
+                options: ['might have arrived', 'might arrive', 'might had arrived', 'might arriving'],
+                correct: 'might have arrived',
+                explanation: 'Correct! Might have + pp for past possibility.',
+                errorExplanation: 'Use might have + past participle'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'They __________ (must/leave) early — their car\'s not here.',
+                correct: ['must have left'],
+                explanation: 'Correct! Must have + pp for strong past deduction.'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'I __________ harder for that exam. I regret not revising properly.',
+                options: ['should have studied', 'should study', 'should had studied', 'should studying'],
+                correct: 'should have studied',
+                explanation: 'Correct! Should have + pp for past regret.',
+                errorExplanation: 'Use should have + past participle for regrets'
+            },
+
+            // EXERCISES 46-52: Wish and Hope
+            {
+                id: 46,
+                type: 'fill',
+                question: 'I wish I __________ (study) harder for the exam. (regret about past)',
+                correct: ['had studied'],
+                explanation: 'Correct! Wish + past perfect for past regrets.'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'I wish I __________ the answer to your question. (present)',
+                options: ['knew', 'know', 'have known', 'had known'],
+                correct: 'knew',
+                explanation: 'Correct! Wish + past simple for present desires.',
+                errorExplanation: 'Use wish + past simple for present wishes'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'I hope you __________ (feel) better soon. (future expectation)',
+                correct: ['feel', 'will feel'],
+                explanation: 'Correct! Hope + present/will for future expectations.'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'She wishes she __________ more time to finish the project.',
+                options: ['had', 'have', 'has', 'having'],
+                correct: 'had',
+                explanation: 'Correct! Wish + past simple for unreal present.',
+                errorExplanation: 'Use wish + past simple (had) for present wishes'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'We hope the weather __________ (improve) by the weekend.',
+                correct: ['will improve', 'improves'],
+                explanation: 'Correct! Hope + will/present for future expectation.'
+            },
+            {
+                id: 51,
+                type: 'choice',
+                question: 'I wish they __________ so much noise right now. It\'s distracting.',
+                options: ['weren\'t making', 'aren\'t making', 'don\'t make', 'wouldn\'t make'],
+                correct: 'weren\'t making',
+                explanation: 'Correct! Wish + past continuous for present temporary situations.',
+                errorExplanation: 'Use wish + past continuous for ongoing present situations'
+            },
+            {
+                id: 52,
+                type: 'fill',
+                question: 'I hope you __________ (manage) to finish the report yesterday.',
+                correct: ['managed'],
+                explanation: 'Correct! Hope + past when referring to past time.'
+            },
+
+            // EXERCISES 53-60: Discourse Markers and Evaluation
+            {
+                id: 53,
+                type: 'fill',
+                question: '__________, I would like to discuss the environmental impact. (opening)',
+                correct: ['To begin with', 'First of all', 'Firstly'],
+                explanation: 'Correct! Formal signposting for opening.'
+            },
+            {
+                id: 54,
+                type: 'choice',
+                question: 'The plan is expensive. __________, it fails to address the root cause.',
+                options: ['Furthermore', 'However', 'Because', 'Therefore'],
+                correct: 'Furthermore',
+                explanation: 'Correct! Furthermore for adding negative points.',
+                errorExplanation: 'Use furthermore/moreover to add points'
+            },
+            {
+                id: 55,
+                type: 'fill',
+                question: '__________ I was saying, we need to consider the long-term effects. (recapping)',
+                correct: ['As', 'To return to what', 'Where was I? Oh yes, as'],
+                explanation: 'Correct! Recapping phrases after interruption.'
+            },
+            {
+                id: 56,
+                type: 'choice',
+                question: '__________, it is true that technology improves efficiency.',
+                options: ['Admittedly', 'However', 'Therefore', 'Furthermore'],
+                correct: 'Admittedly',
+                explanation: 'Correct! Admittedly for conceding a point.',
+                errorExplanation: 'Use admittedly to concede before contrasting'
+            },
+            {
+                id: 57,
+                type: 'fill',
+                question: '__________ the above points, I believe we should proceed cautiously. (concluding)',
+                correct: ['In light of', 'Taking into account', 'Considering'],
+                explanation: 'Correct! Formal concluding phrases.'
+            },
+            {
+                id: 58,
+                type: 'choice',
+                question: 'I agree with you __________, though I have some reservations.',
+                options: ['up to a point', 'to the point', 'at a point', 'in a point'],
+                correct: 'up to a point',
+                explanation: 'Correct! Hedging phrase: up to a point.',
+                errorExplanation: 'Use "up to a point" for partial agreement'
+            },
+            {
+                id: 59,
+                type: 'fill',
+                question: '__________ speaking, the results suggest gradual improvement. (vague language)',
+                correct: ['Generally', 'Broadly', 'Roughly'],
+                explanation: 'Correct! Vague language for careful statements.'
+            },
+            {
+                id: 60,
+                type: 'choice',
+                question: '__________ back, I should have made that decision earlier.',
+                options: ['Looking', 'Looked', 'To look', 'Having looked'],
+                correct: 'Looking',
+                explanation: 'Correct! Looking back for evaluating past actions.',
+                errorExplanation: 'Use "Looking back" for past evaluation'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Exercise ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Exercise ${currentExercise + 1} of ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Check</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Next</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += Math.floor(100 / exercises.length);
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += Math.floor(100 / exercises.length);
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = 'Outstanding! You have mastered B2.3 level grammar! Ready for Grade 9!';
+            } else if (totalScore >= 70) {
+                message = 'Excellent work! You show strong command of intermediate structures. Review your errors.';
+            } else if (totalScore >= 50) {
+                message = 'Good effort! Continue practicing mixed conditionals, modal perfects, and gerund/infinitive patterns.';
+            } else {
+                message = 'Keep studying! Focus on the theory sections and pay attention to formal structures.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

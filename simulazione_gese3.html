@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 3 - Exam Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --trinity-blue: #1e3a5f;
+            --trinity-red: #dc2626;
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #c9a227;
+            --success: #276749;
+            --error: #c53030;
+            --light: #f5f5f0;
+            --dark: #212529;
+            --border: #d4d4c8;
+            --bg-card: #ffffff;
+            --topic-green: #2e7d32;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--trinity-blue);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--trinity-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .timer {
+            background: white;
+            color: var(--trinity-blue);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            font-family: monospace;
+        }
+
+        .exam-badge {
+            display: inline-block;
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--trinity-blue);
+            border-bottom-color: var(--trinity-red);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--trinity-blue);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--trinity-red);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--trinity-blue);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .topic-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--topic-green);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .examiner-section {
+            background: #f8f9fa;
+            border: 2px solid var(--trinity-blue);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .examiner-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--trinity-blue);
+            color: white;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .examiner-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--trinity-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            float: left;
+            margin-right: 1rem;
+        }
+
+        .examiner-text {
+            font-size: 1.1rem;
+            color: var(--dark);
+            padding-left: 80px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .candidate-section {
+            background: #fff8e1;
+            border: 2px solid var(--accent);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .candidate-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--accent);
+            color: #000;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .response-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .response-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .response-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .response-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .response-btn.correct {
+            background: #d4edda;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .response-btn.wrong {
+            background: #f8d7da;
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--trinity-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #152a45;
+        }
+
+        .btn-topic {
+            background: var(--topic-green);
+        }
+
+        .btn-topic:hover {
+            background: #1b5e20;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .feedback {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .feedback.info {
+            background: #e7f3ff;
+            border: 1px solid var(--trinity-blue);
+            color: var(--trinity-blue);
+        }
+
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .phase-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .phase-step.active {
+            background: var(--trinity-blue);
+            color: white;
+        }
+
+        .phase-step.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .phase-step::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--border);
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+        .phase-step:last-child::after {
+            display: none;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .vocab-item {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .vocab-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .vocab-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .vocab-word {
+            font-weight: bold;
+            color: var(--trinity-blue);
+            font-size: 0.9rem;
+        }
+
+        .vocab-phonetic {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .results-container {
+            background: white;
+            border: 2px solid var(--success);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--trinity-blue);
+            border: 4px solid var(--accent);
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .grade-distinction {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .grade-merit {
+            background: #c0c0c0;
+            color: #000;
+        }
+
+        .grade-pass {
+            background: #cd7f32;
+            color: white;
+        }
+
+        .grammar-box {
+            background: #f3e5f5;
+            border-left: 4px solid #7b1fa2;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .topic-form {
+            background: white;
+            border: 2px solid var(--topic-green);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .topic-point {
+            background: #e8f5e9;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-left: 3px solid var(--topic-green);
+        }
+
+        .interactive-scene {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid var(--trinity-blue);
+            padding: 2rem;
+            min-height: 300px;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .scene-element {
+            display: inline-block;
+            margin: 1rem;
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .scene-element:hover {
+            transform: scale(1.05);
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .scene-element.selected {
+            border-color: var(--success);
+            background: #e8f5e9;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timer {
+                margin-top: 1rem;
+            }
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            .response-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>Trinity GESE Grade 3 </h1>
+                <div class="exam-badge">CEFR A2.1 • 7 Minutes</div>
+            </div>
+            <div class="timer" id="timer">07:00</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('intro', this)">📋 About Exam</button>
+            <button class="nav-tab" onclick="showSection('topic', this)">📌 Topic</button>
+            <button class="nav-tab" onclick="showSection('phase1', this)">👋 Phase 1</button>
+            <button class="nav-tab" onclick="showSection('phase2', this)">🖼️ Phase 2</button>
+            <button class="nav-tab" onclick="showSection('results', this)" id="results-tab" style="display:none">📊 Results</button>
+        </div>
+
+        <!-- INTRO SECTION -->
+        <section id="intro" class="section active">
+            <div class="card">
+                <div class="card-header">About GESE Grade 3 Exam</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>GESE Grade 3</strong> introduces the <strong>Topic task</strong> where you prepare and discuss 
+                        your own chosen subject. It corresponds to <strong>CEFR A2.1</strong> level and takes approximately 
+                        <strong>7 minutes</strong>.
+                    </div>
+
+                    <h3 style="color: var(--trinity-blue); margin: 1.5rem 0 1rem;">Exam Format (4 Parts)</h3>
+                    
+                    <div class="phase-indicator">
+                        <div class="phase-step active">1</div>
+                        <div class="phase-step">2</div>
+                        <div class="phase-step">3</div>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div class="phase-label" style="text-align: center; font-size: 0.8rem;">Topic Discussion<br><small>(with Topic Form)</small></div>
+                        <div class="phase-label" style="text-align: center; font-size: 0.8rem;">Conversation<br><small>(School/Weekend)</small></div>
+                        <div class="phase-label" style="text-align: center; font-size: 0.8rem;">Picture Discussion<br><small>(Comparisons)</small></div>
+                    </div>
+
+                    <div class="topic-box">
+                        <strong>🎯 The Topic Task (NEW in Grade 3):</strong>
+                        <p style="margin-top: 0.5rem;">Before the exam, you prepare a topic of your choice and complete a 
+                        <strong>Topic Form</strong> with 4 points. The examiner uses these points to discuss your topic with you.</p>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Language Functions at Grade 3:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Describing people, places, and things using adjectives</li>
+                            <li>Making comparisons (bigger than, more interesting than)</li>
+                            <li>Talking about past events with dates/times</li>
+                            <li>Talking about future plans and intentions</li>
+                            <li>Expressing reasons and preferences (because)</li>
+                            <li>Giving directions and instructions</li>
+                        </ul>
+                    </div>
+
+                    <div class="grammar-box">
+                        <strong>Key Grammar for Grade 3:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Comparative and superlative adjectives (bigger, the biggest)</li>
+                            <li>Adverbs of manner (quickly, carefully)</li>
+                            <li>Past simple with when (When I was 5...)</li>
+                            <li>Linking words (and, but, because, so)</li>
+                            <li>Would like for requests/offers</li>
+                            <li>Prepositions of place and movement</li>
+                        </ul>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary" onclick="startExam()">Start Exam Simulation →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOPIC PREPARATION SECTION -->
+        <section id="topic" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--topic-green);">The Topic Task - Preparation</div>
+                <div class="card-body">
+                    <div class="topic-box">
+                        <strong>Your Topic:</strong> "My Favourite Sport - Football"
+                        <p style="margin-top: 0.5rem;">In the real exam, you choose your own topic. Here, we'll practice with 
+                        "My Favourite Sport" as an example.</p>
+                    </div>
+
+                    <div class="topic-form">
+                        <h3 style="color: var(--topic-green); margin-bottom: 1rem;">📝 Topic Form</h3>
+                        <p style="margin-bottom: 1rem;">Complete these 4 points about your topic:</p>
+                        
+                        <div class="topic-point">
+                            <strong>Point 1:</strong> When and why I started playing football
+                        </div>
+                        <div class="topic-point">
+                            <strong>Point 2:</strong> My favourite football team and player
+                        </div>
+                        <div class="topic-point">
+                            <strong>Point 3:</strong> How often I play and where
+                        </div>
+                        <div class="topic-point">
+                            <strong>Point 4:</strong> A memorable match I watched or played
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>💡 Tip:</strong> The examiner will ask questions based on these 4 points. 
+                        Be ready to give detailed answers with reasons (using "because") and examples!
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary btn-topic" onclick="moveToPhase1()">Go to Exam →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Useful Language for Your Topic</div>
+                <div class="card-body">
+                    <div class="vocab-grid">
+                        <div class="vocab-item" onclick="speak('I started playing when I was eight')">
+                            <div class="vocab-icon">🏃</div>
+                            <div class="vocab-word">I started... when...</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('I like it because it is exciting')">
+                            <div class="vocab-icon">❤️</div>
+                            <div class="vocab-word">I like it because...</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('It is more exciting than tennis')">
+                            <div class="vocab-icon">⚖️</div>
+                            <div class="vocab-word">more... than...</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('I play twice a week')">
+                            <div class="vocab-icon">📅</div>
+                            <div class="vocab-word">I play... (frequency)</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('The best player is...')">
+                            <div class="vocab-icon">🏆</div>
+                            <div class="vocab-word">The best... is...</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('I would like to become a professional player')">
+                            <div class="vocab-icon">⭐</div>
+                            <div class="vocab-word">I would like to...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 1: TOPIC DISCUSSION -->
+        <section id="phase1" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Part 1: Topic Discussion</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~2.5 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="topic-box">
+                        <strong>Your Topic:</strong> My Favourite Sport - Football
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="phase1-examiner-text">
+                            Good morning! Please tell me about your topic. You said you started playing football when you were young. When exactly did you start and why?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="phase1-candidate" style="display: none;">
+                        <div class="candidate-label">YOU (Candidate)</div>
+                        <div class="response-options" id="phase1-options">
+                            <!-- Options inserted by JS -->
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="phase1-feedback"></div>
+
+                    <div class="navigation" id="phase1-nav" style="display: none;">
+                        <button class="btn-primary" onclick="nextPhase1Question()">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Grammar Help: Comparisons & Reasons</div>
+                <div class="card-body">
+                    <div class="grammar-box">
+                        <strong>Comparative Adjectives:</strong><br>
+                        short → shorter | big → bigger | interesting → more interesting<br>
+                        <em>"Football is more exciting than basketball"</em>
+                    </div>
+                    <div class="grammar-box" style="background: #e8f5e9; border-color: var(--topic-green);">
+                        <strong>Giving Reasons with Because:</strong><br>
+                        <em>"I like football because it is exciting and I can play with my friends"</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 2: CONVERSATION -->
+        <section id="phase2" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Part 2: Conversation & Picture Discussion</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~3.5 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="phase2-examiner-text">
+                            Now let's talk about your school. What subjects do you study? Which is your favourite?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="phase2-candidate">
+                        <div class="candidate-label">YOU (Candidate)</div>
+                        <div class="response-options" id="phase2-options">
+                            <button class="response-btn" onclick="checkPhase2Answer(this, true)">I study Maths, English and Science. My favourite is Science because it is interesting</button>
+                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">I go to school every day</button>
+                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">My school is big</button>
+                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">I like my teacher</button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="phase2-feedback"></div>
+
+                    <div class="navigation" id="phase2-nav" style="display: none;">
+                        <button class="btn-primary" onclick="showPictureTask()">Next: Picture Task →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Picture Discussion Sub-section -->
+            <div class="card" id="picture-card" style="display: none;">
+                <div class="card-header">Picture Discussion: Comparisons</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        The examiner will show you two pictures. You need to compare them using 
+                        <strong>comparative adjectives</strong>.
+                    </div>
+
+                    <div class="interactive-scene">
+                        <h3 style="text-align: center; margin-bottom: 1rem;">Compare these two holidays:</h3>
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                            <div class="scene-element" onclick="selectScene(this, 'beach')">
+                                <div style="font-size: 3rem;">🏖️</div>
+                                <div><strong>Beach Holiday</strong></div>
+                                <div style="font-size: 0.9rem; color: var(--secondary);">Hot, relaxing, expensive</div>
+                            </div>
+                            <div class="scene-element" onclick="selectScene(this, 'mountain')">
+                                <div style="font-size: 3rem;">🏔️</div>
+                                <div><strong>Mountain Holiday</strong></div>
+                                <div style="font-size: 0.9rem; color: var(--secondary);">Cool, active, cheap</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="examiner-section" id="picture-examiner" style="display: none;">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            Tell me about these two holidays. Compare them.
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="picture-candidate" style="display: none;">
+                        <div class="candidate-label">YOUR COMPARISON</div>
+                        <div class="response-options" id="picture-options">
+                            <button class="response-btn" onclick="checkPictureAnswer(this, true)">The beach holiday is hotter and more relaxing than the mountain holiday, but the mountain holiday is cheaper</button>
+                            <button class="response-btn" onclick="checkPictureAnswer(this, false)">I like the beach</button>
+                            <button class="response-btn" onclick="checkPictureAnswer(this, false)">There are two holidays</button>
+                            <button class="response-btn" onclick="checkPictureAnswer(this, false)">The beach is nice</button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="picture-feedback"></div>
+
+                    <div class="navigation" id="picture-nav" style="display: none;">
+                        <button class="btn-primary" onclick="finishExam()">Finish Exam →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS SECTION -->
+        <section id="results" class="section">
+            <div class="results-container">
+                <h2 style="color: var(--trinity-blue); margin-bottom: 1rem;">🎉 Exam Completed!</h2>
+                
+                <div class="score-circle" id="final-score">--</div>
+                
+                <div class="grade-badge" id="grade-badge">Grade</div>
+                
+                <p style="font-size: 1.1rem; margin: 1rem 0;" id="result-message"></p>
+
+                <div style="text-align: left; max-width: 600px; margin: 2rem auto; background: var(--light); padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: var(--trinity-blue); margin-bottom: 1rem;">Examiner's Feedback:</h3>
+                    <ul id="feedback-list" style="margin-left: 1.5rem; line-height: 2;">
+                        <!-- Feedback items will be inserted here -->
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn-primary" onclick="location.reload()">Try Again</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Timer functionality
+        let timeRemaining = 420; // 7 minutes in seconds
+        let timerInterval;
+        let currentPhase = 1;
+        let phase1Question = 0;
+        let score = 0;
+
+        // Phase 1 Questions - Topic Discussion
+        const phase1Questions = [
+            {
+                examiner: "Good morning! Please tell me about your topic. You said you started playing football when you were young. When exactly did you start and why?",
+                options: [
+                    "I started playing when I was eight because my father taught me and it looked fun",
+                    "I play football every day",
+                    "I like football",
+                    "My favourite team is Real Madrid"
+                ],
+                correct: "I started playing when I was eight because my father taught me and it looked fun",
+                feedback: "Excellent! You answered when, and gave reasons using 'because'",
+                points: 15
+            },
+            {
+                examiner: "Tell me about your favourite team. Why do you support them?",
+                options: [
+                    "I support them because they are the best team and they play exciting football",
+                    "I watch them on TV",
+                    "They wear white shirts",
+                    "I go to the stadium"
+                ],
+                correct: "I support them because they are the best team and they play exciting football",
+                feedback: "Good! You gave opinions and reasons using 'because'",
+                points: 15
+            },
+            {
+                examiner: "How often do you play football? Where do you usually play?",
+                options: [
+                    "I play twice a week with my friends at the sports centre near my house",
+                    "I like playing football",
+                    "I play very good",
+                    "My friends play football"
+                ],
+                correct: "I play twice a week with my friends at the sports centre near my house",
+                feedback: "Perfect! You gave specific information about frequency and place",
+                points: 15
+            },
+            {
+                examiner: "Is football more popular than other sports in your country? Why do you think so?",
+                options: [
+                    "Yes, it is more popular than basketball because it is more exciting and everyone can play it",
+                    "Football is popular",
+                    "I like football more",
+                    "Many people watch football"
+                ],
+                correct: "Yes, it is more popular than basketball because it is more exciting and everyone can play it",
+                feedback: "Excellent use of comparative (more popular than, more exciting) and reasons!",
+                points: 15
+            }
+        ];
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    finishExam();
+                }
+            }, 1000);
+        }
+
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const totalQuestions = phase1Questions.length + 3; // +3 for other phases
+            let answered = phase1Question + (currentPhase > 1 ? 1 : 0) + (currentPhase > 2 ? 1 : 0);
+            const percent = Math.min((answered / totalQuestions) * 100, 100);
+            document.getElementById('progress').style.width = percent + '%';
+        }
+
+        function startExam() {
+            startTimer();
+            showSection('topic', document.querySelectorAll('.nav-tab')[1]);
+        }
+
+        function moveToPhase1() {
+            currentPhase = 1;
+            showSection('phase1', document.querySelectorAll('.nav-tab')[2]);
+            loadPhase1Question();
+        }
+
+        // PHASE 1 FUNCTIONS
+        function loadPhase1Question() {
+            if (phase1Question >= phase1Questions.length) {
+                moveToPhase2();
+                return;
+            }
+
+            const q = phase1Questions[phase1Question];
+            document.getElementById('phase1-examiner-text').textContent = q.examiner;
+            
+            const optionsDiv = document.getElementById('phase1-options');
+            optionsDiv.innerHTML = '';
+            
+            const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+            shuffled.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'response-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkPhase1Answer(btn, opt === q.correct, q);
+                optionsDiv.appendChild(btn);
+            });
+
+            document.getElementById('phase1-candidate').style.display = 'block';
+            document.getElementById('phase1-nav').style.display = 'none';
+            document.getElementById('phase1-feedback').className = 'feedback';
+            document.getElementById('phase1-feedback').style.display = 'none';
+        }
+
+        function checkPhase1Answer(btn, isCorrect, question) {
+            document.querySelectorAll('#phase1-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b.textContent === question.correct) {
+                    b.classList.add('correct');
+                } else if (b === btn && !isCorrect) {
+                    b.classList.add('wrong');
+                }
+            });
+
+            const feedback = document.getElementById('phase1-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? '✅ ' + question.feedback : '❌ The correct answer is: "' + question.correct + '"<br>' + question.feedback;
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += question.points;
+            document.getElementById('phase1-nav').style.display = 'flex';
+        }
+
+        function nextPhase1Question() {
+            phase1Question++;
+            loadPhase1Question();
+        }
+
+        // PHASE 2 FUNCTIONS
+        function moveToPhase2() {
+            currentPhase = 2;
+            showSection('phase2', document.querySelectorAll('.nav-tab')[3]);
+        }
+
+        function checkPhase2Answer(btn, isCorrect) {
+            document.querySelectorAll('#phase2-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById('phase2-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ Good! You listed subjects and gave a preference with reasons.' : 
+                '❌ Try to list subjects and say which is your favourite with reasons (because...)';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 15;
+            document.getElementById('phase2-nav').style.display = 'flex';
+        }
+
+        function showPictureTask() {
+            document.getElementById('picture-card').style.display = 'block';
+            document.getElementById('picture-card').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function selectScene(element, type) {
+            document.querySelectorAll('.scene-element').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            document.getElementById('picture-examiner').style.display = 'block';
+            document.getElementById('picture-candidate').style.display = 'block';
+        }
+
+        function checkPictureAnswer(btn, isCorrect) {
+            document.querySelectorAll('#picture-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById('picture-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ Excellent comparisons! You used "hotter", "more relaxing" and "cheaper" correctly.' : 
+                '❌ Use comparative adjectives: hotter than, more relaxing than, cheaper than';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 25;
+            document.getElementById('picture-nav').style.display = 'flex';
+        }
+
+        function finishExam() {
+            clearInterval(timerInterval);
+            document.getElementById('results-tab').style.display = 'block';
+            showSection('results', document.getElementById('results-tab'));
+
+            const maxScore = 100;
+            const percentage = Math.round((score / maxScore) * 100);
+            
+            document.getElementById('final-score').textContent = percentage + '%';
+
+            const badge = document.getElementById('grade-badge');
+            const message = document.getElementById('result-message');
+            
+            if (percentage >= 80) {
+                badge.className = 'grade-badge grade-distinction';
+                badge.textContent = 'DISTINCTION 🏆';
+                message.textContent = 'Excellent! You used complex structures and comparisons very well!';
+            } else if (percentage >= 60) {
+                badge.className = 'grade-badge grade-merit';
+                badge.textContent = 'MERIT 🥈';
+                message.textContent = 'Very good! You communicated effectively with good use of comparatives.';
+            } else if (percentage >= 40) {
+                badge.className = 'grade-badge grade-pass';
+                badge.textContent = 'PASS ✅';
+                message.textContent = 'Good effort! You showed ability to discuss your topic.';
+            } else {
+                badge.style.background = '#6c757d';
+                badge.style.color = 'white';
+                badge.textContent = 'NOT PASSED';
+                message.textContent = 'Keep practicing! Focus on using "because" for reasons and comparatives.';
+            }
+
+            const feedbackList = document.getElementById('feedback-list');
+            feedbackList.innerHTML = `
+                <li>${score >= 15 ? '✅' : '⚠️'} Topic presentation with specific information</li>
+                <li>${score >= 30 ? '✅' : '⚠️'} Using <strong>because</strong> to give reasons</li>
+                <li>${score >= 45 ? '✅' : '⚠️'} Talking about past events with <strong>when</strong></li>
+                <li>${score >= 60 ? '✅' : '⚠️'} Using comparative adjectives (<em>more... than</em>)</li>
+                <li>${score >= 75 ? '✅' : '⚠️'} Superlative forms (<em>the best, the most</em>)</li>
+                <li>${score >= 85 ? '✅' : '⚠️'} Frequency expressions (<em>twice a week</em>)</li>
+                <li>${score >= 95 ? '✅' : '⚠️'} Fluent topic discussion with linking words</li>
+            `;
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-GB';
+                utterance.rate = 0.8;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        window.onload = () => {
+            updateProgress();
+        };
+    </script>
+</body>
+</html>

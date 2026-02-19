@@ -1,0 +1,1122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE I (B1) - Reading Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1565c0;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #e3f2fd;
+            --dark: #263238;
+            --border: #bbdefb;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --b1-color: #1565c0;
+            --warning: #ef6c00;
+            --purple: #7b1fa2;
+            --purple-light: #f3e5f5;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d47a1 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: var(--purple-light);
+            border-left: 4px solid var(--purple);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .reading-text {
+            background: #fafafa;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+        }
+
+        .paragraph-num {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 25px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .question-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .timing-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .skill-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .skill-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE I (B1) Reading</h1>
+            <p>Complete Guide to Reading Tasks & Strategies</p>
+            <div class="level-badge">40 Minutes | 30 Questions</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE I Reading Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE I Reading Complete Guide</h1>
+            <p class="page-subtitle">Task 1: Long Reading & Task 2: Multi-text Reading</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('task1', this)">Task 1: Long Reading</button>
+            <button class="nav-tab" onclick="showSection('task2', this)">Task 2: Multi-text</button>
+            <button class="nav-tab" onclick="showSection('strategies', this)">Strategies</button>
+            <button class="nav-tab" onclick="showSection('skills', this)">Reading Skills</button>
+            <button class="nav-tab" onclick="showSection('practice', this)">Practice Tips</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">Reading Module Overview</div>
+                <div class="card-body">
+                    <p>The ISE I Reading module consists of <strong>two tasks</strong> completed in <strong>40 minutes</strong> (20 minutes per task). These tasks test your ability to understand main ideas, specific details, and factual information at B1 level.</p>
+
+                    <div class="instruction-box">
+                        <strong>Key Information:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Total Time:</strong> 40 minutes (advised: 20 mins per task)</li>
+                            <li><strong>Total Questions:</strong> 30 (15 per task)</li>
+                            <li><strong>Total Texts:</strong> 5 (1 long text + 4 short texts)</li>
+                            <li><strong>Total Word Count:</strong> ~1,100 words (400 + 700)</li>
+                            <li><strong>Scoring:</strong> 1 mark per question (30 marks total)</li>
+                        </ul>
+                    </div>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Task 1: Long Reading</th>
+                                <th>Task 2: Multi-text Reading</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Texts</strong></td>
+                                <td>1 text, ~400 words, 5 paragraphs</td>
+                                <td>4 texts, ~700 words total, 1 infographic</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Time</strong></td>
+                                <td><span class="timing-badge">20 minutes</span></td>
+                                <td><span class="timing-badge">20 minutes</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Questions</strong></td>
+                                <td>15 questions (3 types)</td>
+                                <td>15 questions (3 types)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Question Types</strong></td>
+                                <td>Title matching, True statements, Gap-fill</td>
+                                <td>Text matching, True statements, Summary notes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Skills Tested</strong></td>
+                                <td>Gist, specific info, detail</td>
+                                <td>Main ideas, specific info, synthesis</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning-box">
+                        <strong>Important:</strong> Task 2 texts are used for Task 3 (Reading into Writing). The information you extract from these texts will be needed for your writing task. Pay attention to facts, opinions, and examples you can use later.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">The 12 Subject Areas</div>
+                <div class="card-body">
+                    <p>All reading texts relate to these subject areas. Familiarity with these topics helps you predict vocabulary and understand context:</p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem;">
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Travel</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Money</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Fashion</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Rules & Regulations</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Health & Fitness</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Learning Languages</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Festivals</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Transport</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Special Occasions</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Entertainment</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Music</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Recent Personal Experiences</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 1 SECTION -->
+        <section id="task1" class="section">
+            <div class="card">
+                <div class="card-header">Task 1: Long Reading <span class="timing-badge">20 minutes | 15 questions</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Read one factual/descriptive text of approximately <strong>400 words</strong> (divided into 5 paragraphs) and answer 15 questions testing different reading skills.
+                    </div>
+
+                    <h4>Sample Text Structure:</h4>
+                    <div class="reading-text">
+                        <p><span class="paragraph-num">1</span><strong>Paragraph 1:</strong> Introduction to topic - often defines the subject and provides background information.</p>
+                        <p><span class="paragraph-num">2</span><strong>Paragraph 2:</strong> First main point or aspect of the topic - develops the discussion.</p>
+                        <p><span class="paragraph-num">3</span><strong>Paragraph 3:</strong> Second main point - may provide examples or contrast information.</p>
+                        <p><span class="paragraph-num">4</span><strong>Paragraph 4:</strong> Third main point - often includes specific examples, case studies, or expert opinions.</p>
+                        <p><span class="paragraph-num">5</span><strong>Paragraph 5:</strong> Conclusion - summarizes main points or provides final thoughts/recommendations.</p>
+                    </div>
+
+                    <h4>Question Types Breakdown:</h4>
+
+                    <div class="question-box">
+                        <h4>Questions 1-5: Title Matching</h4>
+                        <p>Match the correct title to each of the 5 paragraphs. You have <strong>6 titles to choose from</strong> (one is a distractor).</p>
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            Paragraph discusses how tour guides need patience and deal with problems.<br>
+                            Correct title: "The Challenges of Guiding" (not "The Perfect Job?")
+                        </div>
+                        <p><strong>Skill tested:</strong> Reading for gist and main ideas</p>
+                        <p><strong>Strategy:</strong> Read the first sentence of each paragraph (topic sentence) to identify the main idea.</p>
+                    </div>
+
+                    <div class="question-box">
+                        <h4>Questions 6-10: True Statements Selection</h4>
+                        <p>Choose <strong>5 true statements from a list of 8</strong>. Three statements are false or not given according to the text.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            A) Tour guides often work long hours.<br>
+                            B) All tourists enjoy visiting famous monuments.<br>
+                            C) Step-on guides replace regular tour guides.<br><br>
+                            (Check text to determine which are true/false)
+                        </div>
+                        <p><strong>Skill tested:</strong> Reading for specific factual information</p>
+                        <p><strong>Strategy:</strong> Scan for keywords from statements. Watch for synonyms and paraphrases.</p>
+                    </div>
+
+                    <div class="question-box">
+                        <h4>Questions 11-15: Sentence Completion</h4>
+                        <p>Complete sentences with <strong>exact words from the text</strong> (maximum 3 words per gap).</p>
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            "Successful tour guides must be able to _______ difficult questions quickly."<br>
+                            Answer from text: "answer" (1 word)<br><br>
+                            "Tourists nowadays prefer to be called '_______' rather than tourists."<br>
+                            Answer: "travellers" (1 word)
+                        </div>
+                        <p><strong>Skill tested:</strong> Reading for detail and precise information</p>
+                        <p><strong>Strategy:</strong> Scan for keywords, check grammar fits, copy exactly from text.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Sample Task 1: Tour Guides</div>
+                <div class="card-body">
+                    <div class="reading-text">
+                        <p><span class="paragraph-num">1</span>For a lot of young people, being a tour guide seems to be an ideal way to make money. You visit wonderful places and meet interesting people — it's almost like a paid holiday with no expenses. In reality, of course, it can be tiring, boring and stressful having to solve all the problems and deal with the demands of the people who have paid money for your services.</p>
+
+                        <p><span class="paragraph-num">2</span>And it seems that tourists these days demand more and more. This is partly because of the internet: before they go away on holiday, they do their research, so they already know a lot of the basic information that guides used to tell them. What they want is something different and special. It isn't enough any more just to take them round the famous buildings, monuments and tourist sites and tell them a few dates and interesting stories. In fact, tourists nowadays don't like to think they are tourists at all. Today's well-informed 'traveller' prefers culture, seeing something of people's real way of life in the place they're visiting.</p>
+
+                        <p><span class="paragraph-num">3</span>This need has led to a new kind of tour guide becoming popular. These people, sometimes called 'step-on guides', live in the area and have local knowledge. They don't take the place of the normal guide; their job is just temporary, 'stepping onto' the tour bus and taking visitors to unusual places and providing the kind of information that regular tour guides can't offer.</p>
+
+                        <p><span class="paragraph-num">4</span>Being a step-on guide can give you all the fun of being a tour guide without all the problems. "I really enjoy it," says Enrique, a university student who became a step-on guide in his home city of Valencia in Spain two years ago. "It's best not to think of it as just a job. Of course the extra money is useful but mainly it's a great way to meet people and give them an introduction to your town or city."</p>
+
+                        <p><span class="paragraph-num">5</span>Enrique has noticed how tourists have changed. "When I started, I talked to the visitors like a teacher, but I soon realised they wanted a conversation, not a lecture. These days I always try to give them a more personal experience."</p>
+                    </div>
+
+                    <h4>Sample Questions:</h4>
+                    <div class="question-box">
+                        <strong>Title Matching (Q1-5):</strong> Choose from A-F<br>
+                        A. Advantages of the job<br>
+                        B. A new type of tourist<br>
+                        C. The problems of tourism<br>
+                        D. The perfect job?<br>
+                        E. Becoming a better step-on guide<br>
+                        F. A guide with a difference
+                    </div>
+
+                    <div class="question-box">
+                        <strong>True Statements (Q6-10):</strong> Choose 5 true statements from A-H<br>
+                        A. Many young people have jobs as tour guides.<br>
+                        B. Being a tour guide is less exciting than some people think.<br>
+                        C. Modern travellers are no longer satisfied with traditional tourist activities.<br>
+                        D. People now prefer to describe themselves as travellers rather than tourists.<br>
+                        E. In some countries, step-on guides are replacing regular tour guides.<br>
+                        F. For Enrique, pay is a less important part of the job than meeting people.<br>
+                        G. Enrique understands his clients better now than when he first started.<br>
+                        H. Enrique talks to his customers like a teacher.
+                    </div>
+
+                    <div class="question-box">
+                        <strong>Gap-fill (Q11-15):</strong> Complete with max 3 words from text<br>
+                        11. Some young people think a tour guide's job is a kind of _______.<br>
+                        12. Tourists nowadays often already know a lot because they have done _______.<br>
+                        13. What makes step-on guides special is their _______.<br>
+                        14. One reason Enrique works as a guide is to make some _______.<br>
+                        15. Enrique wants to give visitors a more _______ instead of them just listening to him.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 2 SECTION -->
+        <section id="task2" class="section">
+            <div class="card">
+                <div class="card-header">Task 2: Multi-text Reading <span class="timing-badge">20 minutes | 15 questions</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Read <strong>4 short texts</strong> (approximately 700 words total) on the same topic. One text is an infographic (diagram, table, chart, or map with text). Answer 15 questions testing synthesis and comparison skills.
+                    </div>
+
+                    <h4>Text Types in Task 2:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Text A:</strong> Article or blog post (opinion or experience)</li>
+                        <li><strong>Text B:</strong> Informational text or report</li>
+                        <li><strong>Text C:</strong> Interview or personal account</li>
+                        <li><strong>Text D:</strong> Infographic with visual information (diagram, chart, table, map)</li>
+                    </ul>
+
+                    <h4>Question Types Breakdown:</h4>
+
+                    <div class="question-box">
+                        <h4>Questions 16-20: Text Matching</h4>
+                        <p>Match descriptions to the correct text (A, B, C, or D). Tests understanding of main idea or purpose of each text.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            "Which text describes a more relaxing activity?" → Match to correct letter<br>
+                            "Which text mentions the importance of diet?" → Match to correct letter<br><br>
+                            <strong>Note:</strong> You can use the same letter more than once (up to 2 questions may have the same answer).
+                        </div>
+                        <p><strong>Skill tested:</strong> Understanding main ideas and purposes across multiple texts</p>
+                    </div>
+
+                    <div class="question-box">
+                        <h4>Questions 21-25: True Statements Selection</h4>
+                        <p>Choose <strong>5 true statements from 8 options</strong> based on information across all four texts.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            "Swimming is good for people with joint problems." (Check if mentioned in any text)<br>
+                            "All four texts recommend swimming as the best exercise." (Check if true across all texts)
+                        </div>
+                        <p><strong>Skill tested:</strong> Cross-referencing information across multiple sources</p>
+                    </div>
+
+                    <div class="question-box">
+                        <h4>Questions 26-30: Summary Notes Completion</h4>
+                        <p>Complete summary notes using <strong>exact words from the texts</strong> (maximum 3 words per gap). The notes summarize key information from all four texts.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            Notes about different exercises:<br>
+                            "Swimming exercises all _______ and is good for _______."<br>
+                            "Cycling is _______ but can be dangerous in parks."
+                        </div>
+                        <p><strong>Skill tested:</strong> Synthesizing information from multiple texts into summary form</p>
+                        <div class="warning-box">
+                            <strong>Critical:</strong> The information in these notes is exactly what you need for Task 3 (Reading into Writing). Pay attention to facts, statistics, opinions, and examples you can use in your essay.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Sample Task 2: Health & Fitness</div>
+                <div class="card-body">
+                    <h4>Text A: Article</h4>
+                    <div class="reading-text">
+                        <p>If you are looking for a new regular exercise routine perhaps you can try swimming? There are a lot of reasons why we think swimming is the best exercise. The four swimming styles exercise all of the muscles in your body. It is a great activity as there is more breath control compared to running, and this increases the oxygen in your body, causing your muscles to work harder. Unlike running, swimming doesn't cause so much damage to joints such as knees and ankles. You do not need any special equipment; you only need a swimming costume, cap and goggles. Why not go to your local swimming pool today?</p>
+                    </div>
+
+                    <h4>Text B: Social Media Conversation</h4>
+                    <div class="reading-text">
+                        <p><strong>Suzi:</strong> I went to Hyde Park today, it was great!<br>
+                        <strong>Lee:</strong> Yeah, it's nice, but I love St James' Park.<br>
+                        <strong>Suzi:</strong> It's quite small. Hyde Park is much bigger.<br>
+                        <strong>Lee:</strong> Yes, but there are bicycles everywhere. There aren't so many cyclists in St James' Park - so it's safer for walkers like me.<br>
+                        <strong>Suzi:</strong> Yes, but cycling is fun! There are football pitches and tennis courts in Hyde Park, too. There aren't any in St James' Park.<br>
+                        <strong>Lee:</strong> No, but I like walking by the lake, even in winter!<br>
+                        <strong>Suzi:</strong> You can't swim there! There's a lake at Hyde Park, too. I swim at five o'clock, after college!<br>
+                        <strong>Lee:</strong> Well, I like resting in the park.</p>
+                    </div>
+
+                    <h4>Text C: Park Information</h4>
+                    <div class="reading-text">
+                        <table border="1" style="width: 100%; border-collapse: collapse;">
+                            <tr style="background: var(--light);">
+                                <th colspan="2">Hyde Park, Central London Activities</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Boating</strong></td>
+                                <td>Lake called The Serpentine. Open April-October, 10am to sunset. Closed in winter. Boats hold 6 people, larger boat for up to 40 people.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Swimming</strong></td>
+                                <td>Open-air pool. Weekends in May, daily June-September. After season: swimming club members only. Race every year on Christmas Day. Cafe by pool for drinks and snacks.</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <h4>Text D: Infographic</h4>
+                    <div class="reading-text" style="text-align: center;">
+                        <h4>PARKS FACT FILE</h4>
+                        <p>70% of park users visit parks more than once a week<br>
+                        More people use parks in the evening than at other times<br>
+                        74% of park users stay more than 1 hour</p>
+                        <p><strong>Park users' top activities:</strong><br>
+                        [Bar chart showing: Walking 45%, Cycling 25%, Sports 20%, Other 10%]</p>
+                    </div>
+
+                    <h4>Sample Questions:</h4>
+                    <div class="question-box">
+                        <strong>Text Matching (Q16-20):</strong><br>
+                        16. describes a more relaxing activity?<br>
+                        17. mentions the importance of diet?<br>
+                        18. refers to all types of physical activity?<br>
+                        19. says that one activity is the best for your whole body?<br>
+                        20. talks about doing a variety of activities in the same place?
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRATEGIES SECTION -->
+        <section id="strategies" class="section">
+            <div class="card">
+                <div class="card-header">Step-by-Step Reading Strategies</div>
+                <div class="card-body">
+                    <h4>For Task 1 (Long Reading):</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Skim the Text First (2 minutes)</strong>
+                        <p>Read quickly for general meaning. Look at:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Title and any headings</li>
+                            <li>First sentence of each paragraph (topic sentences)</li>
+                            <li>Last paragraph (conclusion)</li>
+                        </ul>
+                        <p>Don't worry about unknown words at this stage.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Analyze the Questions (2 minutes)</strong>
+                        <p>Read through all 15 questions before detailed reading. Identify:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Question types (title matching, true/false, gap-fill)</li>
+                            <li>Keywords to scan for</li>
+                            <li>What information you need to find</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Tackle Title Matching First (Q1-5)</strong>
+                        <p>While the text is fresh in your memory:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Read each paragraph again carefully</li>
+                            <li>Identify the main idea (usually in first sentence)</li>
+                            <li>Match to the most appropriate title</li>
+                            <li>Remember: 6 titles, 5 paragraphs (one distractor)</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>True Statements (Q6-10)</strong>
+                        <p>For each statement:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Scan for keywords or synonyms</li>
+                            <li>Find the relevant sentence in the text</li>
+                            <li>Check if the statement matches the text exactly</li>
+                            <li>If not mentioned → False/Not given</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>Gap-fill (Q11-15)</strong>
+                        <p>For each gap:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Read the sentence with gap carefully</li>
+                            <li>Identify grammar needed (noun, verb, adjective?)</li>
+                            <li>Scan text for keywords from the sentence</li>
+                            <li>Copy exact words from text (max 3 words)</li>
+                            <li>Check grammar fits in the sentence</li>
+                        </ul>
+                    </div>
+
+                    <h4>For Task 2 (Multi-text Reading):</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Survey All Texts (3 minutes)</strong>
+                        <p>Quickly identify:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Text types (article, conversation, information, infographic)</li>
+                            <li>Main topic (all texts are related)</li>
+                            <li>Key features of the infographic</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Read Questions Before Detailed Reading</strong>
+                        <p>Know what you're looking for before diving into texts.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Text Matching (Q16-20)</strong>
+                        <p>For each question:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Identify the key description in the question</li>
+                            <li>Scan all four texts quickly</li>
+                            <li>Match to the most appropriate text</li>
+                            <li>Same text can be used for multiple questions</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>True Statements Across Texts (Q21-25)</strong>
+                        <p>Check information across all four texts. A statement might be true based on information combined from multiple texts.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>Summary Notes (Q26-30)</strong>
+                        <p>These notes summarize all texts. Look for:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Information that appears in multiple texts (consensus)</li>
+                            <li>Contrasting information between texts</li>
+                            <li>Specific facts and statistics</li>
+                        </ul>
+                        <div class="success-box">
+                            <strong>Tip:</strong> The completed summary notes are essentially a plan for Task 3 (Reading into Writing). Note which text provides which information.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Time Management</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Task 1</th>
+                                <th>Task 2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Survey/Skim texts</td>
+                                <td>2 minutes</td>
+                                <td>3 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Read questions</td>
+                                <td>2 minutes</td>
+                                <td>2 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Answer questions</td>
+                                <td>14 minutes</td>
+                                <td>13 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Check answers</td>
+                                <td>2 minutes</td>
+                                <td>2 minutes</td>
+                            </tr>
+                            <tr style="background: var(--light); font-weight: bold;">
+                                <td>TOTAL</td>
+                                <td>20 minutes</td>
+                                <td>20 minutes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning-box">
+                        <strong>Never spend more than 20 minutes on either task!</strong> You need time for Task 3 and Task 4 (writing). If you're stuck on a question, guess and move on. You won't lose marks for wrong answers.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SKILLS SECTION -->
+        <section id="skills" class="section">
+            <div class="card">
+                <div class="card-header">Reading Skills Tested</div>
+                <div class="card-body">
+                    <div class="skill-grid">
+                        <div class="skill-card">
+                            <div class="skill-title">📖 Skimming</div>
+                            <p>Reading quickly to get the general idea. Look at titles, first sentences, and conclusions. Don't read every word.</p>
+                            <p><strong>Used in:</strong> Title matching, initial text survey</p>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-title">🔍 Scanning</div>
+                            <p>Looking for specific information (names, dates, numbers, keywords). Move eyes quickly over text.</p>
+                            <p><strong>Used in:</strong> True statements, gap-fill questions</p>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-title">💡 Reading for Gist</div>
+                            <p>Understanding the main idea of a paragraph or text. Identifying topic sentences.</p>
+                            <p><strong>Used in:</strong> Title matching (Q1-5, Q16-20)</p>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-title">📋 Reading for Detail</div>
+                            <p>Finding specific factual information at word, phrase, or sentence level.</p>
+                            <p><strong>Used in:</strong> Gap-fill questions (Q11-15, Q26-30)</p>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-title">🧩 Deducing Meaning</div>
+                            <p>Guessing unknown words from context. Looking at surrounding sentences.</p>
+                            <p><strong>Used in:</strong> All question types when encountering new vocabulary</p>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-title">🔗 Synthesis</div>
+                            <p>Combining information from multiple texts. Identifying connections.</p>
+                            <p><strong>Used in:</strong> Task 2 summary notes, Task 3 preparation</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Vocabulary Strategies</div>
+                <div class="card-body">
+                    <h4>Dealing with Unknown Words:</h4>
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Context Clues</strong>
+                        <p>Look at the sentences before and after the unknown word. The context often explains the meaning.</p>
+                        <div class="example-box">
+                            Example: "The <u>serpentine</u> lake winds through the park like a snake."<br>
+                            Context suggests it's a winding, snake-like shape.
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Word Formation</strong>
+                        <p>Look for familiar roots, prefixes, or suffixes.</p>
+                        <div class="example-box">
+                            "Unbelievable" = un (not) + believe + able (can be)<br>
+                            "Step-on guide" = compound noun (guides who step on buses)
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Don't Panic</strong>
+                        <p>You don't need to understand every word to answer questions. Focus on the words you do know and the overall meaning.</p>
+                    </div>
+
+                    <h4>Common B1 Vocabulary Areas:</h4>
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Travel:</strong> destination, accommodation, itinerary, sightseeing</li>
+                        <li><strong>Health:</strong> fitness, nutrition, exercise routine, well-being</li>
+                        <li><strong>Education:</strong> curriculum, assignment, assessment, revision</li>
+                        <li><strong>Technology:</strong> device, application, download, update</li>
+                        <li><strong>Environment:</strong> pollution, recycling, sustainable, conservation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRACTICE SECTION -->
+        <section id="practice" class="section">
+            <div class="card">
+                <div class="card-header">Practice Tips & Resources</div>
+                <div class="card-body">
+                    <h4>How to Practice Effectively:</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Use Official Materials First</strong>
+                        <p>Start with Trinity sample papers to understand the exact format. These are available at trinitycollege.com/ISEI</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Time Yourself</strong>
+                        <p>Always practice with a timer. Stick to 20 minutes per task strictly, even if you haven't finished.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Read Widely</strong>
+                        <p>Read articles on the 12 subject areas. Good sources:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>BBC Learning English</li>
+                            <li>Simple Wikipedia</li>
+                            <li>News websites (BBC, The Guardian)</li>
+                            <li>Travel blogs and magazines</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Build Vocabulary</strong>
+                        <p>Keep a vocabulary notebook. Note:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>New words with example sentences</li>
+                            <li>Synonyms (important for True/False questions)</li>
+                            <li>Topic-specific vocabulary</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>Analyze Mistakes</strong>
+                        <p>When you get questions wrong, ask:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Did I misread the question?</li>
+                            <li>Did I find the wrong part of the text?</li>
+                            <li>Did I copy words incorrectly?</li>
+                            <li>Did I misunderstand the vocabulary?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Exam Day Checklist</div>
+                <div class="card-body">
+                    <ul class="checklist">
+                        <li>Read the instructions carefully before starting</li>
+                        <li>Check how many questions there are (15 per task)</li>
+                        <li>Look at the question types before reading texts</li>
+                        <li>Write answers clearly on the answer sheet</li>
+                        <li>For gap-fill: Copy exact words from text (max 3 words)</li>
+                        <li>For true statements: Write exactly 5 answers (never leave blank)</li>
+                        <li>Guess if unsure - no penalty for wrong answers</li>
+                        <li>Watch the time - 20 minutes maximum per task</li>
+                        <li>Transfer answers carefully if using rough work</li>
+                        <li>Check spelling in gap-fill answers</li>
+                        <li>Never use correction fluid - cross out mistakes clearly</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Common Mistakes to Avoid</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Mistake</th>
+                                <th>Why It Happens</th>
+                                <th>How to Avoid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Spending too long on one question</td>
+                                <td>Trying to find perfect answer</td>
+                                <td>Guess and move on. Come back if time.</td>
+                            </tr>
+                            <tr>
+                                <td>Copying too many words in gap-fill</td>
+                                <td>Not reading instruction (max 3 words)</td>
+                                <td>Count words. Only write what's needed.</td>
+                            </tr>
+                            <tr>
+                                <td>Not writing 5 true statements</td>
+                                <td>Only finding 4 or being unsure of 5th</td>
+                                <td>Always guess 5th. No marks lost for wrong.</td>
+                            </tr>
+                            <tr>
+                                <td>Using same title twice (Task 1)</td>
+                                <td>Not checking which titles used</td>
+                                <td>Cross out titles as you use them.</td>
+                            </tr>
+                            <tr>
+                                <td>Not using exact words from text</td>
+                                <td>Trying to paraphrase in gap-fill</td>
+                                <td>Copy exactly. Grammar must fit.</td>
+                            </tr>
+                            <tr>
+                                <td>Running out of time</td>
+                                <td>Reading every word carefully</td>
+                                <td>Skim first, scan for answers. Practice timing.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE I (B1) Reading Guide</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 1  - Exam Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --trinity-blue: #1e3a5f;
+            --trinity-red: #dc2626;
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #c9a227;
+            --success: #276749;
+            --error: #c53030;
+            --light: #f5f5f0;
+            --dark: #212529;
+            --border: #d4d4c8;
+            --bg-card: #ffffff;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--trinity-blue);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--trinity-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .timer {
+            background: white;
+            color: var(--trinity-blue);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            font-family: monospace;
+        }
+
+        .exam-badge {
+            display: inline-block;
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--trinity-blue);
+            border-bottom-color: var(--trinity-red);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--trinity-blue);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--trinity-red);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--trinity-blue);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .examiner-section {
+            background: #f8f9fa;
+            border: 2px solid var(--trinity-blue);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .examiner-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--trinity-blue);
+            color: white;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .examiner-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--trinity-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            float: left;
+            margin-right: 1rem;
+        }
+
+        .examiner-text {
+            font-size: 1.1rem;
+            color: var(--dark);
+            padding-left: 80px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .candidate-section {
+            background: #fff8e1;
+            border: 2px solid var(--accent);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .candidate-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--accent);
+            color: #000;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .response-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .response-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .response-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .response-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .response-btn.correct {
+            background: #d4edda;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .response-btn.wrong {
+            background: #f8d7da;
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .picture-container {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .scene-picture {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid var(--trinity-blue);
+            margin: 0 auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .scene-object {
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.2s;
+            font-size: 3rem;
+            user-select: none;
+        }
+
+        .scene-object:hover {
+            transform: scale(1.1);
+        }
+
+        .scene-object.selected {
+            filter: drop-shadow(0 0 10px var(--accent));
+            animation: bounce 0.5s;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        .object-label {
+            position: absolute;
+            background: rgba(255,255,255,0.9);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .scene-object:hover .object-label {
+            opacity: 1;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--trinity-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #152a45;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .feedback {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .feedback.info {
+            background: #e7f3ff;
+            border: 1px solid var(--trinity-blue);
+            color: var(--trinity-blue);
+        }
+
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .phase-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .phase-step.active {
+            background: var(--trinity-blue);
+            color: white;
+        }
+
+        .phase-step.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .phase-step::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--border);
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+        .phase-step:last-child::after {
+            display: none;
+        }
+
+        .phase-label {
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .vocab-item {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .vocab-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .vocab-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .vocab-word {
+            font-weight: bold;
+            color: var(--trinity-blue);
+        }
+
+        .vocab-phonetic {
+            font-size: 0.85rem;
+            color: var(--secondary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .results-container {
+            background: white;
+            border: 2px solid var(--success);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--trinity-blue);
+            border: 4px solid var(--accent);
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .grade-distinction {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .grade-merit {
+            background: #c0c0c0;
+            color: #000;
+        }
+
+        .grade-pass {
+            background: #cd7f32;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timer {
+                margin-top: 1rem;
+            }
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            .response-options {
+                grid-template-columns: 1fr;
+            }
+            .scene-picture {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>Trinity GESE Grade 1 </h1>
+                <div class="exam-badge">CEFR Pre-A1 • 5 Minutes</div>
+            </div>
+            <div class="timer" id="timer">05:00</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('intro', this)">📋 About Exam</button>
+            <button class="nav-tab" onclick="showSection('phase1', this)">👋 Phase 1: Greeting</button>
+            <button class="nav-tab" onclick="showSection('phase2', this)">🖼️ Phase 2: Picture</button>
+            <button class="nav-tab" onclick="showSection('phase3', this)">💬 Phase 3: Chat</button>
+            <button class="nav-tab" onclick="showSection('results', this)" id="results-tab" style="display:none">📊 Results</button>
+        </div>
+
+        <!-- INTRO SECTION -->
+        <section id="intro" class="section active">
+            <div class="card">
+                <div class="card-header">About GESE Grade 1 Exam</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>GESE Grade 1</strong> is the first level of Trinity College London's Graded Examinations in Spoken English.
+                        It corresponds to <strong>CEFR Pre-A1</strong> level and takes approximately <strong>5 minutes</strong>.
+                    </div>
+
+                    <h3 style="color: var(--trinity-blue); margin: 1.5rem 0 1rem;">Exam Format (3 Phases)</h3>
+                    
+                    <div class="phase-indicator">
+                        <div class="phase-step active">1</div>
+                        <div class="phase-step">2</div>
+                        <div class="phase-step">3</div>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
+                        <div class="phase-label">Greeting &<br>Personal Info</div>
+                        <div class="phase-label">Picture-based<br>Discussion</div>
+                        <div class="phase-label">Conversation<br>& Goodbye</div>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>What You Need to Know:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Greetings: Hello, Good morning, Goodbye</li>
+                            <li>Personal information: name, age</li>
+                            <li>Numbers 1-20</li>
+                            <li>Colours: red, blue, green, yellow, etc.</li>
+                            <li>Common objects: book, pen, bag, chair, etc.</li>
+                            <li>Animals: cat, dog, bird, etc.</li>
+                        </ul>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary" onclick="startExam()">Start Exam Simulation →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 1: GREETING AND PERSONAL INFORMATION -->
+        <section id="phase1" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Phase 1: Greeting & Personal Information</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~1-2 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="phase1-examiner-text">
+                            Good morning! Hello! What's your name?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="phase1-candidate" style="display: none;">
+                        <div class="candidate-label">YOU (Candidate)</div>
+                        <div class="response-options" id="phase1-options">
+                            <!-- Options will be inserted by JS -->
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="phase1-feedback"></div>
+
+                    <div class="navigation" id="phase1-nav" style="display: none;">
+                        <button class="btn-primary" onclick="nextPhase1Question()">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Helpful Vocabulary for Phase 1</div>
+                <div class="card-body">
+                    <div class="vocab-grid">
+                        <div class="vocab-item" onclick="speak('My name is...')">
+                            <div class="vocab-icon">📝</div>
+                            <div class="vocab-word">My name is...</div>
+                            <div class="vocab-phonetic">/maɪ neɪm ɪz/</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('I am seven years old')">
+                            <div class="vocab-icon">🎂</div>
+                            <div class="vocab-word">I am... years old</div>
+                            <div class="vocab-phonetic">/aɪ æm/</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('Hello')">
+                            <div class="vocab-icon">👋</div>
+                            <div class="vocab-word">Hello / Hi</div>
+                            <div class="vocab-phonetic">/həˈləʊ/</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('Goodbye')">
+                            <div class="vocab-icon">👋</div>
+                            <div class="vocab-word">Goodbye / Bye</div>
+                            <div class="vocab-phonetic">/ˌɡʊdˈbaɪ/</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 2: PICTURE-BASED DISCUSSION -->
+        <section id="phase2" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Phase 2: Picture Discussion</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~2 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-box">
+                        The examiner will show you a picture and ask you to identify objects, 
+                        colors, and numbers. Click on the objects in the picture to identify them!
+                    </div>
+
+                    <div class="picture-container">
+                        <div class="scene-picture" id="scene-picture">
+                            <!-- Objects will be placed here by JS -->
+                            <div class="scene-object" style="top: 10%; left: 10%;" data-name="cat" data-color="black" onclick="selectObject(this)">🐈‍⬛</div>
+                            <div class="scene-object" style="top: 15%; left: 60%;" data-name="bird" data-color="blue" onclick="selectObject(this)">🐦</div>
+                            <div class="scene-object" style="top: 50%; left: 20%;" data-name="book" data-color="red" onclick="selectObject(this)">📕</div>
+                            <div class="scene-object" style="top: 55%; left: 70%;" data-name="bag" data-color="red" onclick="selectObject(this)">🎒</div>
+                            <div class="scene-object" style="top: 75%; left: 40%;" data-name="chair" data-color="brown" onclick="selectObject(this)">🪑</div>
+                            <div class="scene-object" style="top: 30%; left: 35%;" data-name="tree" data-color="green" onclick="selectObject(this)">🌳</div>
+                            <div class="scene-object" style="top: 80%; left: 75%;" data-name="flowers" data-color="pink" onclick="selectObject(this)">🌸</div>
+                            <div class="scene-object" style="top: 40%; left: 85%;" data-name="sun" data-color="yellow" onclick="selectObject(this)">☀️</div>
+                        </div>
+                        <p style="margin-top: 1rem; color: var(--secondary); font-style: italic;">
+                            Click on an object to identify it!
+                        </p>
+                    </div>
+
+                    <div class="examiner-section" id="phase2-examiner" style="display: none;">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="phase2-question"></div>
+                    </div>
+
+                    <div class="candidate-section" id="phase2-candidate" style="display: none;">
+                        <div class="candidate-label">YOUR ANSWER</div>
+                        <div class="response-options" id="phase2-options"></div>
+                    </div>
+
+                    <div class="feedback" id="phase2-feedback"></div>
+
+                    <div class="navigation" id="phase2-nav" style="display: none;">
+                        <button class="btn-primary" onclick="nextPhase2Question()">Next Question →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Useful Language for Pictures</div>
+                <div class="card-body">
+                    <div class="vocab-grid">
+                        <div class="vocab-item" onclick="speak('This is a')">
+                            <div class="vocab-icon">👉</div>
+                            <div class="vocab-word">This is a...</div>
+                            <div class="vocab-phonetic">/ðɪs ɪz ə/</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('That is a')">
+                            <div class="vocab-icon">👆</div>
+                            <div class="vocab-word">That is a...</div>
+                            <div class="vocab-phonetic">/ðæt ɪz ə/</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('It is red')">
+                            <div class="vocab-icon">🔴</div>
+                            <div class="vocab-word">It is (colour)</div>
+                            <div class="vocab-phonetic">/ɪt ɪz/</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('I can see')">
+                            <div class="vocab-icon">👁️</div>
+                            <div class="vocab-word">I can see...</div>
+                            <div class="vocab-phonetic">/aɪ kæn siː/</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 3: CONVERSATION AND LEAVE-TAKING -->
+        <section id="phase3" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Phase 3: Conversation & Leave-taking</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~1-2 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="phase3-examiner-text">
+                            Thank you! Now, how old are you?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="phase3-candidate">
+                        <div class="candidate-label">YOU (Candidate)</div>
+                        <div class="response-options" id="phase3-options">
+                            <button class="response-btn" onclick="checkPhase3Answer(this, true)">I am seven years old</button>
+                            <button class="response-btn" onclick="checkPhase3Answer(this, false)">My name is Tom</button>
+                            <button class="response-btn" onclick="checkPhase3Answer(this, false)">I like apples</button>
+                            <button class="response-btn" onclick="checkPhase3Answer(this, false)">Goodbye</button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="phase3-feedback"></div>
+
+                    <div class="navigation" id="phase3-nav" style="display: none;">
+                        <button class="btn-primary" onclick="finishExam()">Finish Exam →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS SECTION -->
+        <section id="results" class="section">
+            <div class="results-container">
+                <h2 style="color: var(--trinity-blue); margin-bottom: 1rem;">🎉 Exam Completed!</h2>
+                
+                <div class="score-circle" id="final-score">--</div>
+                
+                <div class="grade-badge" id="grade-badge">Grade</div>
+                
+                <p style="font-size: 1.1rem; margin: 1rem 0;" id="result-message"></p>
+
+                <div style="text-align: left; max-width: 600px; margin: 2rem auto; background: var(--light); padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: var(--trinity-blue); margin-bottom: 1rem;">Examiner's Feedback:</h3>
+                    <ul id="feedback-list" style="margin-left: 1.5rem; line-height: 2;">
+                        <!-- Feedback items will be inserted here -->
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn-primary" onclick="location.reload()">Try Again</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Timer functionality
+        let timeRemaining = 300; // 5 minutes in seconds
+        let timerInterval;
+        let currentPhase = 1;
+        let phase1Question = 0;
+        let phase2Question = 0;
+        let score = 0;
+        let selectedObject = null;
+
+        // Phase 1 Questions
+        const phase1Questions = [
+            {
+                examiner: "Good morning! Hello! What's your name?",
+                options: ["My name is Marco", "I am seven years old", "Hello teacher", "Goodbye"],
+                correct: "My name is Marco",
+                feedback: "Correct! When asked 'What's your name?', say 'My name is...'",
+                points: 10
+            },
+            {
+                examiner: "Nice to meet you! How old are you?",
+                options: ["I am fine", "I am eight years old", "My name is Anna", "I like pizza"],
+                correct: "I am eight years old",
+                feedback: "Correct! Answer with 'I am [number] years old'",
+                points: 10
+            },
+            {
+                examiner: "Are you a boy or a girl?",
+                options: ["I am a student", "I am a boy/girl", "I am happy", "I am ten"],
+                correct: "I am a boy/girl",
+                feedback: "Correct! Simply state 'I am a boy' or 'I am a girl'",
+                points: 10
+            }
+        ];
+
+        // Phase 2 Questions (Picture-based)
+        const phase2Questions = [
+            {
+                examiner: "Point to the cat. What colour is it?",
+                options: ["It is black", "It is a cat", "I like cats", "The cat is big"],
+                correct: "It is black",
+                feedback: "Correct! Describe the color: 'It is [colour]'",
+                points: 10,
+                requiresSelection: "cat"
+            },
+            {
+                examiner: "How many books can you see?",
+                options: ["It is red", "I can see one book", "This is a book", "Books are nice"],
+                correct: "I can see one book",
+                feedback: "Correct! Count and say 'I can see [number] book(s)'",
+                points: 10,
+                requiresSelection: "book"
+            },
+            {
+                examiner: "What colour is the bag?",
+                options: ["It is yellow", "This is a bag", "I have a bag", "The bag is big"],
+                correct: "It is yellow",
+                feedback: "Correct! Identify the color",
+                points: 10,
+                requiresSelection: "bag"
+            },
+            {
+                examiner: "Point to something green.",
+                options: ["The tree is green", "I like green", "Green is nice", "This is green"],
+                correct: "The tree is green",
+                feedback: "Correct! Identify the green object (the tree)",
+                points: 10,
+                requiresSelection: "tree"
+            }
+        ];
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    finishExam();
+                }
+            }, 1000);
+        }
+
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const totalQuestions = phase1Questions.length + phase2Questions.length + 2; // +2 for phase 3
+            let answered = phase1Question + phase2Question + (currentPhase > 3 ? 1 : 0);
+            const percent = Math.min((answered / totalQuestions) * 100, 100);
+            document.getElementById('progress').style.width = percent + '%';
+        }
+
+        function startExam() {
+            startTimer();
+            showSection('phase1', document.querySelectorAll('.nav-tab')[1]);
+            loadPhase1Question();
+        }
+
+        // PHASE 1 FUNCTIONS
+        function loadPhase1Question() {
+            if (phase1Question >= phase1Questions.length) {
+                moveToPhase2();
+                return;
+            }
+
+            const q = phase1Questions[phase1Question];
+            document.getElementById('phase1-examiner-text').textContent = q.examiner;
+            
+            const optionsDiv = document.getElementById('phase1-options');
+            optionsDiv.innerHTML = '';
+            
+            // Shuffle options
+            const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+            shuffled.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'response-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkPhase1Answer(btn, opt === q.correct, q);
+                optionsDiv.appendChild(btn);
+            });
+
+            document.getElementById('phase1-candidate').style.display = 'block';
+            document.getElementById('phase1-nav').style.display = 'none';
+            document.getElementById('phase1-feedback').className = 'feedback';
+            document.getElementById('phase1-feedback').style.display = 'none';
+        }
+
+        function checkPhase1Answer(btn, isCorrect, question) {
+            // Disable all buttons
+            document.querySelectorAll('#phase1-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b.textContent === question.correct) {
+                    b.classList.add('correct');
+                } else if (b === btn && !isCorrect) {
+                    b.classList.add('wrong');
+                }
+            });
+
+            const feedback = document.getElementById('phase1-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? '✅ ' + question.feedback : '❌ The correct answer is: "' + question.correct + '"<br>' + question.feedback;
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += question.points;
+            document.getElementById('phase1-nav').style.display = 'flex';
+        }
+
+        function nextPhase1Question() {
+            phase1Question++;
+            loadPhase1Question();
+        }
+
+        // PHASE 2 FUNCTIONS
+        function moveToPhase2() {
+            currentPhase = 2;
+            showSection('phase2', document.querySelectorAll('.nav-tab')[2]);
+            loadPhase2Question();
+        }
+
+        function loadPhase2Question() {
+            if (phase2Question >= phase2Questions.length) {
+                moveToPhase3();
+                return;
+            }
+
+            const q = phase2Questions[phase2Question];
+            
+            // Reset selection
+            selectedObject = null;
+            document.querySelectorAll('.scene-object').forEach(obj => {
+                obj.classList.remove('selected');
+                obj.style.pointerEvents = 'auto';
+            });
+
+            document.getElementById('phase2-question').textContent = q.examiner;
+            document.getElementById('phase2-examiner').style.display = 'block';
+            document.getElementById('phase2-candidate').style.display = 'none';
+            document.getElementById('phase2-nav').style.display = 'none';
+            document.getElementById('phase2-feedback').style.display = 'none';
+
+            // If question requires selecting an object first
+            if (q.requiresSelection) {
+                document.getElementById('phase2-feedback').className = 'feedback show info';
+                document.getElementById('phase2-feedback').innerHTML = '👆 First, click on the ' + q.requiresSelection + ' in the picture!';
+                document.getElementById('phase2-feedback').style.display = 'block';
+            } else {
+                showPhase2Options(q);
+            }
+        }
+
+        function selectObject(obj) {
+            // Clear previous selection
+            document.querySelectorAll('.scene-object').forEach(o => o.classList.remove('selected'));
+            
+            // Select new object
+            obj.classList.add('selected');
+            selectedObject = obj.dataset.name;
+
+            const q = phase2Questions[phase2Question];
+            
+            // Check if correct object selected
+            if (q.requiresSelection && selectedObject === q.requiresSelection) {
+                document.getElementById('phase2-feedback').style.display = 'none';
+                showPhase2Options(q);
+            } else if (q.requiresSelection) {
+                const feedback = document.getElementById('phase2-feedback');
+                feedback.className = 'feedback show info';
+                feedback.innerHTML = 'That\'s the ' + selectedObject + '. Please find the ' + q.requiresSelection + '!';
+            } else {
+                showPhase2Options(q);
+            }
+        }
+
+        function showPhase2Options(q) {
+            const optionsDiv = document.getElementById('phase2-options');
+            optionsDiv.innerHTML = '';
+            
+            const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+            shuffled.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'response-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkPhase2Answer(btn, opt === q.correct, q);
+                optionsDiv.appendChild(btn);
+            });
+
+            document.getElementById('phase2-candidate').style.display = 'block';
+        }
+
+        function checkPhase2Answer(btn, isCorrect, question) {
+            document.querySelectorAll('#phase2-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b.textContent === question.correct) {
+                    b.classList.add('correct');
+                } else if (b === btn && !isCorrect) {
+                    b.classList.add('wrong');
+                }
+            });
+
+            const feedback = document.getElementById('phase2-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? '✅ ' + question.feedback : '❌ The correct answer is: "' + question.correct + '"';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += question.points;
+            document.getElementById('phase2-nav').style.display = 'flex';
+        }
+
+        function nextPhase2Question() {
+            phase2Question++;
+            loadPhase2Question();
+        }
+
+        // PHASE 3 FUNCTIONS
+        function moveToPhase3() {
+            currentPhase = 3;
+            showSection('phase3', document.querySelectorAll('.nav-tab')[3]);
+        }
+
+        function checkPhase3Answer(btn, isCorrect) {
+            document.querySelectorAll('#phase3-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById('phase3-feedback');
+            feedback.className = 'feedback show correct';
+            feedback.innerHTML = '✅ Good! Now the examiner will say goodbye.<br><br><strong>Examiner:</strong> "Thank you very much! Goodbye!"<br><strong>You should say:</strong> "Goodbye! Bye!"';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 10;
+            document.getElementById('phase3-nav').style.display = 'flex';
+        }
+
+        function finishExam() {
+            clearInterval(timerInterval);
+            document.getElementById('results-tab').style.display = 'block';
+            showSection('results', document.getElementById('results-tab'));
+
+            // Calculate percentage
+            const maxScore = 60; // Total possible points
+            const percentage = Math.round((score / maxScore) * 100);
+            
+            document.getElementById('final-score').textContent = percentage + '%';
+
+            // Determine grade
+            const badge = document.getElementById('grade-badge');
+            const message = document.getElementById('result-message');
+            
+            if (percentage >= 80) {
+                badge.className = 'grade-badge grade-distinction';
+                badge.textContent = 'DISTINCTION 🏆';
+                message.textContent = 'Excellent! You demonstrated excellent communication skills!';
+            } else if (percentage >= 60) {
+                badge.className = 'grade-badge grade-merit';
+                badge.textContent = 'MERIT 🥈';
+                message.textContent = 'Very good! You communicated well with the examiner.';
+            } else if (percentage >= 40) {
+                badge.className = 'grade-badge grade-pass';
+                badge.textContent = 'PASS ✅';
+                message.textContent = 'Good effort! You showed basic communication ability.';
+            } else {
+                badge.style.background = '#6c757d';
+                badge.style.color = 'white';
+                badge.textContent = 'NOT PASSED';
+                message.textContent = 'Keep practicing! Try the simulation again.';
+            }
+
+            // Generate feedback
+            const feedbackList = document.getElementById('feedback-list');
+            feedbackList.innerHTML = `
+                <li>✅ Greeting and personal information exchange</li>
+                <li>${score >= 20 ? '✅' : '⚠️'} Picture identification and description</li>
+                <li>${score >= 40 ? '✅' : '⚠️'} Color identification</li>
+                <li>${score >= 50 ? '✅' : '⚠️'} Number recognition</li>
+                <li>✅ Appropriate leave-taking</li>
+            `;
+        }
+
+        // Text-to-Speech function
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-GB';
+                utterance.rate = 0.8;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        // Initialize
+        window.onload = () => {
+            updateProgress();
+        };
+    </script>
+</body>
+</html>

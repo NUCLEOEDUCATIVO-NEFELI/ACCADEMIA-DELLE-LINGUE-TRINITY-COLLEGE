@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE Foundation Portfolio - Complete Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #e8f5e9;
+            --dark: #263238;
+            --border: #c8e6c9;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --a2-color: #1565c0;
+            --warning: #ef6c00;
+            --section1: #e3f2fd;
+            --section2: #fff3e0;
+            --section3: #f3e5f5;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3e0;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--a2-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .section-box {
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 5px solid;
+        }
+
+        .section1-box {
+            background: var(--section1);
+            border-color: #1565c0;
+        }
+
+        .section2-box {
+            background: var(--section2);
+            border-color: #ef6c00;
+        }
+
+        .section3-box {
+            background: var(--section3);
+            border-color: #6a1b9a;
+        }
+
+        .section-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .word-count {
+            display: inline-block;
+            background: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-weight: bold;
+            margin-left: 0.5rem;
+            border: 2px solid;
+        }
+
+        .section1-box .word-count {
+            border-color: #1565c0;
+            color: #1565c0;
+        }
+
+        .section2-box .word-count {
+            border-color: #ef6c00;
+            color: #ef6c00;
+        }
+
+        .section3-box .word-count {
+            border-color: #6a1b9a;
+            color: #6a1b9a;
+        }
+
+        .task-example {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            line-height: 1.6;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE Foundation Portfolio</h1>
+            <p>Complete Guide to the Three Portfolio Tasks (A2 Level)</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE Foundation Portfolio Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE Foundation Portfolio Guide</h1>
+            <p class="page-subtitle">Three Tasks: Correspondence, Factual Writing & Creative Writing</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('section1', this)">Task 1: Correspondence</button>
+            <button class="nav-tab" onclick="showSection('section2', this)">Task 2: Factual</button>
+            <button class="nav-tab" onclick="showSection('section3', this)">Task 3: Creative</button>
+            <button class="nav-tab" onclick="showSection('guide', this)">Writing Guide</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">What is the ISE Foundation Portfolio?</div>
+                <div class="card-body">
+                    <p>The <strong>Portfolio</strong> is one of three components of the ISE Foundation exam (A2 level). It consists of <strong>three pieces of written work</strong> that you prepare before the exam. The portfolio demonstrates your best writing ability and accounts for <strong>20% of your total mark</strong>.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Key Facts:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>You choose <strong>3 tasks from 15 options</strong> (5 in each section)</li>
+                            <li>You must complete <strong>one task from each section</strong></li>
+                            <li>You have <strong>6-12 weeks</strong> to prepare (recommended)</li>
+                            <li>You can use dictionaries, spell-checkers, and ask for teacher feedback</li>
+                            <li>The examiner assesses your portfolio <strong>before</strong> your speaking exam</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Important Rules:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Tasks must be from the <strong>current year's list</strong> (January-December)</li>
+                            <li>Work must be <strong>your own</strong> — no copying or plagiarism</li>
+                            <li>Teacher can give <strong>one piece of feedback per task only</strong></li>
+                            <li>You must include a <strong>word count</strong> for each task</li>
+                            <li>Present tasks in order: Section 1, Section 2, Section 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">The Three Portfolio Sections</div>
+                <div class="card-body">
+                    
+                    <div class="section-box section1-box">
+                        <div class="section-title">Section 1: Correspondence <span class="word-count">40-60 words</span></div>
+                        <p><strong>Task types:</strong> Email, letter, postcard, note, memo</p>
+                        <p><strong>Focus:</strong> Personal communication with appropriate style and format</p>
+                        <p><strong>Weighting:</strong> 20% of portfolio mark</p>
+                    </div>
+
+                    <div class="section-box section2-box">
+                        <div class="section-title">Section 2: Factual Writing <span class="word-count">80-100 words</span></div>
+                        <p><strong>Task types:</strong> Article, report, review, instructions, directions</p>
+                        <p><strong>Focus:</strong> Conveying factual information clearly and accurately</p>
+                        <p><strong>Weighting:</strong> 40% of portfolio mark</p>
+                    </div>
+
+                    <div class="section-box section3-box">
+                        <div class="section-title">Section 3: Creative/Descriptive Writing <span class="word-count">80-100 words</span></div>
+                        <p><strong>Task types:</strong> Story, diary entry, description</p>
+                        <p><strong>Focus:</strong> Using language imaginatively to describe people, places, experiences</p>
+                        <p><strong>Weighting:</strong> 40% of portfolio mark</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Assessment Criteria</div>
+                <div class="card-body">
+                    <p>Examiners assess your portfolio using one overall criterion: <strong>Task Fulfilment</strong>. This includes:</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Factor</th>
+                                <th>What the Examiner Looks For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Communicative Aim</td>
+                                <td>Did you complete the task? Is the message clear?</td>
+                            </tr>
+                            <tr>
+                                <td>Text Organisation</td>
+                                <td>Logical structure, paragraphs, connectors</td>
+                            </tr>
+                            <tr>
+                                <td>Format & Register</td>
+                                <td>Correct layout (email vs letter), appropriate formality</td>
+                            </tr>
+                            <tr>
+                                <td>Language Accuracy</td>
+                                <td>Grammar, vocabulary, spelling, punctuation</td>
+                            </tr>
+                            <tr>
+                                <td>Effect on Reader</td>
+                                <td>Is it interesting? Appropriate tone?</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>High Accuracy Expected:</strong> Because you can use spell-checkers, dictionaries, and time to draft, the examiner expects a <strong>high level of accuracy</strong> in your portfolio. Mistakes will affect your grade more than in the exam room.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 1: CORRESPONDENCE -->
+        <section id="section1" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: #1565c0;">Section 1: Correspondence (40-60 words)</div>
+                <div class="card-body">
+                    <div class="section1-box" style="margin-bottom: 1.5rem;">
+                        <p><strong>Task Types:</strong> Email, letter, postcard, note, memo</p>
+                        <p><strong>Word Count:</strong> 40-60 words (strictly enforced)</p>
+                        <p><strong>Time Suggested:</strong> 2-3 hours per draft</p>
+                    </div>
+
+                    <h4>What You Need to Demonstrate:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Appropriate greeting and closing for the text type</li>
+                        <li>Clear purpose (why are you writing?)</li>
+                        <li>Basic information exchange</li>
+                        <li>Simple and routine communication</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Task from Official List:</strong><br>
+                        "You are on holiday with your family in the mountains. Write a postcard to a friend telling him where you are, what the weather is like and what you are doing."
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Model Answer 1: Postcard (52 words)</div>
+                <div class="card-body">
+                    <div class="task-example">Dear Maria,
+
+Greetings from the mountains! I'm here with my family for a week. The weather is fantastic — sunny and warm every day. Yesterday we went hiking and saw a beautiful lake. Today we're going to visit a small village nearby. The food is delicious! See you next week.
+
+Love,
+Anna</div>
+
+                    <div class="rule-box">
+                        <strong>Why this is good:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Appropriate postcard format (greeting, message, closing)</li>
+                            <li>Covers all three points: location, weather, activities</li>
+                            <li>Simple past and going to for future</li>
+                            <li>Within word count (52 words)</li>
+                            <li>Friendly, informal tone suitable for a friend</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Model Answer 2: Email to a Friend (58 words)</div>
+                <div class="card-body">
+                    <div class="task-example">Hi Tom,
+
+Thanks for your email. I'm writing to tell you about my new job. I started last Monday and I really like it. My colleagues are friendly and the work is interesting. I work from 9 to 5 every day. Let's meet for coffee next weekend. Are you free on Saturday?
+
+Best wishes,
+Lucy</div>
+
+                    <div class="instruction-box">
+                        <strong>Language Features for Correspondence:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Greetings:</strong> Dear..., Hi..., Hello...</li>
+                            <li><strong>Closings:</strong> Love, Best wishes, Regards, See you soon</li>
+                            <li><strong>Opening phrases:</strong> Thanks for..., I'm writing to..., How are you?</li>
+                            <li><strong>Closing phrases:</strong> Write soon, Let's meet..., Give my love to...</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Common Correspondence Tasks</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Task Type</th>
+                                <th>Key Features</th>
+                                <th>Example Situation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Postcard</td>
+                                <td>Brief, chatty, no address needed</td>
+                                <td>Holiday greetings, short update</td>
+                            </tr>
+                            <tr>
+                                <td>Informal email</td>
+                                <td>Hi/Hello, friendly tone, contractions</td>
+                                <td>To friends or family</td>
+                            </tr>
+                            <tr>
+                                <td>Formal email/letter</td>
+                                <td>Dear Mr/Ms, polite language, no contractions</td>
+                                <td>To teacher, employer, official</td>
+                            </tr>
+                            <tr>
+                                <td>Note</td>
+                                <td>Very short, often just message</td>
+                                <td>Leaving a message for someone</td>
+                            </tr>
+                            <tr>
+                                <td>Memo</td>
+                                <td>To/From/Date/Subject format</td>
+                                <td>Workplace communication</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 2: FACTUAL WRITING -->
+        <section id="section2" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: #ef6c00;">Section 2: Factual Writing (80-100 words)</div>
+                <div class="card-body">
+                    <div class="section2-box" style="margin-bottom: 1.5rem;">
+                        <p><strong>Task Types:</strong> Article, report, review, instructions, directions</p>
+                        <p><strong>Word Count:</strong> 80-100 words (strictly enforced)</p>
+                        <p><strong>Weighting:</strong> 40% of portfolio (most important section)</p>
+                    </div>
+
+                    <h4>What You Need to Demonstrate:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Ability to convey factual information clearly</li>
+                        <li>Logical organisation of information</li>
+                        <li>Appropriate style for the text type</li>
+                        <li>Use of sequencing (first, then, finally) for instructions</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Task from Official List:</strong><br>
+                        "You are going on a camping trip with a group of friends. Write some instructions for your friends saying what clothes, food and equipment to bring."
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Model Answer 1: Instructions (88 words)</div>
+                <div class="card-body">
+                    <div class="task-example">Camping Trip Instructions
+
+Please bring the following items for our camping trip:
+
+Clothes: Bring warm clothes for the evening, a waterproof jacket and comfortable walking shoes. Don't forget your swimming costume!
+
+Food: We will cook together, but please bring snacks and drinks for yourself. Bring a bottle of water.
+
+Equipment: You need a sleeping bag and a torch. If you have a tent, please bring it. We also need one camping stove per group.
+
+See you on Saturday morning!
+
+Sam</div>
+
+                    <div class="rule-box">
+                        <strong>Why this is good:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Clear title and introduction</li>
+                            <li>Organised with bullet points/categories</li>
+                            <li>Imperative verbs (bring, don't forget)</li>
+                            <li>Covers all three required areas (clothes, food, equipment)</li>
+                            <li>Appropriate word count (88 words)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Model Answer 2: Review (94 words)</div>
+                <div class="card-body">
+                    <div class="task-example">Restaurant Review: Pizza Palace
+
+Last weekend, I visited Pizza Palace with my family. The restaurant is in the city centre, near the train station.
+
+The food was excellent. I ordered a margherita pizza and my brother had pasta. The portions were very big and everything was fresh. The prices were reasonable — about €15 per person.
+
+The waiter was friendly but the service was a bit slow because the restaurant was busy. The atmosphere was nice and the music wasn't too loud.
+
+I recommend this restaurant for families. I will definitely go back soon!</div>
+
+                    <div class="instruction-box">
+                        <strong>Language for Reviews:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Introduction:</strong> Last weekend..., I recently visited...</li>
+                            <li><strong>Positive:</strong> excellent, delicious, fantastic, reasonable prices, friendly staff</li>
+                            <li><strong>Negative:</strong> disappointing, expensive, slow service, too noisy</li>
+                            <li><strong>Recommendation:</strong> I recommend..., I suggest..., Perfect for families</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Model Answer 3: Article (96 words)</div>
+                <div class="card-body">
+                    <div class="task-example">How to Stay Healthy
+
+Do you want to feel better and have more energy? Here are three easy ways to stay healthy.
+
+First, eat plenty of fruit and vegetables. Try to eat five portions every day. Second, do regular exercise. You should walk or cycle for thirty minutes daily. Finally, drink lots of water and sleep for eight hours every night.
+
+Small changes can make a big difference. Start today and you will feel healthier tomorrow!
+
+What do you do to stay healthy? Send us your tips!</div>
+
+                    <div class="rule-box">
+                        <strong>Article Features:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Catchy title</li>
+                            <li>Engaging opening question</li>
+                            <li>Sequencing words (First, Second, Finally)</li>
+                            <li>Direct address to reader (you)</li>
+                            <li>Conclusion with call to action</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 3: CREATIVE WRITING -->
+        <section id="section3" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: #6a1b9a;">Section 3: Creative/Descriptive Writing (80-100 words)</div>
+                <div class="card-body">
+                    <div class="section3-box" style="margin-bottom: 1.5rem;">
+                        <p><strong>Task Types:</strong> Story, diary entry, description (person, place, experience)</p>
+                        <p><strong>Word Count:</strong> 80-100 words (strictly enforced)</p>
+                        <p><strong>Weighting:</strong> 40% of portfolio</p>
+                    </div>
+
+                    <h4>What You Need to Demonstrate:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Imaginative use of language</li>
+                        <li>Descriptive vocabulary (adjectives, adverbs)</li>
+                        <li>Ability to engage the reader</li>
+                        <li>Past tenses for stories and diary entries</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Task from Official List:</strong><br>
+                        "Write a description of your favourite hobby for a family magazine. Say when you started it, how often you do it and what special equipment you use."
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Model Answer 1: Description of a Hobby (89 words)</div>
+                <div class="card-body">
+                    <div class="task-example">My Favourite Hobby: Photography
+
+My favourite hobby is photography. I started taking photos three years ago when my dad gave me a camera for my birthday.
+
+I take pictures every weekend. I usually go to the park or the city centre to photograph nature and people. Sometimes I take photos of my friends and family at special events.
+
+I use a digital camera and my smartphone. I also have a tripod for steady shots. I love editing my photos on the computer and sharing them online.
+
+Photography helps me see the beauty in everyday life.</div>
+
+                    <div class="rule-box">
+                        <strong>Why this is good:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Clear title</li>
+                            <li>Past simple for when started</li>
+                            <li>Present simple for routines (every weekend, usually)</li>
+                            <li>Specific details (tripod, editing on computer)</li>
+                            <li>Personal conclusion showing enjoyment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Model Answer 2: Story (95 words)</div>
+                <div class="card-body">
+                    <div class="task-example">A Lucky Escape
+
+Last Saturday, I decided to go for a walk in the forest. The weather was beautiful and I wanted some fresh air.
+
+I walked for about an hour and then I realised I was lost. I couldn't see the path and my phone had no signal. I felt scared and worried.
+
+Suddenly, I heard a dog barking. I followed the sound and saw a man with his dog. He showed me the way back to the village. I was so relieved!
+
+I always take a map with me now.</div>
+
+                    <div class="instruction-box">
+                        <strong>Story Language:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Time markers:</strong> Last Saturday, Suddenly, Then, Finally</li>
+                            <li><strong>Past tenses:</strong> decided, was, realised, felt, heard</li>
+                            <li><strong>Adjectives for feelings:</strong> scared, worried, relieved, excited</li>
+                            <li><strong>Direct speech:</strong> Can you help me? (optional)</li>
+                            <li><strong>Conclusion:</strong> Lesson learned or happy ending</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Model Answer 3: Diary Entry (86 words)</div>
+                <div class="card-body">
+                    <div class="task-example">Saturday 15th June
+
+Today was the best day ever! I went to the amusement park with my best friends, Tom and Sara.
+
+We arrived at 10 o'clock and went on all the rides. My favourite was the roller coaster — it was terrifying but amazing! We ate hot dogs and ice cream for lunch. In the afternoon, we won prizes at the games stall.
+
+I felt tired but very happy when I got home. I want to go back again soon!
+
+Bedtime now. Good night!</div>
+
+                    <div class="rule-box">
+                        <strong>Diary Features:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Date at the top</li>
+                            <li>Personal pronouns (I, my)</li>
+                            <li>Chronological order</li>
+                            <li>Feelings and opinions</li>
+                            <li>Informal style (exclamation marks, Bedtime now)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WRITING GUIDE SECTION -->
+        <section id="guide" class="section">
+            <div class="card">
+                <div class="card-header">Step-by-Step Portfolio Writing Process</div>
+                <div class="card-body">
+                    
+                    <div class="essay-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">Step 1: Choose Your Tasks</h4>
+                        <p>From the official Trinity list (15 tasks total), select:</p>
+                        <ul>
+                            <li><strong>One from Section 1</strong> (Correspondence)</li>
+                            <li><strong>One from Section 2</strong> (Factual Writing)</li>
+                            <li><strong>One from Section 3</strong> (Creative Writing)</li>
+                        </ul>
+                        <p><strong>Tip:</strong> Choose topics you know well and can write about personally.</p>
+                    </div>
+
+                    <div class="essay-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">Step 2: Plan Your Content</h4>
+                        <p>Before writing, make notes:</p>
+                        <ul>
+                            <li>What is the purpose?</li>
+                            <li>Who is the reader?</li>
+                            <li>What points must I include?</li>
+                            <li>What tense should I use?</li>
+                        </ul>
+                    </div>
+
+                    <div class="essay-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">Step 3: Write the First Draft</h4>
+                        <p>Don't worry about perfection. Focus on:</p>
+                        <ul>
+                            <li>Including all required information</li>
+                            <li>Organising ideas logically</li>
+                            <li>Using appropriate layout</li>
+                        </ul>
+                    </div>
+
+                    <div class="essay-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">Step 4: Self-Edit</h4>
+                        <p>Check your work carefully:</p>
+                        <ul class="checklist">
+                            <li>Word count (use Word Count tool)</li>
+                            <li>Spelling (use spell-checker)</li>
+                            <li>Grammar (tenses, articles, prepositions)</li>
+                            <li>Punctuation (capital letters, full stops, commas)</li>
+                            <li>Task completion (all points covered?)</li>
+                            <li>Format (correct layout for text type)</li>
+                        </ul>
+                    </div>
+
+                    <div class="essay-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">Step 5: Teacher Feedback</h4>
+                        <p>Give your draft to your teacher. They can provide <strong>one piece of feedback per task</strong> using the official feedback form. They cannot correct errors directly.</p>
+                    </div>
+
+                    <div class="essay-step" style="margin-bottom: 1.5rem; padding-left: 1.5rem; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">Step 6: Final Draft</h4>
+                        <p>Write your final version incorporating feedback. Check again for accuracy.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Grammar Checklist for A2 Level</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Grammar Point</th>
+                                <th>Example</th>
+                                <th>Used In</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Present Simple</td>
+                                <td>I work, She works, Do you like?</td>
+                                <td>Routines, facts</td>
+                            </tr>
+                            <tr>
+                                <td>Present Continuous</td>
+                                <td>I am working, He is playing</td>
+                                <td>Now, temporary situations</td>
+                            </tr>
+                            <tr>
+                                <td>Past Simple</td>
+                                <td>I visited, She went, Did you see?</td>
+                                <td>Stories, past events</td>
+                            </tr>
+                            <tr>
+                                <td>Going to (future)</td>
+                                <td>I'm going to visit</td>
+                                <td>Plans, intentions</td>
+                            </tr>
+                            <tr>
+                                <td>Can/Can't</td>
+                                <td>I can swim, She can't come</td>
+                                <td>Ability, possibility</td>
+                            </tr>
+                            <tr>
+                                <td>Comparatives</td>
+                                <td>bigger, more expensive</td>
+                                <td>Comparisons</td>
+                            </tr>
+                            <tr>
+                                <td>Imperatives</td>
+                                <td>Bring, Don't forget</td>
+                                <td>Instructions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Final Submission Checklist</div>
+                <div class="card-body">
+                    <p>Before handing in your portfolio, ensure you have:</p>
+                    <ul class="checklist">
+                        <li>Three tasks only (one from each section)</li>
+                        <li>Tasks in correct order: Section 1, Section 2, Section 3</li>
+                        <li>Word count written on each task</li>
+                        <li>Portfolio Cover Sheet completed</li>
+                        <li>Student Portfolio Feedback Forms attached (one per task)</li>
+                        <li>Tasks are your own work (no copying)</li>
+                        <li>No draft versions included</li>
+                        <li>Presented in the official colour-coded wallet</li>
+                    </ul>
+
+                    <div class="rule-box" style="margin-top: 1.5rem;">
+                        <strong>Remember:</strong> The examiner will assess your portfolio <strong>before</strong> your speaking exam. You cannot change it after submission. Make sure it represents your <strong>best work</strong>!
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Useful Resources</div>
+                <div class="card-body">
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Official Trinity Website:</strong> <a href="https://www.trinitycollege.com/ISE">trinitycollege.com/ISE</a> — Download current year's task list</li>
+                        <li><strong>Portfolio Cover Sheet:</strong> Must be attached to your submission</li>
+                        <li><strong>Student Portfolio Feedback Form:</strong> For teacher feedback</li>
+                        <li><strong>Sample Portfolios:</strong> Examples of real candidate work</li>
+                        <li><strong>Subject Areas:</strong> Personal information, education, hobbies, etc.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity ISE Foundation Portfolio Preparation</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

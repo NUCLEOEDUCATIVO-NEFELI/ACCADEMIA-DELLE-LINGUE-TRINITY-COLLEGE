@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 5  - Exam Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --trinity-blue: #1e3a5f;
+            --trinity-red: #dc2626;
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #c9a227;
+            --success: #276749;
+            --error: #c53030;
+            --light: #f5f5f0;
+            --dark: #212529;
+            --border: #d4d4c8;
+            --bg-card: #ffffff;
+            --topic-green: #2e7d32;
+            --interactive-purple: #6a1b9a;
+            --conversation-orange: #ef6c00;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--trinity-blue);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--trinity-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .timer {
+            background: white;
+            color: var(--trinity-blue);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            font-family: monospace;
+        }
+
+        .exam-badge {
+            display: inline-block;
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--trinity-blue);
+            border-bottom-color: var(--trinity-red);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--trinity-blue);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--trinity-red);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--trinity-blue);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .topic-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--topic-green);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .interactive-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--interactive-purple);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .conversation-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--conversation-orange);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .examiner-section {
+            background: #f8f9fa;
+            border: 2px solid var(--trinity-blue);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .examiner-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--trinity-blue);
+            color: white;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .examiner-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--trinity-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            float: left;
+            margin-right: 1rem;
+        }
+
+        .examiner-text {
+            font-size: 1.1rem;
+            color: var(--dark);
+            padding-left: 80px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .candidate-section {
+            background: #fff8e1;
+            border: 2px solid var(--accent);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .candidate-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--accent);
+            color: #000;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .response-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .response-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .response-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .response-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .response-btn.correct {
+            background: #d4edda;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .response-btn.wrong {
+            background: #f8d7da;
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--trinity-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #152a45;
+        }
+
+        .btn-topic {
+            background: var(--topic-green);
+        }
+
+        .btn-topic:hover {
+            background: #1b5e20;
+        }
+
+        .btn-interactive {
+            background: var(--interactive-purple);
+        }
+
+        .btn-interactive:hover {
+            background: #4a148c;
+        }
+
+        .btn-conversation {
+            background: var(--conversation-orange);
+        }
+
+        .btn-conversation:hover {
+            background: #e65100;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .feedback {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .feedback.info {
+            background: #e7f3ff;
+            border: 1px solid var(--trinity-blue);
+            color: var(--trinity-blue);
+        }
+
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .phase-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .phase-step.active {
+            background: var(--trinity-blue);
+            color: white;
+        }
+
+        .phase-step.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .phase-step::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--border);
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+        .phase-step:last-child::after {
+            display: none;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .vocab-item {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .vocab-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .vocab-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .vocab-word {
+            font-weight: bold;
+            color: var(--trinity-blue);
+            font-size: 0.9rem;
+        }
+
+        .vocab-phonetic {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .results-container {
+            background: white;
+            border: 2px solid var(--success);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--trinity-blue);
+            border: 4px solid var(--accent);
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .grade-distinction {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .grade-merit {
+            background: #c0c0c0;
+            color: #000;
+        }
+
+        .grade-pass {
+            background: #cd7f32;
+            color: white;
+        }
+
+        .grammar-box {
+            background: #f3e5f5;
+            border-left: 4px solid #7b1fa2;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .topic-form {
+            background: white;
+            border: 2px solid var(--topic-green);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .topic-point {
+            background: #e8f5e9;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-left: 3px solid var(--topic-green);
+        }
+
+        .scenario-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid #ff9800;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .scenario-title {
+            font-size: 1.2rem;
+            color: #e65100;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .interactive-task {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border: 2px solid var(--interactive-purple);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .interactive-title {
+            font-size: 1.2rem;
+            color: var(--interactive-purple);
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timer {
+                margin-top: 1rem;
+            }
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            .response-options {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>Trinity GESE Grade 5 </h1>
+                <div class="exam-badge">CEFR B1 • 10 Minutes</div>
+            </div>
+            <div class="timer" id="timer">10:00</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('intro', this)">📋 About Exam</button>
+            <button class="nav-tab" onclick="showSection('topic', this)">📌 Topic</button>
+            <button class="nav-tab" onclick="showSection('phase1', this)">🎯 Topic Discussion</button>
+            <button class="nav-tab" onclick="showSection('phase2', this)">🎭 Interactive</button>
+            <button class="nav-tab" onclick="showSection('phase3', this)">💬 Conversation</button>
+            <button class="nav-tab" onclick="showSection('results', this)" id="results-tab" style="display:none">📊 Results</button>
+        </div>
+
+        <!-- INTRO SECTION -->
+        <section id="intro" class="section active">
+            <div class="card">
+                <div class="card-header">About GESE Grade 5 Exam</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>GESE Grade 5</strong> is a major milestone at B1 level, introducing the 
+                        <strong>Interactive task</strong> where you must engage in genuine two-way communication. 
+                        The exam takes <strong>10 minutes</strong> and tests your ability to handle unpredictable situations.
+                    </div>
+
+                    <h3 style="color: var(--trinity-blue); margin: 1.5rem 0 1rem;">Exam Format (4 Parts)</h3>
+                    
+                    <div class="phase-indicator">
+                        <div class="phase-step active">1</div>
+                        <div class="phase-step">2</div>
+                        <div class="phase-step">3</div>
+                        <div class="phase-step">4</div>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Topic<br>Discussion<br><small>(2.5 min)</small></div>
+                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Interactive<br>Task<br><small>(2.5 min)</small></div>
+                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Conversation<br>Task<br><small>(2.5 min)</small></div>
+                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Listening<br>Task<br><small>(2.5 min)</small></div>
+                    </div>
+
+                    <div class="interactive-box">
+                        <strong>🎭 The Interactive Task (NEW in Grade 5):</strong>
+                        <p style="margin-top: 0.5rem;">The examiner presents a situation or problem. You must:</p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Ask questions to find out more information</li>
+                            <li>Make suggestions and proposals</li>
+                            <li>Respond to the examiner's comments</li>
+                            <li>Negotiate and reach a conclusion together</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem;"><strong>This is NOT a monologue - you must interact!</strong></p>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Language Functions at Grade 5:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Expressing and responding to feelings and attitudes</li>
+                            <li>Expressing opinions and making assumptions</li>
+                            <li>Speculating about past, present and future events</li>
+                            <li>Managing discourse (interrupting, changing topic, returning to topic)</li>
+                            <li>Making, accepting and rejecting suggestions</li>
+                            <li>Narrating events with detail and evaluation</li>
+                        </ul>
+                    </div>
+
+                    <div class="grammar-box">
+                        <strong>Key Grammar for Grade 5:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Third conditional (If I had known, I would have...)</li>
+                            <li>Mixed conditionals (If I had studied, I would be...)</li>
+                            <li>Modals in the past (must have, can't have, could have)</li>
+                            <li>Wish/If only (I wish I had...)</li>
+                            <li>Phrasal verbs and idiomatic expressions</li>
+                            <li>Discourse markers (On the other hand, Having said that, Anyway)</li>
+                        </ul>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary" onclick="startExam()">Start Exam Simulation →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOPIC PREPARATION SECTION -->
+        <section id="topic" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--topic-green);">The Topic Task - Preparation</div>
+                <div class="card-body">
+                    <div class="topic-box">
+                        <strong>Your Topic:</strong> "A Difficult Decision I Had to Make"
+                        <p style="margin-top: 0.5rem;">In Grade 5, your topic should allow for discussion of emotions, 
+                        speculation about alternatives, and evaluation of outcomes.</p>
+                    </div>
+
+                    <div class="topic-form">
+                        <h3 style="color: var(--topic-green); margin-bottom: 1rem;">📝 Topic Form</h3>
+                        <p style="margin-bottom: 1rem;">Complete these discussion points:</p>
+                        
+                        <div class="topic-point">
+                            <strong>Point 1:</strong> What the situation was and what options I had
+                        </div>
+                        <div class="topic-point">
+                            <strong>Point 2:</strong> Why the decision was difficult and my feelings at the time
+                        </div>
+                        <div class="topic-point">
+                            <strong>Point 3:</strong> What I decided and how I reached that decision
+                        </div>
+                        <div class="topic-point">
+                            <strong>Point 4:</strong> What happened afterwards and how I feel about it now
+                        </div>
+                    </div>
+
+                    <div class="conversation-box">
+                        <strong>💡 Grade 5 Tip:</strong> Be ready to discuss what <em>might have happened</em> if you had chosen differently. 
+                        The examiner will ask speculative questions using third conditional!
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary btn-topic" onclick="moveToPhase1()">Go to Exam →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Advanced Language for Your Topic</div>
+                <div class="card-body">
+                    <div class="vocab-grid">
+                        <div class="vocab-item" onclick="speak('I had to choose between')">
+                            <div class="vocab-icon">⚖️</div>
+                            <div class="vocab-word">I had to choose between...</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('If I had chosen differently, I would have')">
+                            <div class="vocab-icon">🔄</div>
+                            <div class="vocab-word">If I had..., I would have...</div>
+                            <div class="vocab-phonetic">3rd conditional</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('I wish I had known')">
+                            <div class="vocab-icon">😔</div>
+                            <div class="vocab-word">I wish I had...</div>
+                            <div class="vocab-phonetic">Regrets</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('Looking back, I think I made the right choice')">
+                            <div class="vocab-icon">👀</div>
+                            <div class="vocab-word">Looking back...</div>
+                            <div class="vocab-phonetic">Evaluation</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('It must have been the right decision')">
+                            <div class="vocab-icon">🎯</div>
+                            <div class="vocab-word">It must have been...</div>
+                            <div class="vocab-phonetic">Past deduction</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('On the other hand, I could have')">
+                            <div class="vocab-icon">🤔</div>
+                            <div class="vocab-word">On the other hand...</div>
+                            <div class="vocab-phonetic">Contrast</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 1: TOPIC DISCUSSION -->
+        <section id="phase1" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Part 1: Topic Discussion</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~2.5 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="topic-box">
+                        <strong>Your Topic:</strong> A Difficult Decision I Had to Make
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="phase1-examiner-text">
+                            Good morning! Please tell me about this difficult decision. What exactly was the situation, and what options were available to you?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="phase1-candidate" style="display: none;">
+                        <div class="candidate-label">YOU (Candidate)</div>
+                        <div class="response-options" id="phase1-options">
+                            <!-- Options inserted by JS -->
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="phase1-feedback"></div>
+
+                    <div class="navigation" id="phase1-nav" style="display: none;">
+                        <button class="btn-primary" onclick="nextPhase1Question()">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Grammar Help: Third Conditional & Speculation</div>
+                <div class="card-body">
+                    <div class="grammar-box">
+                        <strong>Third Conditional (Past regrets):</strong><br>
+                        <em>"If I had known it would be so difficult, I would have asked for advice"</em><br>
+                        <em>"If I had chosen the other job, I would have earned more money"</em>
+                    </div>
+                    <div class="grammar-box" style="background: #fff3e0; border-color: var(--conversation-orange);">
+                        <strong>Wish / If only (Past regrets):</strong><br>
+                        <em>"I wish I had thought about it more carefully"</em><br>
+                        <em>"If only I had known what would happen"</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 2: INTERACTIVE TASK -->
+        <section id="phase2" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--interactive-purple);">
+                    <span>Part 2: Interactive Task</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~2.5 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="interactive-task">
+                        <div class="interactive-title">🎭 Interactive Situation</div>
+                        <p>Your friend wants to organise a surprise birthday party for another friend. 
+                        You need to plan it together, but there are some problems to solve.</p>
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER (Your friend)</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="interactive-examiner-text">
+                            Hi! So, we need to organise this surprise party for Sarah. I'm thinking we could do it at my place. What do you think?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="interactive-candidate">
+                        <div class="candidate-label">YOU - Respond and ask questions!</div>
+                        <div class="response-options" id="interactive-options">
+                            <button class="response-btn" onclick="checkInteractiveAnswer(this, true)">That's a good idea, but how many people are coming? We need to make sure there's enough space</button>
+                            <button class="response-btn" onclick="checkInteractiveAnswer(this, false)">Yes, that's fine</button>
+                            <button class="response-btn" onclick="checkInteractiveAnswer(this, false)">I don't know</button>
+                            <button class="response-btn" onclick="checkInteractiveAnswer(this, false)">OK. When is the party?</button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="interactive-feedback"></div>
+
+                    <div class="navigation" id="interactive-nav" style="display: none;">
+                        <button class="btn-primary btn-interactive" onclick="continueInteractive()">Continue Interaction →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 3: CONVERSATION TASK -->
+        <section id="phase3" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--conversation-orange);">
+                    <span>Part 3: Conversation Task</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~2.5 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="conversation-box">
+                        <strong>Conversation Focus:</strong> Education and Future Plans
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="conversation-examiner-text">
+                            Let's talk about education. Do you think the education system in your country prepares young people well for the future?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="conversation-candidate">
+                        <div class="candidate-label">YOU (Candidate)</div>
+                        <div class="response-options" id="conversation-options">
+                            <button class="response-btn" onclick="checkConversationAnswer(this, true)">To be honest, I think it could be improved. On the one hand, we learn academic subjects well, but on the other hand, we don't get enough practical skills for real jobs</button>
+                            <button class="response-btn" onclick="checkConversationAnswer(this, false)">Yes, it is good</button>
+                            <button class="response-btn" onclick="checkConversationAnswer(this, false)">I don't like school</button>
+                            <button class="response-btn" onclick="checkConversationAnswer(this, false)">Education is important</button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="conversation-feedback"></div>
+
+                    <div class="navigation" id="conversation-nav" style="display: none;">
+                        <button class="btn-primary btn-conversation" onclick="showSpeculationTask()">Next: Speculation Task →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Speculation Task -->
+            <div class="card" id="speculation-card" style="display: none;">
+                <div class="card-header">Speculation about the Future</div>
+                <div class="card-body">
+                    <div class="scenario-box">
+                        <div class="scenario-title">🔮 Future Speculation</div>
+                        <p>How might education change in the next 20 years?</p>
+                    </div>
+
+                    <div class="examiner-section" id="speculation-examiner" style="display: block;">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            How do you think education might be different in 20 years' time? Do you think technology will replace teachers?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="speculation-candidate">
+                        <div class="candidate-label">YOUR RESPONSE (Speculate!)</div>
+                        <div class="response-options" id="speculation-options">
+                            <button class="response-btn" onclick="checkSpeculationAnswer(this, true)">I imagine that technology will play a much bigger role, but I don't think it will completely replace teachers. Having said that, lessons might be more online and interactive than they are now</button>
+                            <button class="response-btn" onclick="checkSpeculationAnswer(this, false)">Technology is good</button>
+                            <button class="response-btn" onclick="checkSpeculationAnswer(this, false)">I don't know what will happen</button>
+                            <button class="response-btn" onclick="checkSpeculationAnswer(this, false)">Robots will teach</button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="speculation-feedback"></div>
+
+                    <div class="navigation" id="speculation-nav" style="display: none;">
+                        <button class="btn-primary" onclick="finishExam()">Finish Exam →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS SECTION -->
+        <section id="results" class="section">
+            <div class="results-container">
+                <h2 style="color: var(--trinity-blue); margin-bottom: 1rem;">🎉 Exam Completed!</h2>
+                
+                <div class="score-circle" id="final-score">--</div>
+                
+                <div class="grade-badge" id="grade-badge">Grade</div>
+                
+                <p style="font-size: 1.1rem; margin: 1rem 0;" id="result-message"></p>
+
+                <div style="text-align: left; max-width: 600px; margin: 2rem auto; background: var(--light); padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: var(--trinity-blue); margin-bottom: 1rem;">Examiner's Feedback:</h3>
+                    <ul id="feedback-list" style="margin-left: 1.5rem; line-height: 2;">
+                        <!-- Feedback items will be inserted here -->
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn-primary" onclick="location.reload()">Try Again</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Timer functionality
+        let timeRemaining = 600; // 10 minutes in seconds
+        let timerInterval;
+        let currentPhase = 1;
+        let phase1Question = 0;
+        let interactiveStep = 0;
+        let score = 0;
+
+        // Phase 1 Questions - Detailed Topic Discussion with speculation
+        const phase1Questions = [
+            {
+                examiner: "Good morning! Please tell me about this difficult decision. What exactly was the situation, and what options were available to you?",
+                options: [
+                    "I had to decide whether to study medicine at university or take a gap year to travel. It was a really tough choice because both options had advantages",
+                    "I made a decision last year",
+                    "I wanted to study medicine",
+                    "Traveling is nice"
+                ],
+                correct: "I had to decide whether to study medicine at university or take a gap year to travel. It was a really tough choice because both options had advantages",
+                feedback: "Excellent opening! You clearly outlined the dilemma and both options",
+                points: 20
+            },
+            {
+                examiner: "Why was this such a difficult decision? How were you feeling at the time?",
+                options: [
+                    "I was torn between the two options because my parents wanted me to study immediately, but I felt I needed a break. I was anxious about making the wrong choice",
+                    "I was happy",
+                    "It was difficult",
+                    "My parents were angry"
+                ],
+                correct: "I was torn between the two options because my parents wanted me to study immediately, but I felt I needed a break. I was anxious about making the wrong choice",
+                feedback: "Great! You expressed conflicting pressures and your emotional state",
+                points: 20
+            },
+            {
+                examiner: "What did you eventually decide? Looking back, do you think you made the right choice?",
+                options: [
+                    "I decided to take a gap year, and looking back, I think I made the right choice. It must have been the best decision because I learned so much about myself",
+                    "I took a gap year",
+                    "I decided to study",
+                    "It was good"
+                ],
+                correct: "I decided to take a gap year, and looking back, I think I made the right choice. It must have been the best decision because I learned so much about myself",
+                feedback: "Excellent use of 'looking back' and modal of deduction 'must have been'!",
+                points: 20
+            },
+            {
+                examiner: "What would have happened if you had chosen differently? Do you have any regrets?",
+                options: [
+                    "If I had gone straight to university, I would have probably burned out. I wish I had known earlier that taking time off was so valuable. If only I had been more confident in my decision at the time",
+                    "I don't know",
+                    "I would be a doctor now",
+                    "No regrets"
+                ],
+                correct: "If I had gone straight to university, I would have probably burned out. I wish I had known earlier that taking time off was so valuable. If only I had been more confident in my decision at the time",
+                feedback: "Perfect! Third conditional, wish + past perfect, and if only - excellent complex grammar!",
+                points: 25
+            }
+        ];
+
+        // Interactive task steps
+        const interactiveSteps = [
+            {
+                examiner: "That's a good point about space. Actually, I'm worried about the cost too. I was thinking we could ask everyone to contribute £20. Is that reasonable, do you think?",
+                options: [
+                    "£20 sounds fair, but have we thought about food and drinks? We might need to ask for more, or we could make it a bring-your-own-food party to keep costs down",
+                    "Yes, £20 is fine",
+                    "I don't have money",
+                    "OK"
+                ],
+                correct: "£20 sounds fair, but have we thought about food and drinks? We might need to ask for more, or we could make it a bring-your-own-food party to keep costs down",
+                feedback: "Excellent interaction! You responded, asked questions, and made alternative suggestions",
+                points: 25
+            },
+            {
+                examiner: "Good idea about the food. Oh, another thing - Sarah's birthday is on a Tuesday, but most people work. Should we do it at the weekend instead?",
+                options: [
+                    "Definitely the weekend would be better. On the other hand, it won't be on her actual birthday. What do you think - is the surprise more important than the exact date?",
+                    "Yes, weekend is better",
+                    "Tuesday is her birthday",
+                    "I don't mind"
+                ],
+                correct: "Definitely the weekend would be better. On the other hand, it won't be on her actual birthday. What do you think - is the surprise more important than the exact date?",
+                feedback: "Perfect interactive language! You used 'on the other hand' and asked for their opinion",
+                points: 25
+            }
+        ];
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    finishExam();
+                }
+            }, 1000);
+        }
+
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const totalQuestions = phase1Questions.length + interactiveSteps.length + 2; // +2 for conversation
+            let answered = phase1Question + interactiveStep + (currentPhase > 2 ? 2 : 0);
+            const percent = Math.min((answered / totalQuestions) * 100, 100);
+            document.getElementById('progress').style.width = percent + '%';
+        }
+
+        function startExam() {
+            startTimer();
+            showSection('topic', document.querySelectorAll('.nav-tab')[1]);
+        }
+
+        function moveToPhase1() {
+            currentPhase = 1;
+            showSection('phase1', document.querySelectorAll('.nav-tab')[2]);
+            loadPhase1Question();
+        }
+
+        // PHASE 1 FUNCTIONS
+        function loadPhase1Question() {
+            if (phase1Question >= phase1Questions.length) {
+                moveToPhase2();
+                return;
+            }
+
+            const q = phase1Questions[phase1Question];
+            document.getElementById('phase1-examiner-text').textContent = q.examiner;
+            
+            const optionsDiv = document.getElementById('phase1-options');
+            optionsDiv.innerHTML = '';
+            
+            const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+            shuffled.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'response-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkPhase1Answer(btn, opt === q.correct, q);
+                optionsDiv.appendChild(btn);
+            });
+
+            document.getElementById('phase1-candidate').style.display = 'block';
+            document.getElementById('phase1-nav').style.display = 'none';
+            document.getElementById('phase1-feedback').className = 'feedback';
+            document.getElementById('phase1-feedback').style.display = 'none';
+        }
+
+        function checkPhase1Answer(btn, isCorrect, question) {
+            document.querySelectorAll('#phase1-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b.textContent === question.correct) {
+                    b.classList.add('correct');
+                } else if (b === btn && !isCorrect) {
+                    b.classList.add('wrong');
+                }
+            });
+
+            const feedback = document.getElementById('phase1-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? '✅ ' + question.feedback : '❌ The correct answer is: "' + question.correct + '"<br>' + question.feedback;
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += question.points;
+            document.getElementById('phase1-nav').style.display = 'flex';
+        }
+
+        function nextPhase1Question() {
+            phase1Question++;
+            loadPhase1Question();
+        }
+
+        // PHASE 2: INTERACTIVE TASK
+        function moveToPhase2() {
+            currentPhase = 2;
+            showSection('phase2', document.querySelectorAll('.nav-tab')[3]);
+            loadInteractiveStep();
+        }
+
+        function loadInteractiveStep() {
+            if (interactiveStep >= interactiveSteps.length) {
+                moveToPhase3();
+                return;
+            }
+
+            const step = interactiveSteps[interactiveStep];
+            document.getElementById('interactive-examiner-text').textContent = step.examiner;
+            
+            const optionsDiv = document.getElementById('interactive-options');
+            optionsDiv.innerHTML = '';
+            
+            const shuffled = [...step.options].sort(() => Math.random() - 0.5);
+            shuffled.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'response-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkInteractiveAnswer(btn, opt === step.correct, step);
+                optionsDiv.appendChild(btn);
+            });
+
+            document.getElementById('interactive-candidate').style.display = 'block';
+            document.getElementById('interactive-nav').style.display = 'none';
+            document.getElementById('interactive-feedback').className = 'feedback';
+            document.getElementById('interactive-feedback').style.display = 'none';
+        }
+
+        function checkInteractiveAnswer(btn, isCorrect, step) {
+            document.querySelectorAll('#interactive-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b.textContent === step.correct) {
+                    b.classList.add('correct');
+                } else if (b === btn && !isCorrect) {
+                    b.classList.add('wrong');
+                }
+            });
+
+            const feedback = document.getElementById('interactive-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? '✅ ' + step.feedback : '❌ The correct answer is: "' + step.correct + '"<br>' + step.feedback;
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += step.points;
+            document.getElementById('interactive-nav').style.display = 'flex';
+        }
+
+        function continueInteractive() {
+            interactiveStep++;
+            loadInteractiveStep();
+        }
+
+        // PHASE 3: CONVERSATION
+        function moveToPhase3() {
+            currentPhase = 3;
+            showSection('phase3', document.querySelectorAll('.nav-tab')[4]);
+        }
+
+        function checkConversationAnswer(btn, isCorrect) {
+            document.querySelectorAll('#conversation-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById('conversation-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ Excellent! You used "On the one hand... on the other hand" to present a balanced argument with specific examples.' : 
+                '❌ Try to present a balanced view with specific examples. Use phrases like "On the one hand... on the other hand"';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 25;
+            document.getElementById('conversation-nav').style.display = 'flex';
+        }
+
+        function showSpeculationTask() {
+            document.getElementById('speculation-card').style.display = 'block';
+            document.getElementById('speculation-card').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function checkSpeculationAnswer(btn, isCorrect) {
+            document.querySelectorAll('#speculation-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById('speculation-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ Perfect speculation! You used "I imagine that...", "Having said that", and qualified your opinion appropriately.' : 
+                '❌ When speculating, use phrases like "I imagine...", "It might...", "Having said that..." and give reasons';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 25;
+            document.getElementById('speculation-nav').style.display = 'flex';
+        }
+
+        function finishExam() {
+            clearInterval(timerInterval);
+            document.getElementById('results-tab').style.display = 'block';
+            showSection('results', document.getElementById('results-tab'));
+
+            const maxScore = 180;
+            const percentage = Math.round((score / maxScore) * 100);
+            
+            document.getElementById('final-score').textContent = percentage + '%';
+
+            const badge = document.getElementById('grade-badge');
+            const message = document.getElementById('result-message');
+            
+            if (percentage >= 80) {
+                badge.className = 'grade-badge grade-distinction';
+                badge.textContent = 'DISTINCTION 🏆';
+                message.textContent = 'Outstanding! You handled complex interactions with sophisticated language and fluency!';
+            } else if (percentage >= 60) {
+                badge.className = 'grade-badge grade-merit';
+                badge.textContent = 'MERIT 🥈';
+                message.textContent = 'Very good! You communicated effectively with good range and interactive skills.';
+            } else if (percentage >= 40) {
+                badge.className = 'grade-badge grade-pass';
+                badge.textContent = 'PASS ✅';
+                message.textContent = 'Good effort! You showed ability to handle B1 level interactions.';
+            } else {
+                badge.style.background = '#6c757d';
+                badge.style.color = 'white';
+                badge.textContent = 'NOT PASSED';
+                message.textContent = 'Keep practicing! Focus on third conditional and interactive question techniques.';
+            }
+
+            const feedbackList = document.getElementById('feedback-list');
+            feedbackList.innerHTML = `
+                <li>${score >= 20 ? '✅' : '⚠️'} Detailed topic presentation with evaluation</li>
+                <li>${score >= 40 ? '✅' : '⚠️'} Using <strong>third conditional</strong> (If I had..., I would have...)</li>
+                <li>${score >= 60 ? '✅' : '⚠️'} <strong>Wish/If only</strong> + past perfect for regrets</li>
+                <li>${score >= 85 ? '✅' : '⚠️'} <strong>Interactive task</strong> - asking questions & making suggestions</li>
+                <li>${score >= 110 ? '✅' : '⚠️'} Using <strong>discourse markers</strong> (On the other hand, Having said that)</li>
+                <li>${score >= 135 ? '✅' : '⚠️'} <strong>Modals of deduction</strong> in past (must have been, can't have)</li>
+                <li>${score >= 155 ? '✅' : '⚠️'} Speculating about future with <em>might, could, may</em></li>
+                <li>${score >= 170 ? '✅' : '⚠️'} Managing interaction and turn-taking effectively</li>
+            `;
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-GB';
+                utterance.rate = 0.8;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        window.onload = () => {
+            updateProgress();
+        };
+    </script>
+</body>
+</html>

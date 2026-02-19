@@ -1,0 +1,2004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity College London - Grade 12 (C2) - Mastery Level Preparation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0d1b2a;
+            --secondary: #415a77;
+            --accent: #9b2226;
+            --light: #e0e1dd;
+            --dark: #1b263b;
+            --border: #778da9;
+            --success: #1b5e20;
+            --success-bg: #c8e6c9;
+            --error: #9b2226;
+            --error-bg: #ffcdd2;
+            --parchment: #fdfcf8;
+            --c2-color: #005f73;
+            --gold: #ca6702;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--gold);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--gold);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e0f4f8;
+            border-left: 4px solid var(--c2-color);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3e0;
+            border: 1px solid #ffb74d;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #f1f8e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--c2-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c2-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #0a1520;
+        }
+
+        .btn-check {
+            background: var(--c2-color);
+            color: white;
+        }
+
+        .btn-check:hover {
+            background: #004c5c;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c2-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--gold);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--c2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .essay-section {
+            background: white;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .essay-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 0.5rem;
+        }
+
+        .essay-step {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--c2-color);
+        }
+
+        .essay-step h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin: 2rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .subject-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .subject-item {
+            background: var(--light);
+            padding: 0.75rem;
+            border-left: 3px solid var(--gold);
+        }
+
+        .c2-feature {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+            .subject-list { grid-template-columns: 1fr; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity College London - Grade 12 (C2)</h1>
+            <p>Mastery Level: Precision, Nuance, and Sophisticated Discourse</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity GESE</a>
+            <span>›</span>
+            <strong>Grade 12 (C2) - Mastery Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Grade 12 Mastery Grammar and Discourse</h1>
+            <p class="page-subtitle">Hypothesizing, Evaluating Complex Arguments, and Eloquent Expression</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('grammar', this)">C2 Grammar</button>
+            <button class="nav-tab" onclick="showSection('essay', this)">Essay Writing</button>
+            <button class="nav-tab" onclick="showSection('video', this)">Video Prep</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">70 Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">Grade 12 Overview (C2 Level - Mastery)</div>
+                <div class="card-body">
+                    <p>Grade 12 of the Trinity College London GESE exam corresponds to level C2 (mastery/proficiency) of the CEFR. At this level, candidates demonstrate exceptional command of the language with precision, nuance, and sophistication in complex academic and professional contexts.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Key Features of Grade 12:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Duration:</strong> 25 minutes (fully candidate-led discussion)</li>
+                            <li><strong>Topic Presentation:</strong> Formal presentation on sophisticated discursive topic (5 minutes)</li>
+                            <li><strong>Topic Discussion:</strong> Handling abstract concepts and defending complex arguments (5 minutes)</li>
+                            <li><strong>Interactive Task:</strong> Sophisticated questioning and discussion management (5 minutes)</li>
+                            <li><strong>Listening Task:</strong> Inferring attitude, persuading, and third-party referencing (3 minutes)</li>
+                            <li><strong>Conversation:</strong> Two subject areas from selected lists (6 minutes)</li>
+                        </ul>
+                    </div>
+
+                    <div class="c2-feature">
+                        <strong>C2 Language Functions:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Hypothesizing and speculating with precision</li>
+                            <li>Evaluating and challenging complex arguments</li>
+                            <li>Identifying and exploiting ambiguity</li>
+                            <li>Distinguishing between fact and opinion elegantly</li>
+                            <li>Expressing subtle distinctions of meaning</li>
+                            <li>Third-party referencing (reporting others' views)</li>
+                            <li>Emphasizing and highlighting key points</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Exam Tip:</strong> At Grade 12, you must demonstrate complete linguistic mastery. You are expected to handle abstract, hypothetical, and philosophical discussions with ease, using language that is both precise and elegant.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Subject Areas for Conversation</div>
+                <div class="card-body">
+                    <p>Candidates must prepare ONE of the following lists (List A or List B). The examiner will select two subject areas from your chosen list.</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 1rem;">List A</h4>
+                            <div class="subject-list" style="display: block;">
+                                <div class="subject-item">Society and living standards</div>
+                                <div class="subject-item">Personal values and ideals</div>
+                                <div class="subject-item">The world of work</div>
+                                <div class="subject-item">The unexplainable</div>
+                                <div class="subject-item">Nature and the cosmos</div>
+                                <div class="subject-item">The creative arts</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 1rem;">List B</h4>
+                            <div class="subject-list" style="display: block;">
+                                <div class="subject-item">Education and training</div>
+                                <div class="subject-item">The impact of IT on society</div>
+                                <div class="subject-item">The treatment of animals</div>
+                                <div class="subject-item">The spirit of enquiry</div>
+                                <div class="subject-item">Lifestyles and relationships</div>
+                                <div class="subject-item">The rights of the individual</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADVANCED GRAMMAR SECTION -->
+        <section id="grammar" class="section">
+            <div class="card">
+                <div class="card-header">Third-Party Referencing</div>
+                <div class="card-body">
+                    <p>At C2 level, you must demonstrate the ability to report, attribute, and distance yourself from others' opinions elegantly. This involves sophisticated reporting verbs and complex structures.</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Structure</th>
+                                <th>Function</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>It has been suggested that...</td>
+                                <td>Impersonal attribution</td>
+                                <td>It has been suggested that economic factors are paramount.</td>
+                            </tr>
+                            <tr>
+                                <td>According to + source...</td>
+                                <td>Direct attribution</td>
+                                <td>According to recent studies, the trend is accelerating.</td>
+                            </tr>
+                            <tr>
+                                <td>X takes the view that...</td>
+                                <td>Attributing specific positions</td>
+                                <td>Smith takes the view that traditional methods are obsolete.</td>
+                            </tr>
+                            <tr>
+                                <td>The prevailing wisdom holds that...</td>
+                                <td>Reporting consensus</td>
+                                <td>The prevailing wisdom holds that early intervention is crucial.</td>
+                            </tr>
+                            <tr>
+                                <td>Critics argue/maintain/contend...</td>
+                                <td>Reporting opposition</td>
+                                <td>Critics argue that this approach lacks empirical support.</td>
+                            </tr>
+                            <tr>
+                                <td>Proponents claim/assert...</td>
+                                <td>Reporting support</td>
+                                <td>Proponents assert that the benefits outweigh the risks.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Advanced Third-Party Referencing:</strong><br>
+                        • <strong>It is widely held that</strong> climate change represents the greatest challenge of our time.<br>
+                        • <strong>Opponents of this view maintain that</strong> economic growth should take precedence.<br>
+                        • <strong>As Jones (2023) cogently argues,</strong> the data does not support such conclusions.<br>
+                        • <strong>Common perception would have it that</strong> technology improves efficiency, yet the evidence is mixed.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Complex Hypothesizing and Speculation</div>
+                <div class="card-body">
+                    <p>C2 level requires sophisticated expression of hypothetical scenarios, including impossible pasts, counterfactual presents, and theoretical futures.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Mixed Conditionals (Advanced):</strong><br>
+                        • If he <strong>were to have accepted</strong> the position, the company <strong>would be</strong> in a different position today.<br>
+                        • Had we <strong>known then what we know now</strong>, our approach <strong>would have been</strong> radically different.<br>
+                        • Were it not for his intervention, the project <strong>would have collapsed</strong>.
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Advanced Speculative Structures:</strong><br>
+                        • <strong>Supposing (that)</strong> the theory proves correct, we would need to revise our understanding.<br>
+                        • <strong>Imagine</strong> a world where energy is freely available.<br>
+                        • <strong>Even if</strong> we were to accept that premise, the conclusion does not necessarily follow.<br>
+                        • <strong>But for</strong> his courage, the mission would have failed.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Formal Conditional Inversion:</strong><br>
+                        • <strong>Were he to agree</strong>, we would proceed immediately.<br>
+                        • <strong>Had they been aware</strong> of the risks, they would never have proceeded.<br>
+                        • <strong>Should the situation change</strong>, we will notify you accordingly.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Subtle Distinctions and Nuanced Meaning</div>
+                <div class="card-body">
+                    <p>At C2, you must demonstrate the ability to express fine shades of meaning, distinguishing between similar concepts with precision.</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Distinction</th>
+                                <th>Expression</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Complete vs. Partial agreement</td>
+                                <td>I wholeheartedly accept... / I am broadly sympathetic to...</td>
+                                <td>I am broadly sympathetic to that view, with certain caveats.</td>
+                            </tr>
+                            <tr>
+                                <td>Strong vs. Weak disagreement</td>
+                                <td>I find that argument unconvincing... / I am not entirely persuaded...</td>
+                                <td>I find that argument unconvincing in light of recent evidence.</td>
+                            </tr>
+                            <tr>
+                                <td>Certainty vs. Probability</td>
+                                <td>It is indisputable that... / It is reasonable to assume...</td>
+                                <td>It is indisputable that the trend has accelerated.</td>
+                            </tr>
+                            <tr>
+                                <td>Direct vs. Indirect causation</td>
+                                <td>directly led to... / contributed to... / was a factor in...</td>
+                                <td>While not directly causing the crisis, it was undoubtedly a contributing factor.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Expressing Subtle Distinctions:</strong><br>
+                        • It is <strong>not so much that</strong> the theory is wrong, <strong>but rather that</strong> it is incomplete.<br>
+                        • The distinction <strong>between</strong> correlation <strong>and</strong> causation is crucial here.<br>
+                        • While <strong>ostensibly</strong> similar, the two phenomena differ <strong>in substance</strong>.<br>
+                        • The effect is <strong>negligible at best</strong> and <strong>potentially counterproductive at worst</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Exploiting Ambiguity and Multiple Meanings</div>
+                <div class="card-body">
+                    <p>C2 candidates can recognize and play with ambiguous language, using it for rhetorical effect or clarifying potential misunderstandings.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Signaling Ambiguity:</strong><br>
+                        • The term "democracy" is <strong>not unproblematic</strong>; it carries different connotations in different contexts.<br>
+                        • <strong>Depending on how one defines</strong> "success," the outcome could be interpreted variously.<br>
+                                <li>Hypothesizing and speculating with precision</li>
+                                <li>Evaluating and challenging complex arguments</li>
+                                <li>Identifying and exploiting ambiguity</li>
+                                <li>Distinguishing between fact and opinion elegantly</li>
+                                <li>Expressing subtle distinctions of meaning</li>
+                                <li>Third-party referencing (reporting others' views)</li>
+                                <li>Emphasizing and highlighting key points</li>
+                            </ul>
+                        </div>
+    
+                        <div class="rule-box">
+                            <strong>Exam Tip:</strong> At Grade 12, you must demonstrate complete linguistic mastery. You are expected to handle abstract, hypothetical, and philosophical discussions with ease, using language that is both precise and elegant.
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">Subject Areas for Conversation</div>
+                    <div class="card-body">
+                        <p>Candidates must prepare ONE of the following lists (List A or List B). The examiner will select two subject areas from your chosen list.</p>
+                        
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 1rem;">List A</h4>
+                                <div class="subject-list" style="display: block;">
+                                    <div class="subject-item">Society and living standards</div>
+                                    <div class="subject-item">Personal values and ideals</div>
+                                    <div class="subject-item">The world of work</div>
+                                    <div class="subject-item">The unexplainable</div>
+                                    <div class="subject-item">Nature and the cosmos</div>
+                                    <div class="subject-item">The creative arts</div>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 style="color: var(--primary); margin-bottom: 1rem;">List B</h4>
+                                <div class="subject-list" style="display: block;">
+                                    <div class="subject-item">Education and training</div>
+                                    <div class="subject-item">The impact of IT on society</div>
+                                    <div class="subject-item">The treatment of animals</div>
+                                    <div class="subject-item">The spirit of enquiry</div>
+                                    <div class="subject-item">Lifestyles and relationships</div>
+                                    <div class="subject-item">The rights of the individual</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- ADVANCED GRAMMAR SECTION -->
+            <section id="grammar" class="section">
+                <div class="card">
+                    <div class="card-header">Third-Party Referencing</div>
+                    <div class="card-body">
+                        <p>At C2 level, you must demonstrate the ability to report, attribute, and distance yourself from others' opinions elegantly. This involves sophisticated reporting verbs and complex structures.</p>
+                        
+                        <table class="grammar-table">
+                            <thead>
+                                <tr>
+                                    <th>Structure</th>
+                                    <th>Function</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>It has been suggested that...</td>
+                                    <td>Impersonal attribution</td>
+                                    <td>It has been suggested that economic factors are paramount.</td>
+                                </tr>
+                                <tr>
+                                    <td>According to + source...</td>
+                                    <td>Direct attribution</td>
+                                    <td>According to recent studies, the trend is accelerating.</td>
+                                </tr>
+                                <tr>
+                                    <td>X takes the view that...</td>
+                                    <td>Attributing specific positions</td>
+                                    <td>Smith takes the view that traditional methods are obsolete.</td>
+                                </tr>
+                                <tr>
+                                    <td>The prevailing wisdom holds that...</td>
+                                    <td>Reporting consensus</td>
+                                    <td>The prevailing wisdom holds that early intervention is crucial.</td>
+                                </tr>
+                                <tr>
+                                    <td>Critics argue/maintain/contend...</td>
+                                    <td>Reporting opposition</td>
+                                    <td>Critics argue that this approach lacks empirical support.</td>
+                                </tr>
+                                <tr>
+                                    <td>Proponents claim/assert...</td>
+                                    <td>Reporting support</td>
+                                    <td>Proponents assert that the benefits outweigh the risks.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+    
+                        <div class="example-box">
+                            <strong>Advanced Third-Party Referencing:</strong><br>
+                            • <strong>It is widely held that</strong> climate change represents the greatest challenge of our time.<br>
+                            • <strong>Opponents of this view maintain that</strong> economic growth should take precedence.<br>
+                            • <strong>As Jones (2023) cogently argues,</strong> the data does not support such conclusions.<br>
+                            • <strong>Common perception would have it that</strong> technology improves efficiency, yet the evidence is mixed.
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">Complex Hypothesizing and Speculation</div>
+                    <div class="card-body">
+                        <p>C2 level requires sophisticated expression of hypothetical scenarios, including impossible pasts, counterfactual presents, and theoretical futures.</p>
+                        
+                        <div class="instruction-box">
+                            <strong>Mixed Conditionals (Advanced):</strong><br>
+                            • If he <strong>were to have accepted</strong> the position, the company <strong>would be</strong> in a different position today.<br>
+                            • Had we <strong>known then what we know now</strong>, our approach <strong>would have been</strong> radically different.<br>
+                            • Were it not for his intervention, the project <strong>would have collapsed</strong>.
+                        </div>
+    
+                        <div class="instruction-box">
+                            <strong>Advanced Speculative Structures:</strong><br>
+                            • <strong>Supposing (that)</strong> the theory proves correct, we would need to revise our understanding.<br>
+                            • <strong>Imagine</strong> a world where energy is freely available.<br>
+                            • <strong>Even if</strong> we were to accept that premise, the conclusion does not necessarily follow.<br>
+                            • <strong>But for</strong> his courage, the mission would have failed.
+                        </div>
+    
+                        <div class="rule-box">
+                            <strong>Formal Conditional Inversion:</strong><br>
+                            • <strong>Were he to agree</strong>, we would proceed immediately.<br>
+                            • <strong>Had they been aware</strong> of the risks, they would never have proceeded.<br>
+                            • <strong>Should the situation change</strong>, we will notify you accordingly.
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">Subtle Distinctions and Nuanced Meaning</div>
+                    <div class="card-body">
+                        <p>At C2, you must demonstrate the ability to express fine shades of meaning, distinguishing between similar concepts with precision.</p>
+                        
+                        <table class="grammar-table">
+                            <thead>
+                                <tr>
+                                    <th>Distinction</th>
+                                    <th>Expression</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Complete vs. Partial agreement</td>
+                                    <td>I wholeheartedly accept... / I am broadly sympathetic to...</td>
+                                    <td>I am broadly sympathetic to that view, with certain caveats.</td>
+                                </tr>
+                                <tr>
+                                    <td>Strong vs. Weak disagreement</td>
+                                    <td>I find that argument unconvincing... / I am not entirely persuaded...</td>
+                                    <td>I find that argument unconvincing in light of recent evidence.</td>
+                                </tr>
+                                <tr>
+                                    <td>Certainty vs. Probability</td>
+                                    <td>It is indisputable that... / It is reasonable to assume...</td>
+                                    <td>It is indisputable that the trend has accelerated.</td>
+                                </tr>
+                                <tr>
+                                    <td>Direct vs. Indirect causation</td>
+                                    <td>directly led to... / contributed to... / was a factor in...</td>
+                                    <td>While not directly causing the crisis, it was undoubtedly a contributing factor.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+    
+                        <div class="example-box">
+                            <strong>Expressing Subtle Distinctions:</strong><br>
+                            • It is <strong>not so much that</strong> the theory is wrong, <strong>but rather that</strong> it is incomplete.<br>
+                            • The distinction <strong>between</strong> correlation <strong>and</strong> causation is crucial here.<br>
+                            • While <strong>ostensibly</strong> similar, the two phenomena differ <strong>in substance</strong>.<br>
+                            • The effect is <strong>negligible at best</strong> and <strong>potentially counterproductive at worst</strong>.
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">Exploiting Ambiguity and Multiple Meanings</div>
+                    <div class="card-body">
+                        <p>C2 candidates can recognize and play with ambiguous language, using it for rhetorical effect or clarifying potential misunderstandings.</p>
+                        
+                        <div class="instruction-box">
+                            <strong>Signaling Ambiguity:</strong><br>
+                            • The term "democracy" is <strong>not unproblematic</strong>; it carries different connotations in different contexts.<br>
+                            • <strong>Depending on how one defines</strong> "success," the outcome could be interpreted variously.<br>
+                            • The concept is <strong>fraught with ambiguity</strong>; it resists simple definition.
+                        </div>
+    
+                        <div class="example-box">
+                            <strong>Clarifying Meanings:</strong><br>
+                            • When I say "efficient," I mean <strong>not in the narrow sense of</strong> speed, <strong>but rather</strong> optimal resource allocation.<br>
+                            • <strong>To be precise,</strong> I am referring to the systemic causes, not the proximate triggers.<br>
+                            • <strong>By X, I do not mean Y; rather, I intend to convey Z</strong>.
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">Advanced Emphasis and Highlighting</div>
+                    <div class="card-body">
+                        <div class="instruction-box">
+                            <strong>Cleft Sentences (Advanced Variations):</strong><br>
+                            • <strong>What is particularly striking is</strong> the rapidity of the change.<br>
+                            • <strong>It is not until X that</strong> we appreciate the full significance of Y.<br>
+                            • <strong>The very idea that</strong> such a thing is possible is, in itself, remarkable.
+                        </div>
+    
+                        <div class="instruction-box">
+                            <strong>Fronting for Emphasis:</strong><br>
+                            • <strong>Most significant of all is</strong> the impact on future generations.<br>
+                            • <strong>Particularly noteworthy are</strong> the findings regarding climate adaptation.<br>
+                            • <strong>Equally compelling is</strong> the argument from economic sustainability.
+                        </div>
+    
+                        <div class="rule-box">
+                            <strong>Reinforcement Structures:</strong><br>
+                            • <strong>Indeed,</strong> it could be argued that...<br>
+                            • <strong>In fact,</strong> the evidence suggests precisely the opposite.<br>
+                            • <strong>More importantly still,</strong> we must consider the ethical implications.
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- ESSAY WRITING SECTION -->
+            <section id="essay" class="section">
+                <div class="essay-section">
+                    <h2 class="essay-title">How to Write the Grade 12 Discursive Essay</h2>
+                    
+                    <div class="instruction-box">
+                        <strong>Requirements:</strong> At Grade 12, you must prepare a <strong>Formal Topic Presentation</strong> - a sophisticated discursive essay (approximately 500-600 words) that demonstrates mastery of abstract reasoning, complex argumentation, and elegant expression. You must provide a written copy to the examiner.
+                    </div>
+    
+                    <div class="essay-step">
+                        <h4>Step 1: Select a Sophisticated Discursive Topic</h4>
+                        <p>Your topic must be <strong>philosophically or conceptually sophisticated</strong>, allowing for nuanced exploration of abstract ideas.</p>
+                        <p><strong>Examples of C2-Level Topics:</strong></p>
+                        <ul>
+                            <li>"To what extent does the pursuit of scientific progress justify ethical compromise?"</li>
+                            <li>"Is the concept of universal human rights a cultural imposition or a moral imperative?"</li>
+                            <li>"Does technological connectivity enhance or diminish authentic human experience?"</li>
+                            <li>"Is objectivity in historical narrative achievable or illusory?"</li>
+                            <li>"To what extent should individual liberty be sacrificed for collective security?"</li>
+                        </ul>
+                        <p><strong>Avoid:</strong> Topics that are purely descriptive or require only factual recounting.</p>
+                    </div>
+    
+                    <div class="essay-step">
+                        <h4>Step 2: Structure Your Argument</h4>
+                        <p><strong>Introduction (80-100 words):</strong></p>
+                        <ul>
+                            <li>Contextualize the debate within broader philosophical or theoretical frameworks</li>
+                            <li>Identify the tension or paradox at the heart of the issue</li>
+                            <li>Present a nuanced thesis that acknowledges complexity</li>
+                            <li>Outline the structure of your argument</li>
+                        </ul>
+                        
+                        <p><strong>Body Paragraph 1 - Opposing View (120-140 words):</strong></p>
+                        <ul>
+                            <li>Present the strongest version of the counter-argument (steel-manning)</li>
+                            <li>Use third-party referencing: "Proponents maintain that..."</li>
+                            <li>Demonstrate understanding of underlying assumptions</li>
+                            <li>Concede validity where appropriate</li>
+                        </ul>
+    
+                        <p><strong>Body Paragraph 2 - Your Position (120-140 words):</strong></p>
+                        <ul>
+                            <li>Present your argument with sophisticated connectors</li>
+                            <li>Distinguish between different types of evidence or reasoning</li>
+                            <li>Use conditional and hypothetical structures</li>
+                            <li>Reference specific examples or thought experiments</li>
+                        </ul>
+    
+                        <p><strong>Body Paragraph 3 - Synthesis/Critique (100-120 words):</strong></p>
+                        <ul>
+                            <li>Identify false dichotomies or oversimplifications</li>
+                            <li>Propose a nuanced middle position or reconceptualization</li>
+                            <li>Exploit ambiguity productively</li>
+                            <li>Demonstrate meta-awareness of the argumentation process</li>
+                        </ul>
+    
+                        <p><strong>Conclusion (80-100 words):</strong></p>
+                        <ul>
+                            <li>Synthesize without merely repeating</li>
+                            <li>Highlight broader implications or unanswered questions</li>
+                            <li>End with an elegant, thought-provoking final statement</li>
+                            <li>Avoid absolute statements; maintain appropriate hedging</li>
+                        </ul>
+                    </div>
+    
+                    <div class="essay-step">
+                        <h4>Step 3: Employ C2-Level Discourse Markers</h4>
+                        <p>Replace standard connectors with sophisticated alternatives:</p>
+                        <ul>
+                            <li>Instead of "but" → <strong>that being said, conversely, on the contrary, nevertheless</strong></li>
+                            <li>Instead of "also" → <strong>furthermore, moreover, in addition, what is more, equally</strong></li>
+                            <li>Instead of "so" → <strong>consequently, as a result, therefore, thus, hence</strong></li>
+                            <li>Instead of "for example" → <strong>by way of illustration, to take a specific instance, consider the case of</strong></li>
+                            <li>Instead of "I think" → <strong>it is reasonable to contend, the evidence suggests, one might argue</strong></li>
+                        </ul>
+                    </div>
+    
+                    <div class="essay-step">
+                        <h4>Step 4: Master the Language of Evaluation</h4>
+                        <ul>
+                            <li><strong>Highlighting significance:</strong> "What is crucial here is...", "The pivotal issue is...", "Of paramount importance is..."</li>
+                            <li><strong>Expressing reservations:</strong> "This is not without its difficulties...", "One might question whether...", "This presupposes that..."</li>
+                            <li><strong>Making distinctions:</strong> "It is essential to distinguish between...", "We must differentiate...", "The contrast between X and Y is not merely semantic but substantive"</li>
+                            <li><strong>Conceding gracefully:</strong> "While there is merit in the view that...", "I am sympathetic to the argument that..., however..."</li>
+                        </ul>
+                    </div>
+    
+                    <div class="rule-box">
+                        <strong>Sample C2 Essay Opening:</strong><br>
+                        "The rapid proliferation of artificial intelligence technologies has precipitated a fundamental reconceptualization of human uniqueness and cognitive superiority. While the prevailing wisdom holds that technological augmentation enhances human capability, this presentation contends that uncritical embrace of AI integration risks eroding the very faculties—critical reasoning, creative intuition, and ethical judgment—that constitute distinctively human intelligence. Through an examination of both the instrumental benefits and the existential costs, I shall argue that sustainable technological development requires not merely efficiency optimization, but the preservation of human agency as an independent, non-instrumental value."
+                    </div>
+    
+                    <div class="c2-feature">
+                        <strong>Key C2 Essay Characteristics:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Use of abstract nouns: reconceptualization, augmentation, optimization, agency</li>
+                            <li>Complex sentence structures with multiple subordinate clauses</li>
+                            <li>Philosophical vocabulary: existential, instrumental, distinctively, sustainable</li>
+                            <li>Self-referential meta-discourse: "this presentation contends," "I shall argue"</li>
+                            <li>Balanced, non-dogmatic tone with appropriate hedging</li>
+                        </ul>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">Language for Evaluating Complex Arguments</div>
+                    <div class="card-body">
+                        <table class="grammar-table">
+                            <thead>
+                                <tr>
+                                    <th>Function</th>
+                                    <th>Advanced Expressions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Identifying logical flaws</td>
+                                    <td>"This commits the fallacy of...", "The reasoning is circular in that...", "This begs the question..."</td>
+                                </tr>
+                                <tr>
+                                    <td>Recognizing hidden assumptions</td>
+                                    <td>"This presupposes that...", "The underlying premise appears to be...", "This rests on the questionable assumption..."</td>
+                                </tr>
+                                <tr>
+                                    <td>Evaluating evidence quality</td>
+                                    <td>"The empirical basis for this claim is...", "While anecdotal evidence suggests..., systematic studies indicate..."</td>
+                                </tr>
+                                <tr>
+                                    <td>Highlighting implications</td>
+                                    <td>"The ramifications extend beyond...", "This entails that...", "If taken to its logical conclusion..."</td>
+                                </tr>
+                                <tr>
+                                    <td>Proposing alternatives</td>
+                                    <td>"A more nuanced approach would...", "Rather than viewing this as..., we might conceptualize it as..."</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- VIDEO SECTION -->
+            <section id="video" class="section">
+                <div class="card">
+                    <div class="card-header">Video Preparation Resource</div>
+                    <div class="card-body">
+                        <p>The following video provides additional preparation material for Trinity GESE Grade 12 exams. Use this resource to understand the expectations for C2-level performance.</p>
+                        
+                        <div class="video-container">
+                            <iframe 
+                                src="https://www.youtube.com/embed/EEx06Qm3pms" 
+                                title="Trinity GESE Grade 12 Preparation Video" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+    
+                        <div class="instruction-box">
+                            <strong>How to use this video for C2 preparation:</strong>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Analyze the speaker's use of sophisticated vocabulary and complex structures</li>
+                                <li>Note how they handle abstract concepts and hypothetical scenarios</li>
+                                <li>Observe the balance between fluency and accuracy</li>
+                                <li>Practice mimicking the intonation patterns for emphasis and nuance</li>
+                                <li>Identify examples of third-party referencing and hedging</li>
+                                <li>Study how the candidate manages the discussion and controls the interaction</li>
+                            </ul>
+                        </div>
+    
+                        <div class="rule-box">
+                            <strong>C2 Performance Indicators:</strong> At Grade 12, examiners look for sustained performance at C2 level throughout all phases. This includes effortless use of idiomatic expressions, precise vocabulary choice, and the ability to reformulate ideas elegantly when challenged.
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="card">
+                    <div class="card-header">Additional C2 Resources</div>
+                    <div class="card-body">
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>Academic Journals:</strong> Read articles from Nature, The Economist, or Foreign Affairs for sophisticated argumentation models</li>
+                            <li><strong>Philosophy Texts:</strong> Practice summarizing complex philosophical positions</li>
+                            <li><strong>Debate Formats:</strong> Study British Parliamentary debate styles for rhetorical techniques</li>
+                            <li><strong>TED Talks:</strong> Analyze how expert speakers structure complex arguments</li>
+                            <li><strong>Official Trinity Materials:</strong> Review examiner reports for Grade 12 specific expectations</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+    
+            <!-- EXERCISES SECTION -->
+            <section id="exercises" class="section">
+                <div class="game-container">
+                    <div class="score-panel">
+                        <div>
+                            <div class="score-label">Exercise</div>
+                            <div class="score-value" id="exerciseCounter">1 / 70</div>
+                        </div>
+                        <div>
+                            <div class="score-label">Score</div>
+                            <div class="score-value" id="currentScore">0 / 100</div>
+                        </div>
+                    </div>
+    
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressBar"></div>
+                    </div>
+    
+                    <div id="exerciseContainer">
+                        <!-- Exercises loaded dynamically -->
+                    </div>
+    
+                    <!-- FINAL SCORE SECTION -->
+                    <div class="final-score-section" id="finalScoreSection">
+                        <h2>Congratulations! You've completed all 70 exercises!</h2>
+                        <div class="final-score-value" id="finalScore">0/100</div>
+                        <p class="final-message" id="finalMessage"></p>
+                        <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                            Try All Exercises Again
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    
+        <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+            <div style="max-width: 1200px; margin: 0 auto;">
+                <p>© 2024 Trinity College London GESE - Grade 12 (C2) Preparation</p>
+                <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+            </div>
+        </footer>
+    
+        <script>
+            // Database of 70 exercises for Grade 12 (C2)
+            const exercises = [
+                // EXERCISES 1-15: Third-Party Referencing
+                {
+                    id: 1,
+                    type: 'choice',
+                    question: '__________ that economic inequality is the root cause of social unrest.',
+                    options: ['It is widely held', 'People hold', 'They hold', 'It holds'],
+                    correct: 'It is widely held',
+                    explanation: 'Correct! Impersonal passive structure for third-party referencing: It is widely held that...',
+                    errorExplanation: 'Use "It is widely held that" for impersonal attribution'
+                },
+                {
+                    id: 2,
+                    type: 'fill',
+                    question: 'Smith __________ (take) the view that traditional education models are obsolete.',
+                    correct: ['takes', 'took'],
+                    explanation: 'Correct! Third-party referencing: Smith takes the view that...'
+                },
+                {
+                    id: 3,
+                    type: 'choice',
+                    question: '__________ of this view maintain that deregulation stimulates innovation.',
+                    options: ['Proponents', 'Proposers', 'Supporters', 'Advocates'],
+                    correct: 'Proponents',
+                    explanation: 'Correct! Formal noun for supporters: proponents.',
+                    errorExplanation: 'Use "Proponents" in formal academic contexts'
+                },
+                {
+                    id: 4,
+                    type: 'fill',
+                    question: 'Critics __________ (argue) that this approach lacks empirical foundation.',
+                    correct: ['argue', 'contend', 'maintain'],
+                    explanation: 'Correct! Reporting verbs for opposition: argue/contend/maintain.'
+                },
+                {
+                    id: 5,
+                    type: 'choice',
+                    question: '__________ wisdom holds that early intervention produces optimal outcomes.',
+                    options: ['The prevailing', 'The previous', 'The prevalent', 'The prevaricating'],
+                    correct: 'The prevailing',
+                    explanation: 'Correct! Fixed expression: the prevailing wisdom holds that.',
+                    errorExplanation: 'Use "The prevailing wisdom" meaning current/common belief'
+                },
+                {
+                    id: 6,
+                    type: 'fill',
+                    question: 'According __________ recent studies, the correlation is statistically significant.',
+                    correct: ['to'],
+                    explanation: 'Correct! Attribution phrase: According to + source.'
+                },
+                {
+                    id: 7,
+                    type: 'choice',
+                    question: '__________ Jones (2023), the data does not support such sweeping conclusions.',
+                    options: ['As', 'Like', 'For', 'With'],
+                    correct: 'As',
+                    explanation: 'Correct! Formal attribution: As Jones argues...',
+                    errorExplanation: 'Use "As" + subject + verb for attribution'
+                },
+                {
+                    id: 8,
+                    type: 'fill',
+                    question: 'It has been __________ (suggest) that climate change represents an existential threat.',
+                    correct: ['suggested'],
+                    explanation: 'Correct! Present perfect passive for general attribution.'
+                },
+                {
+                    id: 9,
+                    type: 'choice',
+                    question: 'Common perception would have it that technology __________ efficiency.',
+                    options: ['improves', 'improve', 'improved', 'improving'],
+                    correct: 'improves',
+                    explanation: 'Correct! Third-party referencing with "would have it that" + present.',
+                    errorExplanation: 'Use present tense after "would have it that"'
+                },
+                {
+                    id: 10,
+                    type: 'fill',
+                    question: 'Opponents __________ this view challenge the underlying assumptions.',
+                    correct: ['of'],
+                    explanation: 'Correct! Prepositional phrase: Opponents of this view.'
+                },
+                {
+                    id: 11,
+                    type: 'choice',
+                    question: '__________ the author cogently argues, the distinction is not merely semantic.',
+                    options: ['As', 'Like', 'Since', 'Because'],
+                    correct: 'As',
+                    explanation: 'Correct! Formal attribution with adverb: As...cogently argues.',
+                    errorExplanation: 'Use "As" for formal attribution with reporting verbs'
+                },
+                {
+                    id: 12,
+                    type: 'fill',
+                    question: 'The __________ (prevail) consensus appears to be shifting in light of new evidence.',
+                    correct: ['prevailing'],
+                    explanation: 'Correct! Adjective form: prevailing consensus.'
+                },
+                {
+                    id: 13,
+                    type: 'choice',
+                    question: 'Some commentators __________ that the benefits outweigh the potential risks.',
+                    options: ['contend', 'contends', 'contending', 'contention'],
+                    correct: 'contend',
+                    explanation: 'Correct! Formal reporting verb: contend.',
+                    errorExplanation: 'Use "contend" (formal synonym for argue) with plural subject'
+                },
+                {
+                    id: 14,
+                    type: 'fill',
+                    question: 'It is frequently __________ (assert) that market forces ensure optimal distribution.',
+                    correct: ['asserted'],
+                    explanation: 'Correct! Passive reporting structure with adverb.'
+                },
+                {
+                    id: 15,
+                    type: 'choice',
+                    question: '__________ to the theory, human behavior is fundamentally rational.',
+                    options: ['Proponents', 'Advocates', 'Proposers', 'Supporters'],
+                    correct: 'Proponents',
+                    explanation: 'Correct! Proponents of + theory.',
+                    errorExplanation: 'Use "Proponents" for formal academic contexts'
+                },
+    
+                // EXERCISES 16-30: Complex Hypothesizing
+                {
+                    id: 16,
+                    type: 'fill',
+                    question: '__________ he to agree to these terms, we would proceed immediately.',
+                    correct: ['Were'],
+                    explanation: 'Correct! Formal conditional inversion: Were he to agree...'
+                },
+                {
+                    id: 17,
+                    type: 'choice',
+                    question: 'Had we known then __________ we know now, our approach would have differed.',
+                    options: ['what', 'that', 'which', 'how'],
+                    correct: 'what',
+                    explanation: 'Correct! Comparative clause: what we know now.',
+                    errorExplanation: 'Use "what" as pronoun in comparative structures'
+                },
+                {
+                    id: 18,
+                    type: 'fill',
+                    question: '__________ it not for his intervention, the project would have collapsed.',
+                    correct: ['Had', 'Were'],
+                    explanation: 'Correct! Formal conditional: Had it not for/Were it not for.'
+                },
+                {
+                    id: 19,
+                    type: 'choice',
+                    question: '__________ that the theory proves correct, we would need to revise our understanding.',
+                    options: ['Supposing', 'Suppose', 'Supposed', 'To suppose'],
+                    correct: 'Supposing',
+                    explanation: 'Correct! Hypothetical supposing (that).',
+                    errorExplanation: 'Use "Supposing (that)" for hypothetical scenarios'
+                },
+                {
+                    id: 20,
+                    type: 'fill',
+                    question: 'Imagine a world where energy __________ (be) freely available.',
+                    correct: ['were', 'was'],
+                    explanation: 'Correct! Subjunctive after imagine: were (formal) or was.'
+                },
+                {
+                    id: 21,
+                    type: 'choice',
+                    question: 'Even if we __________ to accept that premise, the conclusion does not follow.',
+                    options: ['were', 'are', 'be', 'would be'],
+                    correct: 'were',
+                    explanation: 'Correct! Formal hypothetical: were to accept.',
+                    errorExplanation: 'Use "were to" + infinitive for formal hypotheticals'
+                },
+                {
+                    id: 22,
+                    type: 'fill',
+                    question: 'But __________ his courage, the mission would have failed.',
+                    correct: ['for'],
+                    explanation: 'Correct! Formal conditional phrase: But for = Without/Except for.'
+                },
+                {
+                    id: 23,
+                    type: 'choice',
+                    question: 'Should the situation __________, we will notify you immediately.',
+                    options: ['change', 'changes', 'changed', 'changing'],
+                    correct: 'change',
+                    explanation: 'Correct! Formal conditional inversion: Should + subject + base form.',
+                    errorExplanation: 'Use base form after "Should" in conditional inversion'
+                },
+                {
+                    id: 24,
+                    type: 'fill',
+                    question: 'If he __________ (be) to have accepted the position, the company would be different now.',
+                    correct: ['were'],
+                    explanation: 'Correct! Formal conditional: were to have + past participle.'
+                },
+                {
+                    id: 25,
+                    type: 'choice',
+                    question: '__________ they been aware of the risks, they would never have proceeded.',
+                    options: ['Had', 'Have', 'If', 'Were'],
+                    correct: 'Had',
+                    explanation: 'Correct! Past conditional inversion: Had they been...',
+                    errorExplanation: 'Use "Had" + subject for past conditional inversion'
+                },
+                {
+                    id: 26,
+                    type: 'fill',
+                    question: '__________ for the timely warning, the consequences would have been catastrophic.',
+                    correct: ['But'],
+                    explanation: 'Correct! Formal conditional: But for = Without.'
+                },
+                {
+                    id: 27,
+                    type: 'choice',
+                    question: 'Were it not __________ his expertise, the project would have failed.',
+                    options: ['for', 'of', 'because', 'due'],
+                    correct: 'for',
+                    explanation: 'Correct! Fixed phrase: Were it not for.',
+                    errorExplanation: 'Use "for" after "Were it not"'
+                },
+                {
+                    id: 28,
+                    type: 'fill',
+                    question: 'If I __________ (be) you, I would reconsider the proposal.',
+                    correct: ['were'],
+                    explanation: 'Correct! Subjunctive in hypothetical condition: were (formal).'
+                },
+                {
+                    id: 29,
+                    type: 'choice',
+                    question: '__________ the theory to be validated, it would revolutionize the field.',
+                    options: ['Were', 'Was', 'If', 'Should'],
+                    correct: 'Were',
+                    explanation: 'Correct! Formal conditional inversion: Were the theory to be...',
+                    errorExplanation: 'Use "Were" + subject + "to be" for formal conditionals'
+                },
+                {
+                    id: 30,
+                    type: 'fill',
+                    question: 'Had I __________ (know) the truth, I would have acted differently.',
+                    correct: ['known'],
+                    explanation: 'Correct! Past participle after Had I: known.'
+                },
+    
+                // EXERCISES 31-45: Subtle Distinctions
+                {
+                    id: 31,
+                    type: 'choice',
+                    question: 'I am __________ sympathetic to that view, with certain caveats.',
+                    options: ['broadly', 'wide', 'large', 'general'],
+                    correct: 'broadly',
+                    explanation: 'Correct! Hedging adverb: broadly sympathetic.',
+                    errorExplanation: 'Use "broadly" to indicate general but not total agreement'
+                },
+                {
+                    id: 32,
+                    type: 'fill',
+                    question: 'I find that argument __________ (convince) in light of recent evidence.',
+                    correct: ['unconvincing'],
+                    explanation: 'Correct! Sophisticated disagreement: unconvincing.'
+                },
+                {
+                    id: 33,
+                    type: 'choice',
+                    question: 'It is __________ that the trend has accelerated.',
+                    options: ['indisputable', 'disputable', 'disputed', 'disputing'],
+                    correct: 'indisputable',
+                    explanation: 'Correct! Strong certainty: indisputable.',
+                    errorExplanation: 'Use "indisputable" for absolute certainty'
+                },
+                {
+                    id: 34,
+                    type: 'fill',
+                    question: 'It is not so much that the theory is wrong, __________ that it is incomplete.',
+                    correct: ['but rather'],
+                    explanation: 'Correct! Contrastive structure: not so much...but rather.'
+                },
+                {
+                    id: 35,
+                    type: 'choice',
+                    question: 'While __________ similar, the two phenomena differ in substance.',
+                    options: ['ostensibly', 'obviously', 'clearly', 'apparently'],
+                    correct: 'ostensibly',
+                    explanation: 'Correct! Nuanced distinction: ostensibly (appearing to be).',
+                    errorExplanation: 'Use "ostensibly" to suggest appearance vs. reality'
+                },
+                {
+                    id: 36,
+                    type: 'fill',
+                    question: 'The effect is negligible __________ best and potentially counterproductive at worst.',
+                    correct: ['at'],
+                    explanation: 'Correct! Idiomatic structure: at best...at worst.'
+                },
+                {
+                    id: 37,
+                    type: 'choice',
+                    question: 'The distinction __________ correlation and causation is crucial.',
+                    options: ['between', 'among', 'amid', 'within'],
+                    correct: 'between',
+                    explanation: 'Correct! Distinction between X and Y.',
+                    errorExplanation: 'Use "between" for distinguishing two things'
+                },
+                {
+                    id: 38,
+                    type: 'fill',
+                    question: 'I __________ (whole) accept the validity of that premise.',
+                    correct: ['wholeheartedly'],
+                    explanation: 'Correct! Adverbial intensifier: wholeheartedly.'
+                },
+                {
+                    id: 39,
+                    type: 'choice',
+                    question: 'It is __________ to assume that the trend will continue.',
+                    options: ['reasonable', 'reason', 'reasonably', 'reasoning'],
+                    correct: 'reasonable',
+                    explanation: 'Correct! Evaluative adjective: reasonable to assume.',
+                    errorExplanation: 'Use adjective "reasonable" after "It is"'
+                },
+                {
+                    id: 40,
+                    type: 'fill',
+                    question: 'The impact is __________ (direct) linked to policy changes.',
+                    correct: ['directly', 'inextricably'],
+                    explanation: 'Correct! Adverbial precision: directly/inextricably linked.'
+                },
+                {
+                    id: 41,
+                    type: 'choice',
+                    question: 'While there is __________ in the view that..., the counter-arguments are compelling.',
+                    options: ['merit', 'merits', 'merited', 'meriting'],
+                    correct: 'merit',
+                    explanation: 'Correct! Concession phrase: there is merit in...',
+                    errorExplanation: 'Use "merit" as uncountable noun in this context'
+                },
+                {
+                    id: 42,
+                    type: 'fill',
+                    question: 'I am not entirely __________ (persuade) by that line of reasoning.',
+                    correct: ['persuaded'],
+                    explanation: 'Correct! Tentative disagreement: not entirely persuaded.'
+                },
+                {
+                    id: 43,
+                    type: 'choice',
+                    question: 'The benefits are, __________ speaking, negligible.',
+                    options: ['relatively', 'relative', 'relation', 'related'],
+                    correct: 'relatively',
+                    explanation: 'Correct! Hedging phrase: relatively speaking.',
+                    errorExplanation: 'Use "relatively speaking" to soften evaluations'
+                },
+                {
+                    id: 44,
+                    type: 'fill',
+                    question: 'It is essential to __________ (different) between immediate causes and root causes.',
+                    correct: ['differentiate', 'distinguish'],
+                    explanation: 'Correct! Formal verb: differentiate/distinguish between.'
+                },
+                {
+                    id: 45,
+                    type: 'choice',
+                    question: 'The theory is not __________ incorrect; rather, it is incomplete.',
+                    options: ['per se', 'per say', 'persay', 'for say'],
+                    correct: 'per se',
+                    explanation: 'Correct! Latin phrase: per se = in itself.',
+                    errorExplanation: 'Use "per se" meaning "in itself" or "intrinsically"'
+                },
+    
+                // EXERCISES 46-55: Ambiguity and Meaning
+                {
+                    id: 46,
+                    type: 'fill',
+                    question: 'The term is __________ (fraught) with ambiguity; it resists simple definition.',
+                    correct: ['fraught'],
+                    explanation: 'Correct! Formal collocation: fraught with ambiguity.'
+                },
+                {
+                    id: 47,
+                    type: 'choice',
+                    question: '__________ on how one defines "success," the outcome varies.',
+                    options: ['Depending', 'Depends', 'To depend', 'Depend'],
+                    correct: 'Depending',
+                    explanation: 'Correct! Participle clause: Depending on...',
+                    errorExplanation: 'Use "Depending on" as participle clause'
+                },
+                {
+                    id: 48,
+                    type: 'fill',
+                    question: 'When I say "efficient," I mean not in the narrow sense of speed, __________ rather optimal allocation.',
+                    correct: ['but'],
+                    explanation: 'Correct! Contrastive structure: not...but rather.'
+                },
+                {
+                    id: 49,
+                    type: 'choice',
+                    question: 'To be __________, I am referring to systemic causes, not proximate triggers.',
+                    options: ['precise', 'precision', 'precisely', 'preciseness'],
+                    correct: 'precise',
+                    explanation: 'Correct! Discourse marker: To be precise.',
+                    errorExplanation: 'Use adjective "precise" after "To be"'
+                },
+                {
+                    id: 50,
+                    type: 'fill',
+                    question: 'The concept is not __________ (problem); it carries different connotations in different contexts.',
+                    correct: ['unproblematic'],
+                    explanation: 'Correct! Litotes (double negative): not unproblematic.'
+                },
+                {
+                    id: 51,
+                    type: 'choice',
+                    question: 'By X, I do not mean Y; __________, I intend to convey Z.',
+                    options: ['rather', 'instead', 'but', 'however'],
+                    correct: 'rather',
+                    explanation: 'Correct! Clarification structure: rather.',
+                    errorExplanation: 'Use "rather" to introduce correction/clarification'
+                },
+                {
+                    id: 52,
+                    type: 'fill',
+                    question: 'The distinction is __________ (substance), not merely semantic.',
+                    correct: ['substantive', 'substantial'],
+                    explanation: 'Correct! Formal adjective: substantive = substantial/meaningful.'
+                },
+                {
+                    id: 53,
+                    type: 'choice',
+                    question: '__________ how one interprets the data, the conclusion remains valid.',
+                    options: ['Regardless of', 'Regardless', 'Regarding', 'Regard of'],
+                    correct: 'Regardless of',
+                    explanation: 'Correct! Concessive phrase: Regardless of.',
+                    errorExplanation: 'Use "Regardless of" + noun/wh-clause'
+                },
+                {
+                    id: 54,
+                    type: 'fill',
+                    question: 'The term "democracy" is __________ (load) with historical baggage.',
+                    correct: ['loaded', 'laden'],
+                    explanation: 'Correct! Metaphorical collocation: loaded/laden with.'
+                },
+                {
+                    id: 55,
+                    type: 'choice',
+                    question: '__________ one defines the parameters, the result is consistent.',
+                    options: ['However', 'Whatever', 'Whenever', 'Wherever'],
+                    correct: 'However',
+                    explanation: 'Correct! Concessive clause: However one defines...',
+                    errorExplanation: 'Use "However" + subject + verb for concession'
+                },
+    
+                // EXERCISES 56-62: Advanced Emphasis
+                {
+                    id: 56,
+                    type: 'fill',
+                    question: '__________ is particularly striking is the rapidity of the change.',
+                    correct: ['What'],
+                    explanation: 'Correct! Wh-cleft for emphasis: What is striking...'
+                },
+                {
+                    id: 57,
+                    type: 'choice',
+                    question: 'It is not until X __________ we appreciate the full significance of Y.',
+                    options: ['that', 'when', 'then', 'which'],
+                    correct: 'that',
+                    explanation: 'Correct! Emphatic cleft: It is not until X that...',
+                    errorExplanation: 'Use "that" in emphatic cleft sentences'
+                },
+                {
+                    id: 58,
+                    type: 'fill',
+                    question: '__________ significant of all is the impact on future generations.',
+                    correct: ['Most'],
+                    explanation: 'Correct! Superlative fronting: Most significant of all...'
+                },
+                {
+                    id: 59,
+                    type: 'choice',
+                    question: '__________ noteworthy are the findings regarding climate adaptation.',
+                    options: ['Particularly', 'Particular', 'In particular', 'Of particular'],
+                    correct: 'Particularly',
+                    explanation: 'Correct! Fronting with adverb: Particularly noteworthy are...',
+                    errorExplanation: 'Use "Particularly" + adjective + verb-subject inversion'
+                },
+                {
+                    id: 60,
+                    type: 'fill',
+                    question: '__________ compelling is the argument from economic sustainability.',
+                    correct: ['Equally', 'Similarly'],
+                    explanation: 'Correct! Balanced fronting: Equally compelling is...'
+                },
+                {
+                    id: 61,
+                    type: 'choice',
+                    question: '__________, it could be argued that the benefits outweigh the costs.',
+                    options: ['Indeed', 'In deed', 'In fact', 'Actually'],
+                    correct: 'Indeed',
+                    explanation: 'Correct! Emphatic adverb: Indeed.',
+                    errorExplanation: 'Use "Indeed" for formal emphasis/reinforcement'
+                },
+                {
+                    id: 62,
+                    type: 'fill',
+                    question: '__________ importantly still, we must consider the ethical implications.',
+                    correct: ['More'],
+                    explanation: 'Correct! Progressive emphasis: More importantly still.'
+                },
+    
+                // EXERCISES 63-70: Evaluating Arguments
+                {
+                    id: 63,
+                    type: 'choice',
+                    question: 'This __________ the question: who benefits from this policy?',
+                    options: ['begs', 'beg', 'begging', 'begged'],
+                    correct: 'begs',
+                    explanation: 'Correct! Logical fallacy term: begs the question.',
+                    errorExplanation: 'Use "begs the question" meaning "assumes the conclusion"'
+                },
+                {
+                    id: 64,
+                    type: 'fill',
+                    question: 'This __________ (presuppose) that all participants have equal access.',
+                    correct: ['presupposes'],
+                    explanation: 'Correct! Identifying assumptions: presuppose.'
+                },
+                {
+                    id: 65,
+                    type: 'choice',
+                    question: 'The reasoning is __________ in that it assumes what it seeks to prove.',
+                    options: ['circular', 'round', 'circuitous', 'cyclical'],
+                    correct: 'circular',
+                    explanation: 'Correct! Logical fallacy: circular reasoning.',
+                    errorExplanation: 'Use "circular" for circular reasoning/logic'
+                },
+                {
+                    id: 66,
+                    type: 'fill',
+                    question: 'The underlying __________ (premise) appears to be flawed.',
+                    correct: ['premise'],
+                    explanation: 'Correct! Logical term: underlying premise.'
+                },
+                {
+                    id: 67,
+                    type: 'choice',
+                    question: 'If taken to its logical __________, this policy would lead to absurd outcomes.',
+                    options: ['conclusion', 'end', 'termination', 'finality'],
+                    correct: 'conclusion',
+                    explanation: 'Correct! Idiom: logical conclusion.',
+                    errorExplanation: 'Use "logical conclusion" as fixed expression'
+                },
+                {
+                    id: 68,
+                    type: 'fill',
+                    question: 'This commits the __________ (fall) of false dichotomy.',
+                    correct: ['fallacy'],
+                    explanation: 'Correct! Logical terminology: fallacy.'
+                },
+                {
+                    id: 69,
+                    type: 'choice',
+                    question: 'The __________ extend beyond immediate economic concerns.',
+                    options: ['ramifications', 'branches', 'roots', 'stems'],
+                    correct: 'ramifications',
+                    explanation: 'Correct! Formal noun: ramifications = consequences.',
+                    errorExplanation: 'Use "ramifications" for complex consequences'
+                },
+                {
+                    id: 70,
+                    type: 'fill',
+                    question: '__________ mistake, this represents a fundamental shift in policy.',
+                    correct: ['Make no'],
+                    explanation: 'Correct! Emphatic affirmation: Make no mistake.'
+                }
+            ];
+    
+            let currentExercise = 0;
+            let totalScore = 0;
+            let answered = false;
+    
+            function showSection(id, btn) {
+                document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+                document.getElementById(id).classList.add('active');
+                document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+                if(btn) btn.classList.add('active');
+    
+                if(id === 'exercises' && currentExercise === 0) {
+                    loadExercise();
+                }
+            }
+    
+            function loadExercise() {
+                if (currentExercise >= exercises.length) {
+                    showFinalScore();
+                    return;
+                }
+    
+                const ex = exercises[currentExercise];
+                const container = document.getElementById('exerciseContainer');
+                
+                document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+                document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+                document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+                
+                answered = false;
+    
+                let html = `
+                    <div class="card" style="animation: fadeIn 0.4s ease;">
+                        <div class="card-header">Exercise ${ex.id}</div>
+                        <div class="card-body">
+                            <div class="exercise-counter">Exercise ${currentExercise + 1} of ${exercises.length}</div>
+                            <div class="question-box">
+                                <div class="question-text">${ex.question}</div>
+                            </div>
+                `;
+    
+                if (ex.type === 'choice') {
+                    html += `<div class="options-grid" id="optionsGrid">`;
+                    const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                    shuffledOptions.forEach(opt => {
+                        html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                    });
+                    html += `</div>`;
+                } else if (ex.type === 'fill') {
+                    html += `
+                        <div style="text-align: center; margin-bottom: 1.5rem;">
+                            <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                        </div>
+                        <div class="text-center">
+                            <button class="btn-primary btn-check" onclick="checkFill()">Check</button>
+                        </div>
+                    `;
+                }
+    
+                html += `
+                            <div class="feedback" id="feedback"></div>
+                            <div class="text-center" id="nextBtnContainer" style="display: none;">
+                                <button class="btn-primary" onclick="nextExercise()">Next</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+    
+                container.innerHTML = html;
+                
+                if (ex.type === 'fill') {
+                    setTimeout(() => document.getElementById('fillInput').focus(), 100);
+                }
+            }
+    
+            function checkChoice(selected) {
+                if (answered) return;
+                answered = true;
+    
+                const ex = exercises[currentExercise];
+                const btns = document.querySelectorAll('#optionsGrid .option-btn');
+                const feedback = document.getElementById('feedback');
+                const nextContainer = document.getElementById('nextBtnContainer');
+    
+                btns.forEach(btn => {
+                    btn.disabled = true;
+                    if (btn.dataset.value === ex.correct) {
+                        btn.classList.add('correct');
+                    } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                        btn.classList.add('wrong');
+                    }
+                });
+    
+                feedback.classList.add('show');
+    
+                if (selected === ex.correct) {
+                    feedback.className = 'feedback show correct';
+                    feedback.textContent = ex.explanation;
+                    totalScore += Math.floor(100 / exercises.length);
+                } else {
+                    feedback.className = 'feedback show wrong';
+                    feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+                }
+    
+                document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+                nextContainer.style.display = 'block';
+            }
+    
+            function checkFill() {
+                if (answered) return;
+                
+                const input = document.getElementById('fillInput');
+                const value = input.value.trim().toLowerCase();
+                if (!value) return;
+    
+                answered = true;
+    
+                const ex = exercises[currentExercise];
+                const feedback = document.getElementById('feedback');
+                const nextContainer = document.getElementById('nextBtnContainer');
+    
+                const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+    
+                feedback.classList.add('show');
+                input.disabled = true;
+    
+                if (isCorrect) {
+                    feedback.className = 'feedback show correct';
+                    feedback.textContent = ex.explanation;
+                    input.style.borderColor = 'var(--success)';
+                    input.style.background = '#f0fff4';
+                    totalScore += Math.floor(100 / exercises.length);
+                } else {
+                    feedback.className = 'feedback show wrong';
+                    feedback.innerHTML = `Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                    input.style.borderColor = 'var(--error)';
+                    input.style.background = '#fff5f5';
+                    input.value = ex.correct[0];
+                }
+    
+                document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+                nextContainer.style.display = 'block';
+            }
+    
+            function nextExercise() {
+                currentExercise++;
+                loadExercise();
+            }
+    
+            function showFinalScore() {
+                document.getElementById('exerciseContainer').style.display = 'none';
+                document.getElementById('finalScoreSection').classList.add('show');
+                document.getElementById('finalScore').textContent = `${totalScore}/100`;
+                
+                let message = '';
+                if (totalScore >= 90) {
+                    message = 'Outstanding! You have demonstrated C2 mastery! Ready for Grade 12!';
+                } else if (totalScore >= 70) {
+                    message = 'Excellent work! You show sophisticated command of C2 structures. Review your errors.';
+                } else if (totalScore >= 50) {
+                    message = 'Good effort! Continue practicing third-party referencing, complex conditionals, and nuanced evaluation.';
+                } else {
+                    message = 'Keep studying! Focus on the theory sections and practice with sophisticated academic texts.';
+                }
+                
+                document.getElementById('finalMessage').textContent = message;
+                document.getElementById('progressBar').style.width = '100%';
+            }
+    
+            function restartExercises() {
+                currentExercise = 0;
+                totalScore = 0;
+                answered = false;
+                
+                exercises.sort(() => Math.random() - 0.5);
+                
+                document.getElementById('exerciseContainer').style.display = 'block';
+                document.getElementById('finalScoreSection').classList.remove('show');
+                document.getElementById('progressBar').style.width = '0%';
+                
+                loadExercise();
+            }
+    
+            document.addEventListener('DOMContentLoaded', function() {
+                exercises.sort(() => Math.random() - 0.5);
+            });
+        </script>
+    </body>
+    </html>

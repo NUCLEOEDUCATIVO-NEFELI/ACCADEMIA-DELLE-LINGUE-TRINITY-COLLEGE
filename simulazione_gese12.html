@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 12 - Exam Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: #f5f5f0;
+            color: #212529;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #1e3a5f;
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid #8b0000;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .timer {
+            background: white;
+            color: #1e3a5f;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            font-family: monospace;
+        }
+
+        .exam-badge {
+            display: inline-block;
+            background: #8b0000;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #276749;
+            transition: width 0.3s;
+            width: 0%;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid #d4d4c8;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: #6c757d;
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            color: #1e3a5f;
+            background: #f5f5f0;
+        }
+
+        .nav-tab.active {
+            color: #1e3a5f;
+            border-bottom-color: #8b0000;
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #d4d4c8;
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            background: #f5f5f0;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #d4d4c8;
+            font-weight: bold;
+            color: #1e3a5f;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid #8b0000;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #1e3a5f;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .gese12-box {
+            background: #fdf2f2;
+            border-left: 4px solid #8b0000;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-top: 2px solid #d4af37;
+        }
+
+        .examiner-section {
+            background: #f8f9fa;
+            border: 2px solid #1e3a5f;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .examiner-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #1e3a5f;
+            color: white;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .examiner-avatar {
+            width: 60px;
+            height: 60px;
+            background: #1e3a5f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            float: left;
+            margin-right: 1rem;
+        }
+
+        .examiner-text {
+            font-size: 1.1rem;
+            color: #212529;
+            padding-left: 80px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .candidate-section {
+            background: #fff8e1;
+            border: 2px solid #c9a227;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .candidate-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #c9a227;
+            color: #000;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .response-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .response-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid #d4d4c8;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .response-btn:hover:not(:disabled) {
+            border-color: #c9a227;
+            background: #f5f5f0;
+            transform: translateY(-2px);
+        }
+
+        .response-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .response-btn.correct {
+            background: #d4edda;
+            border-color: #276749;
+            color: #276749;
+        }
+
+        .response-btn.wrong {
+            background: #f8d7da;
+            border-color: #c53030;
+            color: #c53030;
+        }
+
+        .btn-primary {
+            background: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+            margin: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: #152a45;
+        }
+
+        .btn-gese12 {
+            background: #8b0000;
+        }
+
+        .btn-gese12:hover {
+            background: #6b0000;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #d4d4c8;
+            flex-wrap: wrap;
+        }
+
+        .feedback {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border: 1px solid #276749;
+            color: #276749;
+        }
+
+        .feedback.info {
+            background: #e7f3ff;
+            border: 1px solid #1e3a5f;
+            color: #1e3a5f;
+        }
+
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .phase-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #d4d4c8;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .phase-step.active {
+            background: #1e3a5f;
+            color: white;
+        }
+
+        .phase-step.completed {
+            background: #276749;
+            color: white;
+        }
+
+        .phase-step::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: #d4d4c8;
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+        .phase-step:last-child::after {
+            display: none;
+        }
+
+        .results-container {
+            background: white;
+            border: 2px solid #276749;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #f5f5f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1e3a5f;
+            border: 4px solid #d4af37;
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .grade-distinction {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .grade-merit {
+            background: #c0c0c0;
+            color: #000;
+        }
+
+        .grade-pass {
+            background: #cd7f32;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timer {
+                margin-top: 1rem;
+            }
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            .examiner-text {
+                padding-left: 0;
+                margin-top: 1rem;
+            }
+            .examiner-avatar {
+                float: none;
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>Trinity GESE Grade 12</h1>
+                <div class="exam-badge">CEFR C2 • 25 Minutes</div>
+            </div>
+            <div class="timer" id="timer">25:00</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="goToSection(0)">📋 About</button>
+            <button class="nav-tab" onclick="goToSection(1)">📌 Topic</button>
+            <button class="nav-tab" onclick="goToSection(2)">🎯 Phase 1</button>
+            <button class="nav-tab" onclick="goToSection(3)">🎭 Phase 2</button>
+            <button class="nav-tab" onclick="goToSection(4)">👂 Phase 3</button>
+            <button class="nav-tab" onclick="goToSection(5)">💬 Phase 4</button>
+            <button class="nav-tab" onclick="goToSection(6)" id="results-tab" style="display:none">📊 Results</button>
+        </div>
+
+        <!-- SEZIONE 0: INTRO -->
+        <div class="section active" id="section-0">
+            <div class="card">
+                <div class="card-header">About GESE Grade 12 Exam</div>
+                <div class="card-body">
+                    <div class="gese12-box">
+                        <strong>GESE Grade 12 (CEFR C2)</strong> - Mastery level. 25 minutes, 5 phases:
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Topic Presentation (5 min)</li>
+                            <li>Topic Discussion (5 min)</li>
+                            <li>Interactive Task (5 min)</li>
+                            <li>Listening Task (3 min)</li>
+                            <li>Conversation Task (6 min)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase-indicator">
+                        <div class="phase-step active">1</div>
+                        <div class="phase-step">2</div>
+                        <div class="phase-step">3</div>
+                        <div class="phase-step">4</div>
+                        <div class="phase-step">5</div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary btn-gese12" onclick="startExam()">Start Exam →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 1: TOPIC -->
+        <div class="section" id="section-1">
+            <div class="card">
+                <div class="card-header">Your Topic</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>"The Epistemological Crisis in the Digital Age"</strong>
+                        <p>A formal, academic topic requiring C2-level language: cleft sentences, subtle modality, abstract terminology.</p>
+                    </div>
+                    
+                    <div class="navigation">
+                        <button class="btn-primary" onclick="goToSection(0)">← Back</button>
+                        <button class="btn-primary btn-gese12" onclick="goToSection(2)">Begin Presentation →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 2: PHASE 1 - PRESENTATION -->
+        <div class="section" id="section-2">
+            <div class="card">
+                <div class="card-header">Phase 1: Formal Presentation (5 min)</div>
+                <div class="card-body">
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            Good morning. Please begin your formal presentation on your chosen topic. You have up to five minutes.
+                        </div>
+                    </div>
+
+                    <div class="candidate-section">
+                        <div class="candidate-label">YOUR RESPONSE</div>
+                        <div class="response-options">
+                            <button class="response-btn" onclick="checkAnswer(2, this, true, 30)">
+                                What I propose to examine today is the fundamental epistemological shift precipitated by digital technologies. Particularly striking is the paradox that access to information has never been greater, yet consensus on truth has never been more elusive. The notion that algorithms merely reflect human preferences is, I would contend, fundamentally flawed. Equally significant is the delegitimization of traditional cognitive authorities. That is not to say that expertise was ever infallible; rather, that the mechanisms for establishing credibility have been systematically dismantled. I would welcome your thoughts on whether education can adapt to these challenges.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(2, this, false, 0)">
+                                I want to talk about fake news on the internet and how social media is bad for society.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(2, this, false, 0)">
+                                Social media is changing how we get information. People don't know what to believe anymore.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(2, this, false, 0)">
+                                Technology is important today. Everyone uses the internet for news.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="feedback-2"></div>
+                    
+                    <div class="navigation" id="nav-2" style="display: none;">
+                        <button class="btn-primary" onclick="goToSection(1)">← Back</button>
+                        <button class="btn-primary btn-gese12" onclick="goToSection(3)">Continue →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 3: PHASE 2 - DISCUSSION -->
+        <div class="section" id="section-3">
+            <div class="card">
+                <div class="card-header">Phase 2: Topic Discussion (5 min)</div>
+                <div class="card-body">
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            You mentioned the 'expertise deficit' - but isn't there an argument that democratizing knowledge access actually empowers people? How do you reconcile that with your concerns?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section">
+                        <div class="candidate-label">YOUR RESPONSE</div>
+                        <div class="response-options">
+                            <button class="response-btn" onclick="checkAnswer(3, this, true, 25)">
+                                That is a compelling counterpoint, and one that deserves careful consideration. What I would argue is that democratization and devaluation are not synonymous - though they have become conflated. The crux of the matter is that access without the apparatus of critical evaluation is, paradoxically, disempowering. Might we not say that true empowerment requires not just information availability, but epistemic frameworks to interpret it?
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(3, this, false, 0)">
+                                I think people should trust experts more and not believe everything online.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(3, this, false, 0)">
+                                The internet gives everyone a voice, but sometimes that's not good.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(3, this, false, 0)">
+                                Social media is dangerous because of fake news.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="feedback-3"></div>
+                    
+                    <div class="navigation" id="nav-3" style="display: none;">
+                        <button class="btn-primary" onclick="goToSection(2)">← Back</button>
+                        <button class="btn-primary btn-gese12" onclick="goToSection(4)">Continue →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 4: PHASE 3 - INTERACTIVE -->
+        <div class="section" id="section-4">
+            <div class="card">
+                <div class="card-header">Phase 3: Interactive Task (5 min)</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>Scenario:</strong> You are a policy advisor. The government considers Universal Basic Income. The examiner is a skeptical minister. Control the discussion.
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER (Minister)</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            Giving people money for nothing - won't that discourage work? What evidence do you have?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section">
+                        <div class="candidate-label">YOUR RESPONSE - Control the interaction!</div>
+                        <div class="response-options">
+                            <button class="response-btn" onclick="checkAnswer(4, this, true, 30)">
+                                I appreciate your concern - it's one that many share. However, might we reframe this not as 'money for nothing' but as 'investment in autonomy'? The evidence from Finland suggests recipients didn't work less - they worked differently. But I'm getting ahead of myself. What specific aspects concern you most - the economic contribution or the psychological structure?
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(4, this, false, 0)">
+                                UBI is a good idea because people need money to live.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(4, this, false, 0)">
+                                Automation is taking jobs so we need basic income.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(4, this, false, 0)">
+                                Studies show it works in other countries.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="feedback-4"></div>
+                    
+                    <div class="navigation" id="nav-4" style="display: none;">
+                        <button class="btn-primary" onclick="goToSection(3)">← Back</button>
+                        <button class="btn-primary btn-gese12" onclick="goToSection(5)">Continue →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 5: PHASE 4 - LISTENING -->
+        <div class="section" id="section-5">
+            <div class="card">
+                <div class="card-header">Phase 4: Listening Task (3 min)</div>
+                <div class="card-body">
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            "The 15-minute city concept - where residents access all services nearby - has gained traction. However, critics argue such zones risk creating enclaves of privilege that exclude the workforce who must commute for affordable housing. The tension between localism and social equity remains unresolved."
+                        </div>
+                    </div>
+
+                    <div class="candidate-section">
+                        <div class="candidate-label">RESPOND TO IMPLICIT MEANING</div>
+                        <div class="response-options">
+                            <button class="response-btn" onclick="checkAnswer(5, this, true, 25)">
+                                If I've understood correctly, the fundamental tension is between sustainability and stratification. What the speaker implies is that well-intentioned design might inadvertently reinforce inequality. The notion that localism could become exclusionary is particularly striking - proximity might reduce social mobility. Is that the crux?
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(5, this, false, 0)">
+                                15-minute cities are good for the environment.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(5, this, false, 0)">
+                                People should walk more instead of driving.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(5, this, false, 0)">
+                                Cities need better urban planning.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="feedback-5"></div>
+                    
+                    <div class="navigation" id="nav-5" style="display: none;">
+                        <button class="btn-primary" onclick="goToSection(4)">← Back</button>
+                        <button class="btn-primary btn-gese12" onclick="goToSection(6)">Continue →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 6: PHASE 5 - CONVERSATION -->
+        <div class="section" id="section-6">
+            <div class="card">
+                <div class="card-header">Phase 5: Conversation Task (6 min)</div>
+                <div class="card-body">
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            Some argue genius is simply the right person at the right time. What's your view on individual brilliance versus historical contingency?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section">
+                        <div class="candidate-label">UNCONSTRAINED DISCOURSE</div>
+                        <div class="response-options">
+                            <button class="response-btn" onclick="checkAnswer(6, this, true, 25)">
+                                That is a false dichotomy that, I would suggest, obscures more than illuminates. What is particularly striking is that contingency and capability are inextricably intertwined. Newton might conceivably have remained unremarked had plague not sent him to Woolsthorpe - yet calculus did not create itself. That is not to say genius operates in a vacuum; rather, that the 'prepared mind' represents synthesis of moment and exceptionalism.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(6, this, false, 0)">
+                                Genius is important but timing matters too.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(6, this, false, 0)">
+                                Newton was smart and he invented calculus.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(6, this, false, 0)">
+                                I think both are important factors.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="feedback-6"></div>
+                    
+                    <div class="navigation" id="nav-6" style="display: none;">
+                        <button class="btn-primary" onclick="goToSection(5)">← Back</button>
+                        <button class="btn-primary btn-gese12" onclick="finishExam()">Finish Exam →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 7: RESULTS -->
+        <div class="section" id="section-7">
+            <div class="results-container">
+                <h2 style="color: #1e3a5f; margin-bottom: 1rem;">🎉 Exam Completed!</h2>
+                
+                <div class="score-circle" id="final-score">0%</div>
+                
+                <div class="grade-badge" id="grade-badge">Grade</div>
+                
+                <p style="font-size: 1.1rem; margin: 1rem 0;" id="result-message"></p>
+
+                <div style="text-align: left; max-width: 600px; margin: 2rem auto; background: #f5f5f0; padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: #1e3a5f; margin-bottom: 1rem;">Feedback:</h3>
+                    <ul id="feedback-list" style="margin-left: 1.5rem; line-height: 2;"></ul>
+                </div>
+
+                <div class="navigation">
+                    <button class="btn-primary btn-gese12" onclick="location.reload()">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VARIABILI GLOBALI
+        let timeRemaining = 1500; // 25 minuti
+        let timerInterval = null;
+        let currentSection = 0;
+        let totalScore = 0;
+        let maxScore = 135; // 30+25+30+25+25
+        let answeredSections = [false, false, false, false, false, false, false];
+
+        // AVVIA TIMER
+        function startTimer() {
+            if (timerInterval) return;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Time's up!");
+                    finishExam();
+                }
+            }, 1000);
+        }
+
+        // NAVIGAZIONE SEMPLICE
+        function goToSection(num) {
+            // Nascondi tutte le sezioni
+            for (let i = 0; i <= 7; i++) {
+                const section = document.getElementById('section-' + i);
+                if (section) section.classList.remove('active');
+            }
+            
+            // Mostra la sezione richiesta
+            const target = document.getElementById('section-' + num);
+            if (target) target.classList.add('active');
+            
+            // Aggiorna tab attivo
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach((tab, index) => {
+                if (index === num) tab.classList.add('active');
+                else tab.classList.remove('active');
+            });
+            
+            currentSection = num;
+            updateProgress();
+        }
+
+        // INIZIA ESAME
+        function startExam() {
+            startTimer();
+            goToSection(1);
+        }
+
+        // CONTROLLA RISPOSTA
+        function checkAnswer(sectionNum, btn, isCorrect, points) {
+            // Disabilita tutti i bottoni nella sezione
+            const section = document.getElementById('section-' + sectionNum);
+            const buttons = section.querySelectorAll('.response-btn');
+            buttons.forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+            
+            // Mostra feedback
+            const feedback = document.getElementById('feedback-' + sectionNum);
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.innerHTML = '✅ Excellent! C2-level performance with sophisticated structures.';
+                totalScore += points;
+            } else {
+                feedback.className = 'feedback show info';
+                feedback.innerHTML = '❌ This response is too simple. Use cleft sentences, subtle modality, and formal academic register.';
+            }
+            
+            // Mostra navigazione
+            document.getElementById('nav-' + sectionNum).style.display = 'flex';
+            
+            // Marca come risposto
+            answeredSections[sectionNum] = true;
+            updateProgress();
+        }
+
+        // AGGIORNA PROGRESSO
+        function updateProgress() {
+            let answered = 0;
+            for (let i = 2; i <= 6; i++) {
+                if (answeredSections[i]) answered++;
+            }
+            const percent = (answered / 5) * 100;
+            document.getElementById('progress').style.width = percent + '%';
+        }
+
+        // FINISCI ESAME
+        function finishExam() {
+            clearInterval(timerInterval);
+            
+            // Mostra tab risultati
+            document.getElementById('results-tab').style.display = 'block';
+            goToSection(7);
+            
+            // Calcola percentuale
+            const percentage = Math.round((totalScore / maxScore) * 100);
+            document.getElementById('final-score').textContent = percentage + '%';
+            
+            // Determina voto
+            const badge = document.getElementById('grade-badge');
+            const message = document.getElementById('result-message');
+            
+            if (percentage >= 80) {
+                badge.className = 'grade-badge grade-distinction';
+                badge.textContent = 'DISTINCTION 🏆';
+                message.textContent = 'Exceptional C2 mastery! Complete linguistic command demonstrated.';
+            } else if (percentage >= 60) {
+                badge.className = 'grade-badge grade-merit';
+                badge.textContent = 'MERIT 🥈';
+                message.textContent = 'Very good! Strong C2 competence with sophisticated language control.';
+            } else if (percentage >= 40) {
+                badge.className = 'grade-badge grade-pass';
+                badge.textContent = 'PASS ✅';
+                message.textContent = 'Good effort! C2 level achieved with some complex language use.';
+            } else {
+                badge.style.background = '#6c757d';
+                badge.style.color = 'white';
+                badge.textContent = 'NOT PASSED';
+                message.textContent = 'Practice formal register, cleft sentences, and nuanced modality.';
+            }
+            
+            // Lista feedback
+            const list = document.getElementById('feedback-list');
+            list.innerHTML = `
+                <li>${totalScore >= 30 ? '✅' : '⚠️'} Formal presentation with cleft sentences</li>
+                <li>${totalScore >= 55 ? '✅' : '⚠️'} Sophisticated hedging and subtle modality</li>
+                <li>${totalScore >= 85 ? '✅' : '⚠️'} Controlling interactive discourse</li>
+                <li>${totalScore >= 110 ? '✅' : '⚠️'} Listening for implicit meaning</li>
+                <li>${totalScore >= 135 ? '✅' : '⚠️'} Unconstrained conversation with nuance</li>
+            `;
+        }
+
+        // INIZIALIZZAZIONE
+        window.onload = function() {
+            goToSection(0);
+        };
+    </script>
+</body>
+</html>

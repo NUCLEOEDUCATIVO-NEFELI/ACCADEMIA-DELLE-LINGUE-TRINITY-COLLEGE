@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Login - Accademia delle Lingue</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a5f;
+            --primary-dark: #152a45;
+            --secondary: #8b0000;
+            --success: #276749;
+            --error: #c53030;
+            --bg-primary: #f5f5f0;
+            --bg-card: #ffffff;
+            --border: #d4d4c8;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --accent: #3b82f6;
+            --admin: #6b7280;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.4;
+            -webkit-text-size-adjust: 100%;
+        }
+
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .login-box {
+            width: 100%;
+            max-width: 320px;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .login-header {
+            background: var(--primary);
+            padding: 16px 12px;
+            text-align: center;
+            color: white;
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .login-header h1 {
+            font-size: 1rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 2px;
+        }
+
+        .login-header p {
+            font-size: 0.7rem;
+            opacity: 0.9;
+            margin: 0;
+        }
+
+        .login-header p:last-child {
+            font-size: 0.6rem;
+            opacity: 0.75;
+            margin-top: 2px;
+        }
+
+        .login-body {
+            padding: 16px;
+        }
+
+        .login-footer {
+            padding: 10px;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            background: var(--bg-primary);
+        }
+
+        .login-footer p {
+            font-size: 0.65rem;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+
+        .login-footer small {
+            font-size: 0.6rem;
+        }
+
+        .admin-link {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--border);
+        }
+
+        .admin-link a {
+            color: var(--admin);
+            text-decoration: none;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+        }
+
+        .admin-link a:hover {
+            color: var(--primary);
+            text-decoration: underline;
+        }
+
+        .form-group {
+            margin-bottom: 10px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            margin-bottom: 3px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            font-size: 0.85rem;
+            font-family: inherit;
+            background: #fafafa;
+            border-radius: 0;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            transition: background 0.2s;
+            margin-top: 4px;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+        }
+
+        .alert {
+            padding: 8px 10px;
+            margin-bottom: 10px;
+            font-size: 0.75rem;
+            border-left: 3px solid;
+            display: none;
+        }
+
+        .alert-error {
+            background: #fed7d7;
+            color: var(--error);
+            border-left-color: var(--error);
+        }
+
+        .alert-success {
+            background: #c6f6d5;
+            color: var(--success);
+            border-left-color: var(--success);
+        }
+
+        .signup-link {
+            margin-top: 12px;
+            text-align: center;
+        }
+
+        .signup-link p {
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .signup-link a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.75rem;
+        }
+
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile ottimizzazioni */
+        @media (max-width: 360px) {
+            .login-container {
+                padding: 5px;
+            }
+
+            .login-box {
+                max-width: 100%;
+            }
+
+            .login-header {
+                padding: 12px 10px;
+            }
+
+            .login-header h1 {
+                font-size: 0.9rem;
+            }
+
+            .login-body {
+                padding: 12px;
+            }
+
+            .form-input {
+                padding: 7px 8px;
+                font-size: 16px; /* Previene zoom su iOS */
+            }
+
+            .btn {
+                padding: 12px; /* Più facile da toccare */
+            }
+        }
+
+        /* Schermi molto piccoli */
+        @media (max-height: 600px) {
+            .login-container {
+                align-items: flex-start;
+                padding-top: 20px;
+            }
+        }
+
+        /* Landscape mobile */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .login-container {
+                align-items: flex-start;
+                padding-top: 10px;
+            }
+
+            .login-header {
+                padding: 10px;
+            }
+
+            .login-body {
+                padding: 12px;
+            }
+
+            .form-group {
+                margin-bottom: 8px;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>Accademia delle Lingue</h1>
+                <p>Sezione Italiano</p>
+                <p>Nucleo educativo per la formazione europea al lavoro internazionale</p>
+            </div>
+
+            <div class="login-body">
+                <div id="alertBox" class="alert alert-error"></div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label class="form-label">Email istituzionale</label>
+                        <input type="email" id="email" class="form-input" placeholder="nome@accademia.it" required autocomplete="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">Password</label>
+                        <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        Accedi
+                    </button>
+                </form>
+
+                <div class="signup-link">
+                    <p>
+                        Non hai un account?<br>
+                        <a href="richiesta-accesso.html">Richiedi accesso →</a>
+                    </p>
+                </div>
+            </div>
+
+            <div class="login-footer">
+                <p>© 2024 Accademia delle Lingue<br><small>Tutti i diritti riservati</small></p>
+                <div class="admin-link">
+                    <a href="admin/admin.html">⚙️ Accesso Amministrazione</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const alertBox = document.getElementById('alertBox');
+            
+            // Recupera dati da localStorage
+            const data = JSON.parse(localStorage.getItem('accademia_data') || '{"users":[]}');
+            const user = data.users.find(u => u.email === email && u.password === password && u.role === 'student');
+            
+            if (!user) {
+                alertBox.textContent = 'Credenziali non valide';
+                alertBox.className = 'alert alert-error';
+                alertBox.style.display = 'block';
+                return;
+            }
+
+            // Controlla limite dispositivi
+            if (!user.devices) user.devices = [];
+            const deviceId = localStorage.getItem('device_id') || 'dev_' + Date.now();
+            
+            if (!user.devices.some(d => d.id === deviceId)) {
+                if (user.devices.length >= 2) {
+                    alertBox.textContent = 'Limite 2 dispositivi raggiunto. Contatta l\'amministratore.';
+                    alertBox.className = 'alert alert-error';
+                    alertBox.style.display = 'block';
+                    return;
+                }
+                user.devices.push({
+                    id: deviceId,
+                    timestamp: new Date().toISOString()
+                });
+                localStorage.setItem('device_id', deviceId);
+                localStorage.setItem('accademia_data', JSON.stringify(data));
+            }
+
+            // Login success
+            sessionStorage.setItem('studentLoggedIn', 'true');
+            sessionStorage.setItem('studentEmail', email);
+            sessionStorage.setItem('studentId', user.id);
+            
+            alertBox.textContent = 'Accesso effettuato!';
+            alertBox.className = 'alert alert-success';
+            alertBox.style.display = 'block';
+            
+            setTimeout(() => {
+                window.location.href = '../index.html';
+            }, 500);
+        });
+    </script>
+</body>
+</html>

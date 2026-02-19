@@ -1,0 +1,1828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 7 - Advanced Examination Preparation (50 Exercises)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a365d;
+            --secondary: #4a5568;
+            --accent: #744210;
+            --light: #f7fafc;
+            --dark: #171923;
+            --border: #cbd5e0;
+            --success: #22543d;
+            --success-bg: #c6f6d5;
+            --error: #742a2a;
+            --error-bg: #fed7d7;
+            --trinity-red: #742a2a;
+            --trinity-blue: #1a365d;
+            --parchment: #fafaf9;
+            --grade7-indigo: #4c51bf;
+            --grade7-dark: #3730a3;
+            --academic-gold: #d69e2e;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.7;
+            min-height: 100vh;
+            font-size: 16px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--grade7-dark) 0%, var(--grade7-indigo) 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 5px solid var(--academic-gold);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--academic-gold);
+            color: #744210;
+            padding: 0.35rem 1rem;
+            border-radius: 2px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-top: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+            color: var(--grade7-indigo);
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 4px double var(--academic-gold);
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.25rem;
+            color: var(--grade7-dark);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.15rem;
+            font-weight: 400;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 3px solid var(--border);
+            margin-bottom: 2.5rem;
+            background: white;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            padding: 0.75rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            font-family: 'Crimson Text', serif;
+        }
+
+        .nav-tab {
+            padding: 0.875rem 1.75rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.05rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            font-weight: 600;
+            border-radius: 2px;
+        }
+
+        .nav-tab:hover {
+            color: var(--grade7-indigo);
+            background: #e0e7ff;
+        }
+
+        .nav-tab.active {
+            color: var(--grade7-dark);
+            border-bottom-color: var(--grade7-indigo);
+            background: #c7d2fe;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(to right, #e0e7ff, #ffffff);
+            padding: 1.5rem;
+            border-bottom: 2px solid var(--border);
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: var(--grade7-dark);
+            font-size: 1.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            letter-spacing: 0.25px;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .instruction-box {
+            background: #e0e7ff;
+            border-left: 5px solid var(--grade7-indigo);
+            padding: 1.25rem 1.75rem;
+            margin-bottom: 2rem;
+            border-radius: 0 4px 4px 0;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .topic-card {
+            background: #fafafa;
+            border: 2px solid var(--border);
+            padding: 1.75rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .topic-card:hover {
+            border-color: var(--grade7-indigo);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(76, 81, 191, 0.15);
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--grade7-indigo);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .topic-card:hover::before {
+            opacity: 1;
+        }
+
+        .topic-title {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: var(--grade7-dark);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.15rem;
+        }
+
+        .grammar-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .grammar-box::before {
+            content: 'GRAMMAR ANALYSIS';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #f6e05e;
+            color: #744210;
+            padding: 2px 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .grammar-title {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: #744210;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .academic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border: 2px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .academic-table th {
+            background: var(--grade7-dark);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border: 1px solid #3730a3;
+        }
+
+        .academic-table td {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .academic-table tr:nth-child(even) {
+            background: #f7f8fa;
+        }
+
+        .academic-table tr:hover {
+            background: #e0e7ff;
+        }
+
+        .game-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+            font-family: 'Crimson Text', serif;
+        }
+
+        .score-label {
+            font-weight: 700;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            color: var(--grade7-indigo);
+            font-weight: 700;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin: 1.25rem 0;
+            overflow: hidden;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--grade7-indigo), #667eea);
+            width: 0%;
+            transition: width 0.6s ease;
+        }
+
+        .question-box {
+            background: white;
+            border: 3px solid var(--grade7-indigo);
+            padding: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .question-type-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--grade7-indigo);
+            color: white;
+            padding: 0.35rem 1.25rem;
+            border-radius: 2px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.35rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: var(--dark);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .listening-box {
+            background: #e0e7ff;
+            border: 2px solid var(--grade7-indigo);
+            border-radius: 4px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-audio {
+            background: var(--grade7-indigo);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-audio:hover {
+            background: var(--grade7-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(76, 81, 191, 0.3);
+        }
+
+        .btn-audio:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .transcript-box {
+            background: white;
+            border: 1px solid #c7d2fe;
+            padding: 1.25rem;
+            border-radius: 4px;
+            margin-top: 1.25rem;
+            font-style: italic;
+            color: var(--grade7-dark);
+            display: none;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .transcript-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-btn {
+            padding: 1.25rem 1.75rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--grade7-indigo);
+            background: #e0e7ff;
+            transform: translateX(5px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            margin-bottom: 1.5rem;
+            border: 3px solid;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--grade7-indigo);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.05rem;
+            cursor: pointer;
+            font-weight: 700;
+            border-radius: 2px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary:hover {
+            background: var(--grade7-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(76, 81, 191, 0.25);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--border);
+            padding: 0.875rem 1.75rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--grade7-indigo);
+            color: var(--grade7-indigo);
+            background: #e0e7ff;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 320px;
+            padding: 0.875rem 1.25rem;
+            border: 2px solid #a0aec0;
+            border-radius: 4px;
+            margin: 0 0.35rem;
+            font-size: 1.05rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--grade7-indigo);
+            box-shadow: 0 0 0 4px rgba(76, 81, 191, 0.1);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--grade7-dark) 0%, var(--grade7-indigo) 100%);
+            color: white;
+            padding: 3.5rem;
+            border-radius: 4px;
+            text-align: center;
+            margin-top: 2.5rem;
+            display: none;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 3px solid var(--academic-gold);
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .final-score-value {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: white;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+            font-family: 'Crimson Text', serif;
+        }
+
+        .final-message {
+            font-size: 1.35rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .exercise-counter {
+            background: var(--grade7-indigo);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 2px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1.25rem; }
+        .mb-2 { margin-bottom: 1.25rem; }
+
+        .vocab-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .vocab-item {
+            background: white;
+            padding: 0.875rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .vocab-icon {
+            font-size: 1.25rem;
+        }
+
+        .analysis-box {
+            background: #e0e7ff;
+            border-left: 5px solid var(--grade7-indigo);
+            padding: 1.25rem 1.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .analysis-title {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: var(--grade7-dark);
+            margin-bottom: 0.75rem;
+            font-size: 1.15rem;
+        }
+
+        .formula-box {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            padding: 1.25rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            text-align: center;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #92400e;
+        }
+
+        .phrasal-verb-box {
+            background: #f0fdf4;
+            border: 2px solid #10b981;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .phrasal-verb-title {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: #065f46;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { flex: 1 1 calc(50% - 0.5rem); text-align: center; font-size: 0.95rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.75rem; }
+            .page-title { font-size: 1.75rem; }
+            .final-score-value { font-size: 3.5rem; }
+            .fill-blank { width: 280px; }
+            .topic-grid { grid-template-columns: 1fr; }
+            .academic-table { font-size: 0.85rem; }
+            .academic-table th, .academic-table td { padding: 0.75rem; }
+        }
+
+        .hint-text {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        .scholarly-note {
+            font-size: 0.85rem;
+            color: #92400e;
+            background: #fffbeb;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            border-left: 3px solid #f6e05e;
+        }
+
+        .reported-speech-box {
+            background: #fce7f3;
+            border: 2px solid #ec4899;
+            padding: 1.5rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .reported-speech-title {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: #9d174d;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity College London</h1>
+            <p>Graded Examinations in Spoken English — Grade 7</p>
+            <span class="badge">CEFR B2.1 Level — Upper Intermediate</span>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">GESE Examinations</a>
+            <span>›</span>
+            <strong>Grade 7 Advanced Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Advanced Examination Preparation</h1>
+            <p class="page-subtitle">Rigorous analysis of counterfactual conditionals, voice transformations, reported discourse, and multi-word verbs through 50 advanced exercises</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">📋 Syllabus</button>
+            <button class="nav-tab" onclick="showSection('grammar', this)">Grammar</button>
+            <button class="nav-tab" onclick="showSection('vocabulary', this)">Lexicon</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 50 Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">GESE Grade 7: Examination Overview</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Examination Format:</strong> A 15-minute advanced discourse examining the candidate's capacity to manipulate complex grammatical structures including counterfactual conditionals, voice transformations, reported discourse, and multi-word lexical units at CEFR B2.1 level.
+                    </div>
+                    
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">⏮️ Third Conditional</div>
+                            <p>Articulation of counterfactual past scenarios and their hypothetical outcomes: <em>If + past perfect, would have + past participle</em>.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">⏳ Present Perfect Continuous</div>
+                            <p>Expression of ongoing activities from past to present with present relevance, emphasizing duration and recent activity.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🔄 Passive Voice</div>
+                            <p>Transformation of active to passive constructions across all tenses, with focus on agentless and agentive passives.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">💬 Reported Speech</div>
+                            <p>Conversion of direct to indirect discourse with systematic backshift of tenses and adaptation of temporal/deictic markers.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🎯 Phrasal Verbs</div>
+                            <p>Manipulation of multi-word lexical units including verb + particle combinations with idiomatic and literal meanings.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🧠 Complex Narrative</div>
+                            <p>Construction of sophisticated narratives integrating multiple temporal frames and hypothetical scenarios.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Required Communicative Competencies</div>
+                <div class="card-body">
+                    <ul style="margin-left: 1.5rem; line-height: 2.2;">
+                        <li>Articulate counterfactual past scenarios with their hypothetical consequences</li>
+                        <li>Emphasize duration and recency of ongoing activities using present perfect continuous</li>
+                        <li>Transform active constructions to passive voice with appropriate agent selection</li>
+                        <li>Convert direct speech to reported speech with systematic tense backshift</li>
+                        <li>Deploy phrasal verbs accurately in both literal and idiomatic contexts</li>
+                        <li>Construct complex narratives integrating multiple grammatical frameworks</li>
+                        <li>Discuss abstract concepts with nuanced temporal and modal reference</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRAMMAR SECTION -->
+        <section id="grammar" class="section">
+            <div class="card">
+                <div class="card-header">Advanced Grammatical Analysis & Syntactic Structures</div>
+                <div class="card-body">
+                    <div class="grammar-box">
+                        <div class="grammar-title">⏮️ Third Conditional: Counterfactual Past</div>
+                        <div class="formula-box">If + Past Perfect, Would Have + Past Participle</div>
+                        <p><strong>Semantic Function:</strong> Expression of hypothetical past scenarios contrary to actual historical events, with their imagined consequences.</p>
+                        <div class="analysis-box">
+                            <div class="analysis-title">Exemplification:</div>
+                            <p><em>If I had studied medicine, I would have become a doctor.</em> (I didn't study medicine, so I didn't become a doctor)</p>
+                            <p><em>If she had arrived on time, she wouldn't have missed the train.</em> (She was late, so she missed it)</p>
+                        </div>
+                        <p class="scholarly-note"><strong>Academic Note:</strong> The third conditional expresses regret, criticism, or hypothetical alternative histories.</p>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">⏳ Present Perfect Continuous: Duration and Recency</div>
+                        <div class="formula-box">Have/Has + Been + Verb-ing</div>
+                        <p><strong>Semantic Distinction:</strong> Emphasizes ongoing duration, recent activity, or visible results of recent action.</p>
+                        <div class="analysis-box">
+                            <div class="analysis-title">Contrastive Analysis:</div>
+                            <p><em>I have read that book.</em> (completed action — present perfect simple)</p>
+                            <p><em>I have been reading that book.</em> (ongoing activity — present perfect continuous)</p>
+                            <p><em>Why are your hands dirty? — I have been gardening.</em> (visible result of recent activity)</p>
+                        </div>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">🔄 Passive Voice: Transformation and Agency</div>
+                        <table class="academic-table">
+                            <thead>
+                                <tr>
+                                    <th>Tense</th>
+                                    <th>Active Structure</th>
+                                    <th>Passive Structure</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Present Simple</td>
+                                    <td>They make cars here.</td>
+                                    <td>Cars <strong>are made</strong> here.</td>
+                                </tr>
+                                <tr>
+                                    <td>Past Simple</td>
+                                    <td>Someone stole my bag.</td>
+                                    <td>My bag <strong>was stolen</strong>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Present Perfect</td>
+                                    <td>They have finished the work.</td>
+                                    <td>The work <strong>has been finished</strong>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Future</td>
+                                    <td>They will announce the results.</td>
+                                    <td>The results <strong>will be announced</strong>.</td>
+                                </tr>
+                                <tr>
+                                    <td>Modals</td>
+                                    <td>They must fix this problem.</td>
+                                    <td>This problem <strong>must be fixed</strong>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="scholarly-note"><strong>Agent Selection:</strong> The agent (by-phrase) is omitted when unknown, unimportant, or when the focus is on the action rather than the actor.</p>
+                    </div>
+
+                    <div class="reported-speech-box">
+                        <div class="reported-speech-title">💬 Reported Speech: Tense Backshift and Deictic Adaptation</div>
+                        <table class="academic-table">
+                            <thead>
+                                <tr>
+                                    <th>Direct Speech</th>
+                                    <th>Reported Speech</th>
+                                    <th>Transformation</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>"I <strong>am</strong> tired."</td>
+                                    <td>He said he <strong>was</strong> tired.</td>
+                                    <td>Present → Past</td>
+                                </tr>
+                                <tr>
+                                    <td>"I <strong>have</strong> finished."</td>
+                                    <td>She said she <strong>had</strong> finished.</td>
+                                    <td>Present perfect → Past perfect</td>
+                                </tr>
+                                <tr>
+                                    <td>"I <strong>will</strong> help."</td>
+                                    <td>He said he <strong>would</strong> help.</td>
+                                    <td>Will → Would</td>
+                                </tr>
+                                <tr>
+                                    <td>"I <strong>can</strong> swim."</td>
+                                    <td>She said she <strong>could</strong> swim.</td>
+                                    <td>Can → Could</td>
+                                </tr>
+                                <tr>
+                                    <td>"<strong>Yesterday</strong> I saw him."</td>
+                                    <td>She said she had seen him <strong>the day before</strong>.</td>
+                                    <td>Temporal marker shift</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="scholarly-note"><strong>Exception:</strong> When reporting universal truths or current situations, backshift may be optional: "She said that the Earth <strong>is/was</strong> round."</p>
+                    </div>
+
+                    <div class="phrasal-verb-box">
+                        <div class="phrasal-verb-title">🎯 Phrasal Verbs: Classification and Usage</div>
+                        <p><strong>Type 1 (Intransitive):</strong> No object — <em>The plane took off.</em></p>
+                        <p><strong>Type 2 (Transitive, separable):</strong> Object can separate verb and particle — <em>Turn off the light / Turn the light off.</em></p>
+                        <p><strong>Type 3 (Transitive, inseparable):</strong> Object cannot separate verb and particle — <em>Look after the children.</em> (NOT: <em>Look the children after</em>)</p>
+                        <p><strong>Type 4 (With preposition):</strong> Three-part verbs — <em>Put up with, Look forward to.</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VOCABULARY SECTION -->
+        <section id="vocabulary" class="section">
+            <div class="card">
+                <div class="card-header">Advanced Lexicon & Phrasal Verbs</div>
+                <div class="card-body">
+                    <div style="margin-bottom: 2.5rem;">
+                        <h3 style="color: var(--grade7-dark); margin-bottom: 1rem; font-family: 'Crimson Text', serif; font-size: 1.35rem;">🎯 Common Phrasal Verbs (Type 2 - Separable)</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> turn on/off (activate/deactivate)</div>
+                            <div class="vocab-item"><span class="vocab-icon">👕</span> put on (don clothing)</div>
+                            <div class="vocab-item"><span class="vocab-icon">📋</span> fill in/out (complete forms)</div>
+                            <div class="vocab-item"><span class="vocab-icon">☎️</span> call off (cancel)</div>
+                            <div class="vocab-item"><span class="vocab-icon">⏪</span> put off (postpone)</div>
+                            <div class="vocab-item"><span class="vocab-icon">💡</span> think over (consider)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🗑️</span> throw away (discard)</div>
+                            <div class="vocab-item"><span class="vocab-icon">✅</span> check in (register arrival)</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <h3 style="color: var(--grade7-dark); margin-bottom: 1rem; font-family: 'Crimson Text', serif; font-size: 1.35rem;">🎯 Common Phrasal Verbs (Type 3 - Inseparable)</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">👀</span> look after (care for)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔍</span> look for (seek)</div>
+                            <div class="vocab-item"><span class="vocab-icon">👂</span> listen to (hear attentively)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🏃</span> run into (meet by chance)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎓</span> get on with (have good relations)</div>
+                            <div class="vocab-item"><span class="vocab-icon">💥</span> come across (find by chance)</div>
+                            <div class="vocab-item"><span class="vocab-icon">💪</span> deal with (handle, manage)</div>
+                            <div class="vocab-item"><span class="vocab-icon">📉</span> go down (decrease)</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <h3 style="color: var(--grade7-dark); margin-bottom: 1rem; font-family: 'Crimson Text', serif; font-size: 1.35rem;">🎯 Three-Part Phrasal Verbs</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">😤</span> put up with (tolerate)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎉</span> look forward to (anticipate)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔙</span> get away with (escape punishment)</div>
+                            <div class="vocab-item"><span class="vocab-icon">✂️</span> cut down on (reduce)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🤝</span> catch up with (reach same level)</div>
+                            <div class="vocab-item"><span class="vocab-icon">📅</span> get on with (continue)</div>
+                            <div class="vocab-item"><span class="vocab-icon">💡</span> come up with (suggest, invent)</div>
+                            <div class="vocab-item"><span class="vocab-icon">📖</span> look down on (despise)</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="color: var(--grade7-dark); margin-bottom: 1rem; font-family: 'Crimson Text', serif; font-size: 1.35rem;">🧠 Abstract Conceptual Vocabulary</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">🎭</span> consequence</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> circumstance</div>
+                            <div class="vocab-item"><span class="vocab-icon">💭</span> implication</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎯</span> assumption</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔍</span> perception</div>
+                            <div class="vocab-item"><span class="vocab-icon">⚖️</span> justification</div>
+                            <div class="vocab-item"><span class="vocab-icon">🌟</span> achievement</div>
+                            <div class="vocab-item"><span class="vocab-icon">😔</span> retrospect</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Exercises loaded dynamically -->
+                </div>
+
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2 style="font-family: 'Crimson Text', serif; font-size: 2.5rem; margin-bottom: 1rem;">Examination Complete</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <div style="margin-top: 2.5rem; display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn-primary" onclick="restartExercises()" style="font-size: 1.15rem; padding: 1.25rem 2.5rem;">
+                            Reattempt Examination
+                        </button>
+                        <button class="btn-secondary" onclick="showSection('overview', document.querySelector('.nav-tab'))" style="font-size: 1.15rem; padding: 1.25rem 2.5rem;">
+                            Review Syllabus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 2px solid var(--border); padding: 2.5rem; margin-top: 3.5rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="font-family: 'Crimson Text', serif; font-weight: 700; color: var(--grade7-dark); margin-bottom: 0.75rem; font-size: 1.25rem;">Trinity College London GESE Grade 7 Advanced Preparation</p>
+            <p style="font-size: 0.95rem; font-style: italic;">Based on official Trinity GESE Grade 7 Syllabus (CEFR B2.1 — Upper Intermediate)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Trinity GESE Grade 7 Advanced Exercise Database (50 exercises)
+        const exercises = [
+            // EXERCISES 1-10: Third Conditional (If + past perfect, would have + pp)
+            {
+                id: 1,
+                type: 'listening',
+                audioText: "I made a terrible decision last year. I quit my job without having another one lined up. If I had thought about it more carefully, I wouldn't have resigned so suddenly. I would have found a new position first. Now I've been unemployed for eight months and I really regret it.",
+                question: "What does the speaker regret?",
+                options: ["Finding a new position", "Resigning suddenly without another job", "Being unemployed for eight months", "Thinking too carefully"],
+                correct: "Resigning suddenly without another job",
+                explanation: "✅ Correct! Third conditional for past regret: 'If I had thought... I wouldn't have resigned'.",
+                errorExplanation: "❌ The speaker uses third conditional to express regret about resigning suddenly."
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: "If I ______ (know) about the meeting, I ______ (come) to work on time. Unfortunately, nobody ______ (tell) me.",
+                correct: ["had known would have come had told"],
+                explanation: "✅ Correct! Third conditional: If + past perfect, would have + pp. Past perfect in the reason clause too."
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: "Which sentence demonstrates correct third conditional structure?",
+                options: ["If I studied harder, I would have passed.", "If I had studied harder, I would pass.", "If I had studied harder, I would have passed.", "If I have studied harder, I would have passed."],
+                correct: "If I had studied harder, I would have passed.",
+                explanation: "✅ Correct! If + past perfect (had studied), would have + past participle (would have passed).",
+                errorExplanation: "❌ Third conditional: If + past perfect, would have + past participle."
+            },
+            {
+                id: 4,
+                type: 'listening',
+                audioText: "The accident was completely avoidable. If the driver had been paying attention, he wouldn't have run the red light. If he had stopped at the light, the collision would never have happened. Fortunately, nobody was seriously injured, but it could have been much worse.",
+                question: "What would have prevented the collision?",
+                options: ["The driver paying attention", "Nobody being injured", "The red light", "The accident being avoidable"],
+                correct: "The driver paying attention",
+                explanation: "✅ Correct! 'If the driver had been paying attention... the collision would never have happened'.",
+                errorExplanation: "❌ The third conditional chain shows that paying attention would have prevented everything."
+            },
+            {
+                id: 5,
+                type: 'fill',
+                question: "We ______ (miss) the train if we ______ (not/run) to the station. We ______ (have) to wait two hours for the next one.",
+                correct: ["would have missed hadn't run would have had"],
+                explanation: "✅ Correct! Third conditional with negative: hadn't run. Note: would have had (conditional perfect of have)."
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: "If she ______ earlier, she ______ the job.",
+                options: ["applied / would get", "had applied / would have got", "has applied / would have got", "had applied / would get"],
+                correct: "had applied / would have got",
+                explanation: "✅ Correct! If + past perfect (had applied), would have + past participle (would have got).",
+                errorExplanation: "❌ Third conditional requires past perfect in if-clause and would have + pp in main clause."
+            },
+            {
+                id: 7,
+                type: 'listening',
+                audioText: "My brother is terrible with money. He spent his entire savings on a car he didn't need. If he had saved that money, he could have bought a house by now. He would have been much better off financially. But now he has nothing left in his account.",
+                question: "What could the brother have done with his savings?",
+                options: ["Bought a car he needed", "Bought a house", "Spent everything", "Been worse off"],
+                correct: "Bought a house",
+                explanation: "✅ Correct! 'If he had saved that money, he could have bought a house' (third conditional with could).",
+                errorExplanation: "❌ Third conditional with could have: hypothetical past possibility."
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: "I wish I ______ (take) your advice. If I ______ (listen) to you, I ______ (not/make) such a terrible mistake.",
+                correct: ["had taken had listened wouldn't have made"],
+                explanation: "✅ Correct! I wish + past perfect for past regret, followed by third conditional."
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: "Complete with the correct form: If they ______ us about the problem, we ______ helped them.",
+                options: ["told / would have", "had told / would have", "had told / would", "have told / would have"],
+                correct: "had told / would have",
+                explanation: "✅ Correct! If + past perfect (had told), would have + past participle (would have helped — helped omitted in answer).",
+                errorExplanation: "❌ Third conditional structure: If + past perfect, would have + pp."
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: "The project failed because of poor planning. If it ______ (plan) properly, it ______ (succeed). We ______ (not/lose) so much money.",
+                correct: ["had been planned would have succeeded wouldn't have lost"],
+                explanation: "✅ Correct! Third conditional passive: had been planned. Note: succeed (intransitive) has no passive."
+
+            },
+
+            // EXERCISES 11-20: Present Perfect Continuous
+            {
+                id: 11,
+                type: 'choice',
+                question: "Which sentence uses present perfect continuous correctly?",
+                options: ["I have been knowing him for years.", "I have been waiting here for two hours.", "She has been having that car since 2019.", "They have been liking this music for ages."],
+                correct: "I have been waiting here for two hours.",
+                explanation: "✅ Correct! Present perfect continuous with dynamic verb (waiting) for duration.",
+                errorExplanation: "❌ Present perfect continuous is used with dynamic verbs (waiting, working, raining), not stative verbs (know, have, like)."
+            },
+            {
+                id: 12,
+                type: 'listening',
+                audioText: "You look exhausted! What's wrong? I've been working on this report all night. I've been sitting at my desk for eight hours without a break. My eyes have been hurting from staring at the screen. I really need some sleep.",
+                question: "Why does the speaker look exhausted?",
+                options: ["They slept all night", "They worked on a report all night", "They took an eight-hour break", "They stopped staring at the screen"],
+                correct: "They worked on a report all night",
+                explanation: "✅ Correct! 'I've been working on this report all night' — present perfect continuous for recent duration.",
+                errorExplanation: "❌ Present perfect continuous emphasizes the ongoing duration of the activity."
+            },
+            {
+                id: 13,
+                type: 'fill',
+                question: "Your hands are covered in paint. ______ (you/paint) the kitchen? How long ______ (you/work) on it?",
+                correct: ["Have you been painting have you been working"],
+                explanation: "✅ Correct! Present perfect continuous questions: Have you been + verb-ing?"
+            },
+            {
+                id: 14,
+                type: 'choice',
+                question: "It ______ all morning. The streets are wet.",
+                options: ["rains", "is raining", "has been raining", "rained"],
+                correct: "has been raining",
+                explanation: "✅ Correct! Present perfect continuous for recent activity with visible result (wet streets).",
+                errorExplanation: "❌ Present perfect continuous is used when there is evidence of recent activity."
+            },
+            {
+                id: 15,
+                type: 'listening',
+                audioText: "I'm worried about my neighbour. His car has been sitting in the driveway for two weeks. I haven't seen him coming or going. I've been calling him every day, but he hasn't answered. I think I should check if he's okay.",
+                question: "How long has the neighbour's car been in the driveway?",
+                options: ["Every day", "For two weeks", "Since yesterday", "Since he hasn't answered"],
+                correct: "For two weeks",
+                explanation: "✅ Correct! 'His car has been sitting... for two weeks' — present perfect continuous for duration.",
+                errorExplanation: "❌ 'For two weeks' with present perfect continuous indicates ongoing duration."
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: "I ______ (wait) for this delivery ______ (for/since) 9 o'clock this morning. I ______ (be) getting really impatient!",
+                correct: ["have been waiting since am"],
+                explanation: "✅ Correct! Present perfect continuous with since + starting point. Present continuous for current state."
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: "She's tired because she ______ all day.",
+                options: ["has been jogging", "is jogging", "jogs", "jogged"],
+                correct: "has been jogging",
+                explanation: "✅ Correct! Present perfect continuous for activity continuing up to now (with present result: tired).",
+                errorExplanation: "❌ Present perfect continuous connects recent activity to present state."
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: "How long ______ (you/learn) English? I ______ (study) it ______ (for/since) I was at school.",
+                correct: ["have you been learning have been learning since"],
+                explanation: "✅ Correct! Present perfect continuous for ongoing activity from past to present."
+            },
+            {
+                id: 19,
+                type: 'listening',
+                audioText: "The children are making so much noise! They've been playing video games for three hours. They've been shouting and laughing the whole time. I've been trying to concentrate on my work, but it's impossible with all this noise.",
+                question: "What has the speaker been trying to do?",
+                options: ["Play video games", "Make noise", "Concentrate on work", "Shout and laugh"],
+                correct: "Concentrate on work",
+                explanation: "✅ Correct! 'I've been trying to concentrate' — present perfect continuous for ongoing attempt.",
+                errorExplanation: "❌ Present perfect continuous emphasizes the ongoing nature of the attempt."
+            },
+            {
+                id: 20,
+                type: 'choice',
+                question: "Your eyes are red. ______?",
+                options: ["Do you cry", "Are you crying", "Have you been crying", "Did you cry"],
+                correct: "Have you been crying",
+                explanation: "✅ Correct! Present perfect continuous for recent activity with visible evidence (red eyes).",
+                errorExplanation: "❌ Present perfect continuous is used when there is visible evidence of recent activity."
+
+            },
+
+            // EXERCISES 21-30: Passive Voice
+            {
+                id: 21,
+                type: 'choice',
+                question: "Change to passive: 'They built this castle in the 12th century.'",
+                options: ["This castle was built in the 12th century.", "This castle is built in the 12th century.", "This castle has been built in the 12th century.", "This castle had been built in the 12th century."],
+                correct: "This castle was built in the 12th century.",
+                explanation: "✅ Correct! Past simple passive: was/were + past participle (built).",
+                errorExplanation: "❌ Past simple passive for completed past actions: was/were + past participle."
+            },
+            {
+                id: 22,
+                type: 'listening',
+                audioText: "The new hospital was opened by the Prime Minister last week. It had been planned for over ten years. The building was designed by a famous architect. It is being equipped with the latest medical technology. Patients will be treated here from next month.",
+                question: "Who opened the new hospital?",
+                options: ["A famous architect", "The Prime Minister", "Patients", "Medical technology"],
+                correct: "The Prime Minister",
+                explanation: "✅ Correct! 'The new hospital was opened by the Prime Minister' — passive with agent.",
+                errorExplanation: "❌ The agent (by the Prime Minister) is mentioned in the passive construction."
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: "This problem must ______ (deal) with immediately. All complaints should ______ (take) seriously. The report has ______ (write) and will ______ (publish) tomorrow.",
+                correct: ["be dealt be taken been written be published"],
+                explanation: "✅ Correct! Modal passive: must be dealt. Present perfect passive: has been written. Future passive: will be published."
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: "The windows ______ by the storm last night.",
+                options: ["are broken", "were broken", "have been broken", "had been broken"],
+                correct: "were broken",
+                explanation: "✅ Correct! Past simple passive for completed past event: were + past participle.",
+                errorExplanation: "❌ 'Last night' indicates past simple passive: were broken."
+            },
+            {
+                id: 25,
+                type: 'listening',
+                audioText: "A new species of frog has been discovered in the Amazon rainforest. It is being studied by scientists from around the world. The discovery was made by a team of Brazilian researchers. It is believed that many more species will be found in the coming years.",
+                question: "Who discovered the new species?",
+                options: ["Scientists from around the world", "A team of Brazilian researchers", "Many more species", "The Amazon rainforest"],
+                correct: "A team of Brazilian researchers",
+                explanation: "✅ Correct! 'The discovery was made by a team of Brazilian researchers' — passive with agent.",
+                errorExplanation: "❌ The agent is specified in the passive construction with 'by'."
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: "The meeting ______ (cancel) because of the snow. It ______ (reschedule) for next week. All participants ______ (inform) by email.",
+                correct: ["was cancelled will be rescheduled have been informed"],
+                explanation: "✅ Correct! Past simple passive, future passive, present perfect passive."
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: "My car ______ at the moment.",
+                options: ["is being repaired", "is repairing", "has been repairing", "repairs"],
+                correct: "is being repaired",
+                explanation: "✅ Correct! Present continuous passive: am/is/are + being + past participle.",
+                errorExplanation: "❌ 'At the moment' + present continuous passive: is being repaired."
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: "This book ______ (translate) into over 50 languages. It ______ (read) by millions of people since it ______ (publish) in 1997.",
+                correct: ["has been translated has been read was published"],
+                explanation: "✅ Correct! Present perfect passive for experience, past simple passive for specific time."
+            },
+            {
+                id: 29,
+                type: 'listening',
+                audioText: "The suspect is being questioned by police at this moment. He was arrested early this morning. His house has been searched and his computer has been seized. He will be charged with fraud if sufficient evidence is found. His lawyer has been contacted.",
+                question: "What is happening to the suspect right now?",
+                options: ["He was arrested", "He is being questioned", "He will be charged", "His lawyer has been contacted"],
+                correct: "He is being questioned",
+                explanation: "✅ Correct! 'The suspect is being questioned... at this moment' — present continuous passive.",
+                errorExplanation: "❌ 'At this moment' indicates present continuous passive: is being questioned."
+            },
+            {
+                id: 30,
+                type: 'choice',
+                question: "The documents ______ before we arrived.",
+                options: ["have been destroyed", "had been destroyed", "were destroyed", "are destroyed"],
+                correct: "had been destroyed",
+                explanation: "✅ Correct! Past perfect passive for action completed before another past action.",
+                errorExplanation: "❌ 'Before we arrived' requires past perfect passive: had been destroyed."
+
+            },
+
+            // EXERCISES 31-40: Reported Speech
+            {
+                id: 31,
+                type: 'choice',
+                question: "Direct: 'I am tired.' Reported: She said that ______ tired.",
+                options: ["she is", "she was", "I am", "she were"],
+                correct: "she was",
+                explanation: "✅ Correct! Present simple → past simple in reported speech (backshift).",
+                errorExplanation: "❌ Reported speech: present simple (am) → past simple (was)."
+            },
+            {
+                id: 32,
+                type: 'listening',
+                audioText: "Yesterday I met John. He told me that he was moving to London the following week. He said he had found a new job there. He explained that he would be working for a bank. He asked if I wanted to visit him sometime.",
+                question: "When was John moving to London?",
+                options: ["Yesterday", "The following week", "Sometime", "When he found a job"],
+                correct: "The following week",
+                explanation: "✅ Correct! 'Next week' → 'the following week' (temporal expression shift in reported speech).",
+                errorExplanation: "❌ Temporal expressions shift: next week → the following week."
+            },
+            {
+                id: 33,
+                type: 'fill',
+                question: "\"I have finished my work,\" she said. → She said that she ______ (finish) her work. \"I will help you,\" he promised. → He promised that he ______ (help) me.",
+                correct: ["had finished would help"],
+                explanation: "✅ Correct! Present perfect → past perfect. Will → would (modal backshift)."
+            },
+            {
+                id: 34,
+                type: 'choice',
+                question: "Direct: 'Can you swim?' Reported: He asked me if ______.",
+                options: ["I can swim", "I could swim", "can I swim", "could I swim"],
+                correct: "I could swim",
+                explanation: "✅ Correct! Can → could (modal backshift), and statement word order (not question order).",
+                errorExplanation: "❌ Reported questions: modal backshift + statement word order (subject before verb)."
+            },
+            {
+                id: 35,
+                type: 'listening',
+                audioText: "My mother called me yesterday. She asked where I had been all day. She told me that my grandmother had been trying to reach me. She warned me not to forget my grandmother's birthday the next day. She suggested that I should call my grandmother immediately.",
+                question: "What did the mother warn about?",
+                options: ["Where the speaker had been", "The grandmother trying to reach her", "Not forgetting the grandmother's birthday", "Calling the grandmother immediately"],
+                correct: "Not forgetting the grandmother's birthday",
+                explanation: "✅ Correct! 'She warned me not to forget...' — reported imperative with warning function.",
+                errorExplanation: "❌ 'Warned me not to forget' is the reported form of a negative warning."
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: "\"Don't touch that wire!\" he shouted. → He shouted at me ______ (not/touch) that wire. \"Please sit down,\" she said. → She ______ (ask) me to sit down.",
+                correct: ["not to touch asked"],
+                explanation: "✅ Correct! Negative imperative → told/warned/asked + not + to + verb. Positive → asked + to + verb."
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: "She said, \"I bought this car last year.\" → She said that ______.",
+                options: ["she buys this car last year", "she bought this car the year before", "she had bought that car the year before", "she has bought that car last year"],
+                correct: "she had bought that car the year before",
+                explanation: "✅ Correct! Past simple → past perfect, this → that, last year → the year before.",
+                errorExplanation: "❌ Backshift: bought → had bought. Deictic shift: this → that, last year → the year before."
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: "\"Where are you going?\" she asked. → She asked me where I ______ (go). \"Why didn't you call?\" he demanded. → He demanded to know why I ______ (not/call).",
+                correct: ["was going hadn't called"],
+                explanation: "✅ Correct! Present continuous → past continuous. Past simple → past perfect (negative)."
+            },
+            {
+                id: 39,
+                type: 'listening',
+                audioText: "At the interview, the manager asked me if I had any experience in sales. I told him that I had worked in a shop for two years. He wanted to know why I had left that job. I explained that I was looking for more challenging work. He asked when I could start.",
+                question: "What did the manager want to know?",
+                options: ["If the speaker had experience", "Why the speaker had left the previous job", "Where the speaker had worked", "When the speaker could start"],
+                correct: "Why the speaker had left the previous job",
+                explanation: "✅ Correct! 'He wanted to know why I had left that job' — reported wh- question.",
+                errorExplanation: "❌ 'Wanted to know why' is the reported form of 'Why did you leave?'"
+            },
+            {
+                id: 40,
+                type: 'choice',
+                question: "She promised, \"I will call you tomorrow.\" → She promised that ______.",
+                options: ["she will call me tomorrow", "she would call me the next day", "she calls me tomorrow", "she called me the next day"],
+                correct: "she would call me the next day",
+                explanation: "✅ Correct! Will → would, tomorrow → the next day (temporal shift).",
+                errorExplanation: "❌ Reported speech: will → would, tomorrow → the next day/the following day."
+
+            },
+
+            // EXERCISES 41-50: Phrasal Verbs
+            {
+                id: 41,
+                type: 'choice',
+                question: "Could you ______ the lights? It's getting dark.",
+                options: ["turn on", "turn off", "turn up", "turn down"],
+                correct: "turn on",
+                explanation: "✅ Correct! Turn on = activate/switch on (separable phrasal verb).",
+                errorExplanation: "❌ 'Turn on' means to activate electrical devices like lights."
+            },
+            {
+                id: 42,
+                type: 'listening',
+                audioText: "I need to look after my neighbour's cat while she's on holiday. I also have to look out for her plants — she asked me to water them if they look dry. I don't mind helping out, but I hope nothing goes wrong while she's away!",
+                question: "What does 'look after' mean in this context?",
+                options: ["Search for", "Take care of", "Watch for", "Help out"],
+                correct: "Take care of",
+                explanation: "✅ Correct! Look after = take care of (inseparable phrasal verb).",
+                errorExplanation: "❌ 'Look after' is an inseparable phrasal verb meaning to care for someone/something."
+            },
+            {
+                id: 43,
+                type: 'fill',
+                question: "We need to ______ (put off / call off) the meeting until next week. The boss has decided to ______ (call off / put off) the project completely.",
+                correct: ["put off call off"],
+                explanation: "✅ Correct! Put off = postpone. Call off = cancel."
+            },
+            {
+                id: 44,
+                type: 'choice',
+                question: "I can't ______ the noise from the construction site. It's driving me crazy.",
+                options: ["put up with", "look forward to", "get on with", "come up with"],
+                correct: "put up with",
+                explanation: "✅ Correct! Put up with = tolerate (three-part inseparable phrasal verb).",
+                errorExplanation: "❌ 'Put up with' is a three-part phrasal verb meaning to tolerate."
+            },
+            {
+                id: 45,
+                type: 'listening',
+                audioText: "I've come up with a great idea for the party! We could hire a live band. I ran into an old friend yesterday who plays guitar. We need to find out how much it would cost. I'm really looking forward to it!",
+                question: "What does 'come up with' mean?",
+                options: ["Meet by chance", "Suggest or invent", "Discover information", "Anticipate with pleasure"],
+                correct: "Suggest or invent",
+                explanation: "✅ Correct! Come up with = suggest, invent, or produce an idea (three-part phrasal verb).",
+                errorExplanation: "❌ 'Come up with' means to suggest or invent (ideas, plans, solutions)."
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: "Please ______ (fill in / fill out) this form and ______ (hand in / hand out) it to the receptionist. Make sure you don't ______ (leave out / leave off) any details.",
+                correct: ["fill in hand in leave out"],
+                explanation: "✅ Correct! Fill in/out = complete. Hand in = submit. Leave out = omit."
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: "We need to ______ on expenses. The company is losing money.",
+                options: ["cut down", "cut off", "cut out", "cut up"],
+                correct: "cut down",
+                explanation: "✅ Correct! Cut down on = reduce (three-part phrasal verb).",
+                errorExplanation: "❌ 'Cut down on' is a three-part phrasal verb meaning to reduce."
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: "I ______ (get on / get along) well with my colleagues. We ______ (get together) for lunch every Friday. I really ______ (get on with / get over) my work quickly.",
+                correct: ["get on get together get on with"],
+                explanation: "✅ Correct! Get on/along with = have good relations. Get together = meet socially. Get on with = continue/progress."
+            },
+            {
+                id: 49,
+                type: 'listening',
+                audioText: "My grandmother passed away last year. It took me a long time to get over her death. I still can't do without her advice. Sometimes I come across old photos of her and it makes me sad. But I'm trying to move on with my life.",
+                question: "What does 'get over' mean in this context?",
+                options: ["Pass away", "Recover from", "Do without", "Come across"],
+                correct: "Recover from",
+                explanation: "✅ Correct! Get over = recover from (illness, shock, emotional difficulty).",
+                errorExplanation: "❌ 'Get over' in this context means to recover emotionally from a loss."
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: "Complete this complex narrative using appropriate forms: If I ______ (not/oversleep) yesterday morning, I ______ (not/be) late for the interview. The position ______ (already/fill) by the time I arrived. I ______ (wait) for that opportunity ______ (for/since) months! The company ______ (tell) me that they ______ (look) for someone more reliable. I really ______ (let down) by my own carelessness. I ______ (must/learn) to use an alarm clock! I ______ (look forward to) hearing from them again, but I doubt they ______ (call) me back.",
+                correct: ["hadn't overslept wouldn't have been had already been filled had been waiting for was told were looking was let down must learn am looking forward to will call"],
+                explanation: "✅ Distinguished performance! You have successfully completed all 50 advanced exercises, demonstrating mastery of third conditionals, passive voice transformations, reported discourse, and multi-word lexical units at CEFR B2.1 level."
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+        let speechSynthesis = window.speechSynthesis;
+        let currentUtterance = null;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function speakText(text) {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.85;
+            utterance.pitch = 1;
+            
+            speechSynthesis.speak(utterance);
+            currentUtterance = utterance;
+        }
+
+        function stopSpeaking() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let typeBadge = '';
+            if (ex.type === 'listening') typeBadge = '🎧 Listening Comprehension';
+            else if (ex.type === 'choice') typeBadge = '📝 Multiple Choice';
+            else if (ex.type === 'fill') typeBadge = '✏️ Constructed Response';
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.5s ease;">
+                    <div class="card-header">Exercise ${ex.id} — ${typeBadge}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Question ${currentExercise + 1} of ${exercises.length}</div>
+            `;
+
+            if (ex.type === 'listening') {
+                html += `
+                    <div class="listening-box">
+                        <div class="audio-controls">
+                            <button class="btn-audio" onclick="speakText('${ex.audioText.replace(/'/g, "\\'")}')" id="playBtn">
+                                ▶️ Play Audio
+                            </button>
+                            <button class="btn-secondary" onclick="document.getElementById('transcript').classList.toggle('show')">
+                                👁️ Reveal Transcript
+                            </button>
+                        </div>
+                        <div class="transcript-box" id="transcript">
+                            "${ex.audioText}"
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="question-box">
+                            <div class="question-type-badge">${typeBadge}</div>
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice' || ex.type === 'listening') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt.replace(/'/g, "\\'")}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Enter your response..." onkeypress="if(event.key==='Enter') checkFill()">
+                        <div class="hint-text">Press Enter or click Verify to submit your response</div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary" onclick="checkFill()" style="background: var(--grade7-indigo);">✓ Verify Response</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Proceed to Next Question →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct response:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Incorrect response.<br><strong>Correct construction:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            stopSpeaking();
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Distinguished Performance! You demonstrate exceptional command of advanced grammatical structures including counterfactual conditionals, voice transformations, reported discourse, and multi-word lexical units. You are thoroughly prepared for the GESE Grade 7 examination at CEFR B2.1 level.';
+            } else if (totalScore >= 70) {
+                message = '👍 Commendable Achievement! You exhibit solid understanding of Grade 7 grammatical concepts. Review the formation of third conditionals, passive transformations across tenses, and systematic backshift in reported speech to achieve complete mastery.';
+            } else if (totalScore >= 50) {
+                message = '💪 Satisfactory Progress. Continue to develop your understanding of: 1) Third conditional formation (If + past perfect, would have + pp), 2) Passive voice across all tenses, 3) Reported speech with tense backshift, and 4) Phrasal verb classification and usage.';
+            } else {
+                message = '📚 Further Study Required. Focus your attention on: 1) Counterfactual past conditionals, 2) Active to passive transformations, 3) Direct to indirect speech conversion with systematic backshift, and 4) Multi-word verbs and their syntactic behaviour.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        // Shuffle exercises on initial load
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+
+        // Clean up speech synthesis when leaving page
+        window.addEventListener('beforeunload', function() {
+            stopSpeaking();
+        });
+    </script>
+</body>
+</html>

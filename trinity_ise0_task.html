@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE Foundation (A2) - Complete Exam Preparation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #e8f5e9;
+            --dark: #263238;
+            --border: #c8e6c9;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --a2-color: #1565c0;
+            --warning: #ef6c00;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3e0;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--a2-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin: 2rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .subject-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .subject-item {
+            background: var(--light);
+            padding: 0.75rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .skill-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .skill-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .skill-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .skill-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .exam-format-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+        }
+
+        .exam-format-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .exam-format-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .exam-format-table tr:nth-child(even) {
+            background: #f5f5f5;
+        }
+
+        .topic-form-template {
+            background: #fafafa;
+            border: 2px dashed var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .topic-point {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .topic-point::before {
+            content: "•";
+            color: var(--accent);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .writing-task-box {
+            background: #fff8e1;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .listening-task-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--a2-color);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--a2-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--a2-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #1b5e20;
+        }
+
+        .btn-check {
+            background: var(--a2-color);
+            color: white;
+        }
+
+        .btn-check:hover {
+            background: #0d47a1;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--a2-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #1b5e20 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #ffcc80;
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--a2-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+            .subject-list { grid-template-columns: 1fr; }
+            .skill-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE Foundation (A2)</h1>
+            <p>Integrated Skills in English - All Four Skills Preparation</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE Foundation (A2) Complete Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE Foundation Complete Preparation</h1>
+            <p class="page-subtitle">Reading, Writing, Speaking & Listening at A2 Level</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('reading', this)">Reading</button>
+            <button class="nav-tab" onclick="showSection('writing', this)">Writing</button>
+            <button class="nav-tab" onclick="showSection('speaking', this)">Speaking</button>
+            <button class="nav-tab" onclick="showSection('listening', this)">Listening</button>
+            <button class="nav-tab" onclick="showSection('video', this)">Video</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">Practice</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">ISE Foundation Exam Overview (A2)</div>
+                <div class="card-body">
+                    <p>ISE Foundation is a four-skills exam (Reading, Writing, Speaking, Listening) at CEFR A2 level. The exam is taken in two modules and demonstrates your ability to use English in real-life situations.</p>
+                    
+                    <div class="skill-grid">
+                        <div class="skill-card">
+                            <div class="skill-icon">📖</div>
+                            <div class="skill-title">Reading & Writing</div>
+                            <p>2 hours<br>4 tasks<br>70-100 words writing</p>
+                        </div>
+                        <div class="skill-card">
+                            <div class="skill-icon">🎤</div>
+                            <div class="skill-title">Speaking & Listening</div>
+                            <p>13 minutes<br>3 tasks<br>One-to-one with examiner</p>
+                        </div>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Key Features:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Integrated Skills:</strong> Tasks combine reading-to-writing and speaking-to-listening</li>
+                            <li><strong>Real-life Communication:</strong> Tasks reflect authentic language use</li>
+                            <li><strong>Personal Topics:</strong> You choose your own topic for discussion</li>
+                            <li><strong>Diagnostic Feedback:</strong> Detailed feedback on your performance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Exam Format Summary</div>
+                <div class="card-body">
+                    <table class="exam-format-table">
+                        <thead>
+                            <tr>
+                                <th>Module</th>
+                                <th>Task</th>
+                                <th>Time</th>
+                                <th>What You Do</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4"><strong>Reading & Writing</strong></td>
+                                <td>Task 1: Long Reading</td>
+                                <td>30 mins</td>
+                                <td>Read 1 text (300 words), answer 15 questions</td>
+                            </tr>
+                            <tr>
+                                <td>Task 2: Multi-text Reading</td>
+                                <td>30 mins</td>
+                                <td>Read 3-4 short texts, answer 15 questions</td>
+                            </tr>
+                            <tr>
+                                <td>Task 3: Reading into Writing</td>
+                                <td>30 mins</td>
+                                <td>Write 70-100 words using information from Task 2</td>
+                            </tr>
+                            <tr>
+                                <td>Task 4: Extended Writing</td>
+                                <td>30 mins</td>
+                                <td>Write 70-100 words (email, article, review, essay)</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3"><strong>Speaking & Listening</strong></td>
+                                <td>Topic Task</td>
+                                <td>4 mins</td>
+                                <td>Discuss your prepared topic with examiner</td>
+                            </tr>
+                            <tr>
+                                <td>Conversation Task</td>
+                                <td>2 mins</td>
+                                <td>Talk about one subject area from the list</td>
+                            </tr>
+                            <tr>
+                                <td>Independent Listening</td>
+                                <td>8 mins</td>
+                                <td>Two listening tasks with written and oral responses</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Subject Areas for Conversation Task</div>
+                <div class="card-body">
+                    <p>The examiner will choose ONE of these subjects for the Conversation task:</p>
+                    <div class="subject-list">
+                        <div class="subject-item">Holidays</div>
+                        <div class="subject-item">Shopping</div>
+                        <div class="subject-item">School and work</div>
+                        <div class="subject-item">Hobbies and sports</div>
+                        <div class="subject-item">Food</div>
+                        <div class="subject-item">Weekend and seasonal activities</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- READING SECTION -->
+        <section id="reading" class="section">
+            <div class="card">
+                <div class="card-header">Task 1: Long Reading (30 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>What you do:</strong> Read one long text (about 300 words, 5 paragraphs) and answer 15 questions.
+                    </div>
+
+                    <h4>Question Types (15 questions total):</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Questions 1-5:</strong> Multiple choice - choose the correct answer (A, B, C)</li>
+                        <li><strong>Questions 6-10:</strong> True/False/Not Given statements</li>
+                        <li><strong>Questions 11-15:</strong> Complete sentences with exact words from the text</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Question Types:</strong><br>
+                        • <strong>Multiple Choice:</strong> "What is the main purpose of the text?"<br>
+                        • <strong>True/False:</strong> "The writer believes that... [T/F/Not Given]"<br>
+                        • <strong>Gap-fill:</strong> "The writer suggests that exercise is _______ for mental health."
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Strategy Tips:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Read the questions first, then scan for answers</li>
+                            <li>For True/False: If the text doesn't mention it, choose "Not Given"</li>
+                            <li>For gap-fill: Use the exact words from the text (1-3 words usually)</li>
+                            <li>Manage your time: 2 minutes per question maximum</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Task 2: Multi-text Reading (30 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>What you do:</strong> Read 3-4 short texts on the same topic and answer 15 questions.
+                    </div>
+
+                    <h4>Question Types:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Questions 16-20:</strong> Match descriptions to texts (which text matches?)</li>
+                        <li><strong>Questions 21-25:</strong> Choose 5 true statements from 8 options (3 are false)</li>
+                        <li><strong>Questions 26-30:</strong> Complete notes with exact words from texts (choose from list)</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Task:</strong><br>
+                        You read 4 short texts about different people's holidays.<br>
+                        <strong>Q16:</strong> "Which person went on holiday with their family?" → Match to Text A/B/C/D<br>
+                        <strong>Q21:</strong> "Choose 5 true statements: The weather was good / It was expensive / They went swimming..." etc.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Important:</strong> The information you use in Task 3 (Reading into Writing) comes from these texts. Pay attention to facts, dates, names, and opinions.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Reading Strategies for A2</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Strategy</th>
+                                <th>How to Apply</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Skimming</td>
+                                <td>Read quickly for general idea - look at title, first sentence of each paragraph, conclusion</td>
+                            </tr>
+                            <tr>
+                                <td>Scanning</td>
+                                <td>Look for specific information - names, dates, numbers, key words from questions</td>
+                            </tr>
+                            <tr>
+                                <td>Context clues</td>
+                                <td>Guess unknown words from surrounding text - look at the sentence before and after</td>
+                            </tr>
+                            <tr>
+                                <td>Keyword matching</td>
+                                <td>Find words in the question that appear in the text (but be careful of synonyms)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- WRITING SECTION -->
+        <section id="writing" class="section">
+            <div class="card">
+                <div class="card-header">Task 3: Reading into Writing (30 minutes)</div>
+                <div class="card-body">
+                    <div class="writing-task-box">
+                        <strong>Task Requirements:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Write <strong>70-100 words</strong></li>
+                            <li>Use information from the <strong>3-4 texts in Task 2</strong></li>
+                            <li>Write in your <strong>own words</strong> - do not copy from the texts</li>
+                            <li>Text types: <strong>descriptive essay, article, email/letter, or review</strong></li>
+                        </ul>
+                    </div>
+
+                    <h4>How to Approach This Task:</h4>
+                    <div class="essay-step" style="margin-left: 0; border-left: 3px solid var(--accent); padding-left: 1rem;">
+                        <h4>Step 1: Analyze the Question</h4>
+                        <p>Identify what you need to write: "Write an article for your school magazine describing different types of holidays people prefer."</p>
+                    </div>
+
+                    <div class="essay-step" style="margin-left: 0; border-left: 3px solid var(--accent); padding-left: 1rem;">
+                        <h4>Step 2: Select Information from Texts</h4>
+                        <p>Go back to Task 2 texts and find relevant facts. Make notes:</p>
+                        <ul>
+                            <li>Text A: Maria likes beach holidays, went to Spain last year</li>
+                            <li>Text B: Tom prefers adventure holidays, went hiking in Scotland</li>
+                            <li>Text C: The Johnsons enjoy city breaks, visited Paris</li>
+                        </ul>
+                    </div>
+
+                    <div class="essay-step" style="margin-left: 0; border-left: 3px solid var(--accent); padding-left: 1rem;">
+                        <h4>Step 3: Plan Your Structure</h4>
+                        <ul>
+                            <li><strong>Introduction (1 sentence):</strong> Introduce the topic</li>
+                            <li><strong>Body (2-3 sentences):</strong> Include information from all texts</li>
+                            <li><strong>Conclusion (1 sentence):</strong> Personal opinion or summary</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Sample Answer (85 words):</strong><br>
+                        "People enjoy different types of holidays. Maria loves beach holidays and she went to Spain last summer. In contrast, Tom prefers adventure holidays. He went hiking in the mountains in Scotland. The Johnson family likes city breaks. They visited Paris and saw the Eiffel Tower. In my opinion, beach holidays are the best because I like swimming and relaxing in the sun."
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Common Mistakes to Avoid:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>❌ Copying sentences directly from the reading texts (penalty!)</li>
+                            <li>❌ Writing less than 70 words or more than 100 words</li>
+                            <li>❌ Not using information from all the texts</li>
+                            <li>❌ Forgetting to include your own opinion (if asked)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Task 4: Extended Writing (30 minutes)</div>
+                <div class="card-body">
+                    <div class="writing-task-box">
+                        <strong>Task Requirements:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Write <strong>70-100 words</strong></li>
+                            <li>No reading texts provided - use your own ideas</li>
+                            <li>Text types: <strong>descriptive essay, article, email/letter, or review</strong></li>
+                        </ul>
+                    </div>
+
+                    <h4>Text Types Explained:</h4>
+                    
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <h4 style="color: var(--primary);">1. Descriptive Essay</h4>
+                        <p>Describe a person, place, or thing. Use adjectives and sensory details.</p>
+                        <p><strong>Example topic:</strong> "Describe your favourite place in your town."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <h4 style="color: var(--primary);">2. Article (Magazine or Online)</h4>
+                        <p>Informal, interesting title, engaging opening, personal opinion.</p>
+                        <p><strong>Example topic:</strong> "Write an article about your hobby for a school magazine."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <h4 style="color: var(--primary);">3. Email or Letter (Informal or Neutral)</h4>
+                        <p>Correct opening/closing, clear purpose, appropriate tone.</p>
+                        <p><strong>Example topic:</strong> "Write an email to a friend inviting them to visit you."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <h4 style="color: var(--primary);">4. Review</h4>
+                        <p>Describe and give opinion about a film, book, restaurant, or place.</p>
+                        <p><strong>Example topic:</strong> "Write a review of a restaurant you visited recently."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Sample Extended Writing Tasks with Model Answers</div>
+                <div class="card-body">
+                    
+                    <h4 style="color: var(--primary); margin-top: 1rem;">Sample 1: Email to a Friend (Informal)</h4>
+                    <div style="background: #fafafa; padding: 1rem; border-left: 3px solid var(--a2-color); margin: 0.5rem 0;">
+                        <p><strong>Task:</strong> You are going to visit your friend in another city. Write an email to your friend. Tell them:</p>
+                        <ul>
+                            <li>When you will arrive</li>
+                            <li>What you want to do together</li>
+                            <li>What you are looking forward to</li>
+                        </ul>
+                    </div>
+                    <div class="example-box">
+                        <strong>Model Answer (78 words):</strong><br>
+                        Hi Sarah,<br><br>
+                        I'm writing to tell you that I'm coming to visit you next weekend. I'll arrive on Saturday morning at about 10 o'clock. I think we can go shopping in the afternoon and then see a film in the evening. On Sunday, I'd like to visit the museum if that's OK with you. I'm really looking forward to seeing you and spending time together. It's been too long!<br><br>
+                        See you soon,<br>
+                        Maria
+                    </div>
+
+                    <h4 style="color: var(--primary); margin-top: 1.5rem;">Sample 2: Article About a Hobby</h4>
+                    <div style="background: #fafafa; padding: 1rem; border-left: 3px solid var(--a2-color); margin: 0.5rem 0;">
+                        <p><strong>Task:</strong> Write an article for your school magazine about a hobby you enjoy. Say:</p>
+                        <ul>
+                            <li>What the hobby is</li>
+                            <li>When and where you do it</li>
+                            <li>Why you enjoy it</li>
+                        </ul>
+                    </div>
+                    <div class="example-box">
+                        <strong>Model Answer (82 words):</strong><br>
+                        My Favourite Hobby: Photography<br><br>
+                        My favourite hobby is photography. I take photos every weekend when I go to the park or the city centre. I usually use my smartphone but sometimes I use my dad's camera. I enjoy photography because I love capturing special moments. Last month, I took amazing photos of my sister's birthday party. I also like sharing my photos on Instagram. In the future, I want to learn how to edit photos properly. Photography helps me see the beauty in everyday life.
+                    </div>
+
+                    <h4 style="color: var(--primary); margin-top: 1.5rem;">Sample 3: Review of a Restaurant</h4>
+                    <div style="background: #fafafa; padding: 1rem; border-left: 3px solid var(--a2-color); margin: 0.5rem 0;">
+                        <p><strong>Task:</strong> Write a review of a restaurant you visited recently. Include:</p>
+                        <ul>
+                            <li>The name and location of the restaurant</li>
+                            <li>What you ate</li>
+                            <li>Your opinion of the food and service</li>
+                        </ul>
+                    </div>
+                    <div class="example-box">
+                        <strong>Model Answer (76 words):</strong><br>
+                        Restaurant Review: Pizza Palace<br><br>
+                        Last Saturday, I went to Pizza Palace with my family. It is in the city centre, near the train station. I ordered a margarita pizza and my brother had pasta. The food was delicious and the portions were very big. The waiter was friendly but the service was a bit slow because the restaurant was busy. The prices were reasonable - about €15 per person. I recommend this restaurant for families. I will definitely go back soon!
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Writing Checklist</div>
+                <div class="card-body">
+                    <p>Before you finish, check:</p>
+                    <ul style="margin-left: 2rem;">
+                        <li>☐ Word count: Is it between 70-100 words?</li>
+                        <li>☐ Task completion: Did you answer all parts of the question?</li>
+                        <li>☐ Grammar: Past tenses for past events, present for habits</li>
+                        <li>☐ Vocabulary: Did you use some A2-level words (enjoy, recommend, however, although)?</li>
+                        <li>☐ Spelling: Check common words (friend, because, beautiful, restaurant)</li>
+                        <li>☐ Punctuation: Capital letters, full stops, commas, apostrophes</li>
+                        <li>☐ Text type features: Did you include greeting/closing for emails? Title for articles?</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPEAKING SECTION -->
+        <section id="speaking" class="section">
+            <div class="card">
+                <div class="card-header">Topic Task (4 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>What you do:</strong> You prepare a topic before the exam. You bring a Topic Form with 4 points to discuss. The examiner asks you questions about your topic.
+                    </div>
+
+                    <h4>How to Choose Your Topic:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Choose something you know well and can talk about easily</li>
+                        <li>Choose something you are interested in (you'll speak better!)</li>
+                        <li>Make sure you can demonstrate A2 language functions</li>
+                        <li>Do NOT choose from the Conversation subject areas (Holidays, Shopping, etc.)</li>
+                    </ul>
+
+                    <div class="topic-form-template">
+                        <strong>Sample Topic Form: "My Favourite Sport - Swimming"</strong>
+                        <div class="topic-point">When I started swimming and why</div>
+                        <div class="topic-point">My training schedule (routines)</div>
+                        <div class="topic-point">A competition I participated in (past)</div>
+                        <div class="topic-point">My future swimming goals</div>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Language Functions to Demonstrate:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Giving personal information about present and past circumstances</li>
+                            <li>Describing routines (present simple)</li>
+                            <li>Describing ability and inability (can/can't, could/couldn't)</li>
+                            <li>Describing future plans (going to, would like to)</li>
+                            <li>Expressing likes and dislikes</li>
+                            <li>Describing people, objects and places</li>
+                            <li>Expressing simple comparisons (comparative adjectives)</li>
+                            <li>Asking for information (asking the examiner a question!)</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Sample Exchange:</strong><br>
+                        <strong>Examiner:</strong> "Can you tell me about your swimming routine?"<br>
+                        <strong>You:</strong> "I swim three times a week. On Mondays and Wednesdays, I go to the pool after school. I usually swim for one hour. At the weekend, I have longer training sessions on Saturday mornings. I can swim 50 metres in 35 seconds now, but last year I couldn't do it that fast."<br>
+                        <strong>Examiner:</strong> "What would you like to achieve in the future?"<br>
+                        <strong>You:</strong> "I'm going to compete in the regional championship next month. I hope I can win a medal. In the future, I would like to become a swimming instructor. Do you enjoy swimming, examiner?"
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Conversation Task (2 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>What you do:</strong> The examiner chooses one subject area and asks you questions. You need to respond and ask the examiner at least one question.
+                    </div>
+
+                    <h4>Subject Areas (Examiner chooses one):</h4>
+                    <div class="subject-list">
+                        <div class="subject-item"><strong>Holidays</strong> — Past trips, dream destinations, preferences</div>
+                        <div class="subject-item"><strong>Shopping</strong> — Favourite shops, online vs. high street, last purchase</div>
+                        <div class="subject-item"><strong>School and work</strong> — Subjects, future career, daily routine</div>
+                        <div class="subject-item"><strong>Hobbies and sports</strong> — Free time activities, abilities, preferences</div>
+                        <div class="subject-item"><strong>Food</strong> — Cooking, favourite meals, restaurants, healthy eating</div>
+                        <div class="subject-item"><strong>Weekend and seasonal activities</strong> — Saturday routines, summer vs. winter</div>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Sample Conversation about "Food":</strong><br>
+                        <strong>Examiner:</strong> "Let's talk about food. Can you cook?"<br>
+                        <strong>You:</strong> "Yes, I can cook simple meals. I make pasta and omelettes. I can't cook complicated dishes yet, but I'm learning. I cook dinner for my family twice a week."<br>
+                        <strong>Examiner:</strong> "What did you have for breakfast this morning?"<br>
+                        <strong>You:</strong> "I had toast with jam and a cup of tea. I usually don't eat much in the morning. Do you prefer sweet or savoury breakfast, examiner?"
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Important:</strong> You MUST ask the examiner a question in this task. Prepare some questions in advance:
+                        <ul style="margin-left: 1.5rem;">
+                            <li>"Do you like...?"</li>
+                            <li>"Have you ever...?"</li>
+                            <li>"What do you think about...?"</li>
+                            <li>"Do you prefer... or...?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Speaking Assessment Criteria</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>What the Examiner Looks For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Communicative Effectiveness</td>
+                                <td>Can you complete the tasks? Do you respond appropriately? Is your message clear?</td>
+                            </tr>
+                            <tr>
+                                <td>Interactive Listening</td>
+                                <td>Do you understand the examiner? Do you respond to questions naturally? Do you initiate conversation?</td>
+                            </tr>
+                            <tr>
+                                <td>Language Control</td>
+                                <td>Grammar accuracy (tenses, articles, prepositions), vocabulary range, word order</td>
+                            </tr>
+                            <tr>
+                                <td>Delivery</td>
+                                <td>Pronunciation, intonation, fluency, speed, clarity</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- LISTENING SECTION -->
+        <section id="listening" class="section">
+            <div class="card">
+                <div class="card-header">Independent Listening Task (8 minutes)</div>
+                <div class="card-body">
+                    <div class="listening-task-box">
+                        <strong>Overview:</strong> Two separate recordings. You listen twice to each. Task 1 requires written answers. Task 2 requires you to report facts and answer questions orally.
+                    </div>
+
+                    <h4>Task 1: Listening for Information (Written Response)</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>You see a <strong>map, plan, or diagram</strong> with pictures</li>
+                        <li>You listen to someone describing locations</li>
+                        <li>You match letters (B, C, D, etc.) to numbers on the map</li>
+                        <li>One picture is not used (distraction)</li>
+                        <li>You write your answers on paper</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Task 1:</strong><br>
+                        You see a map of an airport waiting room with 5 numbered circles and 6 pictures (A-F).<br>
+                        You hear: "The information desk is on the left side of the room, next to the entrance."<br>
+                        You write the correct letter in circle 1 on your map.<br>
+                        <strong>Tip:</strong> Listen for directions (left, right, opposite, next to, between) and locations (entrance, exit, corner, centre).
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">Task 2: Listening for Facts (Oral Response)</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>You listen to a monologue (one person speaking)</li>
+                        <li>The recording is approximately 1 minute long</li>
+                        <li>You can take notes while listening</li>
+                        <li>After listening, the examiner asks you 6 questions</li>
+                        <li>You answer in one or two words or short phrases</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Task 2:</strong><br>
+                        You hear a woman talking about her weekend.<br>
+                        <strong>Examiner asks:</strong> "What did she do on Saturday morning?"<br>
+                        <strong>You answer:</strong> "Went shopping" or "She went shopping."<br>
+                        <strong>Examiner asks:</strong> "Who did she go with?"<br>
+                        <strong>You answer:</strong> "Her sister" or "With her sister."
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Listening Strategies:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>First listening:</strong> Get the general idea, don't worry about details</li>
+                            <li><strong>Second listening:</strong> Focus on specific information, write key words</li>
+                            <li><strong>For maps:</strong> Quickly look at the layout before listening</li>
+                            <li><strong>For facts:</strong> Note down numbers, names, times, places</li>
+                            <li>Don't worry if you miss something - you hear it twice!</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Useful Language for Listening</div>
+                <div class="card-body">
+                    <h4>Directions and Locations (for Task 1):</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Language</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>On the left/right</td>
+                                <td>"The café is on the left side of the entrance."</td>
+                            </tr>
+                            <tr>
+                                <td>Next to / Beside</td>
+                                <td>"The toilets are next to the information desk."</td>
+                            </tr>
+                            <tr>
+                                <td>Opposite / Across from</td>
+                                <td>"The shop is opposite the main door."</td>
+                            </tr>
+                            <tr>
+                                <td>In the corner</td>
+                                <td>"You'll find the lift in the corner of the room."</td>
+                            </tr>
+                            <tr>
+                                <td>In the centre/middle</td>
+                                <td>"There's a fountain in the centre of the square."</td>
+                            </tr>
+                            <tr>
+                                <td>Between</td>
+                                <td>"The bank is between the post office and the chemist."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 style="margin-top: 1.5rem;">Key Information to Listen For (Task 2):</h4>
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Times and dates:</strong> "I arrived at <u>3 o'clock</u> on <u>Saturday</u>."</li>
+                        <li><strong>Places:</strong> "We went to <u>the beach</u>."</li>
+                        <li><strong>People:</strong> "I went with <u>my brother</u>."</li>
+                        <li><strong>Activities:</strong> "We <u>played football</u> and <u>had a picnic</u>."</li>
+                        <li><strong>Transport:</strong> "We went <u>by bus</u>."</li>
+                        <li><strong>Prices:</strong> "It cost <u>twenty euros</u>."</li>
+                        <li><strong>Opinions:</strong> "I thought it was <u>very interesting</u>."</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Note-Taking Template for Task 2</div>
+                <div class="card-body">
+                    <p>While listening the second time, quickly write down key words:</p>
+                    <div style="background: #f5f5f5; padding: 1rem; font-family: monospace; margin: 1rem 0;">
+                        WHO: ________________<br>
+                        WHERE: ________________<br>
+                        WHEN: ________________<br>
+                        WHAT (activity): ________________<br>
+                        TRANSPORT: ________________<br>
+                        OPINION: ________________
+                    </div>
+                    <p>This helps you answer the examiner's questions accurately!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SECTION -->
+        <section id="video" class="section">
+            <div class="card">
+                <div class="card-header">Official ISE Foundation Sample Exam</div>
+                <div class="card-body">
+                    <p>Watch this official Trinity College London video to see a real ISE Foundation exam. Observe how the candidate handles the Topic task, Conversation task, and Independent Listening tasks.</p>
+                    
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/-rG7zMUgLKU" 
+                            title="Trinity ISE Foundation Sample Exam" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>What to observe in this video:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Topic Task:</strong> How the candidate presents their topic form and discusses the four points</li>
+                            <li><strong>Language Functions:</strong> Notice the use of present simple for routines, past simple for past events, "going to" for future plans</li>
+                            <li><strong>Conversation Task:</strong> How the candidate asks the examiner a question</li>
+                            <li><strong>Listening Task:</strong> How the candidate uses the map and takes notes</li>
+                            <li><strong>Fluency:</strong> The candidate speaks naturally, not memorized</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Key Differences from GESE:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>ISE includes writing and independent listening tasks</li>
+                            <li>Topic discussion is shorter (4 minutes vs. 5 minutes in GESE)</li>
+                            <li>You must ask the examiner a question in the Conversation task</li>
+                            <li>Listening tasks require written answers and note-taking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Additional Resources</div>
+                <div class="card-body">
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Official Trinity Website:</strong> <a href="https://www.trinitycollege.com/ISE">trinitycollege.com/ISE</a></li>
+                        <li><strong>Student Guide:</strong> Download the ISE Foundation Guide for Students</li>
+                        <li><strong>Sample Papers:</strong> Practice with official sample exams</li>
+                        <li><strong>Topic Form:</strong> Download the official topic form template</li>
+                        <li><strong>Teacher Support:</strong> Schemes of work and preparation activities</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Exercises loaded dynamically -->
+                </div>
+
+                <!-- FINAL SCORE SECTION -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>Congratulations! You've completed all 50 exercises!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        Try All Exercises Again
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE Foundation (A2) Preparation</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database of 50 exercises for ISE Foundation (A2)
+        const exercises = [
+            // EXERCISES 1-10: Grammar - Tenses for Speaking
+            {
+                id: 1,
+                type: 'choice',
+                question: 'I __________ to the gym three times a week.',
+                options: ['go', 'went', 'am going', 'gone'],
+                correct: 'go',
+                explanation: 'Correct! Present simple for routines and habits.',
+                errorExplanation: 'Use present simple for regular activities'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'Last summer, I __________ (visit) my grandparents in Italy.',
+                correct: ['visited'],
+                explanation: 'Correct! Past simple for completed past actions.'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Look! It __________ . Take an umbrella.',
+                options: ['rains', 'is raining', 'rained', 'rain'],
+                correct: 'is raining',
+                explanation: 'Correct! Present continuous for actions happening now.',
+                errorExplanation: 'Use present continuous for now'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Next year, I __________ (go) to university to study medicine.',
+                correct: ['am going', '\'m going', 'am going to go'],
+                explanation: 'Correct! Going to for future plans and intentions.'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'She __________ play the piano when she was five, but now she can play very well.',
+                options: ['can', 'could', 'couldn\'t', 'can\'t'],
+                correct: 'couldn\'t',
+                explanation: 'Correct! Couldn\'t for past inability.',
+                errorExplanation: 'Use couldn\'t for past inability'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'I __________ (can/swim) when I was young, but I learned last year.',
+                correct: ['couldn\'t swim', 'could not swim'],
+                explanation: 'Correct! Couldn\'t + verb for past inability.'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'They __________ to Paris next weekend for their anniversary.',
+                options: ['go', 'went', 'are going', 'goes'],
+                correct: 'are going',
+                explanation: 'Correct! Present continuous for arranged future plans.',
+                errorExplanation: 'Use present continuous for arranged plans'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'I __________ (would/like) to travel around the world one day.',
+                correct: ['would like', '\'d like'],
+                explanation: 'Correct! Would like to for future desires.'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'We __________ a great time at the party last night.',
+                options: ['have', 'had', 'are having', 'has'],
+                correct: 'had',
+                explanation: 'Correct! Past simple for completed past events.',
+                errorExplanation: 'Use past simple for past events'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'She usually __________ (wake) up at 7 o\'clock during the week.',
+                correct: ['wakes'],
+                explanation: 'Correct! Present simple for routines (3rd person -s).'
+            },
+
+            // EXERCISES 11-20: Comparisons and Descriptions
+            {
+                id: 11,
+                type: 'choice',
+                question: 'My new phone is __________ than my old one.',
+                options: ['expensive', 'more expensive', 'most expensive', 'expensiver'],
+                correct: 'more expensive',
+                explanation: 'Correct! More + long adjective for comparatives.',
+                errorExplanation: 'Use more + long adjective'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'Living in the city is __________ (exciting) than living in the countryside.',
+                correct: ['more exciting'],
+                explanation: 'Correct! More + -ing adjective for comparatives.'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'This is the __________ book I\'ve ever read.',
+                options: ['interesting', 'more interesting', 'most interesting', 'interestinger'],
+                correct: 'most interesting',
+                explanation: 'Correct! Most + long adjective for superlatives.',
+                errorExplanation: 'Use most + long adjective for superlatives'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'My brother is __________ (tall) than me. He\'s 1.85m!',
+                correct: ['taller'],
+                explanation: 'Correct! Short adjective + -er for comparatives.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'The weather today is __________ than yesterday.',
+                options: ['bad', 'worse', 'worst', 'badder'],
+                correct: 'worse',
+                explanation: 'Correct! Irregular comparative form of bad.',
+                errorExplanation: 'Use worse (comparative of bad)'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'This restaurant is the __________ (good) in our town.',
+                correct: ['best'],
+                explanation: 'Correct! Irregular superlative form of good.'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'I think Maths is __________ than English.',
+                options: ['difficult', 'more difficult', 'most difficult', 'difficulter'],
+                correct: 'more difficult',
+                explanation: 'Correct! More + adjective with 3+ syllables.',
+                errorExplanation: 'Use more + long adjectives'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'The red dress is __________ (pretty) than the blue one.',
+                correct: ['prettier'],
+                explanation: 'Correct! Short adjective ending in -y: -ier.'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'My house is __________ to the school than yours.',
+                options: ['close', 'closer', 'closest', 'more close'],
+                correct: 'closer',
+                explanation: 'Correct! Short adjective + -er.',
+                errorExplanation: 'Use closer for comparative'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'That was the __________ (bad) film I\'ve ever seen!',
+                correct: ['worst'],
+                explanation: 'Correct! Irregular superlative form of bad.'
+            },
+
+            // EXERCISES 21-30: Prepositions and Directions
+            {
+                id: 21,
+                type: 'choice',
+                question: 'The bank is __________ the post office and the supermarket.',
+                options: ['between', 'next', 'opposite', 'behind'],
+                correct: 'between',
+                explanation: 'Correct! Between for position in the middle of two things.',
+                errorExplanation: 'Use between with and'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'The cinema is __________ the right side of the street.',
+                correct: ['on'],
+                explanation: 'Correct! On the right/left side.'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'The restaurant is __________ the hotel, just across the road.',
+                options: ['between', 'next', 'opposite', 'in'],
+                correct: 'opposite',
+                explanation: 'Correct! Opposite = across from.',
+                errorExplanation: 'Use opposite for across the road'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Go straight ahead and turn left __________ the traffic lights.',
+                correct: ['at'],
+                explanation: 'Correct! At the traffic lights/at the corner.'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'The information desk is __________ to the main entrance.',
+                options: ['between', 'next', 'opposite', 'behind'],
+                correct: 'next',
+                explanation: 'Correct! Next to = beside.',
+                errorExplanation: 'Use next to'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'You\'ll find the toilets __________ the corner of the building.',
+                correct: ['in'],
+                explanation: 'Correct! In the corner.'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'The museum is __________ the end of this street.',
+                options: ['at', 'in', 'on', 'to'],
+                correct: 'at',
+                explanation: 'Correct! At the end of.',
+                errorExplanation: 'Use at the end of'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Walk __________ the bridge and you\'ll see the station.',
+                correct: ['over', 'across'],
+                explanation: 'Correct! Over/across the bridge.'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'The café is __________ the first floor.',
+                options: ['at', 'in', 'on', 'to'],
+                correct: 'on',
+                explanation: 'Correct! On the first floor.',
+                errorExplanation: 'Use on for floors'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'The shop is __________ front of the bus station.',
+                correct: ['in'],
+                explanation: 'Correct! In front of.'
+            },
+
+            // EXERCISES 31-40: Writing - Email and Article Language
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Which is the correct opening for an informal email to a friend?',
+                options: ['Dear Sir,', 'Hi Maria,', 'To whom it may concern,', 'Dear Mr Smith,'],
+                correct: 'Hi Maria,',
+                explanation: 'Correct! Hi + first name for informal emails.',
+                errorExplanation: 'Use Hi + name for informal emails'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'Write the closing: __________ (informal email to a friend)',
+                correct: ['Best wishes,', 'See you soon,', 'Take care,', 'Bye,'],
+                explanation: 'Correct! Friendly closings for informal emails.'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'Which phrase is best for giving your opinion in an article?',
+                options: ['I think', 'In my opinion,', 'Maybe', 'I don\'t know'],
+                correct: 'In my opinion,',
+                explanation: 'Correct! In my opinion for formal writing.',
+                errorExplanation: 'Use In my opinion for articles'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'Write a phrase to introduce a contrast: __________, not many people agree.',
+                correct: ['However,', 'On the other hand,', 'But'],
+                explanation: 'Correct! However for formal contrast.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: 'Which is the best way to start a review of a restaurant?',
+                options: ['I went to a restaurant.', 'Last weekend, I visited...', 'There is a restaurant.', 'Restaurants are good.'],
+                correct: 'Last weekend, I visited...',
+                explanation: 'Correct! Specific time reference for reviews.',
+                errorExplanation: 'Use specific time references'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'Write a recommendation: I __________ recommend this place to families.',
+                correct: ['highly', 'really', 'definitely'],
+                explanation: 'Correct! Adverbs to strengthen recommendations.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Which sentence is too informal for an article?',
+                options: ['It was amazing!', 'It was very enjoyable.', 'The experience was positive.', 'I would recommend it.'],
+                correct: 'It was amazing!',
+                explanation: 'Correct! Amazing is too informal for articles.',
+                errorExplanation: 'Avoid very informal words in articles'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Write a phrase to add information: __________, the service was excellent.',
+                correct: ['Furthermore', 'Moreover', 'In addition', 'Also'],
+                explanation: 'Correct! Formal connectors for adding information.'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: 'Which is the correct way to sign off a formal letter?',
+                options: ['Love,', 'Yours faithfully,', 'See you,', 'Bye for now,'],
+                correct: 'Yours faithfully,',
+                explanation: 'Correct! Yours faithfully for formal letters (Dear Sir/Madam).',
+                errorExplanation: 'Use Yours faithfully for formal letters'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'Write a phrase to conclude: __________, it was a great experience.',
+                correct: ['In conclusion', 'To sum up', 'All in all', 'Overall'],
+                explanation: 'Correct! Formal concluding phrases.'
+            },
+
+            // EXERCISES 41-50: Speaking Functions
+            {
+                id: 41,
+                type: 'choice',
+                question: 'How do you ask for clarification in the exam?',
+                options: ['What?', 'Sorry, could you repeat that?', 'I don\'t understand.', 'Speak louder.'],
+                correct: 'Sorry, could you repeat that?',
+                explanation: 'Correct! Polite request for repetition.',
+                errorExplanation: 'Be polite when asking for repetition'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Ask the examiner a question about holidays: __________',
+                correct: ['Do you like going on holiday?', 'Have you ever been to Spain?', 'Where do you usually go on holiday?', 'Do you prefer summer or winter holidays?'],
+                explanation: 'Correct! Questions to ask the examiner.'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Which phrase expresses a preference?',
+                options: ['I like it.', 'I prefer swimming to running.', 'It\'s good.', 'I can swim.'],
+                correct: 'I prefer swimming to running.',
+                explanation: 'Correct! Prefer + -ing to + -ing.',
+                errorExplanation: 'Use prefer X to Y'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'Express inability: I __________ play the guitar, but I want to learn.',
+                correct: ['can\'t', 'cannot'],
+                explanation: 'Correct! Can\'t for present inability.'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'How do you describe a routine?',
+                options: ['Yesterday I go to work.', 'I usually go to work at 9.', 'Tomorrow I went to work.', 'I am going to work yesterday.'],
+                correct: 'I usually go to work at 9.',
+                explanation: 'Correct! Present simple with frequency adverbs.',
+                errorExplanation: 'Use present simple for routines'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'Describe future plans: I __________ (go) visit my grandmother next weekend.',
+                correct: ['am going to', '\'m going to'],
+                explanation: 'Correct! Going to for future plans.'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'Which is the best way to express likes?',
+                options: ['I like.', 'I really enjoy swimming.', 'Swimming is good.', 'I am liking swimming.'],
+                correct: 'I really enjoy swimming.',
+                explanation: 'Correct! Enjoy + -ing for likes.',
+                errorExplanation: 'Use enjoy + -ing'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Make a suggestion: __________ we go to the cinema tonight?',
+                correct: ['Shall', 'Should', 'Why don\'t', 'How about'],
+                explanation: 'Correct! Shall we... for suggestions.'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'How do you give a reason?',
+                options: ['Because I like it.', 'I like it because it is fun.', 'It is fun.', 'I like.'],
+                correct: 'I like it because it is fun.',
+                explanation: 'Correct! Because to give reasons.',
+                errorExplanation: 'Use because to explain why'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'Agree with the examiner: Yes, I __________ with you. I think so too.',
+                correct: ['agree'],
+                explanation: 'Correct! Agree with someone.'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Exercise ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Exercise ${currentExercise + 1} of ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Check</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Next</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += Math.floor(100 / exercises.length);
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += Math.floor(100 / exercises.length);
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = 'Excellent! You are ready for ISE Foundation!';
+            } else if (totalScore >= 70) {
+                message = 'Good job! Review your mistakes and keep practicing.';
+            } else if (totalScore >= 50) {
+                message = 'Keep studying! Focus on the grammar sections.';
+            } else {
+                message = 'Keep practicing! Study the examples carefully.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE III (C1) - Reading Complete Guide & Exercises</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6a1b9a;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #f3e5f5;
+            --dark: #263238;
+            --border: #ce93d8;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --c1-color: #6a1b9a;
+            --warning: #ef6c00;
+            --info: #0277bd;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #4a148c 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--info);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .task-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .task-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .task-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .timing-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .exercise-box {
+            background: #fff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .exercise-title {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            display: block;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: var(--light);
+            border-color: var(--primary);
+        }
+
+        .quiz-option.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background: var(--error-bg);
+            border-color: var(--error);
+        }
+
+        .reading-passage {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .question-box {
+            background: #f9f9f9;
+            border-left: 4px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .task-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE III (C1) Reading</h1>
+            <p>Complete Preparation Guide & Practice Exercises</p>
+            <div class="level-badge">CEFR Level C1</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE III (C1) Reading Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE III Reading Complete Guide</h1>
+            <p class="page-subtitle">Task 1 & Task 2 • 40 Minutes • 30 Questions</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('task1', this)">Task 1: Long Reading</button>
+            <button class="nav-tab" onclick="showSection('task2', this)">Task 2: Multi-text</button>
+            <button class="nav-tab" onclick="showSection('strategies', this)">Strategies</button>
+            <button class="nav-tab" onclick="showSection('subject', this)">Subject Areas</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">ISE III Reading Exam Overview</div>
+                <div class="card-body">
+                    <p>The <strong>Reading</strong> component of ISE III (C1) consists of <strong>two tasks</strong> to be completed in <strong>40 minutes</strong>. The exam tests your ability to understand complex, demanding texts and identify implicit meaning at C1 level.</p>
+
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-icon">📄</div>
+                            <div class="task-title">Task 1: Long Reading</div>
+                            <p>1 text (700 words)<br>15 questions<br><span class="timing-badge">20 mins</span></p>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-icon">📑</div>
+                            <div class="task-title">Task 2: Multi-text Reading</div>
+                            <p>4 texts (700 words total)<br>15 questions<br><span class="timing-badge">20 mins</span></p>
+                        </div>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Key Features at C1 Level:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Longer texts:</strong> 700 words (vs. 500 words at B2)</li>
+                            <li><strong>Complex vocabulary:</strong> Abstract concepts, academic language, idiomatic expressions</li>
+                            <li><strong>Implicit meaning:</strong> Understanding what is suggested but not directly stated</li>
+                            <li><strong>Opinion and attitude:</strong> Identifying tone, bias, and perspective</li>
+                            <li><strong>Text structure:</strong> Following complex argumentation and discourse</li>
+                            <li><strong>Synthesis:</strong> Comparing and contrasting multiple sources</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Important:</strong> The reading texts at ISE III relate to the 12 subject areas. Familiarity with these topics will help you understand context and vocabulary.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Exam Format Summary</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Text Type</th>
+                                <th>Length</th>
+                                <th>Questions</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Task 1</strong><br>Long Reading</td>
+                                <td>One continuous text (article, essay, or extract)</td>
+                                <td>Approx. 700 words</td>
+                                <td>15 questions</td>
+                                <td><span class="timing-badge">20 mins</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Task 2</strong><br>Multi-text Reading</td>
+                                <td>Four different texts on same theme (may include infographic)</td>
+                                <td>Approx. 700 words total</td>
+                                <td>15 questions</td>
+                                <td><span class="timing-badge">20 mins</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box">
+                        <strong>Total:</strong> 40 minutes for both tasks (approximately 20 minutes each)
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">C1 Reading Skills Required</div>
+                <div class="card-body">
+                    <p>At ISE III (C1), you must demonstrate the following reading skills:</p>
+                    
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Reading for Gist</strong>
+                        <p>Understanding the main idea, purpose, and overall message of complex texts.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Reading for Detail</strong>
+                        <p>Identifying specific information, facts, and supporting evidence.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Reading for Inference</strong>
+                        <p>Understanding implied meaning, reading between the lines, recognising what is suggested but not explicitly stated.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Understanding Opinion and Attitude</strong>
+                        <p>Identifying the writer's stance, tone, bias, and evaluating their perspective.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>Understanding Text Structure</strong>
+                        <p>Following complex argumentation, recognising discourse markers, understanding how ideas are organised and developed.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">6</span>
+                        <strong>Synthesising Information</strong>
+                        <p>Comparing and contrasting information from multiple sources, identifying agreement and contradiction.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 1 SECTION -->
+        <section id="task1" class="section">
+            <div class="card">
+                <div class="card-header">Task 1: Long Reading (20 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Read one complex text of approximately <strong>700 words</strong> (usually divided into 5 paragraphs) and answer 15 questions testing different reading skills at C1 level.
+                    </div>
+
+                    <h4>Question Types (15 questions total):</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Questions 1-5: Title Matching</strong>
+                        <p style="margin-top: 0.5rem;">Match the correct title to each of the 5 paragraphs. You have 6 titles to choose from (one is a distractor).</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> Paragraph discusses economic inequality solutions. Correct title: "Addressing the Wealth Gap" (not "Global Economic Trends")
+                        </div>
+                        <p><strong>Skill tested:</strong> Reading for gist, main ideas, and understanding paragraph focus</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Questions 6-10: True Statements Selection</strong>
+                        <p style="margin-top: 0.5rem;">Choose 5 true statements from a list of 8. Three statements are false according to the text.</p>
+                        <div class="example-box">
+                            <strong>Example statements:</strong>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>"Economic inequality has decreased in developed nations" (True/False based on text)</li>
+                                <li>"The author supports progressive taxation policies" (True/False based on text)</li>
+                                <li>"Wealth gaps are primarily caused by educational disparities" (True/False based on text)</li>
+                            </ul>
+                        </div>
+                        <p><strong>Skill tested:</strong> Reading for specific factual information and inference</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Questions 11-15: Sentence Completion</strong>
+                        <p style="margin-top: 0.5rem;">Complete sentences with <strong>exact words from the text</strong> (maximum 3 words per gap).</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> "The author suggests that _______ policies are necessary to address climate change."<br>
+                            Answer from text: "comprehensive environmental" (exact words from the passage)
+                        </div>
+                        <p><strong>Skill tested:</strong> Reading for detail and precise information</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>C1 Reading Strategies for Task 1:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Skim first:</strong> Read quickly for overall structure and main idea</li>
+                            <li><strong>Identify tone and attitude:</strong> Is the author critical, supportive, neutral, or ironic?</li>
+                            <li><strong>Recognise implicit meaning:</strong> What is suggested but not directly stated?</li>
+                            <li><strong>Track argument development:</strong> How does the writer build their case?</li>
+                            <li><strong>Watch for hedging language:</strong> "may," "could," "potentially," "arguably" indicate uncertainty</li>
+                            <li><strong>Understand discourse markers:</strong> "however," "furthermore," "consequently," "nevertheless"</li>
+                            <li><strong>Note paragraph focus:</strong> Each paragraph usually has one main idea</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Common Mistakes to Avoid:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Matching titles based on similar words rather than meaning</li>
+                            <li>Using your own knowledge instead of the text (true/false questions)</li>
+                            <li>Changing the form of words in sentence completion (must be exact)</li>
+                            <li>Spending too long on one question - move on and return</li>
+                            <li>Not checking that answers make grammatical sense</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Sample Task 1 Layout</div>
+                <div class="card-body">
+                    <div class="reading-passage">
+                        <h4>Text: The Future of Remote Work</h4>
+                        <p style="margin-top: 1rem;"><strong>Paragraph A</strong><br>
+                        The shift towards remote working, accelerated by global events, has fundamentally transformed the modern workplace. What began as a temporary necessity has evolved into a permanent feature of corporate culture, with profound implications for productivity, employee wellbeing, and urban development...</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Paragraph B</strong><br>
+                        Proponents argue that flexibility enhances productivity by eliminating commuting time and allowing employees to work during their most productive hours. However, critics contend that the blurring of boundaries between professional and personal life has led to increased burnout and decreased job satisfaction...</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Paragraph C</strong><br>
+                        The economic implications extend beyond individual companies. Commercial real estate markets in major cities have experienced significant declines in demand, while suburban and rural areas have seen property values surge as workers relocate...</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Paragraph D</strong><br>
+                        From an environmental perspective, reduced commuting has contributed to lower carbon emissions in urban centres. Nevertheless, the increased energy consumption of home offices and the rise in domestic deliveries partially offset these gains...</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Paragraph E</strong><br>
+                        Ultimately, the future of work likely lies in hybrid models that combine the benefits of both approaches. Organisations must develop policies that maximise flexibility while maintaining corporate culture and employee connection...</p>
+                    </div>
+
+                    <div class="question-box">
+                        <strong>Sample Questions:</strong>
+                        <p style="margin-top: 0.5rem;"><strong>1-5:</strong> Match titles (a-f) to paragraphs A-E. One title is extra.</p>
+                        <p><strong>6-10:</strong> Choose 5 true statements from 8 options.</p>
+                        <p><strong>11-15:</strong> Complete sentences with exact words from the text (max 3 words).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 2 SECTION -->
+        <section id="task2" class="section">
+            <div class="card">
+                <div class="card-header">Task 2: Multi-text Reading (20 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Read <strong>4 short texts</strong> (approximately 700 words total) on the same theme. One text may be an infographic (diagram, table, or chart with text). Answer 15 questions.
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Important:</strong> The information in these texts is used for <strong>Task 3 (Reading into Writing)</strong> in the Written Exam. Pay attention to facts, statistics, opinions, and examples you can use in your writing.
+                    </div>
+
+                    <h4>Question Types (15 questions total):</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Questions 16-20: Text Matching</strong>
+                        <p style="margin-top: 0.5rem;">Match descriptions to the correct text (A, B, C, or D). Tests understanding of main idea or purpose of each text.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> "Which text presents statistical evidence?" → Match to correct letter<br>
+                            <strong>Example:</strong> "Which text expresses a personal opinion?" → Match to correct letter
+                        </div>
+                        <p><strong>Skill tested:</strong> Understanding purpose, tone, and content of different texts</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Questions 21-25: True Statements Selection</strong>
+                        <p style="margin-top: 0.5rem;">Choose 5 true statements from 8 options based on information across all four texts.</p>
+                        <div class="example-box">
+                            <strong>Strategy:</strong> You may need to synthesise information from multiple texts. One statement might be true based on combining Text A and Text C.
+                        </div>
+                        <p><strong>Skill tested:</strong> Reading for specific information across multiple sources</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Questions 26-30: Summary Notes Completion</strong>
+                        <p style="margin-top: 0.5rem;">Complete summary notes using <strong>exact words from the texts</strong> (maximum 3 words per gap). The notes synthesise key information from all four texts.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong><br>
+                            "Advantages of remote working:<br>
+                            • Increased __________ (Text A)<br>
+                            • Reduced __________ (Text B)<br>
+                            • Improved __________ (Text C)"
+                        </div>
+                        <p><strong>Skill tested:</strong> Synthesising information from multiple texts, reading for detail</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>C1 Strategies for Multi-text Reading:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Skim all texts first:</strong> Get an overview of the different perspectives</li>
+                            <li><strong>Identify text types:</strong> Is it an article, statistics, opinion piece, or report?</li>
+                            <li><strong>Note the source:</strong> Academic journal? Newspaper? Blog? This affects tone and reliability</li>
+                            <li><strong>Look for agreement and contradiction:</strong> Do texts say the same thing or disagree?</li>
+                            <li><strong>Track information across texts:</strong> You may need to combine information from multiple sources</li>
+                            <li><strong>Read the questions carefully:</strong> Note whether they ask about specific texts or all texts</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Sample Task 2 Layout</div>
+                <div class="card-body">
+                    <div class="reading-passage">
+                        <h4>Theme: The Gig Economy</h4>
+                        
+                        <p style="margin-top: 1rem;"><strong>Text A - Academic Article Extract</strong><br>
+                        The gig economy, characterised by short-term contracts and freelance work facilitated by digital platforms, has grown exponentially over the past decade. Research indicates that approximately 36% of the US workforce now engages in some form of gig work, representing a fundamental shift in labour market dynamics...</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Text B - Infographic: Gig Worker Survey Results</strong><br>
+                        [Visual representation showing:]<br>
+                        • 58% chose gig work for flexibility<br>
+                        • 42% cited lack of traditional employment opportunities<br>
+                        • 67% reported income instability as primary concern<br>
+                        • 23% have access to health benefits<br>
+                        • Average hourly rate: $18 (vs $25 traditional equivalent)</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Text C - Opinion Column</strong><br>
+                        While proponents celebrate the freedom of gig work, we must acknowledge the erosion of worker protections. The classification of workers as 'independent contractors' rather than employees denies them fundamental rights: sick pay, holiday entitlement, and pension contributions. This represents a dangerous regression in labour standards...</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Text D - Company Statement</strong><br>
+                        Platform companies argue that flexible work arrangements empower individuals to choose when and how much they work. Traditional employment models cannot accommodate the diverse needs of modern workers, particularly those with caring responsibilities or pursuing education alongside work...</p>
+                    </div>
+
+                    <div class="question-box">
+                        <strong>Sample Questions:</strong>
+                        <p style="margin-top: 0.5rem;"><strong>16-20:</strong> Match descriptions to texts A-D.</p>
+                        <p><strong>21-25:</strong> Choose 5 true statements from 8 options.</p>
+                        <p><strong>26-30:</strong> Complete summary notes with exact words from texts.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRATEGIES SECTION -->
+        <section id="strategies" class="section">
+            <div class="card">
+                <div class="card-header">C1 Reading Strategies</div>
+                <div class="card-body">
+                    <h4>Time Management (40 minutes total):</h4>
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Task 1: Long Reading (20 minutes)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>2 minutes: Skim the text for gist and structure</li>
+                            <li>14 minutes: Answer questions 1-15</li>
+                            <li>4 minutes: Check answers, ensure sentence completion uses exact words</li>
+                        </ul>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Task 2: Multi-text Reading (20 minutes)</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>3 minutes: Skim all four texts</li>
+                            <li>14 minutes: Answer questions 16-30</li>
+                            <li>3 minutes: Check answers, verify text references</li>
+                        </ul>
+                    </div>
+
+                    <h4>Step-by-Step Approach:</h4>
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Read the Instructions Carefully</strong>
+                        <p>Note word limits (especially "maximum 3 words"), whether to use exact words from the text, and how many options to select.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Skim the Text(s)</strong>
+                        <p>Read quickly for main idea, structure, and tone. Don't worry about every word.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Analyse the Questions</strong>
+                        <p>Understand what each question is asking before you search for the answer.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Scan for Specific Information</strong>
+                        <p>Use key words from the question to locate relevant parts of the text.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>Check Your Answers</strong>
+                        <p>Ensure sentence completion answers are grammatically correct and use exact words from the text.</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Understanding C1 Level Vocabulary:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Abstract nouns:</strong> implementation, consideration, phenomenon, implications</li>
+                            <li><strong>Academic verbs:</strong> demonstrate, indicate, suggest, imply, acknowledge</li>
+                            <li><strong>Hedging language:</strong> arguably, potentially, seemingly, to some extent</li>
+                            <li><strong>Discourse markers:</strong> furthermore, nevertheless, consequently, in contrast</li>
+                            <li><strong>Idiomatic expressions:</strong> "the tip of the iceberg," "a double-edged sword"</li>
+                            <li><strong>Collocations:</strong> "raise awareness," "address issues," "implement policies"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Question Type Strategies</div>
+                <div class="card-body">
+                    <h4>Title Matching (Questions 1-5):</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Read the paragraph first, then look at the titles</li>
+                        <li>Identify the main idea, not just a detail mentioned</li>
+                        <li>Eliminate titles that are too broad or too narrow</li>
+                        <li>Watch out for distractors that use similar words but different meanings</li>
+                        <li>Check that your chosen title covers the whole paragraph</li>
+                    </ul>
+
+                    <h4>True Statements (Questions 6-10 & 21-25):</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Read all 8 statements before checking the text</li>
+                        <li>Look for specific evidence in the text - don't use your own knowledge</li>
+                        <li>Be careful with extreme words: "always," "never," "all," "none" are often false</li>
+                        <li>Watch for paraphrasing - the text may use different words for the same idea</li>
+                        <li>Check that the statement matches the text exactly, not just partially</li>
+                    </ul>
+
+                    <h4>Sentence Completion (Questions 11-15 & 26-30):</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Read the sentence carefully to understand what information is needed</li>
+                        <li>Scan the text for key words from the sentence</li>
+                        <li>Check the word limit (usually maximum 3 words)</li>
+                        <li>Copy words exactly as they appear in the text - do not change form</li>
+                        <li>Ensure your completed sentence makes grammatical sense</li>
+                        <li>Check spelling (British or American, but be consistent)</li>
+                    </ul>
+
+                    <h4>Text Matching (Questions 16-20):</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Identify the unique features of each text (statistics, opinion, history, etc.)</li>
+                        <li>Note the source and tone of each text</li>
+                        <li>Some questions may require synthesising information from multiple texts</li>
+                        <li>Be careful - the same topic may appear in multiple texts but from different angles</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUBJECT AREAS SECTION -->
+        <section id="subject" class="section">
+            <div class="card">
+                <div class="card-header">Subject Areas for ISE III Reading</div>
+                <div class="card-body">
+                    <p>All reading texts relate to these 12 subject areas. Familiarity with vocabulary and concepts in these areas will help your comprehension.</p>
+
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 1rem;">
+                        <div class="step-box">
+                            <strong>1. Ambitions</strong>
+                            <p>Career goals, personal development, motivation, success and failure</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>2. Independence</strong>
+                            <p>Autonomy, self-reliance, leaving home, financial independence</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>3. Stereotypes</strong>
+                            <p>Gender roles, cultural assumptions, prejudice, challenging norms</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>4. Role Models</strong>
+                            <p>Influence, inspiration, leadership, celebrity culture, mentors</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>5. Competitiveness</strong>
+                            <p>Sports, business, education, cooperation vs. competition</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>6. Young People's Rights</strong>
+                            <p>Education, voting, participation, protection, voice</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>7. The Media</strong>
+                            <p>Journalism, social media, bias, fake news, influence</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>8. Advertising</strong>
+                            <p>Marketing, consumerism, manipulation, regulation, ethics</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>9. Lifestyles</strong>
+                            <p>Health, work-life balance, consumer choices, trends</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>10. The Arts</strong>
+                            <p>Culture, creativity, funding, accessibility, value</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>11. Rights of the Individual</strong>
+                            <p>Privacy, freedom of speech, equality, discrimination</p>
+                        </div>
+                        <div class="step-box">
+                            <strong>12. Economic Issues</strong>
+                            <p>Inequality, globalisation, unemployment, sustainability</p>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Vocabulary Building Tip:</strong> Read articles, watch documentaries, and discuss these topics to build your vocabulary. Pay attention to how writers express opinions and balance arguments.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Key Vocabulary by Subject Area</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Subject Area</th>
+                                <th>Key Vocabulary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ambitions</td>
+                                <td>aspiration, endeavour, pursue, fulfilment, setback, resilience, determination</td>
+                            </tr>
+                            <tr>
+                                <td>Independence</td>
+                                <td>autonomy, self-sufficient, emancipation, liberation, reliance, dependency</td>
+                            </tr>
+                            <tr>
+                                <td>Stereotypes</td>
+                                <td>preconception, generalisation, stigma, bias, assumption, perpetuate, challenge</td>
+                            </tr>
+                            <tr>
+                                <td>Role Models</td>
+                                <td>mentor, inspiration, emulate, influence, exemplary, paradigm, icon</td>
+                            </tr>
+                            <tr>
+                                <td>Competitiveness</td>
+                                <td>rivalry, contention, strive, surpass, meritocracy, collaboration, adversity</td>
+                            </tr>
+                            <tr>
+                                <td>The Media</td>
+                                <td>scrutiny, dissemination, sensationalism, impartiality, censorship, credibility</td>
+                            </tr>
+                            <tr>
+                                <td>Economic Issues</td>
+                                <td>inequality, disparity, austerity, prosperity, recession, fiscal, monetary</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="card">
+                <div class="card-header">Reading Practice Exercises</div>
+                <div class="card-body">
+                    <p>Test your understanding of ISE III Reading requirements with these interactive exercises.</p>
+
+                    <!-- Exercise 1 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 1: Exam Duration</div>
+                        <p><strong>How long is the ISE III Reading exam?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 20 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 30 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) 40 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 60 minutes</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 2 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 2: Number of Questions</div>
+                        <p><strong>How many questions are there in total in the ISE III Reading exam?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 20 questions</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 30 questions</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 40 questions</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 15 questions</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 3 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 3: Task 1 Text Length</div>
+                        <p><strong>How long is the Task 1 (Long Reading) text at ISE III?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 500 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 700 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 400 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 900 words</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 4 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 4: Question Types Task 1</div>
+                        <p><strong>Which question types appear in Task 1 (Long Reading)?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Multiple choice only</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Title matching, true statements, and sentence completion</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Only sentence completion</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Essay questions</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 5 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 5: Task 2 Structure</div>
+                        <p><strong>How many texts are there in Task 2 (Multi-text Reading)?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 2 texts</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 4 texts</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 3 texts</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 5 texts</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 6 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 6: Sentence Completion Rule</div>
+                        <p><strong>What is the rule for sentence completion questions?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Write your own words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Use exact words from the text (maximum 3 words)</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Paraphrase the text</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Use up to 5 words of your choice</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 7 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 7: True Statements</div>
+                        <p><strong>In the true statements section, how many statements must you select as true?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 3 statements</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 5 statements</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 8 statements</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) All statements</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 8 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 8: Subject Areas</div>
+                        <p><strong>How many subject areas are there for ISE III?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 10 subject areas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 12 subject areas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 8 subject areas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 15 subject areas</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 9 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 9: C1 Reading Skill</div>
+                        <p><strong>Which reading skill is particularly important at C1 level?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Reading word by word</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Understanding implicit meaning and inference</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Translating to your native language</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Memorising vocabulary lists</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 10 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 10: Task 2 Connection</div>
+                        <p><strong>Why is Task 2 (Multi-text Reading) particularly important?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) It has more questions than Task 1</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) The information is used for Task 3 (Reading into Writing)</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) It is worth more marks</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) It is easier than Task 1</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 11 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 11: Title Matching</div>
+                        <p><strong>In the title matching section, how many titles do you have to choose from?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 4 titles</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 5 titles</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) 6 titles (one is a distractor)</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 7 titles</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 12 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 12: Time Allocation</div>
+                        <p><strong>How should you allocate your time for the two tasks?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 30 minutes for Task 1, 10 minutes for Task 2</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Approximately 20 minutes for each task</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Complete Task 2 first, then Task 1</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) There is no time limit per task</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Exercise Tips:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Click on the option you think is correct</li>
+                            <li>Green indicates correct; red indicates incorrect</li>
+                            <li>Review the relevant sections if you get questions wrong</li>
+                            <li>All answers are based on official Trinity College London specifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Reading Practice Activities</div>
+                <div class="card-body">
+                    <p>Develop your C1 reading skills with these practice activities:</p>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">📖 Activity 1: Skimming Practice</div>
+                        <p><strong>Task:</strong> Find an article of approximately 700 words on a subject area topic (e.g., from The Guardian, BBC, or The Economist).</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Steps:</strong></p>
+                        <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Give yourself 2 minutes to skim the text</li>
+                            <li>Close the article and write down:
+                                <ul style="margin-left: 2rem;">
+                                    <li>The main topic</li>
+                                    <li>The writer's opinion/stance</li>
+                                    <li>Three key points</li>
+                                    <li>The overall structure</li>
+                                </ul>
+                            </li>
+                            <li>Re-open the article and check your answers</li>
+                        </ol>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">📖 Activity 2: Title Matching Practice</div>
+                        <p><strong>Task:</strong> Take a text with 4-5 clear paragraphs and create 6 possible titles (including one distractor).</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Example paragraph:</strong></p>
+                        <div class="example-box">
+                            "The proliferation of social media platforms has fundamentally altered how individuals consume information. Unlike traditional media, which operated through established editorial processes, social media enables anyone to disseminate content instantly. This democratisation of information has coincided with a marked decline in public trust of established news sources."
+                        </div>
+                        
+                        <p style="margin-top: 1rem;"><strong>Possible titles:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>Correct:</strong> "The Changing Landscape of Information Consumption"</li>
+                            <li><strong>Distractor:</strong> "The History of Traditional Media" (too narrow, focuses on wrong aspect)</li>
+                        </ul>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">📖 Activity 3: Inference Practice</div>
+                        <p><strong>Task:</strong> Practice reading between the lines with these statements:</p>
+                        
+                        <div class="question-box">
+                            <p><strong>Text:</strong> "The policy, while well-intentioned, has yielded mixed results thus far."</p>
+                            <p style="margin-top: 0.5rem;"><strong>What can you infer?</strong></p>
+                            <ul style="margin-left: 2rem;">
+                                <li>The policy has been completely successful? (No)</li>
+                                <li>The writer is cautiously critical? (Yes)</li>
+                                <li>Some aspects work, others don't? (Yes)</li>
+                            </ul>
+                        </div>
+
+                        <p style="margin-top: 1rem;"><strong>Practice with hedging language:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li>"arguably" = the writer thinks this but acknowledges others may disagree</li>
+                            <li>"to some extent" = partially true, but not completely</li>
+                            <li>"it could be suggested that" = the writer is presenting a possible interpretation</li>
+                        </ul>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">📖 Activity 4: Vocabulary Building</div>
+                        <p><strong>Task:</strong> Create vocabulary lists by subject area.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>For "Economic Issues":</strong></p>
+                        <table class="grammar-table" style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>Word</th>
+                                    <th>Meaning</th>
+                                    <th>Example</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>disparity</td>
+                                    <td>difference, inequality</td>
+                                    <td>the income disparity between regions</td>
+                                </tr>
+                                <tr>
+                                    <td>prosperity</td>
+                                    <td>economic success</td>
+                                    <td>years of sustained prosperity</td>
+                                </tr>
+                                <tr>
+                                    <td>austerity</td>
+                                    <td>reduced spending</td>
+                                    <td>austerity measures</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">📖 Activity 5: Timed Practice Test</div>
+                        <p><strong>Task:</strong> Simulate exam conditions.</p>
+                        
+                        <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Find two appropriate texts (one 700-word text, four short texts on same theme)</li>
+                            <li>Create 30 questions following ISE III format</li>
+                            <li>Set a timer for 40 minutes</li>
+                            <li>Complete under exam conditions (no dictionary)</li>
+                            <li>Check answers and analyse mistakes</li>
+                        </ol>
+
+                        <div class="warning-box" style="margin-top: 1rem;">
+                            <strong>Tip:</strong> Use past papers from the Trinity website or preparation books for authentic practice.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE III (C1) Reading Guide</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+
+        function checkAnswer(element, isCorrect) {
+            // Remove previous classes from siblings
+            const parent = element.parentElement;
+            const siblings = parent.querySelectorAll('.quiz-option');
+            siblings.forEach(sib => {
+                sib.classList.remove('correct', 'incorrect');
+                sib.style.pointerEvents = 'none';
+            });
+
+            // Add appropriate class
+            if (isCorrect) {
+                element.classList.add('correct');
+                showFeedback(parent, '✓ Correct! Well done.', 'success');
+            } else {
+                element.classList.add('incorrect');
+                // Highlight correct answer
+                siblings.forEach(sib => {
+                    if (sib.onclick.toString().includes('true')) {
+                        sib.classList.add('correct');
+                    }
+                });
+                showFeedback(parent, '✗ Incorrect. The correct answer is highlighted in green.', 'error');
+            }
+        }
+
+        function showFeedback(parent, message, type) {
+            const feedback = parent.querySelector('.feedback');
+            feedback.textContent = message;
+            feedback.style.display = 'block';
+            if (type === 'success') {
+                feedback.style.background = '#c8e6c9';
+                feedback.style.color = '#2e7d32';
+                feedback.style.border = '1px solid #81c784';
+            } else {
+                feedback.style.background = '#ffcdd2';
+                feedback.style.color = '#c62828';
+                feedback.style.border = '1px solid #ef9a9a';
+            }
+        }
+    </script>
+</body>
+</html>

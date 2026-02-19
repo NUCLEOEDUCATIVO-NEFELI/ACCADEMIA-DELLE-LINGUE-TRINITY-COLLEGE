@@ -1,0 +1,1162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE I (B1) - Writing Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1565c0;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #e3f2fd;
+            --dark: #263238;
+            --border: #bbdefb;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --b1-color: #1565c0;
+            --warning: #ef6c00;
+            --purple: #7b1fa2;
+            --purple-light: #f3e5f5;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d47a1 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .danger-box {
+            background: #ffebee;
+            border-left: 4px solid var(--error);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: var(--purple-light);
+            border-left: 4px solid var(--purple);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .model-answer {
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Georgia', serif;
+        }
+
+        .timing-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .word-count-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .genre-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .genre-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .genre-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .genre-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .bullet-point {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            font-weight: bold;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .genre-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE I (B1) Writing</h1>
+            <p>Complete Guide to Writing Tasks & Assessment</p>
+            <div class="level-badge">80 Minutes | 2 Tasks</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE I Writing Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE I Writing Complete Guide</h1>
+            <p class="page-subtitle">Task 3: Reading into Writing & Task 4: Extended Writing</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('task3', this)">Task 3: Reading into Writing</button>
+            <button class="nav-tab" onclick="showSection('task4', this)">Task 4: Extended Writing</button>
+            <button class="nav-tab" onclick="showSection('genres', this)">Text Genres</button>
+            <button class="nav-tab" onclick="showSection('assessment', this)">Assessment</button>
+            <button class="nav-tab" onclick="showSection('strategies', this)">Strategies</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">Writing Module Overview</div>
+                <div class="card-body">
+                    <p>The ISE I Writing module consists of <strong>two tasks</strong> completed in <strong>80 minutes</strong> (40 minutes per task). These tasks test your ability to write different text types at B1 level, using information from reading texts (Task 3) and your own ideas (Task 4).</p>
+
+                    <div class="instruction-box">
+                        <strong>Key Information:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Total Time:</strong> 80 minutes (40 mins per task - strict limit)</li>
+                            <li><strong>Word Count:</strong> 100-130 words per task</li>
+                            <li><strong>Total Marks:</strong> 28 marks (combined across both tasks)</li>
+                            <li><strong>Pass Mark:</strong> 14/28 (50%)</li>
+                            <li><strong>Merit:</strong> 20/28</li>
+                            <li><strong>Distinction:</strong> 25/28</li>
+                        </ul>
+                    </div>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>Task 3: Reading into Writing</th>
+                                <th>Task 4: Extended Writing</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Time</strong></td>
+                                <td><span class="timing-badge">40 minutes</span></td>
+                                <td><span class="timing-badge">40 minutes</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Word Count</strong></td>
+                                <td><span class="word-count-badge">100-130 words</span></td>
+                                <td><span class="word-count-badge">100-130 words</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Source Material</strong></td>
+                                <td>4 texts from Task 2 (Multi-text Reading)</td>
+                                <td>Own ideas and knowledge</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Content Points</strong></td>
+                                <td>3 bullet points to address</td>
+                                <td>2 bullet points to address</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Text Types</strong></td>
+                                <td>Article, Essay, Email, Letter, Review</td>
+                                <td>Article, Essay, Email, Letter, Review</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Key Skill</strong></td>
+                                <td>Synthesis and paraphrasing</td>
+                                <td>Independent composition</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning-box">
+                        <strong>Critical Rule:</strong> Never exceed 130 words. Any text over the maximum word length will NOT be marked by the examiner. Aim for 110-125 words to be safe.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Key Differences Between Task 3 and Task 4</div>
+                <div class="card-body">
+                    <div class="genre-grid">
+                        <div class="genre-card">
+                            <div class="genre-title">📖 Task 3: Reading into Writing</div>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Use information from 4 reading texts</li>
+                                <li>Must reference all 4 texts</li>
+                                <li>Paraphrase - don't copy</li>
+                                <li>3 content points to cover</li>
+                                <li>Synthesis required</li>
+                            </ul>
+                        </div>
+                        <div class="genre-card">
+                            <div class="genre-title">✍️ Task 4: Extended Writing</div>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Use your own ideas only</li>
+                                <li>No reading texts provided</li>
+                                <li>Personal opinions and experiences</li>
+                                <li>2 content points to cover</li>
+                                <li>Independent writing</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 3 SECTION -->
+        <section id="task3" class="section">
+            <div class="card">
+                <div class="card-header">Task 3: Reading into Writing <span class="timing-badge">40 minutes</span> <span class="word-count-badge">100-130 words</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Write a text (100-130 words) using information from the <strong>4 texts in Task 2</strong>. You must address <strong>3 bullet points</strong> from the question and use your own words - copying from the texts will result in penalties.
+                    </div>
+
+                    <h4>Sample Task 3 Question:</h4>
+                    <div class="example-box">
+                        <strong>Write an article (100-130 words) for a school or college magazine saying what you think is the best way to get fit.</strong><br><br>
+                        Use the information you read in texts A, B, C and D (pages 4 and 5) to:<br>
+                        » <strong>explain which types of exercise are best for getting fit</strong><br>
+                        » <strong>say what equipment you need to have for each activity</strong> and<br>
+                        » <strong>talk about a recent trend in exercise.</strong><br><br>
+                        Do not copy from the texts. Use your own words as far as possible.
+                    </div>
+
+                    <h4>Step-by-Step Approach:</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Analyze the Question (5 minutes)</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li>Identify the <strong>genre</strong> (article, essay, email, letter, review)</li>
+                            <li>Identify the <strong>3 bullet points</strong> you must address</li>
+                            <li>Note the <strong>target reader</strong> (school magazine, teacher, friend)</li>
+                            <li>Determine <strong>register</strong> (formal or informal)</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Scan the 4 Texts for Information (10 minutes)</strong>
+                        <p>Go back to Task 2 texts and find relevant information for each bullet point:</p>
+                        <div class="bullet-point">Bullet 1: Types of exercise best for fitness → Text A (swimming), Text B (cycling), Text C (gym)</div>
+                        <div class="bullet-point">Bullet 2: Equipment needed → Text A (swimming costume, cap, goggles), Text C (gym equipment)</div>
+                        <div class="bullet-point">Bullet 3: Recent trend → Text D (fall in physical activity since 1965)</div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Plan Your Structure (5 minutes)</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>Introduction (20-25 words):</strong> Hook the reader, introduce topic</li>
+                            <li><strong>Body Paragraph 1 (30-35 words):</strong> Address bullet point 1 with evidence from texts</li>
+                            <li><strong>Body Paragraph 2 (30-35 words):</strong> Address bullet point 2 with evidence from texts</li>
+                            <li><strong>Conclusion (20-25 words):</strong> Address bullet point 3 + closing thought</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Write Your Answer (15 minutes)</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li>Use your own words - paraphrase the text information</li>
+                            <li>Include information from <strong>all 4 texts</strong></li>
+                            <li>Use linking words (furthermore, however, in addition)</li>
+                            <li>Check word count as you write (aim for 110-125)</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>Check and Revise (5 minutes)</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li>Have you addressed all 3 bullet points?</li>
+                            <li>Have you used information from all 4 texts?</li>
+                            <li>Is the word count 100-130?</li>
+                            <li>Check spelling, grammar, and punctuation</li>
+                        </ul>
+                    </div>
+
+                    <h4>Sample Model Answer (Article):</h4>
+                    <div class="model-answer">
+                        <strong>The Best Way to Get Fit</strong><br><br>
+                        There are many ways to get fit, but some exercises are more effective than others. Swimming is excellent because it exercises all your muscles and is less damaging to joints than running. Cycling is also good, especially in parks, though you need to be careful of pedestrians. If you prefer indoor activities, the gym offers various options like running machines and weights.<br><br>
+                        The equipment you need depends on your choice. For swimming, you only need a costume, cap and goggles. For the gym, you don't need to buy equipment as it's provided. Cycling requires a bicycle and helmet.<br><br>
+                        Unfortunately, studies show that physical activity has fallen since 1965, and fewer people will exercise in 2030 than in 2015. We need to reverse this trend!<br><br>
+                        <em>(128 words)</em>
+                    </div>
+
+                    <div class="success-box">
+                        <strong>✓ What makes this answer good:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>All 3 bullet points addressed clearly</li>
+                            <li>Information from all 4 texts included</li>
+                            <li>Own words used - no copying from texts</li>
+                            <li>Article format with title and engaging opening</li>
+                            <li>Within word count (128 words)</li>
+                            <li>Clear paragraph structure</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Common Mistakes in Task 3</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Mistake</th>
+                                <th>Why It's Wrong</th>
+                                <th>How to Avoid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Copying from texts</td>
+                                <td>Penalty for plagiarism; shows no understanding</td>
+                                <td>Paraphrase: change vocabulary and sentence structure</td>
+                            </tr>
+                            <tr>
+                                <td>Only using 2-3 texts</td>
+                                <td>Must use all 4 texts for full marks</td>
+                                <td>Make notes from all 4 texts during planning</td>
+                            </tr>
+                            <tr>
+                                <td>Missing bullet points</td>
+                                <td>Task not fully completed</td>
+                                <td>Check off each bullet point as you write</td>
+                            </tr>
+                            <tr>
+                                <td>Exceeding word count</td>
+                                <td>Text over 130 words not marked</td>
+                                <td>Count words; aim for 110-125</td>
+                            </tr>
+                            <tr>
+                                <td>Wrong genre features</td>
+                                <td>Article without title, email without greeting</td>
+                                <td>Learn genre conventions (see Genres section)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 4 SECTION -->
+        <section id="task4" class="section">
+            <div class="card">
+                <div class="card-header">Task 4: Extended Writing <span class="timing-badge">40 minutes</span> <span class="word-count-badge">100-130 words</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Write a text (100-130 words) using <strong>your own ideas</strong> - no reading texts are provided. You must address <strong>2 bullet points</strong> from the question. This tests your ability to write independently.
+                    </div>
+
+                    <h4>Sample Task 4 Questions by Genre:</h4>
+
+                    <div class="example-box">
+                        <strong>Essay:</strong><br>
+                        Write an essay (100-130 words) for your teacher about a festival in a country you know. You should:<br>
+                        » give examples of what happens at this festival and<br>
+                        » explain why this festival is important.
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Email to a Friend:</strong><br>
+                        Write an email (100-130 words) to a friend about the rules at your college. You should:<br>
+                        » describe some of the rules and<br>
+                        » explain what you think of these rules.
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Review:</strong><br>
+                        Write a review (100-130 words) of a restaurant you visited recently for a travel website. You should:<br>
+                        » describe the food and service and<br>
+                        » say whether you would recommend it to others.
+                    </div>
+
+                    <h4>Step-by-Step Approach:</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Analyze the Question (5 minutes)</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li>Identify the <strong>genre</strong> (article, essay, email, letter, review)</li>
+                            <li>Identify the <strong>2 bullet points</strong> you must address</li>
+                            <li>Brainstorm ideas from your own knowledge/experience</li>
+                            <li>Plan your paragraph structure</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Plan Your Content (5 minutes)</strong>
+                        <p>Make brief notes for each paragraph:</p>
+                        <div class="bullet-point">Introduction: Introduce topic + your main idea</div>
+                        <div class="bullet-point">Body: Address bullet point 1 with examples</div>
+                        <div class="bullet-point">Body: Address bullet point 2 with your opinion</div>
+                        <div class="bullet-point">Conclusion: Summarize + final thought</div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Write Your Answer (20 minutes)</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li>Use appropriate genre features (see Genres section)</li>
+                            <li>Include personal opinions and experiences</li>
+                            <li>Use B1 language functions (conditionals, modals, passives)</li>
+                            <li>Check word count regularly</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Check and Revise (10 minutes)</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li>Have you addressed both bullet points?</li>
+                            <li>Is the word count 100-130?</li>
+                            <li>Check spelling, grammar, and punctuation</li>
+                            <li>Verify genre features (title, greeting, closing)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Sample Model Answer (Essay):</h4>
+                    <div class="model-answer">
+                        <strong>Diwali: The Festival of Lights</strong><br><br>
+                        Diwali is one of the most important festivals in India, celebrated every autumn. During this festival, people decorate their homes with oil lamps and colourful lights. Families prepare special sweets and share them with neighbours and friends. Many people also buy new clothes and exchange gifts with their loved ones.<br><br>
+                        This festival is important because it represents the victory of light over darkness and good over evil. It brings families together and strengthens community bonds. Furthermore, it is a time when people forgive past conflicts and start fresh relationships. In my opinion, Diwali teaches us valuable lessons about hope and unity that are relevant to everyone, regardless of their background.<br><br>
+                        <em>(125 words)</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GENRES SECTION -->
+        <section id="genres" class="section">
+            <div class="card">
+                <div class="card-header">Text Genres & Their Features</div>
+                <div class="card-body">
+                    <p>Both Task 3 and Task 4 may require you to write in one of these genres. Each has specific features you must include:</p>
+
+                    <div class="genre-grid">
+                        <div class="genre-card">
+                            <div class="genre-title">📝 Article</div>
+                            <p><strong>Purpose:</strong> Inform or persuade readers of a magazine/website</p>
+                            <p><strong>Features:</strong></p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Title/headline</li>
+                                <li>Engaging opening</li>
+                                <li>Direct address to reader ("you")</li>
+                                <li>Personal opinion</li>
+                                <li>Informal or semi-formal register</li>
+                            </ul>
+                            <p><strong>Example opening:</strong> "Have you ever wondered why exercise is so important?"</p>
+                        </div>
+
+                        <div class="genre-card">
+                            <div class="genre-title">📚 Essay</div>
+                            <p><strong>Purpose:</strong> Present arguments and opinions formally</p>
+                            <p><strong>Features:</strong></p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Title</li>
+                                <li>Formal register (no contractions)</li>
+                                <li>Clear thesis statement</li>
+                                <li>Logical argumentation</li>
+                                <li>Conclusion summarizing points</li>
+                            </ul>
+                            <p><strong>Example opening:</strong> "This essay will discuss the benefits of regular exercise for students."</p>
+                        </div>
+
+                        <div class="genre-card">
+                            <div class="genre-title">📧 Email (Informal)</div>
+                            <p><strong>Purpose:</strong> Communicate with friends/family</p>
+                            <p><strong>Features:</strong></p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Greeting: "Hi [Name]," or "Hello [Name],"</li>
+                                <li>Informal language</li>
+                                <li>Contractions (I'm, don't, can't)</li>
+                                <li>Phrasal verbs</li>
+                                <li>Closing: "Best wishes," "Take care," "See you soon,"</li>
+                            </ul>
+                            <p><strong>Example opening:</strong> "Hi Sarah, How are you? I'm writing to tell you about..."</p>
+                        </div>
+
+                        <div class="genre-card">
+                            <div class="genre-title">✉️ Letter (Formal)</div>
+                            <p><strong>Purpose:</strong> Communicate officially or professionally</p>
+                            <p><strong>Features:</strong></p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Greeting: "Dear Sir/Madam," or "Dear Mr/Ms [Surname],"</li>
+                                <li>Formal vocabulary</li>
+                                <li>No contractions</li>
+                                <li>Clear purpose stated early</li>
+                                <li>Closing: "Yours faithfully," (if Dear Sir/Madam) or "Yours sincerely," (if named)</li>
+                            </ul>
+                            <p><strong>Example opening:</strong> "Dear Sir/Madam, I am writing to complain about..."</p>
+                        </div>
+
+                        <div class="genre-card">
+                            <div class="genre-title">⭐ Review</div>
+                            <p><strong>Purpose:</strong> Evaluate and recommend (or not) something</p>
+                            <p><strong>Features:</strong></p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Title mentioning the item reviewed</li>
+                                <li>Description of what it is</li>
+                                <li>Positive and negative aspects</li>
+                                <li>Specific examples</li>
+                                <li>Clear recommendation</li>
+                            </ul>
+                            <p><strong>Example opening:</strong> "Last weekend I visited 'Bella Pasta' restaurant in the city centre."</p>
+                        </div>
+
+                        <div class="genre-card">
+                            <div class="genre-title">📱 Email (Formal/Neutral)</div>
+                            <p><strong>Purpose:</strong> Professional but less formal than letter</p>
+                            <p><strong>Features:</strong></p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Greeting: "Dear [Name],"</li>
+                                <li>Neutral register</li>
+                                <li>Some contractions acceptable</li>
+                                <li>Clear subject reference</li>
+                                <li>Closing: "Best regards," "Kind regards,"</li>
+                            </ul>
+                            <p><strong>Example opening:</strong> "Dear Mr Johnson, Thank you for your email regarding..."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Register: Formal vs Informal</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Formal</th>
+                                <th>Informal</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Contractions</td>
+                                <td>Do not use (cannot, will not, I am)</td>
+                                <td>Use freely (can't, won't, I'm)</td>
+                            </tr>
+                            <tr>
+                                <td>Phrasal verbs</td>
+                                <td>Avoid (use Latin-based verbs)</td>
+                                <td>Common (get up, put off, turn up)</td>
+                            </tr>
+                            <tr>
+                                <td>Vocabulary</td>
+                                <td>"assist," "purchase," "sufficient"</td>
+                                <td>"help," "buy," "enough"</td>
+                            </tr>
+                            <tr>
+                                <td>Sentence structure</td>
+                                <td>Complex sentences, passive voice</td>
+                                <td>Simple sentences, active voice</td>
+                            </tr>
+                            <tr>
+                                <td>Personal pronouns</td>
+                                <td>Imersonal ("One should...")</td>
+                                <td>Personal ("I think," "You should")</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Quick Guide to Register by Genre:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Formal:</strong> Essay, Formal Letter, Formal Email, Report</li>
+                            <li><strong>Informal:</strong> Email to friend, Informal Letter</li>
+                            <li><strong>Semi-formal/Neutral:</strong> Article, Review, Neutral Email</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ASSESSMENT SECTION -->
+        <section id="assessment" class="section">
+            <div class="card">
+                <div class="card-header">How Writing is Assessed</div>
+                <div class="card-body">
+                    <h4>Task 3 (Reading into Writing) - 4 Criteria:</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>What Examiners Look For</th>
+                                <th>Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Reading for Writing</strong></td>
+                                <td>Understanding of source texts, selection of relevant content, paraphrasing, identifying themes across texts</td>
+                                <td>25%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Task Fulfilment</strong></td>
+                                <td>Achievement of communicative aim, awareness of reader, coverage of all bullet points, word count</td>
+                                <td>25%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Organisation & Structure</strong></td>
+                                <td>Paragraphing, logical flow, appropriate openings/closings, cohesive devices (linking words)</td>
+                                <td>25%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Language Control</strong></td>
+                                <td>Grammar accuracy, vocabulary range, spelling, punctuation</td>
+                                <td>25%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Task 4 (Extended Writing) - 3 Criteria:</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>What Examiners Look For</th>
+                                <th>Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Task Fulfilment</strong></td>
+                                <td>Achievement of communicative aim, awareness of reader, coverage of bullet points, word count, genre features</td>
+                                <td>33%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Organisation & Structure</strong></td>
+                                <td>Paragraphing, logical flow, openings/closings, cohesive devices</td>
+                                <td>33%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Language Control</strong></td>
+                                <td>Grammar accuracy, vocabulary range, spelling, punctuation</td>
+                                <td>33%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Score Interpretation (0-4 scale)</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Score</th>
+                                <th>Interpretation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>4</strong></td>
+                                <td>Excellent achievement - at the upper end of B1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3</strong></td>
+                                <td>Appropriate achievement - at the middle of B1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2</strong></td>
+                                <td>Acceptable achievement - of B1 level, possibly newly qualified</td>
+                            </tr>
+                            <tr>
+                                <td><strong>1</strong></td>
+                                <td>Non-achievement - not at B1 level</td>
+                            </tr>
+                            <tr>
+                                <td><strong>0</strong></td>
+                                <td>Task not attempted or paper void</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="success-box">
+                        <strong>Pass Requirements:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li><strong>Pass:</strong> 14/28 marks (average score 2 per criterion)</li>
+                            <li><strong>Merit:</strong> 20/28 marks</li>
+                            <li><strong>Distinction:</strong> 25/28 marks</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRATEGIES SECTION -->
+        <section id="strategies" class="section">
+            <div class="card">
+                <div class="card-header">Writing Strategies for Success</div>
+                <div class="card-body">
+                    <h4>Time Management (40 minutes per task):</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Phase</th>
+                                <th>Time</th>
+                                <th>Activity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Planning</td>
+                                <td>10 minutes</td>
+                                <td>Analyze question, brainstorm ideas, plan structure</td>
+                            </tr>
+                            <tr>
+                                <td>Writing</td>
+                                <td>20 minutes</td>
+                                <td>Write the text, check word count regularly</td>
+                            </tr>
+                            <tr>
+                                <td>Checking</td>
+                                <td>10 minutes</td>
+                                <td>Revise, check bullet points, spelling, grammar</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning-box">
+                        <strong>Never skip the planning phase!</strong> A well-planned answer writes faster and scores higher than a rushed, disorganized one.
+                    </div>
+
+                    <h4>Useful Linking Words & Phrases:</h4>
+                    <div class="genre-grid">
+                        <div class="genre-card">
+                            <div class="genre-title">Adding Information</div>
+                            <p>Furthermore, In addition, Moreover, Also, Besides</p>
+                        </div>
+                        <div class="genre-card">
+                            <div class="genre-title">Contrasting</div>
+                            <p>However, On the other hand, Although, While, Whereas</p>
+                        </div>
+                        <div class="genre-card">
+                            <div class="genre-title">Giving Examples</div>
+                            <p>For example, For instance, Such as, In particular</p>
+                        </div>
+                        <div class="genre-card">
+                            <div class="genre-title">Concluding</div>
+                            <p>In conclusion, To sum up, Overall, In summary</p>
+                        </div>
+                    </div>
+
+                    <h4>B1 Language Functions to Include:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Conditionals:</strong> "If you exercise regularly, you will feel healthier."</li>
+                        <li><strong>Modals:</strong> "You should try to eat more vegetables." / "It might rain tomorrow."</li>
+                        <li><strong>Passive voice:</strong> "The festival is celebrated every year."</li>
+                        <li><strong>Comparatives:</strong> "Swimming is more relaxing than running."</li>
+                        <li><strong>Present perfect:</strong> "I have lived here for five years."</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Final Checklist Before Submitting</div>
+                <div class="card-body">
+                    <ul class="checklist">
+                        <li>Word count is 100-130 words (write the count at the end)</li>
+                        <li>All bullet points from the question are addressed</li>
+                        <li>Task 3: Information from all 4 texts included</li>
+                        <li>Task 3: Information paraphrased (not copied)</li>
+                        <li>Appropriate genre features (title, greeting, closing)</li>
+                        <li>Consistent register (formal or informal)</li>
+                        <li>Clear paragraph structure (introduction, body, conclusion)</li>
+                        <li>Linking words used to connect ideas</li>
+                        <li>Spelling checked (especially common words)</li>
+                        <li>Punctuation checked (full stops, commas, apostrophes)</li>
+                        <li>Grammar checked (tenses, articles, prepositions)</li>
+                        <li>Handwriting is legible (if handwritten)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Common Mistakes to Avoid</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Mistake</th>
+                                <th>Example</th>
+                                <th>Correction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Wrong word count</td>
+                                <td>150 words</td>
+                                <td>Cut to 130 maximum</td>
+                            </tr>
+                            <tr>
+                                <td>Missing bullet points</td>
+                                <td>Only 1 of 2 addressed</td>
+                                <td>Check all are covered</td>
+                            </tr>
+                            <tr>
+                                <td>Wrong genre features</td>
+                                <td>Article without title</td>
+                                <td>Include all genre elements</td>
+                            </tr>
+                            <tr>
+                                <td>Inconsistent register</td>
+                                <td>"Hi Sir, I am writing..."</td>
+                                <td>Choose formal OR informal</td>
+                            </tr>
+                            <tr>
+                                <td>No paragraphs</td>
+                                <td>One block of text</td>
+                                <td>Use clear paragraphing</td>
+                            </tr>
+                            <tr>
+                                <td>Spelling errors</td>
+                                <td>"becuase," "excersise"</td>
+                                <td>Proofread carefully</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE I (B1) Writing Guide</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

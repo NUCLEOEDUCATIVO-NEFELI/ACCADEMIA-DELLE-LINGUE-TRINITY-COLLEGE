@@ -1,0 +1,1132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE II (B2) - Reading Guide & Task Explanations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #e8f5e9;
+            --dark: #263238;
+            --border: #a5d6a7;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --b2-color: #2e7d32;
+            --warning: #ef6c00;
+            --info: #0277bd;
+            --task1: #1565c0;
+            --task2: #6a1b9a;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1b5e20 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--info);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .task1-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--task1);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .task2-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--task2);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .reading-text {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+        }
+
+        .question-box {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .task-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .task-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .task-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-title {
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .time-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .exercise-box {
+            background: #fff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .exercise-title {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            display: block;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: var(--light);
+            border-color: var(--primary);
+        }
+
+        .quiz-option.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background: var(--error-bg);
+            border-color: var(--error);
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .task-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE II (B2)</h1>
+            <p>Reading Module - Complete Task Guide</p>
+            <div class="level-badge">CEFR Level B2 • 2 Hours</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE II (B2) Reading Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE II Reading Complete Guide</h1>
+            <p class="page-subtitle">2 Tasks • Long Reading • Multi-text Reading • 30 Questions Total</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('task1', this)">Task 1: Long Reading</button>
+            <button class="nav-tab" onclick="showSection('task2', this)">Task 2: Multi-text</button>
+            <button class="nav-tab" onclick="showSection('strategies', this)">Strategies</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">Practice</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">Reading Module Overview (B2)</div>
+                <div class="card-body">
+                    <p>The <strong>ISE II Reading Module</strong> is part of the 2-hour Reading & Writing exam. It consists of <strong>2 reading tasks</strong> with a total of <strong>30 questions</strong> (15 questions per task). The tasks test your ability to understand complex texts, identify main ideas, extract specific information, and interpret meaning at B2 level.</p>
+
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-icon">📄</div>
+                            <div class="task-title" style="color: var(--task1);">Task 1: Long Reading</div>
+                            <span class="time-badge">20 mins</span>
+                            <p class="mt-2">Read one text (500 words) and answer 15 questions</p>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-icon">📑</div>
+                            <div class="task-title" style="color: var(--task2);">Task 2: Multi-text Reading</div>
+                            <span class="time-badge">20 mins</span>
+                            <p class="mt-2">Read 4 texts (900 words total) and answer 15 questions</p>
+                        </div>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Key Differences from ISE I (B1):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Longer texts:</strong> 500 words (Task 1) vs. 400 words; 900 words (Task 2) vs. 700 words</li>
+                            <li><strong>More complex vocabulary:</strong> Academic and abstract language</li>
+                            <li><strong>More inference required:</strong> Understanding implied meaning and attitude</li>
+                            <li><strong>Gap-fill with word bank:</strong> Task 2 uses options from a word bank</li>
+                            <li><strong>Abstract topics:</strong> Society, values, environmental concerns, public figures</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Important:</strong> You must complete both reading tasks before moving to the writing tasks (Task 3 and Task 4). The information from Task 2 is required for Task 3 (Reading into Writing), so read carefully and consider taking notes.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Question Types Summary</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Questions</th>
+                                <th>Skill Tested</th>
+                                <th>Format</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="3"><strong>Task 1</strong><br>Long Reading</td>
+                                <td>1-5: Title Matching</td>
+                                <td>Reading for gist and main ideas</td>
+                                <td>Match 6 titles to 5 paragraphs (1 distractor)</td>
+                            </tr>
+                            <tr>
+                                <td>6-10: True Statements</td>
+                                <td>Reading for specific factual information</td>
+                                <td>Choose 5 true from 8 statements</td>
+                            </tr>
+                            <tr>
+                                <td>11-15: Gap-fill</td>
+                                <td>Reading for detail and precise information</td>
+                                <td>Complete sentences with words from text (max 4 words)</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="3"><strong>Task 2</strong><br>Multi-text Reading</td>
+                                <td>16-20: Text Matching</td>
+                                <td>Understanding purpose and main ideas</td>
+                                <td>Match descriptions to 4 texts (A, B, C, D)</td>
+                            </tr>
+                            <tr>
+                                <td>21-25: True Statements</td>
+                                <td>Reading across multiple texts</td>
+                                <td>Choose 5 true from 8 statements</td>
+                            </tr>
+                            <tr>
+                                <td>26-30: Summary Gap-fill</td>
+                                <td>Synthesizing information across texts</td>
+                                <td>Complete summary using word bank options</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Subject Areas for Reading Texts</div>
+                <div class="card-body">
+                    <p>Reading texts relate to these 10 ISE II subject areas:</p>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin: 1rem 0;">
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);"><strong>Society and Living Standards</strong></div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);"><strong>The World of Work</strong></div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);"><strong>Public Figures Past and Present</strong></div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);"><strong>Personal Values and Ideals</strong></div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);"><strong>National Environmental Concerns</strong></div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);"><strong>National Customs</strong></div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);"><strong>Early Memories</strong></div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);"><strong>Education</strong></div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);"><strong>Village and City Life</strong></div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);"><strong>Pollution and Recycling</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 1 SECTION -->
+        <section id="task1" class="section">
+            <div class="card">
+                <div class="card-header">Task 1: Long Reading (20 minutes)</div>
+                <div class="card-body">
+                    <div class="task1-box">
+                        <strong>Task Overview:</strong> Read one complex text of approximately <strong>500 words</strong> (divided into 5 paragraphs) and answer 15 questions testing different reading skills. The text is factual or descriptive and relates to one of the 10 subject areas.
+                    </div>
+
+                    <h4>Question Types Breakdown:</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Questions 1-5: Title Matching</strong>
+                        <p style="margin-top: 0.5rem;">Match the correct title to each of the 5 paragraphs. You have 6 titles to choose from (one is a distractor). Tests understanding of main ideas.</p>
+                        <div class="example-box">
+                            <strong>Strategy:</strong> Look for topic sentences (usually first sentence of paragraph). Identify the main idea, not just specific details.
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Questions 6-10: True Statements Selection</strong>
+                        <p style="margin-top: 0.5rem;">Choose 5 true statements from a list of 8. Three statements are false or not mentioned according to the text. Tests detailed comprehension and ability to distinguish fact from opinion.</p>
+                        <div class="example-box">
+                            <strong>Strategy:</strong> Scan for keywords from each statement. Check carefully - statements may use synonyms or paraphrase the text. Watch for extreme language ("always," "never") which is often false.
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Questions 11-15: Sentence Completion (Gap-fill)</strong>
+                        <p style="margin-top: 0.5rem;">Complete sentences with <strong>exact words from the text</strong> (maximum 4 words per gap). Tests precise understanding and ability to locate specific information.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> "The author suggests that _______ policies are necessary to address climate change."<br>
+                            Answer from text: "comprehensive environmental"
+                        </div>
+                    </div>
+
+                    <h4>Practical Example: Task 1 Reading Text</h4>
+                    <div class="reading-text">
+                        <h3>The Importance of Emotional Intelligence</h3>
+
+                        <p><strong>Paragraph A</strong><br>
+                        For many years, traditional education focused primarily on academic achievement, measuring success through test scores and grades. However, recent research has shown that emotional intelligence (EQ) may be equally important for long-term success. Emotional intelligence refers to the ability to recognise, understand, and manage our own emotions, as well as the emotions of others. This skill set includes empathy, self-awareness, and the ability to handle interpersonal relationships effectively.</p>
+
+                        <p><strong>Paragraph B</strong><br>
+                        In the workplace, employees with high emotional intelligence often outperform their colleagues. They are better at working in teams, resolving conflicts, and adapting to change. A study conducted by a leading business school found that managers with high EQ scores were more likely to retain talented staff and maintain high productivity levels. These managers create positive working environments where employees feel valued and understood.</p>
+
+                        <p><strong>Paragraph C</strong><br>
+                        Despite its importance, emotional intelligence is rarely taught in schools. Most curricula focus on academic subjects like mathematics and science, leaving little room for developing interpersonal skills. Some educators argue that there is not enough time in the school day to add another subject. However, critics point out that emotional intelligence can be integrated into existing subjects rather than taught separately.</p>
+
+                        <p><strong>Paragraph D</strong><br>
+                        Developing emotional intelligence requires practice and self-reflection. One effective method is keeping a journal to track emotional responses to different situations. Another approach is seeking feedback from trusted friends or colleagues about how one's behaviour affects others. Meditation and mindfulness exercises can also help individuals become more aware of their emotional states and reactions.</p>
+
+                        <p><strong>Paragraph E</strong><br>
+                        As artificial intelligence and automation continue to transform the workplace, emotional intelligence is becoming even more valuable. Machines can process data and perform calculations, but they cannot replicate human empathy or build meaningful relationships. Professionals who combine technical expertise with strong emotional skills will be best positioned for success in the future economy. Therefore, investing time in developing emotional intelligence is a wise decision for anyone seeking career advancement.</p>
+                    </div>
+
+                    <h4>Sample Questions:</h4>
+                    <div class="question-box">
+                        <p><strong>Title Matching Example:</strong></p>
+                        <p>Match these titles to the paragraphs:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>The Definition and Components of Emotional Intelligence</li>
+                            <li>Practical Methods for Developing Emotional Intelligence</li>
+                            <li>Emotional Intelligence in Professional Environments</li>
+                            <li>The Future Value of Emotional Intelligence</li>
+                            <li>Challenges in Teaching Emotional Intelligence</li>
+                            <li>The History of Intelligence Testing (DISTRACTOR)</li>
+                        </ul>
+                        <p><strong>Answers:</strong> A-1, B-3, C-5, D-2, E-4</p>
+                    </div>
+
+                    <div class="question-box">
+                        <p><strong>True Statements Example:</strong></p>
+                        <p>Which 5 statements are TRUE according to the text?</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>a) Emotional intelligence is more important than academic achievement for success.</li>
+                            <li>b) Managers with high EQ are more likely to keep talented employees.</li>
+                            <li>c) Emotional intelligence cannot be taught in schools.</li>
+                            <li>d) Meditation can help develop emotional awareness.</li>
+                            <li>e) Machines can replicate human empathy completely.</li>
+                            <li>f) Journaling is one way to develop emotional intelligence.</li>
+                            <li>g) Most school curricula focus on interpersonal skills.</li>
+                            <li>h) EQ includes the ability to understand others' emotions.</li>
+                        </ul>
+                        <p><strong>Answers:</strong> b, d, f, h (plus one more from careful reading)</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Strategies for Task 1 Success:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>✓ <strong>Skim first:</strong> Read quickly for general meaning before looking at questions</li>
+                            <li>✓ <strong>Analyse paragraph structure:</strong> Topic sentences often contain main ideas for title matching</li>
+                            <li>✓ <strong>Scan for keywords:</strong> Look for specific names, numbers, or phrases from questions</li>
+                            <li>✓ <strong>Check context:</strong> For gap-fill, read the whole sentence to ensure grammar fits</li>
+                            <li>✓ <strong>Watch for synonyms:</strong> The text may use different words with similar meanings</li>
+                            <li>✓ <strong>Manage time:</strong> 20 minutes for 500 words and 15 questions = about 1.3 minutes per question</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 2 SECTION -->
+        <section id="task2" class="section">
+            <div class="card">
+                <div class="card-header">Task 2: Multi-text Reading (20 minutes)</div>
+                <div class="card-body">
+                    <div class="task2-box">
+                        <strong>Task Overview:</strong> Read <strong>4 short texts</strong> (approximately 900 words total) on the same theme. One text is typically an infographic (diagram, table, or chart with text). Answer 15 questions testing your ability to synthesize information across multiple sources.
+                    </div>
+
+                    <h4>Question Types Breakdown:</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Questions 16-20: Text Matching</strong>
+                        <p style="margin-top: 0.5rem;">Match descriptions to the correct text (A, B, C, or D). Tests understanding of main idea, purpose, or tone of each text.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> "Which text presents statistical evidence?" → Match to correct letter<br>
+                            <strong>Strategy:</strong> Read each text quickly to identify its main purpose and type (opinion, fact, advice, data).
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Questions 21-25: True Statements Selection</strong>
+                        <p style="margin-top: 0.5rem;">Choose 5 true statements from 8 options based on information across all four texts. Requires synthesizing information from multiple sources.</p>
+                        <div class="example-box">
+                            <strong>Strategy:</strong> These questions may require information from 2 or more texts. Check all texts before deciding.
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Questions 26-30: Summary Gap-fill with Word Bank</strong>
+                        <p style="margin-top: 0.5rem;">Complete summary notes using words from a provided word bank. The notes synthesize key information from all four texts. This is different from Task 1 - you choose from options, not from the text directly.</p>
+                        <div class="example-box">
+                            <strong>Example Word Bank:</strong> sustainable, economic, controversial, beneficial, problematic, essential, optional, widespread<br><br>
+                            "Many experts believe that _______ development is _______ for future generations."
+                        </div>
+                    </div>
+
+                    <h4>Practical Example: Task 2 Texts (Simplified)</h4>
+                    <div class="reading-text">
+                        <h3>Theme: Remote Working</h3>
+
+                        <p><strong>Text A - Opinion Article</strong><br>
+                        Remote working has revolutionised the modern workplace. Employees report higher satisfaction levels and improved work-life balance. However, some managers struggle to maintain team cohesion when staff are dispersed. The key is finding the right balance between flexibility and structure.</p>
+
+                        <p><strong>Text B - Statistical Data (Infographic)</strong><br>
+                        73% of remote workers report higher job satisfaction<br>
+                        45% of companies saw increased productivity<br>
+                        28% of employees feel isolated<br>
+                        60% of managers find team communication challenging</p>
+
+                        <p><strong>Text C - Expert Interview</strong><br>
+                        Dr. Sarah Chen, workplace psychologist: "The shift to remote work isn't simply about location - it's about trust. Companies that succeed are those that focus on outcomes rather than hours worked. However, we must address the mental health implications of isolation."
+
+                        <p><strong>Text D - Company Case Study</strong><br>
+                        TechCorp implemented a hybrid model in 2022. Results after one year: employee retention increased by 35%, sick days decreased by 20%, but innovation metrics dropped slightly. The company addressed this by implementing virtual brainstorming sessions.</p>
+                    </div>
+
+                    <h4>Sample Questions:</h4>
+                    <div class="question-box">
+                        <p><strong>Text Matching Example:</strong></p>
+                        <p>Match the descriptions to the correct text (A, B, C, or D):</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Presents numerical data about remote working trends</li>
+                            <li>Describes a specific company's experience with hybrid work</li>
+                            <li>Offers a professional opinion on psychological aspects</li>
+                            <li>Discusses general advantages and challenges</li>
+                        </ul>
+                        <p><strong>Answers:</strong> B, D, C, A</p>
+                    </div>
+
+                    <div class="question-box">
+                        <p><strong>Gap-fill with Word Bank Example:</strong></p>
+                        <p><strong>Word Bank:</strong> satisfaction, isolation, productivity, retention, innovation, communication, flexibility, outcomes</p>
+                        <p>Complete the summary:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Remote working has led to increased employee _______ and improved _______.</li>
+                            <li>However, challenges include employee _______ and _______ difficulties.</li>
+                            <li>Successful companies focus on _______ rather than monitoring hours.</li>
+                        </ul>
+                        <p><strong>Answers:</strong> satisfaction, productivity (or retention), isolation, communication, outcomes</p>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Critical for Task 3:</strong> The information in these texts is used for Task 3 (Reading into Writing). Pay attention to:
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Statistics and numerical data</li>
+                            <li>Expert opinions and quotes</li>
+                            <li>Contrasting viewpoints</li>
+                            <li>Examples and case studies</li>
+                            <li>Causes and effects</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Strategies for Task 2 Success:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>✓ <strong>Skim all texts first:</strong> Get an overview of what each text contains</li>
+                            <li>✓ <strong>Identify text types:</strong> Is it opinion, data, advice, or narrative?</li>
+                            <li>✓ <strong>Look for connections:</strong> How do the texts relate to each other?</li>
+                            <li>✓ <strong>Note contradictions:</strong> Do any texts present opposing views?</li>
+                            <li>✓ <strong>Word bank strategy:</strong> Read the summary first to understand context, then match words</li>
+                            <li>✓ <strong>Take brief notes:</strong> Jot down main points from each text for Task 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRATEGIES SECTION -->
+        <section id="strategies" class="section">
+            <div class="card">
+                <div class="card-header">Reading Strategies for B2 Level</div>
+                <div class="card-body">
+                    <h4>1. Skimming and Scanning</h4>
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Skimming</strong> - Read quickly for general idea
+                        <p style="margin-top: 0.5rem;">Focus on: Title, first paragraph, topic sentences, last paragraph. Don't stop for unknown words.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Scanning</strong> - Look for specific information
+                        <p style="margin-top: 0.5rem;">Use keywords from questions. Look for names, dates, numbers, and specific terms.</p>
+                    </div>
+
+                    <h4>2. Dealing with Unknown Vocabulary</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Strategy</th>
+                                <th>How to Apply</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Context clues</strong></td>
+                                <td>Look at surrounding words and sentences</td>
+                                <td>"The <em>arduous</em> journey took 12 hours" → arduous = difficult/long</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Word formation</strong></td>
+                                <td>Recognise prefixes, suffixes, roots</td>
+                                <td>"unsustainable" = un (not) + sustain (maintain) + able (can be)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Synonym recognition</strong></td>
+                                <td>Look for words with similar meanings</td>
+                                <td>"happy, delighted, pleased" - all similar</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Ignore if not essential</strong></td>
+                                <td>Don't get stuck on one word</td>
+                                <td>If you understand the sentence without it, move on</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>3. Identifying Text Structure</h4>
+                    <div class="info-box">
+                        <strong>Common B2 Text Structures:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Problem-Solution:</strong> Present issue → Offer solutions → Evaluate</li>
+                            <li><strong>Cause-Effect:</strong> Describe situation → Explain reasons → Show results</li>
+                            <li><strong>Compare-Contrast:</strong> Present two viewpoints → Compare aspects → Conclude</li>
+                            <li><strong>Argument-Evidence:</strong> State claim → Provide proof → Address counterarguments</li>
+                        </ul>
+                    </div>
+
+                    <h4>4. Time Management (40 minutes total)</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Time</th>
+                                <th>Purpose</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Task 1 - Skim text</td>
+                                <td>2 minutes</td>
+                                <td>Get overall understanding</td>
+                            </tr>
+                            <tr>
+                                <td>Task 1 - Answer questions</td>
+                                <td>16 minutes</td>
+                                <td>Complete all 15 questions</td>
+                            </tr>
+                            <tr>
+                                <td>Task 1 - Check answers</td>
+                                <td>2 minutes</td>
+                                <td>Review uncertain answers</td>
+                            </tr>
+                            <tr>
+                                <td>Task 2 - Skim all texts</td>
+                                <td>3 minutes</td>
+                                <td>Understand each text's purpose</td>
+                            </tr>
+                            <tr>
+                                <td>Task 2 - Answer questions</td>
+                                <td>15 minutes</td>
+                                <td>Complete all 15 questions</td>
+                            </tr>
+                            <tr>
+                                <td>Task 2 - Check & note key info</td>
+                                <td>2 minutes</td>
+                                <td>Review and prepare for Task 3</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>5. Common Traps to Avoid</h4>
+                    <div class="warning-box">
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Matching exact words:</strong> The answer often uses synonyms, not the exact same words</li>
+                            <li><strong>Ignoring "not mentioned":</strong> Some statements may be true in reality but NOT in the text</li>
+                            <li><strong>Choosing the distractor:</strong> The extra title in Task 1 is designed to look correct</li>
+                            <li><strong>Spending too long on one question:</strong> Move on and return if time permits</li>
+                            <li><strong>Not checking word count in gap-fill:</strong> Maximum 4 words - check your answer fits</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="card">
+                <div class="card-header">Practice Exercises</div>
+                <div class="card-body">
+                    <p>Test your understanding of ISE II Reading tasks with these interactive exercises.</p>
+
+                    <!-- Exercise 1 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 1: Task Structure</div>
+                        <p><strong>How many questions are there in total for both reading tasks (Task 1 and Task 2)?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 20 questions</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 25 questions</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) 30 questions</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 35 questions</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 2 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 2: Word Count</div>
+                        <p><strong>What is the maximum number of words you can use to complete a gap in Task 1 (Long Reading)?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 2 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 3 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) 4 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 5 words</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 3 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 3: Task 2 Format</div>
+                        <p><strong>In Task 2 (Multi-text Reading), how do you complete the gap-fill questions (26-30)?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) By copying words directly from the texts</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) By choosing from a provided word bank</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) By inventing your own words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) By leaving them blank</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 4 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 4: Title Matching</div>
+                        <p><strong>In Task 1, how many titles do you have to choose from for the 5 paragraphs?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 5 titles</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 6 titles (including 1 distractor)</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 7 titles</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 8 titles</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 5 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 5: True Statements</div>
+                        <p><strong>In the True Statements questions, how many statements are TRUE out of the 8 options?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">A) 5 true statements</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 6 true statements</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 7 true statements</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 8 true statements</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 6 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 6: Text Types</div>
+                        <p><strong>Which type of text is typically included in Task 2 (Multi-text Reading)?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Only academic essays</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) An infographic (diagram, table, or chart)</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Only fictional stories</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Only opinion articles</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 7 - Reading Comprehension -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 7: Reading Comprehension</div>
+                        <p><strong>Read the paragraph and answer the question:</strong></p>
+
+                        <div class="reading-text" style="font-size: 0.95rem;">
+                            <strong>Paragraph:</strong> Despite initial scepticism, renewable energy sources have proven to be remarkably efficient in reducing carbon emissions. Wind farms, once considered unsightly blots on the landscape, are now welcomed by many communities for the economic benefits they bring. Solar panels have become increasingly affordable, allowing households to generate their own electricity. However, critics argue that the intermittent nature of these energy sources makes them unreliable, and storage technology has not yet caught up with generation capacity.
+                        </div>
+
+                        <p><strong>What is the writer's overall attitude toward renewable energy?</strong></p>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Completely negative - they believe renewable energy is a waste of resources</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Generally positive but acknowledging some limitations</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Completely neutral - they present facts without any opinion</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Confused - they cannot decide whether renewable energy is good or bad</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 8 - Gap Fill -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 8: Gap-fill Practice</div>
+                        <p><strong>Complete the sentence with words from the text (maximum 4 words):</strong></p>
+
+                        <div class="reading-text" style="font-size: 0.95rem;">
+                            <strong>Text:</strong> "The implementation of comprehensive environmental policies is essential for addressing climate change. Governments must take immediate action to reduce carbon emissions."
+                        </div>
+
+                        <p><strong>Sentence to complete:</strong> "_________ are necessary to tackle global warming."</p>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Immediate action by governments</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Comprehensive environmental policies</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Reducing carbon emissions immediately</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Addressing climate change now</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Exercise Tips:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Click on the option you think is correct</li>
+                            <li>Green indicates correct; red indicates incorrect</li>
+                            <li>Review the relevant sections if you get questions wrong</li>
+                            <li>For reading comprehension, look for evidence in the text to support your answer</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Reading Exam Checklist</div>
+                <div class="card-body">
+                    <p>Use this checklist before and during your reading exam:</p>
+
+                    <h4>Before the Exam:</h4>
+                    <ul class="checklist">
+                        <li>I have practised skimming and scanning techniques</li>
+                        <li>I can complete reading tasks within the time limit (40 minutes total)</li>
+                        <li>I understand the difference between Task 1 and Task 2 gap-fill formats</li>
+                        <li>I know how to identify topic sentences in paragraphs</li>
+                        <li>I can recognise synonyms and paraphrasing</li>
+                        <li>I understand how to use word banks effectively</li>
+                    </ul>
+
+                    <h4>During the Exam:</h4>
+                    <ul class="checklist">
+                        <li>I skim the text first before reading questions</li>
+                        <li>I check how many words are allowed in gap-fill answers</li>
+                        <li>I look for the distractor in title matching questions</li>
+                        <li>I verify that true statements are actually in the text (not just my knowledge)</li>
+                        <li>I manage my time - 20 minutes per task</li>
+                        <li>I note key information from Task 2 for use in Task 3</li>
+                        <li>I check my answers if I have time remaining</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE II (B2) Reading Preparation Guide</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+
+        function checkAnswer(element, isCorrect) {
+            // Remove previous classes from siblings
+            const parent = element.parentElement;
+            const siblings = parent.querySelectorAll('.quiz-option');
+            siblings.forEach(sib => {
+                sib.classList.remove('correct', 'incorrect');
+                sib.style.pointerEvents = 'none';
+            });
+
+            // Add appropriate class
+            if (isCorrect) {
+                element.classList.add('correct');
+                showFeedback(parent, '✓ Correct! Well done.', 'success');
+            } else {
+                element.classList.add('incorrect');
+                // Highlight correct answer
+                siblings.forEach(sib => {
+                    if (sib.onclick.toString().includes('true')) {
+                        sib.classList.add('correct');
+                    }
+                });
+                showFeedback(parent, '✗ Incorrect. The correct answer is highlighted in green.', 'error');
+            }
+        }
+
+        function showFeedback(parent, message, type) {
+            const feedback = parent.querySelector('.feedback');
+            if (feedback) {
+                feedback.textContent = message;
+                feedback.style.display = 'block';
+                if (type === 'success') {
+                    feedback.style.background = '#c8e6c9';
+                    feedback.style.color = '#2e7d32';
+                    feedback.style.border = '1px solid #81c784';
+                } else {
+                    feedback.style.background = '#ffcdd2';
+                    feedback.style.color = '#c62828';
+                    feedback.style.border = '1px solid #ef9a9a';
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE III (C1) - Portfolio Complete Guide & Exercises</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6a1b9a;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #f3e5f5;
+            --dark: #263238;
+            --border: #ce93d8;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --c1-color: #6a1b9a;
+            --warning: #ef6c00;
+            --info: #0277bd;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #4a148c 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--info);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .task-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .task-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .task-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .word-count {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .exercise-box {
+            background: #fff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .exercise-title {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            display: block;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: var(--light);
+            border-color: var(--primary);
+        }
+
+        .quiz-option.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background: var(--error-bg);
+            border-color: var(--error);
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .task-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE III (C1) Portfolio</h1>
+            <p>Complete Preparation Guide & Practice Exercises</p>
+            <div class="level-badge">CEFR Level C1</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE III (C1) Portfolio Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE III Portfolio Complete Guide</h1>
+            <p class="page-subtitle">Three Tasks • Three Sections • C1 Level Writing</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('structure', this)">Structure</button>
+            <button class="nav-tab" onclick="showSection('correspondence', this)">Section 1</button>
+            <button class="nav-tab" onclick="showSection('factual', this)">Section 2</button>
+            <button class="nav-tab" onclick="showSection('creative', this)">Section 3</button>
+            <button class="nav-tab" onclick="showSection('rules', this)">Rules & Feedback</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">What is the ISE III Portfolio?</div>
+                <div class="card-body">
+                    <p>The <strong>Portfolio</strong> is one of three components of the Trinity ISE III (C1) examination. It consists of <strong>three pieces of written work</strong> that you prepare <strong>before</strong> the exam date, allowing you to use reference materials, dictionaries, and receive feedback during the preparation process.</p>
+
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-icon">✉️</div>
+                            <div class="task-title">Section 1</div>
+                            <p>Correspondence<br><span class="word-count">200-230 words</span></p>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-icon">📊</div>
+                            <div class="task-title">Section 2</div>
+                            <p>Factual Writing<br><span class="word-count">200-230 words</span></p>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-icon">🎨</div>
+                            <div class="task-title">Section 3</div>
+                            <p>Creative & Descriptive<br><span class="word-count">200-230 words</span></p>
+                        </div>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Key Features of the Portfolio:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Prepared in advance:</strong> You complete these tasks before the exam day</li>
+                            <li><strong>Reference materials allowed:</strong> Use dictionaries, grammar books, spell-checks, and word processors</li>
+                            <li><strong>Teacher feedback permitted:</strong> One round of feedback per task using the official form</li>
+                            <li><strong>Three sections required:</strong> One task from each of the three categories</li>
+                            <li><strong>Word count:</strong> 200-230 words per task at C1 level</li>
+                            <li><strong>Submitted before interview:</strong> Must be handed in at least 24 hours before the examiner arrives</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Important:</strong> The Portfolio is discussed during your Speaking & Listening interview. The examiner will ask you about the content and/or the process of writing your portfolio tasks, so be prepared to discuss your work in detail.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">The Three ISE III Components</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Component</th>
+                                <th>When</th>
+                                <th>Duration</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Portfolio</strong></td>
+                                <td>Before exam</td>
+                                <td>Preparation period</td>
+                                <td>3 written tasks (200-230 words each) submitted in advance</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Written Exam</strong></td>
+                                <td>Exam day</td>
+                                <td>2 hours</td>
+                                <td>Controlled examination with reading and writing tasks</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Interview</strong></td>
+                                <td>Exam day</td>
+                                <td>25 minutes</td>
+                                <td>Speaking & Listening including discussion of your Portfolio</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRUCTURE SECTION -->
+        <section id="structure" class="section">
+            <div class="card">
+                <div class="card-header">Portfolio Structure & Requirements</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Mandatory Requirements:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Three tasks total:</strong> One from each section (Correspondence, Factual, Creative)</li>
+                            <li><strong>Same level only:</strong> All tasks must be ISE III (C1) level - do not mix levels</li>
+                            <li><strong>Current task list:</strong> Use only tasks from the official Trinity list for your exam period</li>
+                            <li><strong>Word count:</strong> 200-230 words per task (stated at the end of each piece)</li>
+                            <li><strong>Task numbers:</strong> Write the task question number on each piece of work</li>
+                        </ul>
+                    </div>
+
+                    <h4>Portfolio Task Categories at ISE III:</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Section 1 — Correspondence</strong>
+                        <p style="margin-top: 0.5rem;">Formal and informal emails, letters, and messages. Tests your ability to communicate appropriately with different audiences using proper conventions.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Section 2 — Factual Writing</strong>
+                        <p style="margin-top: 0.5rem;">Reports, articles, reviews, and essays based on factual information. Tests your ability to convey information objectively and structure complex content.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Section 3 — Creative and Descriptive Writing</strong>
+                        <p style="margin-top: 0.5rem;">Stories, narratives, descriptions, and creative pieces. Tests your ability to use imaginative language, descriptive techniques, and engage the reader.</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>C1 Level Expectations (ISE III):</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>✓ Sophisticated vocabulary and abstract concepts</li>
+                            <li>✓ Complex grammatical structures (inversion, subjunctive, advanced conditionals)</li>
+                            <li>✓ Coherent organisation with sophisticated linking devices</li>
+                            <li>✓ Nuanced argumentation and evaluation</li>
+                            <li>✓ Appropriate register and tone for the genre</li>
+                            <li>✓ Clear, well-structured, detailed text on complex subjects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Sample Task Types at ISE III</div>
+                <div class="card-body">
+                    <p>While specific tasks change periodically, here are examples of the types of tasks you might encounter at C1 level:</p>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">Section 1 — Correspondence Examples:</h4>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Write a formal letter to a government official proposing policy changes</li>
+                            <li>Write an email to a company director negotiating terms</li>
+                            <li>Write a letter to an academic journal responding to a published article</li>
+                            <li>Write an email to an international colleague discussing complex project issues</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">Section 2 — Factual Writing Examples:</h4>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Write a report on the impact of remote working on productivity</li>
+                            <li>Write an article about the future of renewable energy</li>
+                            <li>Write a review of a documentary evaluating its cultural impact</li>
+                            <li>Write an essay discussing the advantages and disadvantages of AI in the workplace</li>
+                        </ul>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">Section 3 — Creative Writing Examples:</h4>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Write a story exploring the theme of ambition and its consequences</li>
+                            <li>Write a descriptive piece about a place that represents freedom</li>
+                            <li>Continue a story from a given opening line with complex character development</li>
+                            <li>Write a narrative exploring stereotypes and individuality</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CORRESPONDENCE SECTION -->
+        <section id="correspondence" class="section">
+            <div class="card">
+                <div class="card-header">Section 1: Correspondence (200-230 words)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Write formal or informal correspondence demonstrating your ability to communicate effectively with different audiences using appropriate conventions, tone, and language at C1 level.
+                    </div>
+
+                    <h4>C1 Correspondence Requirements:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Highly formal or appropriately informal register</li>
+                        <li>Complex sentence structures</li>
+                        <li>Sophisticated vocabulary and professional tone</li>
+                        <li>Clear purpose and well-organised content</li>
+                        <li>Appropriate opening and closing conventions</li>
+                        <li>Ability to negotiate, persuade, or discuss complex matters</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Task:</strong><br>
+                        "You recently read an article in an academic journal that you disagree with. The editor has invited readers to respond. Write a formal letter (200-230 words) to the editor:
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>summarising the main argument you disagree with</li>
+                            <li>presenting counterarguments with evidence</li>
+                            <li>suggesting what further research is needed"
+                        </ul>
+                    </div>
+
+                    <h4>Formal Letter Structure at C1:</h4>
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Sender's Address</strong> (if required by task)
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Date</strong>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Recipient's Address / Salutation</strong> (Dear Sir/Madam, Dear Editor, Dear Dr. Smith)
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Opening Paragraph</strong> - State purpose clearly and formally
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>Body Paragraphs</strong> - Develop points with sophisticated language
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">6</span>
+                        <strong>Closing Paragraph</strong> - Conclude with forward-looking statement
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">7</span>
+                        <strong>Sign-off</strong> (Yours faithfully/sincerely, + full name)
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>C1 Language for Correspondence:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Opening:</strong> "I am writing with regard to..." / "I wish to express my concern regarding..."</li>
+                            <li><strong>Presenting arguments:</strong> "It could be argued that..." / "The evidence suggests..."</li>
+                            <li><strong>Conceding:</strong> "While I acknowledge that..., it is nevertheless the case that..."</li>
+                            <li><strong>Persuading:</strong> "I would urge you to consider..." / "It is imperative that..."</li>
+                            <li><strong>Closing:</strong> "I look forward to your response" / "I trust this matter will receive due consideration"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FACTUAL SECTION -->
+        <section id="factual" class="section">
+            <div class="card">
+                <div class="card-header">Section 2: Factual Writing (200-230 words)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Write factual pieces such as reports, articles, reviews, or discursive essays. Demonstrate your ability to convey information objectively, structure arguments logically, and use formal academic language at C1 level.
+                    </div>
+
+                    <h4>Genres in Section 2:</h4>
+                    
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">1. Report</h4>
+                        <p>Objective, analytical tone with clear sections. Includes introduction, findings, analysis, and recommendations.</p>
+                        <p><strong>Example:</strong> "Write a report on the impact of social media on young people's mental health."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">2. Article</h4>
+                        <p>Engaging title, sophisticated vocabulary, rhetorical devices, authoritative but accessible tone.</p>
+                        <p><strong>Example:</strong> "Write an article for a business magazine about the gig economy."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">3. Review</h4>
+                        <p>Sophisticated evaluation, nuanced opinion, cultural context, balanced critique with recommendation.</p>
+                        <p><strong>Example:</strong> "Review a recent documentary about climate change, evaluating its effectiveness."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">4. Discursive Essay</h4>
+                        <p>Balanced discussion of different viewpoints, objective tone, weighing evidence, conclusion.</p>
+                        <p><strong>Example:</strong> "Discuss the extent to which technology has improved education."</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>C1 Factual Writing Features:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Nominalisation:</strong> "The implementation of the policy resulted in..."</li>
+                            <li><strong>Passive voice:</strong> "It has been suggested that..." / "Evidence indicates that..."</li>
+                            <li><strong>Hedging language:</strong> "It appears that..." / "This may indicate..." / "Potentially..."</li>
+                            <li><strong>Discourse markers:</strong> "Furthermore," "Conversely," "Notwithstanding," "Consequently"</li>
+                            <li><strong>Complex conditionals:</strong> "Were this trend to continue, the implications would be..."</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Sample Structure for a Report:</strong><br><br>
+                        <strong>Title:</strong> The Impact of Remote Working on Employee Productivity<br><br>
+                        <strong>Introduction (30-35 words):</strong> Purpose and scope of the report<br>
+                        <strong>Current Situation (50-60 words):</strong> Overview of remote working trends<br>
+                        <strong>Analysis (50-60 words):</strong> Evidence of productivity impacts, both positive and negative<br>
+                        <strong>Recommendations (40-50 words):</strong> Practical suggestions for employers<br>
+                        <strong>Conclusion (30-35 words):</strong> Summary of key findings
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CREATIVE SECTION -->
+        <section id="creative" class="section">
+            <div class="card">
+                <div class="card-header">Section 3: Creative & Descriptive Writing (200-230 words)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Write creative and descriptive pieces including stories, narratives, and descriptive essays. Demonstrate your ability to use imaginative language, create atmosphere, develop character, and engage the reader at C1 level.
+                    </div>
+
+                    <h4>C1 Creative Writing Requirements:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Sophisticated descriptive vocabulary and figurative language</li>
+                        <li>Complex narrative structures and pacing</li>
+                        <li>Psychological depth and character development</li>
+                        <li>Thematic complexity (ambition, identity, freedom, etc.)</li>
+                        <li>Atmospheric and sensory detail</li>
+                        <li>Subtle emotional resonance</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Task:</strong><br>
+                        "Write a story (200-230 words) that explores the theme of ambition and its consequences. Your story should:
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>include a character whose ambition leads to unexpected results</li>
+                            <li>use description to convey the character's emotional state</li>
+                            <li>end with a reflection on the nature of success"</li>
+                        </ul>
+                    </div>
+
+                    <h4>C1 Creative Techniques:</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Technique</th>
+                                <th>C1 Application</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Figurative Language</td>
+                                <td>Sophisticated metaphors and symbolism</td>
+                                <td>"The silence was a heavy blanket, smothering her ambitions"</td>
+                            </tr>
+                            <tr>
+                                <td>Varied Syntax</td>
+                                <td>Inversion for emphasis and effect</td>
+                                <td>"Never had she anticipated such a profound transformation"</td>
+                            </tr>
+                            <tr>
+                                <td>Sensory Detail</td>
+                                <td>Abstract and emotional sensory description</td>
+                                <td>"The air tasted of regret and unfulfilled promises"</td>
+                            </tr>
+                            <tr>
+                                <td>Internal Monologue</td>
+                                <td>Complex psychological insight</td>
+                                <td>"Had he been wrong to sacrifice everything for recognition?"</td>
+                            </tr>
+                            <tr>
+                                <td>Atmospheric Setting</td>
+                                <td>Setting as reflection of theme</td>
+                                <td>"The decaying mansion mirrored his deteriorating values"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Common Themes at ISE III:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Ambition and its costs</li>
+                            <li>Identity and self-discovery</li>
+                            <li>Freedom vs. constraint</li>
+                            <li>The individual vs. society</li>
+                            <li>Memory and nostalgia</li>
+                            <li>Loss and transformation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RULES SECTION -->
+        <section id="rules" class="section">
+            <div class="card">
+                <div class="card-header">Portfolio Rules & Feedback Process</div>
+                <div class="card-body">
+                    <div class="warning-box">
+                        <strong>Critical Rules - Read Carefully:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Original work only:</strong> The portfolio must contain your own work and no one else's</li>
+                            <li><strong>No external corrections:</strong> Nobody except you personally should correct, add to, or remove anything from your tasks</li>
+                            <li><strong>Teacher feedback limited:</strong> Teachers may give only ONE piece of feedback per task using the official Student Portfolio Feedback Form</li>
+                            <li><strong>No specific corrections:</strong> Teachers must not correct or comment upon specific points of language or grammar</li>
+                            <li><strong>No writing on drafts:</strong> Teachers must not write on any draft, whether preparatory or final</li>
+                            <li><strong>Plagiarism warning:</strong> Tasks considered plagiarised or cheated will be marked as 'Ungraded'</li>
+                        </ul>
+                    </div>
+
+                    <h4>The Feedback Process:</h4>
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>First Draft</strong>
+                        <p>You write your first draft using reference materials as needed.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Teacher Review</strong>
+                        <p>Teacher completes ONE Student Portfolio Feedback Form per task, ticking relevant boxes about task fulfilment, organisation, and language.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Revision</strong>
+                        <p>You revise your work based on the general feedback provided. You may use reference materials again.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Final Version</strong>
+                        <p>You submit the final version with the feedback form attached.</p>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Permitted Resources:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Dictionaries (monolingual and bilingual)</li>
+                            <li>Grammar reference books</li>
+                            <li>Spell-check and grammar-check software</li>
+                            <li>Word processing packages</li>
+                            <li>The internet for research (but not for copying text)</li>
+                        </ul>
+                    </div>
+
+                    <h4>Submission Requirements:</h4>
+                    <ul class="checklist">
+                        <li>Present in the colour-coded plastic wallet provided by Trinity</li>
+                        <li>Include completed Portfolio Cover Sheet</li>
+                        <li>Attach Student Portfolio Feedback Form for each task</li>
+                        <li>Write task question number on each piece of work</li>
+                        <li>Write word count at the end of each task</li>
+                        <li>Submit to teacher at least 24 hours before examiner's arrival</li>
+                        <li>No access to portfolio from submission until after examiner's departure</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Portfolio Discussion in the Interview</div>
+                <div class="card-body">
+                    <p>During your Speaking & Listening interview, the examiner will discuss your Portfolio with you. Be prepared to:</p>
+                    
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Explain why you chose particular tasks</li>
+                        <li>Discuss your writing process and challenges</li>
+                        <li>Talk about how you incorporated feedback</li>
+                        <li>Explain your research or preparation for factual tasks</li>
+                        <li>Discuss themes and ideas in your creative writing</li>
+                        <li>Reflect on what you learned from the process</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Interview Questions about Portfolio:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>"Why did you choose this particular task from Section 1?"</li>
+                            <li>"What was the most challenging aspect of writing your report?"</li>
+                            <li>"How did you research the topic for your factual writing?"</li>
+                            <li>"What feedback did your teacher give you, and how did you respond to it?"</li>
+                            <li>"Where did you get the idea for your creative writing piece?"</li>
+                            <li>"If you were to rewrite one of your tasks, what would you change?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="card">
+                <div class="card-header">Portfolio Practice Exercises</div>
+                <div class="card-body">
+                    <p>Test your understanding of ISE III Portfolio requirements with these interactive exercises.</p>
+
+                    <!-- Exercise 1 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 1: Portfolio Components</div>
+                        <p><strong>How many tasks must you submit for the ISE III Portfolio?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 1 task</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 2 tasks</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) 3 tasks</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 4 tasks</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 2 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 2: Word Count</div>
+                        <p><strong>What is the correct word count for each ISE III Portfolio task?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 150-180 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 200-230 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 100-130 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 250-280 words</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 3 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 3: Section Requirements</div>
+                        <p><strong>Which three sections must be represented in your Portfolio?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Reading, Writing, Speaking</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Correspondence, Factual Writing, Creative & Descriptive Writing</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Formal, Informal, Academic</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Essay, Report, Story</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 4 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 4: Feedback Rules</div>
+                        <p><strong>How many times can a teacher provide feedback on each Portfolio task?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">A) Once per task</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) Unlimited times</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Three times per task</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Teachers cannot give feedback</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 5 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 5: Submission Timing</div>
+                        <p><strong>When must you submit your Portfolio to your teacher?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) On the exam day</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) At least 24 hours before the examiner arrives</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) One week before the exam</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Immediately after the interview</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 6 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 6: Permitted Resources</div>
+                        <p><strong>Which of the following resources are you allowed to use when preparing your Portfolio?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Only a pen and paper</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Dictionaries, grammar books, spell-checks, and the internet</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Only course textbooks</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) No resources allowed - it must be entirely your own knowledge</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 7 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 7: Plagiarism Consequences</div>
+                        <p><strong>What happens if a Portfolio task is found to be plagiarised?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) You receive a warning</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) The task receives zero points</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) It is marked as 'Ungraded'</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) You must retake the entire exam</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 8 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 8: Interview Connection</div>
+                        <p><strong>What happens to your Portfolio during the Speaking & Listening interview?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) It is returned to you for review</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) The examiner discusses it with you</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) It is not mentioned at all</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) You must present it formally to the examiner</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 9 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 9: Level Mixing</div>
+                        <p><strong>Can you include tasks from different ISE levels in your Portfolio?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">A) No, all tasks must be from the same level</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) Yes, you can mix ISE II and ISE III tasks</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Yes, as long as you have at least one C1 task</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Only if you are taking multiple levels</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 10 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 10: Teacher Corrections</div>
+                        <p><strong>Which of the following is a teacher NOT allowed to do?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Complete the Portfolio Feedback Form</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) Give general comments on task fulfilment</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) Correct specific grammar mistakes in your draft</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Indicate that the draft does not meet requirements</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Exercise Tips:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Click on the option you think is correct</li>
+                            <li>Green indicates correct; red indicates incorrect</li>
+                            <li>Review the relevant sections if you get questions wrong</li>
+                            <li>All answers are based on official Trinity College London specifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Writing Practice Activity</div>
+                <div class="card-body">
+                    <p>Test your C1 writing skills with this planning exercise:</p>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">✍️ Practice Task: Plan a Portfolio Piece</div>
+                        <p><strong>Task:</strong> You are planning to write a formal letter to a local government official about traffic congestion in your area.</p>
+                        
+                        <p style="margin-top: 1rem;"><strong>Plan your letter by answering these questions:</strong></p>
+                        <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>What is the purpose of your letter? (complaint, suggestion, request for information?)</li>
+                            <li>What are three specific points you will include?</li>
+                            <li>What sophisticated vocabulary could you use? (e.g., "mitigate," "congestion," "infrastructure")</li>
+                            <li>How will you structure your paragraphs?</li>
+                            <li>What formal opening and closing will you use?</li>
+                        </ol>
+
+                        <div class="example-box" style="margin-top: 1rem;">
+                            <strong>Sample Plan Structure:</strong><br>
+                            <strong>Opening:</strong> State purpose formally<br>
+                            <strong>Para 1:</strong> Describe current situation with specific examples<br>
+                            <strong>Para 2:</strong> Present proposed solutions with justification<br>
+                            <strong>Para 3:</strong> Request specific action and offer further cooperation<br>
+                            <strong>Closing:</strong> Formal sign-off with full name
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE III (C1) Portfolio Guide</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+
+        function checkAnswer(element, isCorrect) {
+            // Remove previous classes from siblings
+            const parent = element.parentElement;
+            const siblings = parent.querySelectorAll('.quiz-option');
+            siblings.forEach(sib => {
+                sib.classList.remove('correct', 'incorrect');
+                sib.style.pointerEvents = 'none';
+            });
+
+            // Add appropriate class
+            if (isCorrect) {
+                element.classList.add('correct');
+                showFeedback(parent, '✓ Correct! Well done.', 'success');
+            } else {
+                element.classList.add('incorrect');
+                // Highlight correct answer
+                siblings.forEach(sib => {
+                    if (sib.onclick.toString().includes('true')) {
+                        sib.classList.add('correct');
+                    }
+                });
+                showFeedback(parent, '✗ Incorrect. The correct answer is highlighted in green.', 'error');
+            }
+        }
+
+        function showFeedback(parent, message, type) {
+            const feedback = parent.querySelector('.feedback');
+            feedback.textContent = message;
+            feedback.style.display = 'block';
+            if (type === 'success') {
+                feedback.style.background = '#c8e6c9';
+                feedback.style.color = '#2e7d32';
+                feedback.style.border = '1px solid #81c784';
+            } else {
+                feedback.style.background = '#ffcdd2';
+                feedback.style.color = '#c62828';
+                feedback.style.border = '1px solid #ef9a9a';
+            }
+        }
+    </script>
+</body>
+</html>

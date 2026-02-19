@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE II (B2) - Full Exam Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1565c0;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #e3f2fd;
+            --dark: #263238;
+            --border: #90caf9;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --warning: #ef6c00;
+            --info: #0277bd;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d47a1 100%);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .timer {
+            background: white;
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: monospace;
+        }
+
+        .exam-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .section-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .section-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .section-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section-tab.completed {
+            color: var(--success);
+            border-bottom-color: var(--success);
+        }
+
+        .exam-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .exam-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instructions {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .reading-text {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .paragraph {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        .question {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .options {
+            margin-left: 1rem;
+        }
+
+        .option {
+            display: block;
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .option:hover {
+            background: var(--light);
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .writing-area {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            font-family: 'Georgia', serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+        }
+
+        .word-count {
+            text-align: right;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        .btn:hover {
+            background: #0d47a1;
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #37474f;
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-success:hover {
+            background: #1b5e20;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        .results {
+            background: white;
+            border: 2px solid var(--success);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .answer-key {
+            background: #f5f5f5;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+        }
+
+        .correct-answer {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .your-answer {
+            color: var(--primary);
+        }
+
+        .infographic {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .infographic-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-box {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timer {
+                margin-top: 1rem;
+            }
+            .section-tabs {
+                flex-wrap: wrap;
+            }
+            .infographic-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>Trinity ISE II (B2) Exam Simulation</h1>
+                <p style="opacity: 0.9; font-size: 0.9rem;">Reading & Writing | 2 Hours</p>
+            </div>
+            <div class="timer" id="timer">120:00</div>
+        </div>
+    </header>
+
+    <div class="exam-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+
+        <div class="section-tabs">
+            <button class="section-tab active" onclick="showSection('task1', this)">Task 1: Long Reading</button>
+            <button class="section-tab" onclick="showSection('task2', this)">Task 2: Multi-text</button>
+            <button class="section-tab" onclick="showSection('task3', this)">Task 3: Reading into Writing</button>
+            <button class="section-tab" onclick="showSection('task4', this)">Task 4: Extended Writing</button>
+            <button class="section-tab" onclick="showSection('results', this)" id="results-tab" style="display:none">Results</button>
+        </div>
+
+        <!-- TASK 1: LONG READING -->
+        <section id="task1" class="exam-section active">
+            <div class="card">
+                <div class="card-header">
+                    <span>Task 1 — Long Reading (20 minutes)</span>
+                    <span style="font-size: 0.9rem; font-weight: normal;">15 questions</span>
+                </div>
+                <div class="card-body">
+                    <div class="instructions">
+                        <strong>Instructions:</strong> Read the text about the importance of sleep and answer questions 1-15. 
+                        For questions 1-5, choose the best title for each paragraph. For questions 6-10, choose 5 true statements. 
+                        For questions 11-15, complete the sentences with exact words from the text (maximum 3 words).
+                    </div>
+
+                    <div class="reading-text">
+                        <h3 style="text-align: center; margin-bottom: 1rem;">The Science of Sleep</h3>
+                        
+                        <div class="paragraph">
+                            <strong>Paragraph 1</strong><br>
+                            Sleep is far more than simply a period of rest. While we once viewed sleep as a passive state where the body and mind shut down, modern science has revealed it to be an active and essential process for physical and mental wellbeing. During sleep, the brain consolidates memories, processes emotions, and clears out toxins that accumulate during waking hours. Without adequate sleep, our cognitive functions deteriorate rapidly, affecting everything from decision-making to emotional regulation.
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Paragraph 2</strong><br>
+                            Despite its importance, society has developed a problematic attitude toward sleep. We celebrate those who can function on minimal rest, viewing sleep as a luxury rather than a necessity. This cultural shift has been accelerated by technology, with smartphones and streaming services encouraging us to stay awake longer. The result is a global sleep deprivation epidemic, with the World Health Organization identifying it as a public health crisis affecting millions of people worldwide.
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Paragraph 3</strong><br>
+                            The consequences of chronic sleep deprivation extend far beyond feeling tired. Research has established clear links between insufficient sleep and serious health conditions including obesity, diabetes, cardiovascular disease, and weakened immune function. Mentally, lack of sleep increases anxiety and depression while reducing our capacity to cope with stress. Alarmingly, studies suggest that regularly getting less than six hours of sleep per night can reduce life expectancy by up to 15%.
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Paragraph 4</strong><br>
+                            Fortunately, improving sleep quality is achievable through relatively simple lifestyle changes. Maintaining a consistent sleep schedule, even on weekends, helps regulate our internal body clock. Creating a cool, dark, quiet sleeping environment signals to the brain that it's time to rest. Additionally, avoiding caffeine after midday and limiting screen time in the hour before bed can significantly improve both the speed at which we fall asleep and the quality of rest we obtain.
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Paragraph 5</strong><br>
+                            Looking forward, some researchers are exploring more innovative solutions to our sleep crisis. Companies are developing smart mattresses that adjust temperature and firmness throughout the night. Others are investigating how genetic factors influence sleep patterns, potentially leading to personalized sleep therapies. However, technology alone cannot solve the problem; a fundamental shift in how we value and prioritize sleep is essential for the health of future generations.
+                        </div>
+                    </div>
+
+                    <!-- Questions 1-5: Title Matching -->
+                    <div class="question">
+                        <div class="question-number">Questions 1-5: Title Matching</div>
+                        <p style="margin-bottom: 1rem;">Choose the best title for each paragraph from A-F below. There is one extra title.</p>
+                        
+                        <div style="background: white; padding: 1rem; margin-bottom: 1rem; border: 1px solid #ddd;">
+                            <strong>Titles:</strong><br>
+                            A. Sleep as an active process<br>
+                            B. The future of sleep research<br>
+                            C. Health risks of poor sleep<br>
+                            D. Practical solutions for better rest<br>
+                            E. Society's problematic relationship with sleep<br>
+                            F. Economic costs of sleep deprivation
+                        </div>
+
+                        <div class="options">
+                            <label class="option">1. Paragraph 1: 
+                                <select id="q1" onchange="saveAnswer(1, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                            <label class="option">2. Paragraph 2: 
+                                <select id="q2" onchange="saveAnswer(2, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                            <label class="option">3. Paragraph 3: 
+                                <select id="q3" onchange="saveAnswer(3, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                            <label class="option">4. Paragraph 4: 
+                                <select id="q4" onchange="saveAnswer(4, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                            <label class="option">5. Paragraph 5: 
+                                <select id="q5" onchange="saveAnswer(5, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Questions 6-10: True Statements -->
+                    <div class="question">
+                        <div class="question-number">Questions 6-10: True Statements</div>
+                        <p style="margin-bottom: 1rem;">Choose 5 true statements from A-H according to the text.</p>
+                        
+                        <div class="options">
+                            <label class="option"><input type="checkbox" id="q6" value="A" onchange="saveCheckbox(6, 'A')"> A. Sleep was traditionally viewed as a passive state.</label>
+                            <label class="option"><input type="checkbox" id="q7" value="B" onchange="saveCheckbox(7, 'B')"> B. The brain removes toxins during sleep.</label>
+                            <label class="option"><input type="checkbox" id="q8" value="C" onchange="saveCheckbox(8, 'C')"> C. Most people get sufficient sleep on weekends.</label>
+                            <label class="option"><input type="checkbox" id="q9" value="D" onchange="saveCheckbox(9, 'D')"> D. Technology has contributed to reduced sleep time.</label>
+                            <label class="option"><input type="checkbox" id="q10" value="E" onchange="saveCheckbox(10, 'E')"> E. Sleep deprivation affects mental health.</label>
+                            <label class="option"><input type="checkbox" id="q11" value="F" onchange="saveCheckbox(11, 'F')"> F. Regular sleep of less than 6 hours can reduce life expectancy.</label>
+                            <label class="option"><input type="checkbox" id="q12" value="G" onchange="saveCheckbox(12, 'G')"> G. Caffeine should be avoided completely for better sleep.</label>
+                            <label class="option"><input type="checkbox" id="q13" value="H" onchange="saveCheckbox(13, 'H')"> H. Genetic research may lead to personalized sleep treatments.</label>
+                        </div>
+                    </div>
+
+                    <!-- Questions 11-15: Sentence Completion -->
+                    <div class="question">
+                        <div class="question-number">Questions 11-15: Sentence Completion</div>
+                        <p style="margin-bottom: 1rem;">Complete the sentences with exact words from the text (maximum 3 words).</p>
+                        
+                        <div class="options">
+                            <label class="option">11. During sleep, the brain consolidates <input type="text" id="q14" class="text-input" style="width: 200px; display: inline;" onchange="saveText(14, this.value)"> and processes emotions.</label>
+                            <label class="option">12. Sleep deprivation has been identified as a <input type="text" id="q15" class="text-input" style="width: 200px; display: inline;" onchange="saveText(15, this.value)"> by the WHO.</label>
+                            <label class="option">13. Lack of sleep reduces our capacity to <input type="text" id="q16" class="text-input" style="width: 200px; display: inline;" onchange="saveText(16, this.value)"> with stress.</label>
+                            <label class="option">14. A consistent sleep schedule helps regulate our <input type="text" id="q17" class="text-input" style="width: 200px; display: inline;" onchange="saveText(17, this.value)">.</label>
+                            <label class="option">15. <input type="text" id="q18" class="text-input" style="width: 200px; display: inline;" onchange="saveText(18, this.value)"> alone cannot solve the sleep crisis.</label>
+                        </div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="showSection('intro', this)">← Back to Intro</button>
+                        <button class="btn" onclick="showSection('task2', this)">Next: Task 2 →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 2: MULTI-TEXT READING -->
+        <section id="task2" class="exam-section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Task 2 — Multi-text Reading (20 minutes)</span>
+                    <span style="font-size: 0.9rem; font-weight: normal;">15 questions</span>
+                </div>
+                <div class="card-body">
+                    <div class="instructions">
+                        <strong>Instructions:</strong> Read the four texts about remote working and answer questions 16-30. 
+                        Text D is an infographic. For questions 16-20, match descriptions to texts. For questions 21-25, 
+                        choose 5 true statements. For questions 26-30, complete the notes with exact words from the texts.
+                    </div>
+
+                    <div class="reading-text">
+                        <h3 style="text-align: center; margin-bottom: 1rem;">Remote Working: The New Normal</h3>
+                        
+                        <div class="paragraph">
+                            <strong>Text A — Academic Article</strong><br>
+                            The shift to remote working has been one of the most significant workplace transformations in recent history. Organizations worldwide have discovered that productivity does not necessarily require physical presence in an office. However, this transition has not been without challenges. Communication breakdowns, feelings of isolation among employees, and difficulties in maintaining company culture have emerged as primary concerns. Successful remote working requires intentional strategies, including regular video check-ins, virtual team-building activities, and clear digital communication protocols.
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Text B — Employee Blog Post</strong><br>
+                            I've been working from home for two years now, and honestly, I can't imagine going back to the office full-time. The flexibility is incredible—I can start early when I'm most productive, take a proper lunch break with my family, and avoid that exhausting commute. That said, it took me months to establish boundaries. At first, I was answering emails at 10pm because my laptop was right there. Now I have a dedicated workspace and strict 'office hours.' My advice? Invest in a good chair and never work from your bed!
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Text C — Company Report</strong><br>
+                            Our annual survey of 5,000 employees reveals mixed feelings about remote working. While 78% appreciate the flexibility, 65% report feeling disconnected from colleagues. Interestingly, 82% say they would prefer a hybrid model, coming into the office 2-3 days per week. The data suggests that completely remote work may not be sustainable long-term for most employees. Companies should consider redesigning office spaces to facilitate collaboration rather than individual desk work, creating 'destination offices' that employees want to visit.
+                        </div>
+
+                        <div class="infographic">
+                            <strong>Text D — Infographic: Remote Working Statistics</strong>
+                            <div class="infographic-grid">
+                                <div class="info-box">
+                                    <h4>Productivity</h4>
+                                    <p style="font-size: 2rem; color: var(--primary);">+13%</p>
+                                    <p>Average increase in productivity for remote workers</p>
+                                </div>
+                                <div class="info-box">
+                                    <h4>Commute Time Saved</h4>
+                                    <p style="font-size: 2rem; color: var(--primary);">52 min</p>
+                                    <p>Average daily commute time saved per employee</p>
+                                </div>
+                                <div class="info-box">
+                                    <h4>Carbon Reduction</h4>
+                                    <p style="font-size: 2rem; color: var(--primary);">-54%</p>
+                                    <p>Reduction in carbon emissions from transport</p>
+                                </div>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Challenges:</strong> 47% struggle with work-life balance | 38% feel isolated | 29% have inadequate home office setup</p>
+                        </div>
+                    </div>
+
+                    <!-- Questions 16-20: Text Matching -->
+                    <div class="question">
+                        <div class="question-number">Questions 16-20: Text Matching</div>
+                        <p style="margin-bottom: 1rem;">Which text (A, B, C, or D) does each statement refer to? You can use any letter more than once.</p>
+                        
+                        <div class="options">
+                            <label class="option">16. Presents statistical data about environmental benefits: 
+                                <select id="q19" onchange="saveAnswer(19, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </label>
+                            <label class="option">17. Describes personal experience and recommendations: 
+                                <select id="q20" onchange="saveAnswer(20, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </label>
+                            <label class="option">18. Suggests a hybrid working model as optimal: 
+                                <select id="q21" onchange="saveAnswer(21, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </label>
+                            <label class="option">19. Discusses organizational strategies for remote work: 
+                                <select id="q22" onchange="saveAnswer(22, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </label>
+                            <label class="option">20. Provides specific survey data about employee preferences: 
+                                <select id="q23" onchange="saveAnswer(23, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Questions 21-25: True Statements -->
+                    <div class="question">
+                        <div class="question-number">Questions 21-25: True Statements</div>
+                        <p style="margin-bottom: 1rem;">Choose 5 true statements from A-H according to the texts.</p>
+                        
+                        <div class="options">
+                            <label class="option"><input type="checkbox" id="q24" value="A" onchange="saveCheckbox(24, 'A')"> A. Remote working always increases productivity.</label>
+                            <label class="option"><input type="checkbox" id="q25" value="B" onchange="saveCheckbox(25, 'B')"> B. Communication challenges are a concern in remote work.</label>
+                            <label class="option"><input type="checkbox" id="q26" value="C" onchange="saveCheckbox(26, 'C')"> C. Most employees want to return to full-time office work.</label>
+                            <label class="option"><input type="checkbox" id="q27" value="D" onchange="saveCheckbox(27, 'D')"> D. Setting boundaries is important for remote workers.</label>
+                            <label class="option"><input type="checkbox" id="q28" value="E" onchange="saveCheckbox(28, 'E')"> E. A hybrid model is preferred by the majority of employees.</label>
+                            <label class="option"><input type="checkbox" id="q29" value="F" onchange="saveCheckbox(29, 'F')"> F. Remote working reduces carbon emissions.</label>
+                            <label class="option"><input type="checkbox" id="q30" value="G" onchange="saveCheckbox(30, 'G')"> G. All employees struggle with isolation when working remotely.</label>
+                            <label class="option"><input type="checkbox" id="q31" value="H" onchange="saveCheckbox(31, 'H')"> H. Office spaces should be redesigned for collaboration.</label>
+                        </div>
+                    </div>
+
+                    <!-- Questions 26-30: Notes Completion -->
+                    <div class="question">
+                        <div class="question-number">Questions 26-30: Notes Completion</div>
+                        <p style="margin-bottom: 1rem;">Complete the notes with exact words from the texts (maximum 3 words).</p>
+                        
+                        <div style="background: white; padding: 1rem; border: 1px solid #ddd;">
+                            <strong>Notes: Remote Working</strong><br><br>
+                            <strong>Challenges:</strong><br>
+                            • Communication <input type="text" id="q32" class="text-input" style="width: 150px; display: inline;" onchange="saveText(32, this.value)"><br>
+                            • Feelings of <input type="text" id="q33" class="text-input" style="width: 150px; display: inline;" onchange="saveText(33, this.value)"><br>
+                            • Difficulties maintaining <input type="text" id="q34" class="text-input" style="width: 150px; display: inline;" onchange="saveText(34, this.value)"><br><br>
+                            <strong>Solutions:</strong><br>
+                            • Regular <input type="text" id="q35" class="text-input" style="width: 150px; display: inline;" onchange="saveText(35, this.value)"><br>
+                            • <input type="text" id="q36" class="text-input" style="width: 150px; display: inline;" onchange="saveText(36, this.value)"> offices for collaboration
+                        </div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="showSection('task1', this)">← Back to Task 1</button>
+                        <button class="btn" onclick="showSection('task3', this)">Next: Task 3 →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 3: READING INTO WRITING -->
+        <section id="task3" class="exam-section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Task 3 — Reading into Writing (40 minutes)</span>
+                    <span style="font-size: 0.9rem; font-weight: normal;">150-180 words</span>
+                </div>
+                <div class="card-body">
+                    <div class="instructions">
+                        <strong>Instructions:</strong> Use the information from Texts A-D in Task 2 to write an essay (150-180 words) 
+                        about remote working. Do not copy from the texts. Use your own words as far as possible.
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Writing Task</div>
+                        <p>Write an essay (150-180 words) about remote working for your college magazine.</p>
+                        <div style="background: white; padding: 1rem; margin: 1rem 0; border: 1px solid #ddd;">
+                            <strong>You should:</strong><br>
+                            <div style="margin-left: 1rem; margin-top: 0.5rem;">
+                                • explain the benefits of remote working<br>
+                                • discuss the challenges it presents<br>
+                                • suggest how companies can support remote workers
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #f9f9f9; padding: 1rem; margin-bottom: 1rem;">
+                        <strong>Planning Space</strong> (No marks given for planning notes)<br>
+                        <textarea class="writing-area" style="min-height: 100px; background: white;" placeholder="Make notes here to help plan your essay..."></textarea>
+                    </div>
+
+                    <div>
+                        <strong>Your Essay</strong>
+                        <textarea id="task3writing" class="writing-area" placeholder="Write your essay here (150-180 words)..." oninput="countWords(this, 'count3')"></textarea>
+                        <div class="word-count">Word count: <span id="count3">0</span> / 150-180 words</div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="showSection('task2', this)">← Back to Task 2</button>
+                        <button class="btn" onclick="showSection('task4', this)">Next: Task 4 →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 4: EXTENDED WRITING -->
+        <section id="task4" class="exam-section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Task 4 — Extended Writing (40 minutes)</span>
+                    <span style="font-size: 0.9rem; font-weight: normal;">150-180 words</span>
+                </div>
+                <div class="card-body">
+                    <div class="instructions">
+                        <strong>Instructions:</strong> Write your answer in 150-180 words. No reading texts are provided for this task. 
+                        Use your own ideas and knowledge.
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Writing Task</div>
+                        <p>Write an article (150-180 words) for your college magazine with the title 'Someone I admire'.</p>
+                        <div style="background: white; padding: 1rem; margin: 1rem 0; border: 1px solid #ddd;">
+                            <strong>Choose a public figure from the past or present, giving reasons for your choice.</strong><br>
+                            <div style="margin-left: 1rem; margin-top: 0.5rem;">
+                                • describe the person's achievements<br>
+                                • explain why this person is a good role model
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #f9f9f9; padding: 1rem; margin-bottom: 1rem;">
+                        <strong>Planning Space</strong> (No marks given for planning notes)<br>
+                        <textarea class="writing-area" style="min-height: 100px; background: white;" placeholder="Make notes here to help plan your article..."></textarea>
+                    </div>
+
+                    <div>
+                        <strong>Your Article</strong>
+                        <textarea id="task4writing" class="writing-area" placeholder="Write your article here (150-180 words)..." oninput="countWords(this, 'count4')"></textarea>
+                        <div class="word-count">Word count: <span id="count4">0</span> / 150-180 words</div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="showSection('task3', this)">← Back to Task 3</button>
+                        <button class="btn btn-success" onclick="submitExam()">Submit Exam</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS SECTION -->
+        <section id="results" class="exam-section">
+            <div class="results">
+                <h2 style="color: var(--primary); margin-bottom: 1rem;">Exam Completed!</h2>
+                <div class="score-circle" id="finalScore">--</div>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Your Score: <span id="scoreText">Calculating...</span></p>
+                
+                <div style="text-align: left; max-width: 600px; margin: 0 auto;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Answer Key - Task 1</h3>
+                    <div class="answer-key">
+                        <p><strong>Title Matching:</strong></p>
+                        <p>1. <span class="correct-answer">A</span> (Sleep as an active process) - Your answer: <span class="your-answer" id="ans1">--</span></p>
+                        <p>2. <span class="correct-answer">E</span> (Society's problematic relationship with sleep) - Your answer: <span class="your-answer" id="ans2">--</span></p>
+                        <p>3. <span class="correct-answer">C</span> (Health risks of poor sleep) - Your answer: <span class="your-answer" id="ans3">--</span></p>
+                        <p>4. <span class="correct-answer">D</span> (Practical solutions for better rest) - Your answer: <span class="your-answer" id="ans4">--</span></p>
+                        <p>5. <span class="correct-answer">B</span> (The future of sleep research) - Your answer: <span class="your-answer" id="ans5">--</span></p>
+                    </div>
+                    
+                    <div class="answer-key">
+                        <p><strong>True Statements (any 5 of):</strong> A, B, D, E, F, H</p>
+                        <p>False statements: C (not mentioned), G (should avoid after midday, not completely)</p>
+                    </div>
+
+                    <div class="answer-key">
+                        <p><strong>Sentence Completion:</strong></p>
+                        <p>11. <span class="correct-answer">memories</span> - Your answer: <span class="your-answer" id="ans14">--</span></p>
+                        <p>12. <span class="correct-answer">public health crisis</span> - Your answer: <span class="your-answer" id="ans15">--</span></p>
+                        <p>13. <span class="correct-answer">cope</span> - Your answer: <span class="your-answer" id="ans16">--</span></p>
+                        <p>14. <span class="correct-answer">internal body clock</span> - Your answer: <span class="your-answer" id="ans17">--</span></p>
+                        <p>15. <span class="correct-answer">Technology</span> - Your answer: <span class="your-answer" id="ans18">--</span></p>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 2rem 0 1rem;">Answer Key - Task 2</h3>
+                    <div class="answer-key">
+                        <p><strong>Text Matching:</strong></p>
+                        <p>16. <span class="correct-answer">D</span> - Your answer: <span class="your-answer" id="ans19">--</span></p>
+                        <p>17. <span class="correct-answer">B</span> - Your answer: <span class="your-answer" id="ans20">--</span></p>
+                        <p>18. <span class="correct-answer">C</span> - Your answer: <span class="your-answer" id="ans21">--</span></p>
+                        <p>19. <span class="correct-answer">A</span> - Your answer: <span class="your-answer" id="ans22">--</span></p>
+                        <p>20. <span class="correct-answer">C</span> - Your answer: <span class="your-answer" id="ans23">--</span></p>
+                    </div>
+
+                    <div class="answer-key">
+                        <p><strong>True Statements:</strong> B, D, E, F, H</p>
+                        <p>False: A (not always), C (want hybrid, not full-time), G (38%, not all)</p>
+                    </div>
+
+                    <div class="answer-key">
+                        <p><strong>Notes Completion:</strong></p>
+                        <p>26. <span class="correct-answer">breakdowns</span> - Your answer: <span class="your-answer" id="ans32">--</span></p>
+                        <p>27. <span class="correct-answer">isolation</span> - Your answer: <span class="your-answer" id="ans33">--</span></p>
+                        <p>28. <span class="correct-answer">company culture</span> - Your answer: <span class="your-answer" id="ans34">--</span></p>
+                        <p>29. <span class="correct-answer">video check-ins</span> - Your answer: <span class="your-answer" id="ans35">--</span></p>
+                        <p>30. <span class="correct-answer">Destination</span> - Your answer: <span class="your-answer" id="ans36">--</span></p>
+                    </div>
+
+                    <div style="background: var(--light); padding: 1rem; margin-top: 2rem; border-radius: 4px;">
+                        <h4 style="color: var(--primary);">Writing Tasks Assessment</h4>
+                        <p style="margin-top: 0.5rem;">Your writing tasks have been saved. In a real exam, these would be assessed by trained examiners using the Trinity rating scales for:</p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Task fulfilment</li>
+                            <li>Organisation and structure</li>
+                            <li>Language control</li>
+                            <li>Reading for writing (Task 3 only)</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn" onclick="location.reload()">Start New Exam</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Timer functionality
+        let timeRemaining = 7200; // 120 minutes in seconds
+        let timerInterval;
+        const answers = {};
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        // Navigation
+        function showSection(sectionId, btn) {
+            // Hide all sections
+            document.querySelectorAll('.exam-section').forEach(s => s.classList.remove('active'));
+            
+            // Show selected section
+            if (sectionId !== 'intro') {
+                document.getElementById(sectionId).classList.add('active');
+            }
+            
+            // Update tabs
+            document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            
+            // Update progress
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const totalQuestions = 30;
+            let answered = 0;
+            
+            // Count answered questions
+            for (let i = 1; i <= 36; i++) {
+                if (answers[i]) answered++;
+            }
+            
+            // Add writing tasks if completed
+            const task3 = document.getElementById('task3writing').value;
+            const task4 = document.getElementById('task4writing').value;
+            if (task3 && task3.length > 50) answered += 2;
+            if (task4 && task4.length > 50) answered += 2;
+            
+            const percent = Math.min((answered / totalQuestions) * 100, 100);
+            document.getElementById('progress').style.width = percent + '%';
+        }
+
+        // Save answers
+        function saveAnswer(qNum, value) {
+            answers[qNum] = value;
+            updateProgress();
+        }
+
+        function saveCheckbox(qNum, value) {
+            if (!answers[qNum]) answers[qNum] = [];
+            const index = answers[qNum].indexOf(value);
+            if (index > -1) {
+                answers[qNum].splice(index, 1);
+            } else {
+                answers[qNum].push(value);
+            }
+            updateProgress();
+        }
+
+        function saveText(qNum, value) {
+            answers[qNum] = value;
+            updateProgress();
+        }
+
+        function countWords(textarea, counterId) {
+            const text = textarea.value.trim();
+            const words = text.split(/\s+/).filter(w => w.length > 0);
+            document.getElementById(counterId).textContent = words.length;
+            updateProgress();
+        }
+
+        // Submit exam
+        function submitExam() {
+            clearInterval(timerInterval);
+            
+            // Calculate score for objective questions
+            let score = 0;
+            const correctAnswers = {
+                1: 'A', 2: 'E', 3: 'C', 4: 'D', 5: 'B',
+                19: 'D', 20: 'B', 21: 'C', 22: 'A', 23: 'C'
+            };
+            
+            // Check title matching and text matching
+            for (let i = 1; i <= 5; i++) {
+                if (answers[i] === correctAnswers[i]) score++;
+                document.getElementById('ans' + i).textContent = answers[i] || '--';
+            }
+            
+            for (let i = 19; i <= 23; i++) {
+                if (answers[i] === correctAnswers[i]) score++;
+                document.getElementById('ans' + i).textContent = answers[i] || '--';
+            }
+            
+            // Display sentence completion answers
+            for (let i = 14; i <= 18; i++) {
+                document.getElementById('ans' + i).textContent = answers[i] || '--';
+            }
+            
+            for (let i = 32; i <= 36; i++) {
+                document.getElementById('ans' + i).textContent = answers[i] || '--';
+            }
+            
+            // Show results
+            document.getElementById('results-tab').style.display = 'block';
+            showSection('results', document.getElementById('results-tab'));
+            
+            const percentage = Math.round((score / 15) * 100);
+            document.getElementById('finalScore').textContent = percentage + '%';
+            document.getElementById('scoreText').textContent = score + ' out of 15 correct';
+        }
+
+        // Start timer on page load
+        window.onload = startTimer;
+    </script>
+</body>
+</html>

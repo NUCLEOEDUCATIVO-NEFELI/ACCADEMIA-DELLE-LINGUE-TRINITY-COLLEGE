@@ -1,0 +1,1335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE III (C1) - Complete Exam Guide & Task Explanations</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6a1b9a;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #f3e5f5;
+            --dark: #263238;
+            --border: #ce93d8;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --c1-color: #6a1b9a;
+            --warning: #ef6c00;
+            --info: #0277bd;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #4a148c 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--info);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin: 2rem 0;
+            border-radius: 8px;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .task-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .task-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .task-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .timing-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .word-count {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .subject-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .subject-item {
+            background: var(--light);
+            padding: 0.75rem;
+            border-left: 3px solid var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .step-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .exercise-box {
+            background: #fff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .exercise-title {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            display: block;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: var(--light);
+            border-color: var(--primary);
+        }
+
+        .quiz-option.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background: var(--error-bg);
+            border-color: var(--error);
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .task-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.5rem; }
+            .subject-list { grid-template-columns: 1fr; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE III (C1)</h1>
+            <p>Integrated Skills in English - Complete Task Guide</p>
+            <div class="level-badge">CEFR Level C1</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE III (C1) Complete Task Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE III Complete Task Breakdown</h1>
+            <p class="page-subtitle">Reading, Writing, Speaking & Listening at C1 Level</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('reading', this)">Reading Tasks</button>
+            <button class="nav-tab" onclick="showSection('writing', this)">Writing Tasks</button>
+            <button class="nav-tab" onclick="showSection('speaking', this)">Speaking Tasks</button>
+            <button class="nav-tab" onclick="showSection('listening', this)">Listening Tasks</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">Practice Exercises</button>
+            <button class="nav-tab" onclick="showSection('video', this)">Sample Video</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">ISE III Exam Overview (C1)</div>
+                <div class="card-body">
+                    <p>ISE III is a four-skills exam at CEFR C1 level (Proficient User). The exam demonstrates you can understand a wide range of demanding, longer texts, express yourself fluently and spontaneously without much obvious searching for expressions, and use language flexibly and effectively for social, academic, and professional purposes.</p>
+
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-icon">📖</div>
+                            <div class="task-title">Reading & Writing</div>
+                            <p>2 hours<br>4 tasks<br>200-230 words per writing task</p>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-icon">🎤</div>
+                            <div class="task-title">Speaking & Listening</div>
+                            <p>25 minutes<br>4 tasks<br>One-to-one with examiner</p>
+                        </div>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Key Differences from ISE II (B2):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Longer texts:</strong> 700 words vs. 500-900 words</li>
+                            <li><strong>More complex writing:</strong> 200-230 words vs. 150-180 words</li>
+                            <li><strong>Formal presentation:</strong> Topic task includes 4-minute presentation with handout</li>
+                            <li><strong>Extended speaking time:</strong> 25 minutes vs. 20 minutes</li>
+                            <li><strong>Abstract topics:</strong> Ambitions, stereotypes, role models, economic issues</li>
+                            <li><strong>C1 language functions:</strong> Deducing, inferring, hypothesising, staging</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Complete Exam Format</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Module</th>
+                                <th>Task</th>
+                                <th>Time</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4"><strong>Reading & Writing</strong></td>
+                                <td>Task 1: Long Reading</td>
+                                <td><span class="timing-badge">20 mins</span></td>
+                                <td>Read 1 text (700 words), answer 15 questions</td>
+                            </tr>
+                            <tr>
+                                <td>Task 2: Multi-text Reading</td>
+                                <td><span class="timing-badge">20 mins</span></td>
+                                <td>Read 4 texts (700 words total), answer 15 questions</td>
+                            </tr>
+                            <tr>
+                                <td>Task 3: Reading into Writing</td>
+                                <td><span class="timing-badge">40 mins</span></td>
+                                <td>Write 200-230 words using Task 2 information</td>
+                            </tr>
+                            <tr>
+                                <td>Task 4: Extended Writing</td>
+                                <td><span class="timing-badge">40 mins</span></td>
+                                <td>Write 200-230 words (essay, article, email, review)</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4"><strong>Speaking & Listening</strong></td>
+                                <td>Topic Task (Presentation + Discussion)</td>
+                                <td><span class="timing-badge">8 mins</span></td>
+                                <td>4-min formal presentation with handout + 4-min discussion</td>
+                            </tr>
+                            <tr>
+                                <td>Collaborative Task</td>
+                                <td><span class="timing-badge">4 mins</span></td>
+                                <td>Lead interaction based on examiner prompt</td>
+                            </tr>
+                            <tr>
+                                <td>Conversation Task</td>
+                                <td><span class="timing-badge">3 mins</span></td>
+                                <td>Discuss one subject area chosen by examiner</td>
+                            </tr>
+                            <tr>
+                                <td>Independent Listening Task</td>
+                                <td><span class="timing-badge">8 mins</span></td>
+                                <td>Listen twice, report gist, answer questions</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Subject Areas for ISE III</div>
+                <div class="card-body">
+                    <p>All tasks (reading, writing, and conversation) relate to these subject areas:</p>
+                    <div class="subject-list">
+                        <div class="subject-item"><strong>Ambitions</strong></div>
+                        <div class="subject-item"><strong>Independence</strong></div>
+                        <div class="subject-item"><strong>Stereotypes</strong></div>
+                        <div class="subject-item"><strong>Role Models</strong></div>
+                        <div class="subject-item"><strong>Competitiveness</strong></div>
+                        <div class="subject-item"><strong>Young People's Rights</strong></div>
+                        <div class="subject-item"><strong>The Media</strong></div>
+                        <div class="subject-item"><strong>Advertising</strong></div>
+                        <div class="subject-item"><strong>Lifestyles</strong></div>
+                        <div class="subject-item"><strong>The Arts</strong></div>
+                        <div class="subject-item"><strong>Rights of the Individual</strong></div>
+                        <div class="subject-item"><strong>Economic Issues</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- READING SECTION -->
+        <section id="reading" class="section">
+            <div class="card">
+                <div class="card-header">Task 1: Long Reading (20 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Read one complex text of approximately <strong>700 words</strong> (divided into 5 paragraphs) and answer 15 questions testing different reading skills at C1 level.
+                    </div>
+
+                    <h4>Question Types Breakdown:</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Questions 1-5: Title Matching</strong>
+                        <p style="margin-top: 0.5rem;">Match the correct title to each of the 5 paragraphs. You have 6 titles to choose from (one is a distractor).</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> Paragraph discusses economic inequality solutions. Correct title: "Addressing the Wealth Gap"
+                        </div>
+                        <p><strong>Skill tested:</strong> Reading for gist, main ideas, and implicit meaning</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Questions 6-10: True Statements Selection</strong>
+                        <p style="margin-top: 0.5rem;">Choose 5 true statements from a list of 8. Three statements are false according to the text.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> "Economic inequality has decreased in developed nations" (True/False based on text evidence)
+                        </div>
+                        <p><strong>Skill tested:</strong> Reading for specific factual information and inference</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Questions 11-15: Sentence Completion</strong>
+                        <p style="margin-top: 0.5rem;">Complete sentences with <strong>exact words from the text</strong> (maximum 3 words per gap).</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> "The author suggests that _______ policies are necessary to address climate change."<br>
+                            Answer from text: "comprehensive environmental"
+                        </div>
+                        <p><strong>Skill tested:</strong> Reading for detail and precise information</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>C1 Reading Strategies:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Identify tone and attitude:</strong> Is the author critical, supportive, or neutral?</li>
+                            <li><strong>Recognise implicit meaning:</strong> What is suggested but not directly stated?</li>
+                            <li><strong>Track argument development:</strong> How does the writer build their case?</li>
+                            <li><strong>Watch for hedging language:</strong> "may," "could," "potentially" indicate uncertainty</li>
+                            <li><strong>Understand discourse markers:</strong> "however," "furthermore," "consequently"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Task 2: Multi-text Reading (20 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Read <strong>4 short texts</strong> (approximately 700 words total) on the same theme. One text is an infographic (diagram, table, or chart with text). Answer 15 questions.
+                    </div>
+
+                    <h4>Question Types Breakdown:</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Questions 16-20: Text Matching</strong>
+                        <p style="margin-top: 0.5rem;">Match descriptions to the correct text (A, B, C, or D). Tests understanding of main idea or purpose of each text.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> "Which text presents statistical evidence?" → Match to correct letter
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Questions 21-25: True Statements Selection</strong>
+                        <p style="margin-top: 0.5rem;">Choose 5 true statements from 8 options based on information across all four texts.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Questions 26-30: Summary Notes Completion</strong>
+                        <p style="margin-top: 0.5rem;">Complete summary notes using exact words from the texts (maximum 3 words per gap). The notes synthesise key information from all four texts.</p>
+                        <div class="warning-box">
+                            <strong>Important:</strong> The information in these texts is used for Task 3 (Reading into Writing). Pay attention to facts, statistics, opinions, and examples you can use in your writing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WRITING SECTION -->
+        <section id="writing" class="section">
+            <div class="card">
+                <div class="card-header">Task 3: Reading into Writing (40 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Requirements:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Write <strong>200-230 words</strong> <span class="word-count">200-230 words</span></li>
+                            <li>Use information from <strong>all four texts in Task 2</strong></li>
+                            <li>Include <strong>three content points</strong> specified in the prompt</li>
+                            <li>Use your <strong>own words</strong> - copying from texts results in penalties</li>
+                            <li>Genre: Article, essay, formal/informal email, review, or report</li>
+                        </ul>
+                    </div>
+
+                    <h4>Sample Task Structure:</h4>
+                    <div class="example-box">
+                        <strong>Example Prompt:</strong><br>
+                        "Write an article (200-230 words) for a political magazine about economic inequality in your country. Use the information from texts A-D to:<br>
+                        » explain the causes of economic inequality<br>
+                        » evaluate the effectiveness of current government policies<br>
+                        » suggest practical solutions for reducing the wealth gap"
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Analyse the Prompt</strong>
+                        <p>Identify the three bullet points you must address. Note the genre (article) and register (formal/academic).</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Select and Adapt Information</strong>
+                        <p>Go back to Task 2 texts. Find relevant information for each bullet point. Make notes in your own words:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Text A: Causes → "globalisation and technological change"</li>
+                            <li>Text B: Current policies → "progressive taxation with mixed results"</li>
+                            <li>Text C: Solutions → "investment in education and infrastructure"</li>
+                            <li>Text D: Expert opinion → "minimum wage increases and wealth taxes"</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Plan Your Structure</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>Introduction (30-35 words):</strong> Hook the reader and introduce the topic</li>
+                            <li><strong>Body Paragraph 1 (50-60 words):</strong> Address bullet point 1 with evidence from texts</li>
+                            <li><strong>Body Paragraph 2 (50-60 words):</strong> Address bullet point 2 with evaluation</li>
+                            <li><strong>Body Paragraph 3 (40-50 words):</strong> Address bullet point 3 + examples</li>
+                            <li><strong>Conclusion (30-35 words):</strong> Summary + forward-looking statement</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Critical Success Factors:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>✓ Synthesise - combine information from multiple texts</li>
+                            <li>✓ Include information from ALL four texts</li>
+                            <li>✓ Address all three bullet points explicitly</li>
+                            <li>✓ Use sophisticated linking words (furthermore, however, consequently)</li>
+                            <li>✓ Maintain consistent formal register throughout</li>
+                            <li>✓ Use C1 grammar structures (inversion, subjunctive, advanced conditionals)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Task 4: Extended Writing (40 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Requirements:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Write <strong>200-230 words</strong> <span class="word-count">200-230 words</span></li>
+                            <li><strong>No reading texts provided</strong> - use your own ideas and knowledge</li>
+                            <li>Include <strong>two content points</strong> specified in the prompt</li>
+                            <li>Genre: Descriptive essay, discursive essay, argumentative essay, article, formal/informal email/letter, review, or report</li>
+                        </ul>
+                    </div>
+
+                    <h4>C1 Genre Requirements:</h4>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">1. Argumentative Essay</h4>
+                        <p>Clear thesis, sophisticated argumentation, counterarguments, refutation, persuasive language.</p>
+                        <p><strong>Example:</strong> "To what extent has social media improved communication? Discuss both sides and give your opinion."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">2. Discursive Essay</h4>
+                        <p>Balanced discussion of different viewpoints, objective tone, weighing evidence.</p>
+                        <p><strong>Example:</strong> "Discuss the advantages and disadvantages of artificial intelligence in the workplace."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">3. Article (Magazine/Online)</h4>
+                        <p>Engaging title, sophisticated vocabulary, rhetorical devices, authoritative tone.</p>
+                        <p><strong>Example:</strong> "Write an article about the future of renewable energy."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">4. Formal Email/Letter</h4>
+                        <p>Highly professional tone, complex sentence structures, formal conventions, persuasive purpose.</p>
+                        <p><strong>Example:</strong> "Write a letter to a government minister proposing policy changes."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">5. Review</h4>
+                        <p>Sophisticated evaluation, nuanced opinion, cultural context, recommendation.</p>
+                        <p><strong>Example:</strong> "Review a recent documentary about climate change, evaluating its impact."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">6. Report</h4>
+                        <p>Objective tone, analytical approach, data interpretation, recommendations.</p>
+                        <p><strong>Example:</strong> "Write a report on the impact of remote working on productivity."</p>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>C1 Language Requirements:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Complex sentences:</strong> Inversion, cleft sentences, participle clauses</li>
+                            <li><strong>Advanced conditionals:</strong> Mixed conditionals, subjunctive mood</li>
+                            <li><strong>Sophisticated vocabulary:</strong> Abstract nouns, academic collocations</li>
+                            <li><strong>Nominalisation:</strong> "The implementation of the policy resulted in..."</li>
+                            <li><strong>Discourse markers:</strong> "Notwithstanding," "Conversely," "Furthermore"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPEAKING SECTION -->
+        <section id="speaking" class="section">
+            <div class="card">
+                <div class="card-header">Topic Task (8 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> You prepare a topic before the exam and deliver a <strong>formal presentation (4 minutes)</strong> with a handout. This is followed by a <strong>discussion (4 minutes)</strong> where the examiner asks questions about your presentation. You must ask the examiner for their comments.
+                    </div>
+
+                    <h4>Preparing Your Topic:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Choose a discursive topic (arguments for/against, benefits/drawbacks)</li>
+                        <li>Prepare a formal presentation with clear structure</li>
+                        <li>Create a handout for the examiner with brief notes</li>
+                        <li>Bring brief notes for yourself (not a full script)</li>
+                        <li>Do NOT choose from the 12 subject areas (these are for Conversation task)</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Topic: "To what extent has social media benefited society?"</strong><br><br>
+                        <strong>Structure:</strong><br>
+                        1. Introduction - define social media and its prevalence<br>
+                        2. Arguments for - connectivity, information access, business opportunities<br>
+                        3. Arguments against - privacy concerns, mental health, misinformation<br>
+                        4. Evaluation - balanced view with evidence<br>
+                        5. Conclusion - personal stance with justification<br><br>
+                        <strong>Handout content:</strong> Main arguments, key statistics, sources
+                    </div>
+
+                    <h4>C1 Language Functions to Demonstrate:</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Example Language</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Developing and justifying arguments</td>
+                                <td>"The primary argument in favour is..." / "This is supported by the fact that..."</td>
+                            </tr>
+                            <tr>
+                                <td>Summarising</td>
+                                <td>"To summarise the key points..." / "In essence, the evidence suggests..."</td>
+                            </tr>
+                            <tr>
+                                <td>Evaluating options/standpoints</td>
+                                <td>"From one perspective... however, conversely..." / "The merits of X are..."</td>
+                            </tr>
+                            <tr>
+                                <td>Deducing and inferring</td>
+                                <td>"This implies that..." / "It can be deduced from this that..."</td>
+                            </tr>
+                            <tr>
+                                <td>Staging</td>
+                                <td>"Having considered X, I shall now examine Y..." / "Turning to the next point..."</td>
+                            </tr>
+                            <tr>
+                                <td>Hypothesising</td>
+                                <td>"Were this situation to continue..." / "Should X occur, the consequences would be..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Key Strategies:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Structure your presentation clearly with signposting</li>
+                            <li>Use formal, academic language throughout</li>
+                            <li>At the end, ask: "Do you have any questions or comments?"</li>
+                            <li>Be prepared to defend your arguments and consider alternatives</li>
+                            <li>Use your handout to guide the discussion</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Collaborative Task (4 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> The examiner reads you a prompt. You must <strong>initiate, lead, and maintain</strong> the interaction by asking questions and making suggestions. This tests your ability to collaborate and take control of a conversation at C1 level.
+                    </div>
+
+                    <h4>Task Structure:</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 1 - Prompt:</strong> Examiner reads a scenario (e.g., ethical dilemma, complex problem, policy decision)<br><br>
+                        <strong>Phase 2 - Your Role:</strong> You must immediately start asking questions and making suggestions. Do NOT wait for the examiner to ask you questions.<br><br>
+                        <strong>Phase 3 - Development:</strong> Build on the examiner's responses, offer alternatives, reach conclusions.
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Sample Prompt:</strong><br>
+                        "A friend of mine has been offered a promotion at work which would mean moving to another country. She's excited about the opportunity but worried about leaving her elderly parents behind. She's asked me for advice but I'm not sure what to suggest."<br><br>
+                        <strong>Your opening:</strong> "That's a complex situation with no easy answer. Shall we start by considering what factors she should weigh up? For instance, how serious are her parents' health concerns, and what support do they currently have?"
+                    </div>
+
+                    <h4>Useful Collaborative Language:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Opening:</strong> "Shall we start by...?" / "Where shall we begin?" / "I'd suggest we first consider..."</li>
+                        <li><strong>Making suggestions:</strong> "How about...?" / "Why don't we...?" / "Perhaps we could..."</li>
+                        <li><strong>Asking for opinions:</strong> "What do you think about...?" / "Do you think...would work?" / "What's your view on...?"</li>
+                        <li><strong>Responding:</strong> "That's a good point" / "I hadn't thought of that" / "I'm not sure that would work because..."</li>
+                        <li><strong>Negotiating:</strong> "We could compromise by..." / "What if we combined both ideas?" / "Let's settle on..."</li>
+                        <li><strong>Closing:</strong> "So we've agreed on..." / "To summarise our decisions..." / "Shall we move on to...?"</li>
+                    </ul>
+
+                    <div class="warning-box">
+                        <strong>Mandatory Requirements:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Take control immediately - don't wait for examiner questions</li>
+                            <li>Ask multiple questions to gather information</li>
+                            <li>Make suggestions and offer alternatives</li>
+                            <li>Respond to examiner contributions</li>
+                            <li>Work towards a conclusion or decision</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Conversation Task (3 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> The examiner chooses <strong>one subject area</strong> from the 12 listed areas and initiates conversation. You must respond with opinions, ask questions, and maintain interaction at C1 level.
+                    </div>
+
+                    <h4>Key Requirements:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Respond to questions with extended, sophisticated answers</li>
+                        <li>Demonstrate knowledge of the subject area</li>
+                        <li>Ask the examiner questions about the subject area</li>
+                        <li>Use C1 language functions (deducing, evaluating, hypothesising)</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Conversation about "The Media":</strong><br><br>
+                        <strong>Examiner:</strong> "How do you think the media influences public opinion?"<br>
+                        <strong>Candidate:</strong> "The media's influence is profound and multifaceted. On one hand, it serves an essential democratic function by informing citizens. However, the concentration of media ownership raises concerns about bias. Were we to have truly independent media, public discourse might be more balanced. What is your perspective on media ownership regulations?"<br>
+                        <strong>Examiner:</strong> "I think there should be more diversity in media ownership."<br>
+                        <strong>Candidate:</strong> "I concur. The current consolidation limits viewpoint diversity. This implies that policy intervention may be necessary. Would you support stricter antitrust measures in the media sector?"
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Speaking Assessment Criteria</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>What the Examiner Looks For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Communicative Effectiveness</td>
+                                <td>Task fulfilment, appropriate turn-taking, initiating and maintaining interaction, elaborating responses, using C1 functions</td>
+                            </tr>
+                            <tr>
+                                <td>Interactive Listening</td>
+                                <td>Understanding examiner questions, responding appropriately, asking for clarification when needed</td>
+                            </tr>
+                            <tr>
+                                <td>Language Control</td>
+                                <td>Range and accuracy of grammar, vocabulary precision, C1 structures (inversion, subjunctive, advanced conditionals)</td>
+                            </tr>
+                            <tr>
+                                <td>Delivery</td>
+                                <td>Pronunciation, intonation, fluency, appropriate speed, clear articulation</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- LISTENING SECTION -->
+        <section id="listening" class="section">
+            <div class="card">
+                <div class="card-header">Independent Listening Task (8 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Listen twice to a complex recording (approximately 3 minutes 30 seconds). First, report the <strong>gist</strong> (main idea). Second, answer <strong>specific questions</strong> from the examiner. Finally, engage in <strong>discussion</strong> about the content.
+                    </div>
+
+                    <h4>Task Structure:</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 1 - First Listening:</strong><br>
+                        Listen for gist. The examiner will ask: "What is the speaker talking about?" or "What is the main topic?"<br><br>
+                        <strong>Your response:</strong> A comprehensive summary in 2-3 sentences showing understanding of the main argument and perspective.<br>
+                        <em>Example: "The speaker is examining the ethical implications of artificial intelligence in healthcare, arguing that while AI offers significant benefits for diagnosis, it raises serious concerns about patient privacy and the dehumanisation of care."</em>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 2 - Second Listening:</strong><br>
+                        Listen for specific information. Take detailed notes.<br><br>
+                        <strong>After listening:</strong> Answer examiner's questions about specific content, opinions, and implications.<br>
+                        <em>Example: "According to the speaker, what are the main advantages of AI in healthcare?" / "What concerns does the speaker raise about privacy?"</em>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 3 - Discussion:</strong><br>
+                        The examiner asks follow-up questions requiring you to discuss the implications and relate to broader issues.<br><br>
+                        <em>Example: "To what extent do you think the benefits of AI outweigh the risks?" / "How might these issues affect your country specifically?"</em>
+                    </div>
+
+                    <h4>Assessment Criteria (Independent Listening):</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Score</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>4</td>
+                                <td>Identifies gist accurately, understands detailed information, responds to questions with sophistication, shows critical engagement</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Identifies gist, understands most details, responds appropriately with minor hesitation</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Identifies partial gist, understands some details, requires repetition of some questions</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Identifies minimal information, struggles with detailed questions</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>No performance to assess or task not attempted</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning-box">
+                        <strong>Note-Taking Tips:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Use abbreviations and symbols (&, +, →, ↑, ?)</li>
+                            <li>Write keywords only - don't try to write full sentences</li>
+                            <li>Organise notes spatially (left for main ideas, right for details)</li>
+                            <li>Notes are not assessed - only your oral responses count</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="card">
+                <div class="card-header">Practice Exercises</div>
+                <div class="card-body">
+                    <p>Test your understanding of ISE III requirements with these interactive exercises.</p>
+
+                    <!-- Exercise 1 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 1: Task Identification</div>
+                        <p><strong>How long is the ISE III Speaking & Listening interview?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 18 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 20 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) 25 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 30 minutes</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 2 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 2: Word Count</div>
+                        <p><strong>What is the correct word count for ISE III writing tasks?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 150-180 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 200-230 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 100-130 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 250-280 words</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 3 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 3: Topic Task</div>
+                        <p><strong>What must you prepare for the ISE III Topic Task?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) A full written script to read</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) A formal presentation with a handout</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) A mind map only</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Nothing - it's spontaneous</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 4 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 4: Language Functions</div>
+                        <p><strong>Which language function is specific to ISE III (C1) level?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Describing past actions</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) Giving personal opinions</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) Deducing and inferring</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Asking for directions</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 5 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 5: Subject Areas</div>
+                        <p><strong>How many subject areas are there for the ISE III Conversation task?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 10 subject areas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 12 subject areas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 8 subject areas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 15 subject areas</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 6 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 6: Collaborative Task</div>
+                        <p><strong>In the Collaborative Task, who is responsible for leading the interaction?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) The examiner</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) The candidate</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Both equally</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) It depends on the prompt</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 7 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 7: Reading Text Length</div>
+                        <p><strong>How long is the Task 1 (Long Reading) text at ISE III?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 500 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 700 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 400 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 900 words</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 8 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 8: C1 Grammar</div>
+                        <p><strong>Which sentence demonstrates C1-level grammar?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) I think that pollution is bad for the environment.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Were the government to implement stricter policies, air quality would improve significantly.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Pollution affects many people around the world.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) We should stop pollution now.</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Exercise Tips:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Click on the option you think is correct</li>
+                            <li>Green indicates correct; red indicates incorrect</li>
+                            <li>Review the relevant sections if you get questions wrong</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SECTION -->
+        <section id="video" class="section">
+            <div class="card">
+                <div class="card-header">Official ISE III Sample Exam Video</div>
+                <div class="card-body">
+                    <p>Watch this official Trinity College London video to see a real ISE III (C1) Speaking & Listening exam. This demonstrates the Topic presentation, Collaborative task, Conversation task, and Independent Listening task as they occur in the actual exam.</p>
+
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/tq7dCVnljzo" 
+                            title="Trinity ISE III (C1) Sample Exam" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>What to observe in this video:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Topic Presentation (0:00-4:00):</strong> Notice how the candidate delivers a formal presentation with a handout</li>
+                            <li><strong>Language Functions:</strong> Listen for C1 structures (inversion, subjunctive, sophisticated discourse markers)</li>
+                            <li><strong>Topic Discussion:</strong> How the candidate asks for examiner comments and defends arguments</li>
+                            <li><strong>Collaborative Task:</strong> Observe how the candidate immediately takes control and maintains leadership</li>
+                            <li><strong>Conversation Task:</strong> Natural turn-taking and sophisticated discussion of abstract topics</li>
+                            <li><strong>Independent Listening:</strong> Note-taking strategy and sophisticated responses</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Key Differences from ISE II (B2):</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Formal presentation:</strong> 4-minute prepared presentation with handout (vs. discussion only at B2)</li>
+                            <li><strong>Longer speaking time:</strong> 25 minutes vs. 20 minutes</li>
+                            <li><strong>More abstract topics:</strong> Economic issues, stereotypes, rights of the individual</li>
+                            <li><strong>C1 language:</strong> Deducing, inferring, hypothesising, staging</li>
+                            <li><strong>Academic register:</strong> More formal, sophisticated vocabulary and structures</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Video Analysis Checklist</div>
+                <div class="card-body">
+                    <p>While watching the video, check off these observations:</p>
+                    <ul class="checklist">
+                        <li>Candidate brings a handout for the Topic presentation</li>
+                        <li>Presentation is discursive (arguments for/against)</li>
+                        <li>Candidate uses formal, academic language</li>
+                        <li>Candidate asks examiner for comments at the end of presentation</li>
+                        <li>Candidate defends arguments and considers alternatives</li>
+                        <li>Candidate takes immediate control in Collaborative task</li>
+                        <li>Candidate asks multiple questions and makes suggestions</li>
+                        <li>Conversation task covers one of the 12 subject areas</li>
+                        <li>Candidate uses C1 language functions (deducing, evaluating)</li>
+                        <li>Candidate takes notes during Independent Listening</li>
+                        <li>Candidate provides sophisticated gist summary</li>
+                        <li>Candidate engages in critical discussion of listening content</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Additional Resources</div>
+                <div class="card-body">
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Official Trinity Website:</strong> <a href="https://www.trinitycollege.com/ISEIII">trinitycollege.com/ISEIII</a></li>
+                        <li><strong>Guide for Students:</strong> Download the ISE III Guide for detailed preparation advice</li>
+                        <li><strong>Sample Papers:</strong> Practice with official sample Reading & Writing papers</li>
+                        <li><strong>Speaking Activities:</strong> C1 Activity Worksheets 1, 2, and 3</li>
+                        <li><strong>Audio Practice:</strong> Sample Independent Listening tasks</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE III (C1) Preparation Guide</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+
+        function checkAnswer(element, isCorrect) {
+            // Remove previous classes from siblings
+            const parent = element.parentElement;
+            const siblings = parent.querySelectorAll('.quiz-option');
+            siblings.forEach(sib => {
+                sib.classList.remove('correct', 'incorrect');
+                sib.style.pointerEvents = 'none';
+            });
+
+            // Add appropriate class
+            if (isCorrect) {
+                element.classList.add('correct');
+                showFeedback(parent, '✓ Correct! Well done.', 'success');
+            } else {
+                element.classList.add('incorrect');
+                // Highlight correct answer
+                siblings.forEach(sib => {
+                    if (sib.onclick.toString().includes('true')) {
+                        sib.classList.add('correct');
+                    }
+                });
+                showFeedback(parent, '✗ Incorrect. The correct answer is highlighted in green.', 'error');
+            }
+        }
+
+        function showFeedback(parent, message, type) {
+            const feedback = parent.querySelector('.feedback');
+            feedback.textContent = message;
+            feedback.style.display = 'block';
+            if (type === 'success') {
+                feedback.style.background = '#c8e6c9';
+                feedback.style.color = '#2e7d32';
+                feedback.style.border = '1px solid #81c784';
+            } else {
+                feedback.style.background = '#ffcdd2';
+                feedback.style.color = '#c62828';
+                feedback.style.border = '1px solid #ef9a9a';
+            }
+        }
+    </script>
+</body>
+</html>

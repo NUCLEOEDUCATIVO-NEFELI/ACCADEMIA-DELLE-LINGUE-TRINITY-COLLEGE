@@ -1,0 +1,1411 @@
+
+html_content = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity College London - Grade 8 (B2.2) - 50 Exercises</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #155724;
+            --success-bg: #d4edda;
+            --error: #721c24;
+            --error-bg: #f8d7da;
+            --parchment: #faf8f3;
+            --b2-color: #c9a227;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #f0f8ff;
+            border-left: 4px solid #4169e1;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--b2-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--b2-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--b2-color);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--b2-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--b2-color);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--b2-color);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity College London - Grade 8 (B2.2)</h1>
+            <p>Advanced Grammar: Third Conditional, Passive Voice & Reported Speech</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity GESE</a>
+            <span>›</span>
+            <strong>Grade 8 (B2.2) - 50 Exercises</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🎓 Grade 8 Grammar Mastery</h1>
+            <p class="page-subtitle">Third Conditional, Complex Passive Voice, and Advanced Reported Speech</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Theory</button>
+            <button class="nav-tab" onclick="showSection('third-conditional', this)">Third Conditional</button>
+            <button class="nav-tab" onclick="showSection('passive', this)">Passive Voice</button>
+            <button class="nav-tab" onclick="showSection('reported', this)">Reported Speech</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Exercises (50)</button>
+        </nav>
+
+        <!-- THEORY SECTION -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header">Grade 8 Overview (B2.2 Level)</div>
+                <div class="card-body">
+                    <p>Grade 8 of the Trinity College London GESE exam corresponds to level B2.2 (upper-intermediate) of the CEFR. At this level, candidates demonstrate sophisticated control of complex grammatical structures.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Key Features of Grade 8:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Duration:</strong> 15 minutes (interactive task, candidate-controlled)</li>
+                            <li><strong>Third Conditional:</strong> Past hypothetical situations and regrets</li>
+                            <li><strong>Passive Voice:</strong> All tenses including modal constructions</li>
+                            <li><strong>Reported Speech:</strong> Complex tense backshifting and modal changes</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Exam Tip:</strong> At Grade 8, you control the interaction. You should initiate discussions, ask questions, and demonstrate your ability to use these complex structures naturally in conversation.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">The Third Conditional</div>
+                <div class="card-body">
+                    <p>The third conditional is used to talk about <strong>hypothetical situations in the past</strong> - things that didn't happen and their imagined results. It expresses regret or criticism about past events.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Structure:</strong><br>
+                        <strong>If + past perfect, would have + past participle</strong>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Examples:</strong><br>
+                        • If I <strong>had studied</strong> harder, I <strong>would have passed</strong> the exam.<br>
+                        • She <strong>would have been</strong> promoted if she <strong>had taken</strong> the opportunity.<br>
+                        • If they <strong>hadn't missed</strong> the train, they <strong>would have arrived</strong> on time.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Alternative forms:</strong><br>
+                        • <strong>Could have</strong> (ability/possibility in the past)<br>
+                        • <strong>Might have</strong> (uncertainty about the past)<br>
+                        • <strong>Should have</strong> (criticism/advice about the past)
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Passive Voice - All Tenses & Modals</div>
+                <div class="card-body">
+                    <p>The passive voice is used when the focus is on the action rather than who performed it. At Grade 8, you must use passives in all tenses and with modal verbs.</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Tense</th>
+                                <th>Active</th>
+                                <th>Passive</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Present Simple</td>
+                                <td>They make cars here.</td>
+                                <td>Cars <strong>are made</strong> here.</td>
+                            </tr>
+                            <tr>
+                                <td>Present Continuous</td>
+                                <td>They are building a house.</td>
+                                <td>A house <strong>is being built</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td>Past Simple</td>
+                                <td>Shakespeare wrote Hamlet.</td>
+                                <td>Hamlet <strong>was written</strong> by Shakespeare.</td>
+                            </tr>
+                            <tr>
+                                <td>Past Continuous</td>
+                                <td>They were repairing the road.</td>
+                                <td>The road <strong>was being repaired</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td>Present Perfect</td>
+                                <td>Someone has stolen my bike.</td>
+                                <td>My bike <strong>has been stolen</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td>Past Perfect</td>
+                                <td>They had finished the work.</td>
+                                <td>The work <strong>had been finished</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td>Future Simple</td>
+                                <td>They will announce the results.</td>
+                                <td>The results <strong>will be announced</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td>Modals</td>
+                                <td>You must complete this form.</td>
+                                <td>This form <strong>must be completed</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td>Modal Perfect</td>
+                                <td>They should have told us.</td>
+                                <td>We <strong>should have been told</strong>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Reported Speech - Complex Tense Changes</div>
+                <div class="card-body">
+                    <p>Reported speech (indirect speech) involves reporting what someone said without using their exact words. At Grade 8, you must demonstrate mastery of complex tense backshifting.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Basic Tense Changes:</strong>
+                    </div>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Direct Speech</th>
+                                <th>Reported Speech</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Present Simple: "I <strong>live</strong> here."</td>
+                                <td>Past Simple: He said he <strong>lived</strong> there.</td>
+                            </tr>
+                            <tr>
+                                <td>Present Continuous: "I <strong>am working</strong>."</td>
+                                <td>Past Continuous: He said he <strong>was working</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td>Present Perfect: "I <strong>have finished</strong>."</td>
+                                <td>Past Perfect: He said he <strong>had finished</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td>Past Simple: "I <strong>saw</strong> him."</td>
+                                <td>Past Perfect: He said he <strong>had seen</strong> him.</td>
+                            </tr>
+                            <tr>
+                                <td>Will: "I <strong>will help</strong> you."</td>
+                                <td>Would: He said he <strong>would help</strong> me.</td>
+                            </tr>
+                            <tr>
+                                <td>Can: "I <strong>can swim</strong>."</td>
+                                <td>Could: He said he <strong>could swim</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td>Must: "I <strong>must go</strong>."</td>
+                                <td>Had to: He said he <strong>had to go</strong>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Modal Changes in Reported Speech:</strong><br>
+                        • <strong>Must</strong> → <strong>had to</strong> (obligation)<br>
+                        • <strong>Mustn't</strong> → <strong>wasn't allowed to</strong><br>
+                        • <strong>Needn't</strong> → <strong>didn't need to / didn't have to</strong><br>
+                        • <strong>Could, would, should, might, ought to</strong> → <strong>no change</strong>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Complex Examples:</strong><br>
+                        Direct: "If I <strong>had known</strong>, I <strong>would have told</strong> you."<br>
+                        Reported: He said that if he <strong>had known</strong>, he <strong>would have told</strong> me.<br><br>
+                        
+                        Direct: "The project <strong>must be finished</strong> by Friday."<br>
+                        Reported: She said the project <strong>had to be finished</strong> by Friday.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- THIRD CONDITIONAL SECTION -->
+        <section id="third-conditional" class="section">
+            <div class="card">
+                <div class="card-header">Third Conditional Deep Dive</div>
+                <div class="card-body">
+                    <p>The third conditional is unique because both clauses refer to <strong>unreal past situations</strong>. It is the only conditional where both parts are in the past.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Common Time Expressions:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>If I <strong>had</strong> (past participle)..., I <strong>would have</strong> (past participle)...</li>
+                            <li>Had I <strong>known</strong>... (inverted form - formal)</li>
+                            <li>I <strong>wish I had</strong>... (expressing regret)</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Regrets and Criticism:</strong><br>
+                        • I <strong>should have studied</strong> medicine. (I didn't - regret)<br>
+                        • You <strong>shouldn't have said</strong> that. (You did - criticism)<br>
+                        • We <strong>could have won</strong> the match. (We didn't - missed opportunity)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PASSIVE VOICE SECTION -->
+        <section id="passive" class="section">
+            <div class="card">
+                <div class="card-header">Advanced Passive Constructions</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Passive with Two Objects:</strong><br>
+                        Active: They <strong>gave</strong> me a prize.<br>
+                        Passive 1: I <strong>was given</strong> a prize.<br>
+                        Passive 2: A prize <strong>was given to</strong> me.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Verbs with Prepositions in Passive:</strong><br>
+                        • Active: They <strong>laughed at</strong> him.<br>
+                        • Passive: He <strong>was laughed at</strong>.<br><br>
+                        • Active: They <strong>looked after</strong> the children.<br>
+                        • Passive: The children <strong>were looked after</strong>.
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Modal Perfect Passive:</strong><br>
+                        • The report <strong>should have been submitted</strong> yesterday.<br>
+                        • The mistake <strong>could have been avoided</strong>.<br>
+                        • You <strong>might have been told</strong> earlier.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- REPORTED SPEECH SECTION -->
+        <section id="reported" class="section">
+            <div class="card">
+                <div class="card-header">Advanced Reported Speech</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Reporting Questions:</strong><br>
+                        Yes/No: "Are you coming?" → He asked <strong>if/whether</strong> I was coming.<br>
+                        Wh-: "Where is it?" → He asked <strong>where</strong> it was.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Reporting Commands and Requests:</strong><br>
+                        • "Sit down." → He <strong>told/ordered</strong> me to sit down.<br>
+                        • "Don't touch it." → He <strong>told/warned</strong> me not to touch it.<br>
+                        • "Could you help me?" → He <strong>asked</strong> me to help him.
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Reporting Mixed Conditionals:</strong><br>
+                        Direct: "If I <strong>had taken</strong> that job, I <strong>would be</strong> rich now."<br>
+                        Reported: He said that if he <strong>had taken</strong> that job, he <strong>would be</strong> rich then.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Exercises loaded dynamically -->
+                </div>
+
+                <!-- FINAL SCORE SECTION -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Congratulations! You've completed all 50 exercises!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Try All Exercises Again
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London GESE - Grade 8 (B2.2) Preparation</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database of 50 exercises for Grade 8 (B2.2)
+        const exercises = [
+            // EXERCISES 1-15: Third Conditional
+            {
+                id: 1,
+                type: 'choice',
+                question: 'If I ______ (study) harder, I would have passed the exam.',
+                options: ['had studied', 'have studied', 'studied', 'would study'],
+                correct: 'had studied',
+                explanation: '✅ Correct! Third conditional uses: If + past perfect, would have + past participle.',
+                errorExplanation: '❌ Third conditional requires past perfect after "if": had studied'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'If she had taken the job, she ______ (be) rich now.',
+                correct: ['would have been', 'would\'ve been'],
+                explanation: '✅ Correct! "Would have been" is the correct third conditional form.'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'We ______ (win) the match if we had played better.',
+                options: ['would have won', 'would win', 'had won', 'have won'],
+                correct: 'would have won',
+                explanation: '✅ Correct! Third conditional result clause: would have + past participle.',
+                errorExplanation: '❌ The result clause needs "would have won"'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'If they ______ (not miss) the train, they would have arrived on time.',
+                correct: ['hadn\'t missed', 'had not missed'],
+                explanation: '✅ Correct! Negative past perfect: hadn\'t missed.'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'I ______ (call) you if I had known you were in town.',
+                options: ['would have called', 'would call', 'had called', 'have called'],
+                correct: 'would have called',
+                explanation: '✅ Correct! Third conditional: would have + past participle.',
+                errorExplanation: '❌ Use "would have called" for hypothetical past'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'Had I ______ (know) about the meeting, I would have attended.',
+                correct: ['known', 'Known'],
+                explanation: '✅ Correct! Inverted third conditional: Had I known = If I had known.'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'If he had listened to my advice, he ______ (not lose) all his money.',
+                options: ['wouldn\'t have lost', 'won\'t lose', 'hadn\'t lost', 'wouldn\'t lose'],
+                correct: 'wouldn\'t have lost',
+                explanation: '✅ Correct! Negative form: wouldn\'t have + past participle.',
+                errorExplanation: '❌ Use "wouldn\'t have lost" for negative third conditional'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'She could ______ (prevent) the accident if she had been more careful.',
+                correct: ['have prevented'],
+                explanation: '✅ Correct! "Could have prevented" expresses past possibility.'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'We might ______ (finish) the project on time if we had started earlier.',
+                options: ['have finished', 'had finished', 'finish', 'finished'],
+                correct: 'have finished',
+                explanation: '✅ Correct! Might have + past participle for past possibility.',
+                errorExplanation: '❌ Use "might have finished"'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'I should ______ (tell) you the truth, but I was afraid.',
+                correct: ['have told'],
+                explanation: '✅ Correct! "Should have told" expresses past obligation/regret.'
+            },
+            {
+                id: 11,
+                type: 'choice',
+                question: 'If I had known it was your birthday, I ______ (buy) you a present.',
+                options: ['would have bought', 'would buy', 'had bought', 'have bought'],
+                correct: 'would have bought',
+                explanation: '✅ Correct! Third conditional for hypothetical past.',
+                errorExplanation: '❌ Use "would have bought"'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'You shouldn\'t ______ (say) that to her. It was very hurtful.',
+                correct: ['have said'],
+                explanation: '✅ Correct! "Shouldn\'t have said" expresses criticism about past action.'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'Had they ______ (arrive) earlier, they would have got better seats.',
+                options: ['arrived', 'arrive', 'arriving', 'had arrived'],
+                correct: 'arrived',
+                explanation: '✅ Correct! After "Had they" (inverted if), use past participle.',
+                errorExplanation: '❌ In inverted form, use past participle: arrived'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'If we had taken a taxi, we ______ (not be) late for the interview.',
+                correct: ['wouldn\'t have been', 'would not have been'],
+                explanation: '✅ Correct! Negative third conditional: wouldn\'t have been.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'I wish I ______ (take) that opportunity when I had the chance.',
+                options: ['had taken', 'have taken', 'took', 'would take'],
+                correct: 'had taken',
+                explanation: '✅ Correct! "Wish" + past perfect expresses regret about the past.',
+                errorExplanation: '❌ After wish, use past perfect for past regrets: had taken'
+            },
+
+            // EXERCISES 16-32: Passive Voice (all tenses and modals)
+            {
+                id: 16,
+                type: 'fill',
+                question: 'The report ______ (write) by the manager yesterday.',
+                correct: ['was written', 'was wrote'],
+                explanation: '✅ Correct! Past simple passive: was/were + past participle.'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'The new hospital ______ (build) next year.',
+                options: ['will be built', 'is built', 'was built', 'has been built'],
+                correct: 'will be built',
+                explanation: '✅ Correct! Future passive: will be + past participle.',
+                errorExplanation: '❌ Future passive uses "will be built"'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'The windows ______ (clean) right now.',
+                correct: ['are being cleaned', 'are being clean'],
+                explanation: '✅ Correct! Present continuous passive: am/is/are being + past participle.'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'The project ______ (complete) before the deadline.',
+                options: ['had been completed', 'has been completed', 'was completed', 'is completed'],
+                correct: 'had been completed',
+                explanation: '✅ Correct! Past perfect passive: had been + past participle.',
+                errorExplanation: '❌ Past perfect passive: had been completed'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'This book ______ (translate) into 20 languages so far.',
+                correct: ['has been translated'],
+                explanation: '✅ Correct! Present perfect passive: has/have been + past participle.'
+            },
+            {
+                id: 21,
+                type: 'choice',
+                question: 'The road ______ (repair) when I drove past this morning.',
+                options: ['was being repaired', 'is being repaired', 'had been repaired', 'has been repaired'],
+                correct: 'was being repaired',
+                explanation: '✅ Correct! Past continuous passive: was/were being + past participle.',
+                errorExplanation: '❌ Past continuous passive: was being repaired'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'The documents ______ (must sign) by the director.',
+                correct: ['must be signed', 'must signed'],
+                explanation: '✅ Correct! Modal passive: modal + be + past participle.'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'This problem ______ (should address) immediately.',
+                options: ['should be addressed', 'should addressed', 'should be addressing', 'should have addressed'],
+                correct: 'should be addressed',
+                explanation: '✅ Correct! Modal passive: should be + past participle.',
+                errorExplanation: '❌ Modal passive: should be addressed'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'The mistake ______ (could avoid) if more care had been taken.',
+                correct: ['could have been avoided'],
+                explanation: '✅ Correct! Modal perfect passive: could have been + past participle.'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'The guests ______ (give) a welcome drink on arrival.',
+                options: ['were given', 'gave', 'had given', 'have given'],
+                correct: 'were given',
+                explanation: '✅ Correct! Past simple passive with double object construction.',
+                errorExplanation: '❌ Passive: were given'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'The letter ______ (may have send) to the wrong address.',
+                correct: ['may have been sent'],
+                explanation: '✅ Correct! Modal perfect passive: may have been + past participle.'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'The suspect ______ (question) by the police at the moment.',
+                options: ['is being questioned', 'is questioned', 'was questioned', 'has been questioned'],
+                correct: 'is being questioned',
+                explanation: '✅ Correct! Present continuous passive: is being + past participle.',
+                errorExplanation: '❌ Present continuous passive: is being questioned'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'The ancient city ______ (believe) to have been destroyed by a volcano.',
+                correct: ['is believed'],
+                explanation: '✅ Correct! Passive with reporting verbs: is believed to have been.'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'The contract ______ (must not break) under any circumstances.',
+                options: ['must not be broken', 'must not break', 'must not been broken', 'must not breaking'],
+                correct: 'must not be broken',
+                explanation: '✅ Correct! Negative modal passive: must not be + past participle.',
+                errorExplanation: '❌ Negative modal passive: must not be broken'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'The results ______ (announce) tomorrow morning.',
+                correct: ['will be announced', 'are going to be announced'],
+                explanation: '✅ Correct! Future passive: will be announced.'
+            },
+            {
+                id: 31,
+                type: 'choice',
+                question: 'The children ______ (look after) by their grandmother while their parents were away.',
+                options: ['were looked after', 'looked after', 'had looked after', 'have looked after'],
+                correct: 'were looked after',
+                explanation: '✅ Correct! Passive with phrasal verb: were looked after.',
+                errorExplanation: '❌ Passive with phrasal verb keeps the preposition: were looked after'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'The painting ______ (might steal) during the robbery.',
+                correct: ['might have been stolen'],
+                explanation: '✅ Correct! Modal perfect passive: might have been stolen.'
+            },
+
+            // EXERCISES 33-50: Reported Speech
+            {
+                id: 33,
+                type: 'choice',
+                question: '"I am tired." → She said that she ______ tired.',
+                options: ['was', 'is', 'had been', 'has been'],
+                correct: 'was',
+                explanation: '✅ Correct! Present simple → past simple in reported speech.',
+                errorExplanation: '❌ Present simple changes to past simple: was'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: '"I have finished my work." → He said that he ______ (finish) his work.',
+                correct: ['had finished'],
+                explanation: '✅ Correct! Present perfect → past perfect in reported speech.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: '"I will help you." → She promised that she ______ help me.',
+                options: ['would', 'will', 'had', 'was'],
+                correct: 'would',
+                explanation: '✅ Correct! Will → would in reported speech.',
+                errorExplanation: '❌ Will changes to would'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: '"I can swim." → He said that he ______ (can) swim.',
+                correct: ['could'],
+                explanation: '✅ Correct! Can → could in reported speech.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: '"I saw the accident." → She said that she ______ the accident.',
+                options: ['had seen', 'saw', 'has seen', 'would see'],
+                correct: 'had seen',
+                explanation: '✅ Correct! Past simple → past perfect in reported speech.',
+                errorExplanation: '❌ Past simple changes to past perfect: had seen'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: '"I must leave now." → He said that he ______ (must) leave then.',
+                correct: ['had to', 'must'],
+                explanation: '✅ Correct! Must → had to in reported speech (obligation).'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: '"Are you coming to the party?" → She asked me if I ______ coming to the party.',
+                options: ['was', 'am', 'had been', 'have been'],
+                correct: 'was',
+                explanation: '✅ Correct! Present continuous → past continuous in reported questions.',
+                errorExplanation: '❌ Present continuous changes to past continuous: was'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: '"Where is the station?" → He asked me where the station ______ (be).',
+                correct: ['was'],
+                explanation: '✅ Correct! Present simple → past simple in reported questions.'
+            },
+            {
+                id: 41,
+                type: 'choice',
+                question: '"I was working all day." → She said that she ______ working all day.',
+                options: ['had been', 'was', 'has been', 'would be'],
+                correct: 'had been',
+                explanation: '✅ Correct! Past continuous → past perfect continuous in reported speech.',
+                errorExplanation: '❌ Past continuous changes to past perfect continuous: had been'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: '"Don\'t touch that!" → He ______ (tell) me not to touch that.',
+                correct: ['told', 'ordered', 'warned'],
+                explanation: '✅ Correct! Imperatives are reported using tell/order/warn + to-infinitive.'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: '"I had never been there before." → He said that he ______ never been there before.',
+                options: ['had', 'has', 'would have', 'was'],
+                correct: 'had',
+                explanation: '✅ Correct! Past perfect stays the same in reported speech.',
+                errorExplanation: '❌ Past perfect does not change: had'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: '"I may be late." → She said that she ______ (may) be late.',
+                correct: ['might'],
+                explanation: '✅ Correct! May → might in reported speech.'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: '"I\'ll call you tomorrow." → He said that he would call me ______.',
+                options: ['the next day', 'tomorrow', 'the following day', 'both a and c'],
+                correct: 'both a and c',
+                explanation: '✅ Correct! Tomorrow → the next day / the following day.',
+                errorExplanation: '❌ Tomorrow changes to "the next day" or "the following day"'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: '"I don\'t like coffee." → She said that she ______ (not like) coffee.',
+                correct: ['didn\'t like', 'did not like'],
+                explanation: '✅ Correct! Present simple negative → past simple negative.'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: '"If I had known, I would have told you." → He said that if he ______ known, he would have told me.',
+                options: ['had', 'has', 'would have', 'have'],
+                correct: 'had',
+                explanation: '✅ Correct! Third conditional does not change in reported speech.',
+                errorExplanation: '❌ Third conditional if-clause stays as past perfect: had'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: '"Could you help me?" → She ______ (ask) me to help her.',
+                correct: ['asked', 'requested'],
+                explanation: '✅ Correct! Requests with could are reported using ask + to-infinitive.'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: '"I should study more." → He said that he ______ study more.',
+                options: ['should', 'had to', 'must', 'ought to'],
+                correct: 'should',
+                explanation: '✅ Correct! Should does not change in reported speech.',
+                errorExplanation: '❌ Should stays the same in reported speech'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: '"The project must be finished by Friday." → She said that the project ______ (must) be finished by Friday.',
+                correct: ['had to', 'must'],
+                explanation: '✅ Correct! Must (obligation) → had to in reported speech. Congratulations!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Exercise ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Exercise ${currentExercise + 1} of ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Check</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Next →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Excellent! You have mastered Grade 8 grammar! Ready for your Trinity exam!';
+            } else if (totalScore >= 70) {
+                message = '👍 Great job! You have a good grasp of B2.2 grammar. Review the areas where you made mistakes.';
+            } else if (totalScore >= 50) {
+                message = '💪 Good effort! Keep practicing third conditional, passive voice, and reported speech structures.';
+            } else {
+                message = '📚 Keep studying! Focus on the theory sections and try the exercises again.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>'''
+
+# Save to output directory
+with open('/mnt/kimi/output/trinity_grade8_b2_2_50_exercises.html', 'w', encoding='utf-8') as f:
+    f.write(html_content)
+
+print("✅ File created successfully!")
+print("📁 Location: /mnt/kimi/output/trinity_grade8_b2_2_50_exercises.html")
+print(f"📊 Total exercises: 50")
+print(f"📝 Topics covered:")
+print("   • Third Conditional (Exercises 1-15)")
+print("   • Passive Voice - All Tenses & Modals (Exercises 16-32)")
+print("   • Reported Speech - Complex Tense Changes (Exercises 33-50)")
+

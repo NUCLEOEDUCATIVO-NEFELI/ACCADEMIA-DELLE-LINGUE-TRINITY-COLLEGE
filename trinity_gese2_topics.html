@@ -1,0 +1,1662 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 2 - Topics (A1) - 50 Esercizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --trinity-blue: #1e3a5f;
+            --trinity-red: #dc2626;
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #2563eb;
+            --success: #276749;
+            --error: #c53030;
+            --light: #f5f5f0;
+            --dark: #212529;
+            --border: #d4d4c8;
+            --bg-card: #ffffff;
+            --level-a1: #276749;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--trinity-blue);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--trinity-red);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .exam-badge {
+            display: inline-block;
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .breadcrumbs {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--trinity-red);
+        }
+
+        .page-title {
+            font-size: 1.75rem;
+            color: var(--trinity-blue);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--trinity-blue);
+            border-bottom-color: var(--trinity-red);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--trinity-blue);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--trinity-red);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--trinity-blue);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .vocab-table th {
+            background: var(--trinity-blue);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .vocab-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .vocab-table tr:hover {
+            background: var(--light);
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--trinity-blue);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--trinity-blue);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .listening-box {
+            background: #f0f9ff;
+            border: 2px dashed var(--trinity-blue);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .play-btn {
+            background: var(--trinity-blue);
+            color: white;
+            border: none;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .play-btn:hover {
+            background: var(--trinity-red);
+            transform: scale(1.1);
+        }
+
+        .play-btn.playing {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .listening-text {
+            font-style: italic;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: #d4edda;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: #f8d7da;
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: #f8d7da;
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--trinity-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #152a45;
+        }
+
+        .btn-check {
+            background: var(--accent);
+            color: white;
+        }
+
+        .btn-check:hover {
+            background: #1e40af;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--trinity-blue) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 0;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .position-diagram {
+            background: var(--light);
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-family: 'Courier New', monospace;
+        }
+
+        .phonetic {
+            font-family: 'Courier New', monospace;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        .family-tree {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.85rem; flex: 1 1 50%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.3rem; }
+            .page-title { font-size: 1.4rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 150px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🇬🇧</div>
+            <h1>Trinity College London - GESE Grade 2</h1>
+            <p>Graded Examinations in Spoken English - Initial Stage (A1)</p>
+            <div class="exam-badge">CEFR A1 • 6 Minutes Exam</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="index.html">Home</a>
+            <span>›</span>
+            <a href="#">Trinity GESE</a>
+            <span>›</span>
+            <strong>Grade 2 - Topics (50 Exercises)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">💬 GESE Grade 2: Topics</h1>
+            <p class="page-subtitle">Describing people, animals, objects and places • Indicating position • Possessions • Numbers 1-50</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('exam-info', this)">📋 Exam Info</button>
+            <button class="nav-tab" onclick="showSection('vocabulary', this)">📝 Vocabulary</button>
+            <button class="nav-tab" onclick="showSection('grammar', this)">🔤 Grammar</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 50 Exercises</button>
+        </nav>
+
+        <!-- SEZIONE EXAM INFO -->
+        <section id="exam-info" class="section active">
+            <div class="card">
+                <div class="card-header">About GESE Grade 2 Exam</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>Exam Duration:</strong> 6 minutes<br>
+                        <strong>CEFR Level:</strong> A1 (Initial Stage)<br>
+                        <strong>Format:</strong> One-to-one conversation with Trinity examiner
+                    </div>
+
+                    <h3 style="color: var(--trinity-blue); margin: 1.5rem 0 1rem 0;">Language Functions</h3>
+                    <ul style="margin-left: 2rem; line-height: 2;">
+                        <li>Indicating the position of people and objects</li>
+                        <li>Describing people, animals, objects and places very simply</li>
+                        <li>Stating simple facts</li>
+                        <li>Informing about possessions</li>
+                        <li>Asking very simple questions about personal details</li>
+                    </ul>
+
+                    <h3 style="color: var(--trinity-blue); margin: 1.5rem 0 1rem 0;">What the Examiner Will Ask</h3>
+                    <div class="warning-box">
+                        <strong>Example questions:</strong><br>
+                        • "Where is the book?" (prepositions)<br>
+                        • "What has Tom got?" (possessions)<br>
+                        • "Describe your friend" (description)<br>
+                        • "Is there a table in your bedroom?" (there is/are)<br>
+                        • "What colour are her eyes?" (description)<br>
+                        • "When is your birthday?" (dates)
+                    </div>
+
+                    <div class="warning-box" style="margin-top: 1rem;">
+                        <strong>Important:</strong> At Grade 2, you must ask the examiner at least one simple question about personal details during the exam!
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">What's New from Grade 1?</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Grade 1 (Pre-A1)</th>
+                                <th>Grade 2 (A1)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Numbers 1-20</td><td>Numbers 1-50</td></tr>
+                            <tr><td>Basic greetings</td><td>Describing people and things</td></tr>
+                            <td>Identify items</td><td>Indicating position (in, on, under, next to)</td></tr>
+                            <tr><td>This/that/these/those</td><td>There is/are, has/have got</td></tr>
+                            <tr><td>Verb "to be"</td><td>Present simple tense</td></tr>
+                            <tr><td>Colours, clothes</td><td>Family, rooms, household objects</td></tr>
+                            <tr><td>Answer questions</td><td>Ask questions + answer</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE VOCABULARY -->
+        <section id="vocabulary" class="section">
+            <div class="card">
+                <div class="card-header">Family and Friends</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>English</th>
+                                <th>Italian</th>
+                                <th>Pronunciation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Mother/Mum</td><td>Madre/Mamma</td><td class="phonetic">/ˈmʌðə/ /mʌm/</td></tr>
+                            <tr><td>Father/Dad</td><td>Padre/Papà</td><td class="phonetic">/ˈfɑːðə/ /dæd/</td></tr>
+                            <tr><td>Brother</td><td>Fratello</td><td class="phonetic">/ˈbrʌðə/</td></tr>
+                            <tr><td>Sister</td><td>Sorella</td><td class="phonetic">/ˈsɪstə/</td></tr>
+                            <tr><td>Grandmother/Grandma</td><td>Nonna</td><td class="phonetic">/ˈɡrænmʌðə/</td></tr>
+                            <tr><td>Grandfather/Grandpa</td><td>Nonno</td><td class="phonetic">/ˈɡrænfɑːðə/</td></tr>
+                            <tr><td>Friend</td><td>Amico/Amica</td><td class="phonetic">/frend/</td></tr>
+                            <tr><td>Baby</td><td>Bambino</td><td class="phonetic">/ˈbeɪbi/</td></tr>
+                            <tr><td>Child (children)</td><td>Bambino/i</td><td class="phonetic">/tʃaɪld/ /ˈtʃɪldrən/</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Rooms in the Home</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Room</th>
+                                <th>Italian</th>
+                                <th>What's in it?</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Living room</td><td>Soggiorno</td><td>sofa, TV, lamp</td></tr>
+                            <tr><td>Bedroom</td><td>Camera da letto</td><td>bed, wardrobe, mirror</td></tr>
+                            <tr><td>Kitchen</td><td>Cucina</td><td>fridge, cooker, table</td></tr>
+                            <tr><td>Bathroom</td><td>Bagno</td><td>bath, shower, toilet</td></tr>
+                            <tr><td>Dining room</td><td>Sala da pranzo</td><td>table, chairs</td></tr>
+                            <tr><td>Hall</td><td>Ingresso</td><td>door, coat, shoes</td></tr>
+                            <tr><td>Garden</td><td>Giardino</td><td>flowers, grass, tree</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Household Objects</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Object</th>
+                                <th>Italian</th>
+                                <th>Object</th>
+                                <th>Italian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Table</td><td>Tavolo</td><td>Chair</td><td>Sedia</td></tr>
+                            <tr><td>Bed</td><td>Letto</td><td>Sofa</td><td>Divano</td></tr>
+                            <tr><td>TV</td><td>Televisione</td><td>Phone</td><td>Telefono</td></tr>
+                            <tr><td>Computer</td><td>Computer</td><td>Lamp</td><td>Lampada</td></tr>
+                            <tr><td>Mirror</td><td>Specchio</td><td>Clock</td><td>Orologio</td></tr>
+                            <tr><td>Picture</td><td>Quadro/Foto</td><td>Radio</td><td>Radio</td></tr>
+                            <tr><td>Bookcase</td><td>Libreria</td><td>Cupboard</td><td>Armadio</td></tr>
+                            <tr><td>Carpet</td><td>Tappeto</td><td>Curtain</td><td>Tenda</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Numbers 21-50</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Word</th>
+                                <th>Number</th>
+                                <th>Word</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>21</td><td>Twenty-one</td><td>36</td><td>Thirty-six</td></tr>
+                            <tr><td>22</td><td>Twenty-two</td><td>37</td><td>Thirty-seven</td></tr>
+                            <tr><td>25</td><td>Twenty-five</td><td>40</td><td>Forty</td></tr>
+                            <tr><td>30</td><td>Thirty</td><td>45</td><td>Forty-five</td></tr>
+                            <tr><td>35</td><td>Thirty-five</td><td>50</td><td>Fifty</td></tr>
+                        </tbody>
+                    </table>
+                    <p style="margin-top: 1rem;"><strong>Pattern:</strong> Twenty + one = Twenty-one, Thirty + two = Thirty-two, etc.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Days of the Week & Months</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Italian</th>
+                                <th>Month</th>
+                                <th>Italian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Monday</td><td>Lunedì</td><td>January</td><td>Gennaio</td></tr>
+                            <tr><td>Tuesday</td><td>Martedì</td><td>February</td><td>Febbraio</td></tr>
+                            <tr><td>Wednesday</td><td>Mercoledì</td><td>March</td><td>Marzo</td></tr>
+                            <tr><td>Thursday</td><td>Giovedì</td><td>April</td><td>Aprile</td></tr>
+                            <tr><td>Friday</td><td>Venerdì</td><td>May</td><td>Maggio</td></tr>
+                            <tr><td>Saturday</td><td>Sabato</td><td>June</td><td>Giugno</td></tr>
+                            <tr><td>Sunday</td><td>Domenica</td><td>July</td><td>Luglio</td></tr>
+                            <tr><td></td><td></td><td>August</td><td>Agosto</td></tr>
+                            <tr><td></td><td></td><td>September</td><td>Settembre</td></tr>
+                            <tr><td></td><td></td><td>October</td><td>Ottobre</td></tr>
+                            <tr><td></td><td></td><td>November</td><td>Novembre</td></tr>
+                            <tr><td></td><td></td><td>December</td><td>Dicembre</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Pets and Possessions</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Pet</th>
+                                <th>Italian</th>
+                                <th>Possession</th>
+                                <th>Italian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Dog</td><td>Cane</td><td>Bike</td><td>Bicicletta</td></tr>
+                            <tr><td>Cat</td><td>Gatto</td><td>Car</td><td>Macchina</td></tr>
+                            <tr><td>Fish</td><td>Pesce</td><td>Scooter</td><td>Monopattino</td></tr>
+                            <tr><td>Bird</td><td>Uccello</td><td>Tablet</td><td>Tablet</td></tr>
+                            <tr><td>Hamster</td><td>Criceto</td><td>Camera</td><td>Fotocamera</td></tr>
+                            <tr><td>Rabbit</td><td>Coniglio</td><td>Watch</td><td>Orologio</td></tr>
+                            <tr><td>Turtle</td><td>Tartaruga</td><td>Ball</td><td>Palla</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE GRAMMAR -->
+        <section id="grammar" class="section">
+            <div class="card">
+                <div class="card-header">Prepositions of Place</div>
+                <div class="card-body">
+                    <div class="position-diagram">
+                        <strong>IN</strong> = inside something (in the box)<br>
+                        <strong>ON</strong> = on top of something (on the table)<br>
+                        <strong>UNDER</strong> = below something (under the chair)<br>
+                        <strong>NEXT TO</strong> = beside something (next to the door)<br>
+                        <strong>BETWEEN</strong> = in the middle of two things (between the sofa and the TV)
+                    </div>
+
+                    <table class="vocab-table" style="margin-top: 1.5rem;">
+                        <thead>
+                            <tr>
+                                <th>Preposition</th>
+                                <th>Example</th>
+                                <th>Italian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>in</td><td>The book is <strong>in</strong> the bag.</td><td>nella</td></tr>
+                            <tr><td>on</td><td>The phone is <strong>on</strong> the table.</td><td>sul</td></tr>
+                            <tr><td>under</td><td>The cat is <strong>under</strong> the bed.</td><td>sotto</td></tr>
+                            <tr><td>next to</td><td>The lamp is <strong>next to</strong> the sofa.</td><td>accanto a</td></tr>
+                            <tr><td>between</td><td>The ball is <strong>between</strong> the chairs.</td><td>tra/fra</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">There is / There are</div>
+                <div class="card-body">
+                    <p>Use <strong>there is</strong> for singular (one thing) and <strong>there are</strong> for plural (more than one).</p>
+                    
+                    <table class="vocab-table" style="margin-top: 1rem;">
+                        <thead>
+                            <tr>
+                                <th>Affirmative</th>
+                                <th>Negative</th>
+                                <th>Question</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>There is a book.</td><td>There isn't a book.</td><td>Is there a book?</td></tr>
+                            <tr><td>There are two chairs.</td><td>There aren't two chairs.</td><td>Are there two chairs?</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box" style="margin-top: 1.5rem;">
+                        <strong>Examples:</strong><br>
+                        • There is a TV in the living room.<br>
+                        • There are three bedrooms in my house.<br>
+                        • Is there a garden? Yes, there is. / No, there isn't.<br>
+                        • Are there any pictures? Yes, there are. / No, there aren't.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Have got / Has got</div>
+                <div class="card-body">
+                    <p>Use <strong>have got</strong> (I've got) to talk about possessions.</p>
+                    
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Affirmative</th>
+                                <th>Negative</th>
+                                <th>Question</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>I / You / We / They</td><td>have got ('ve got)</td><td>haven't got</td><td>Have you got...?</td></tr>
+                            <tr><td>He / She / It</td><td>has got ('s got)</td><td>hasn't got</td><td>Has she got...?</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box" style="margin-top: 1.5rem;">
+                        <strong>Examples:</strong><br>
+                        • I've got a dog. (I have got)<br>
+                        • She's got blue eyes. (She has got)<br>
+                        • Have you got a bike? Yes, I have. / No, I haven't.<br>
+                        • Has Tom got a sister? Yes, he has. / No, he hasn't.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Possessive Pronouns</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Possessive Adjective</th>
+                                <th>Possessive Pronoun</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>I</td><td>my</td><td>mine</td></tr>
+                            <tr><td>you</td><td>your</td><td>yours</td></tr>
+                            <tr><td>he</td><td>his</td><td>his</td></tr>
+                            <tr><td>she</td><td>her</td><td>hers</td></tr>
+                            <tr><td>it</td><td>its</td><td>its</td></tr>
+                            <tr><td>we</td><td>our</td><td>ours</td></tr>
+                            <tr><td>they</td><td>their</td><td>theirs</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning-box" style="margin-top: 1.5rem;">
+                        <strong>Examples:</strong><br>
+                        • This is <strong>my</strong> book. → This book is <strong>mine</strong>.<br>
+                        • Is this <strong>your</strong> pen? → Yes, it's <strong>yours</strong>.<br>
+                        • That isn't <strong>her</strong> bag. → That bag isn't <strong>hers</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Present Simple Tense</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Verb (work)</th>
+                                <th>Verb (have)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>I / You / We / They</td><td>work</td><td>have</td></tr>
+                            <tr><td>He / She / It</td><td>work<strong>s</strong></td><td>ha<strong>s</strong></td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box" style="margin-top: 1.5rem;">
+                        <strong>Examples:</strong><br>
+                        • I live in Rome. She live<strong>s</strong> in Milan.<br>
+                        • They have a cat. He ha<strong>s</strong> a dog.<br>
+                        • Do you play football? Yes, I do. / No, I don't.<br>
+                        • Does she speak English? Yes, she does. / No, she doesn't.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Congratulations! You completed all exercises!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Try Again
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London - GESE Grade 2 Preparation</p>
+            <p style="font-size: 0.85rem; margin-top: 0.5rem;">Official preparation material for Graded Examinations in Spoken English</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali) - Trinity GESE Grade 2 (A1)
+        const exercises = [
+            // ESERCIZI 1-10: Prepositions of Place
+            {
+                id: 1,
+                type: 'listening',
+                audioText: "The book is on the table.",
+                question: 'Where is the book?',
+                options: ['In the bag', 'On the table', 'Under the chair', 'Next to the door'],
+                correct: 'On the table',
+                explanation: '✅ Correct! "On" means on top of something.',
+                errorExplanation: '❌ The book is on the table'
+            },
+            {
+                id: 2,
+                type: 'choice',
+                question: 'The cat is sleeping _____ the bed.',
+                options: ['in', 'on', 'under', 'next to'],
+                correct: 'on',
+                explanation: '✅ Correct! "On the bed" = sul letto.',
+                errorExplanation: '❌ Cats usually sleep ON the bed'
+            },
+            {
+                id: 3,
+                type: 'listening',
+                audioText: "Where is my phone? It's in my bag.",
+                question: 'Where is the phone?',
+                options: ['On the table', 'In the bag', 'Under the chair', 'Next to the window'],
+                correct: 'In the bag',
+                explanation: '✅ Correct! "In" means inside something.',
+                errorExplanation: '❌ The phone is in the bag'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'The ball is _____ the table. (under/on)',
+                correct: ['under', 'Under'],
+                explanation: '✅ Correct! "Under" = below something.'
+            },
+            {
+                id: 5,
+                type: 'listening',
+                audioText: "The lamp is next to the sofa.",
+                question: 'Where is the lamp?',
+                options: ['On the sofa', 'Under the sofa', 'Next to the sofa', 'In the sofa'],
+                correct: 'Next to the sofa',
+                explanation: '✅ Correct! "Next to" = beside something.',
+                errorExplanation: '❌ The lamp is next to (beside) the sofa'
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: 'The picture is _____ the door and the window.',
+                options: ['in', 'on', 'between', 'under'],
+                correct: 'between',
+                explanation: '✅ Correct! "Between" = in the middle of two things.',
+                errorExplanation: '❌ Use "between" for two things'
+            },
+            {
+                id: 7,
+                type: 'fill',
+                question: 'Complete: "The shoes are _____ the bed." (under/next to)',
+                correct: ['under', 'Under'],
+                explanation: '✅ Correct! Shoes are often under the bed.'
+            },
+            {
+                id: 8,
+                type: 'listening',
+                audioText: "Is the cat under the table? Yes, it is.",
+                question: 'Where is the cat?',
+                options: ['On the table', 'Under the table', 'Next to the table', 'In the table'],
+                correct: 'Under the table',
+                explanation: '✅ Correct! The cat is under the table.',
+                errorExplanation: '❌ The cat is under the table'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Which preposition? "The TV is _____ the living room."',
+                options: ['in', 'on', 'under', 'next to'],
+                correct: 'in',
+                explanation: '✅ Correct! Rooms use "in" (in the living room).',
+                errorExplanation: '❌ We say "in" a room'
+            },
+            {
+                id: 10,
+                type: 'listening',
+                audioText: "My bike is next to the door.",
+                question: 'Where is the bike?',
+                options: ['In the door', 'Under the door', 'Next to the door', 'On the door'],
+                correct: 'Next to the door',
+                explanation: '✅ Correct! The bike is beside the door.'
+
+            },
+
+            // ESERCIZI 11-20: There is / There are
+            {
+                id: 11,
+                type: 'choice',
+                question: '_____ a book on the table.',
+                options: ['There is', 'There are', 'There', 'Is'],
+                correct: 'There is',
+                explanation: '✅ Correct! Use "there is" for singular (one book).',
+                errorExplanation: '❌ Use "there is" for singular nouns'
+            },
+            {
+                id: 12,
+                type: 'listening',
+                audioText: "There are three chairs in the kitchen.",
+                question: 'How many chairs are there?',
+                options: ['One', 'Two', 'Three', 'Four'],
+                correct: 'Three',
+                explanation: '✅ Correct! There are three chairs.',
+                errorExplanation: '❌ There are three chairs'
+            },
+            {
+                id: 13,
+                type: 'fill',
+                question: 'Complete: "_____ two windows in my bedroom." (There is/There are)',
+                correct: ['There are', 'there are'],
+                explanation: '✅ Correct! Use "there are" for plural (two windows).'
+            },
+            {
+                id: 14,
+                type: 'choice',
+                question: 'Is there a garden? _____, there isn\'t.',
+                options: ['Yes', 'No', 'Maybe', 'Not'],
+                correct: 'No',
+                explanation: '✅ Correct! "No, there isn\'t" = negative answer.',
+                errorExplanation: '❌ Use "No" for negative answers'
+            },
+            {
+                id: 15,
+                type: 'listening',
+                audioText: "There isn't a computer in my bedroom.",
+                question: 'What is NOT in the bedroom?',
+                options: ['A bed', 'A computer', 'A lamp', 'A window'],
+                correct: 'A computer',
+                explanation: '✅ Correct! There isn\'t a computer.',
+                errorExplanation: '❌ There isn\'t a computer in the bedroom'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Complete the question: "_____ there any pictures on the wall?" (Is/Are)',
+                correct: ['Are', 'are'],
+                explanation: '✅ Correct! Use "Are" for plural (pictures).'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'Are there any pets? Yes, _____ .',
+                options: ['there is', 'there are', 'it is', 'they are'],
+                correct: 'there are',
+                explanation: '✅ Correct! "Yes, there are" matches "are there".',
+                errorExplanation: '❌ Match: Are there...? Yes, there are.'
+            },
+            {
+                id: 18,
+                type: 'listening',
+                audioText: "There's a big sofa in the living room.",
+                question: 'What is in the living room?',
+                options: ['A small table', 'A big sofa', 'A little chair', 'A tiny lamp'],
+                correct: 'A big sofa',
+                explanation: '✅ Correct! There\'s (there is) a big sofa.',
+                errorExplanation: '❌ There is a big sofa in the living room'
+            },
+            {
+                id: 19,
+                type: 'fill',
+                question: 'Negative: "There _____ a TV in my room." (isn\'t/aren\'t)',
+                correct: ['isn\'t', "isn't", 'is not'],
+                explanation: '✅ Correct! "There isn\'t" for singular (a TV).'
+            },
+            {
+                id: 20,
+                type: 'choice',
+                question: '_____ there a bathroom upstairs?',
+                options: ['Is', 'Are', 'Do', 'Does'],
+                correct: 'Is',
+                explanation: '✅ Correct! Use "Is" for singular (a bathroom).'
+
+            },
+
+            // ESERCIZI 21-30: Have got / Has got (Possessions)
+            {
+                id: 21,
+                type: 'listening',
+                audioText: "I've got a blue bike.",
+                question: 'What has the speaker got?',
+                options: ['A red car', 'A blue bike', 'A green scooter', 'A yellow ball'],
+                correct: 'A blue bike',
+                explanation: '✅ Correct! "I\'ve got" = I have got.',
+                errorExplanation: '❌ The speaker has got a blue bike'
+            },
+            {
+                id: 22,
+                type: 'choice',
+                question: 'She _____ got a sister.',
+                options: ['have', 'has', 'is', 'are'],
+                correct: 'has',
+                explanation: '✅ Correct! She/he/it + has got.',
+                errorExplanation: '❌ Use "has" with she/he/it'
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: 'Complete: "They _____ got a big house." (have/has)',
+                correct: ['have', 'Have'],
+                explanation: '✅ Correct! They + have got.'
+            },
+            {
+                id: 24,
+                type: 'listening',
+                audioText: "Has Tom got a dog? Yes, he has.",
+                question: 'What has Tom got?',
+                options: ['A cat', 'A dog', 'A bird', 'A fish'],
+                correct: 'A dog',
+                explanation: '✅ Correct! Tom has got a dog.',
+                errorExplanation: '❌ Tom has got a dog'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Have you got any brothers? No, I _____.',
+                options: ['have', 'haven\'t', 'has', 'hasn\'t'],
+                correct: 'haven\'t',
+                explanation: '✅ Correct! "No, I haven\'t" = negative.',
+                errorExplanation: '❌ Use "haven\'t" for negative with I/you/we/they'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Question: "_____ she got a computer?" (Have/Has)',
+                correct: ['Has', 'has'],
+                explanation: '✅ Correct! Has she got...?'
+            },
+            {
+                id: 27,
+                type: 'listening',
+                audioText: "My brother hasn't got a bike, but he's got a scooter.",
+                question: 'What has the brother got?',
+                options: ['A bike', 'A scooter', 'Both', 'Nothing'],
+                correct: 'A scooter',
+                explanation: '✅ Correct! He hasn\'t got a bike, but he has got a scooter.',
+                errorExplanation: '❌ He has got a scooter (not a bike)'
+            },
+            {
+                id: 28,
+                type: 'choice',
+                question: '_____ your parents got a car?',
+                options: ['Have', 'Has', 'Do', 'Does'],
+                correct: 'Have',
+                explanation: '✅ Correct! Parents = they (plural) → Have.',
+                errorExplanation: '❌ Use "Have" with plural subjects'
+            },
+            {
+                id: 29,
+                type: 'fill',
+                question: 'Short answer: "Yes, I _____ ." (have/has)',
+                correct: ['have', 'Have'],
+                explanation: '✅ Correct! "Yes, I have" or "No, I haven\'t".'
+            },
+            {
+                id: 30,
+                type: 'listening',
+                audioText: "We've got two cats and a dog.",
+                question: 'How many pets have they got?',
+                options: ['Two', 'Three', 'Four', 'Five'],
+                correct: 'Three',
+                explanation: '✅ Correct! Two cats + one dog = three pets.'
+
+            },
+
+            // ESERCIZI 31-40: Family and Description
+            {
+                id: 31,
+                type: 'choice',
+                question: 'My mother\'s mother is my _____.',
+                options: ['aunt', 'sister', 'grandmother', 'cousin'],
+                correct: 'grandmother',
+                explanation: '✅ Correct! Mother\'s mother = grandmother.',
+                errorExplanation: '❌ Your mother\'s mother is your grandmother'
+            },
+            {
+                id: 32,
+                type: 'listening',
+                audioText: "My brother is tall and he's got brown hair.",
+                question: 'What does the brother look like?',
+                options: ['Short with blonde hair', 'Tall with brown hair', 'Tall with black hair', 'Short with brown hair'],
+                correct: 'Tall with brown hair',
+                explanation: '✅ Correct! He is tall with brown hair.',
+                errorExplanation: '❌ The brother is tall with brown hair'
+            },
+            {
+                id: 33,
+                type: 'fill',
+                question: 'My father\'s brother is my _____. (uncle/brother)',
+                correct: ['uncle', 'Uncle'],
+                explanation: '✅ Correct! Father\'s brother = uncle.'
+            },
+            {
+                id: 34,
+                type: 'choice',
+                question: 'She\'s got long _____ hair.',
+                options: ['eye', 'nose', 'leg', 'hair'],
+                correct: 'hair',
+                explanation: '✅ Correct! "Long hair" describes hair length.',
+                errorExplanation: '❌ We describe "hair" as long/short'
+            },
+            {
+                id: 35,
+                type: 'listening',
+                audioText: "My best friend is short and she's got blue eyes.",
+                question: 'What colour are her eyes?',
+                options: ['Brown', 'Green', 'Blue', 'Grey'],
+                correct: 'Blue',
+                explanation: '✅ Correct! She has got blue eyes.',
+                errorExplanation: '❌ Her eyes are blue'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'The opposite of "tall" is _____. (short/small)',
+                correct: ['short', 'Short'],
+                explanation: '✅ Correct! Tall ↔ Short.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'My sister\'s daughter is my _____.',
+                options: ['niece', 'nephew', 'cousin', 'aunt'],
+                correct: 'niece',
+                explanation: '✅ Correct! Sister\'s daughter = niece.',
+                errorExplanation: '❌ Your sister\'s daughter is your niece'
+            },
+            {
+                id: 38,
+                type: 'listening',
+                audioText: "My grandfather is old and he's got white hair and glasses.",
+                question: 'What has the grandfather got?',
+                options: ['Black hair', 'White hair and glasses', 'Brown hair and a hat', 'No hair'],
+                correct: 'White hair and glasses',
+                explanation: '✅ Correct! He has got white hair and glasses.',
+                errorExplanation: '❌ The grandfather has white hair and glasses'
+            },
+            {
+                id: 39,
+                type: 'fill',
+                question: 'Complete: "She\'s got _____ eyes." (blue/blues)',
+                correct: ['blue', 'Blue'],
+                explanation: '✅ Correct! "Blue eyes" (no S on the colour).'
+            },
+            {
+                id: 40,
+                type: 'choice',
+                question: 'Which describes hair?',
+                options: ['Big', 'Small', 'Curly', 'Fast'],
+                correct: 'Curly',
+                explanation: '✅ Correct! Hair can be straight or curly.'
+
+            },
+
+            // ESERCIZI 41-50: Mixed Review - Days, Months, Numbers, Questions
+            {
+                id: 41,
+                type: 'listening',
+                audioText: "Today is Monday. Tomorrow is Tuesday.",
+                question: 'What day is it today?',
+                options: ['Sunday', 'Monday', 'Tuesday', 'Wednesday'],
+                correct: 'Monday',
+                explanation: '✅ Correct! Today is Monday.',
+                errorExplanation: '❌ Today is Monday'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'Complete: "My birthday is in _____ ." (July/Julys)',
+                correct: ['July', 'july'],
+                explanation: '✅ Correct! Months: January, February, March, April, May, June, July...'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Which day comes after Friday?',
+                options: ['Thursday', 'Saturday', 'Sunday', 'Monday'],
+                correct: 'Saturday',
+                explanation: '✅ Correct! Friday → Saturday.',
+                errorExplanation: '❌ After Friday comes Saturday'
+            },
+            {
+                id: 44,
+                type: 'listening',
+                audioText: "I've got twenty-five books in my room.",
+                question: 'How many books?',
+                options: ['15', '20', '25', '52'],
+                correct: '25',
+                explanation: '✅ Correct! Twenty-five = 25.',
+                errorExplanation: '❌ Twenty-five = 25'
+            },
+            {
+                id: 45,
+                type: 'fill',
+                question: 'Write the number: "thirty-six" = _____',
+                correct: ['36'],
+                explanation: '✅ Correct! Thirty-six = 36.'
+            },
+            {
+                id: 46,
+                type: 'choice',
+                question: 'Ask about possessions: "_____ you got a bike?"',
+                options: ['Do', 'Does', 'Have', 'Has'],
+                correct: 'Have',
+                explanation: '✅ Correct! "Have you got...?" for possessions.',
+                errorExplanation: '❌ Use "Have you got...?"'
+            },
+            {
+                id: 47,
+                type: 'listening',
+                audioText: "Where is my school bag? It's under the table in the kitchen.",
+                question: 'Where is the school bag?',
+                options: ['On the table', 'Under the table', 'Next to the table', 'In the bedroom'],
+                correct: 'Under the table',
+                explanation: '✅ Correct! It is under the table in the kitchen.',
+                errorExplanation: '❌ The bag is under the table'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'Possessive: "This book is _____ ." (my/mine)',
+                correct: ['mine', 'Mine'],
+                explanation: '✅ Correct! "This book is mine" (possessive pronoun, no noun after).'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Ask about place: "_____ is the bathroom?"',
+                options: ['What', 'Who', 'Where', 'When'],
+                correct: 'Where',
+                explanation: '✅ Correct! "Where" asks about place/position.',
+                errorExplanation: '❌ Use "Where" for place questions'
+            },
+            {
+                id: 50,
+                type: 'listening',
+                audioText: "Hello! I'm Anna. I'm twelve years old. I've got a big family. There are five people in my family: my mum, my dad, my brother, my sister, and me. We've got a dog and a cat. My dog is brown and my cat is white. I live in a house with a garden. In my bedroom, there is a bed, a desk, and a big wardrobe. My favourite day is Saturday because I don't go to school!",
+                question: 'How many people are there in Anna\'s family?',
+                options: ['Three', 'Four', 'Five', 'Six'],
+                correct: 'Five',
+                explanation: '✅ Correct! Five people: mum, dad, brother, sister, and Anna. Well done completing all exercises!',
+                errorExplanation: '❌ There are five people in Anna\'s family'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+        let isPlaying = false;
+
+        // Text-to-Speech per gli esercizi di ascolto
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-GB';
+                utterance.rate = 0.8;
+                utterance.pitch = 1;
+                
+                utterance.onstart = () => {
+                    isPlaying = true;
+                    document.querySelector('.play-btn').classList.add('playing');
+                };
+                
+                utterance.onend = () => {
+                    isPlaying = false;
+                    document.querySelector('.play-btn').classList.remove('playing');
+                };
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Text-to-speech not supported in this browser. Please use Chrome, Edge, or Safari.');
+            }
+        }
+
+        function stopSpeaking() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                isPlaying = false;
+                const btn = document.querySelector('.play-btn');
+                if (btn) btn.classList.remove('playing');
+            }
+        }
+
+        function showSection(id, btn) {
+            stopSpeaking();
+            
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Exercise ${ex.id} - ${ex.type === 'listening' ? '🔊 Listening' : ex.type === 'choice' ? '📝 Multiple Choice' : '✏️ Fill in the Blank'}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Exercise ${currentExercise + 1} of ${exercises.length}</div>
+            `;
+
+            if (ex.type === 'listening') {
+                html += `
+                    <div class="listening-box">
+                        <button class="play-btn" onclick="speak('${ex.audioText.replace(/'/g, "\\'")}')" title="Click to listen">▶️</button>
+                        <div style="font-weight: bold; color: var(--trinity-blue); margin-bottom: 0.5rem;">🔊 Listen carefully</div>
+                        <div class="listening-text">Click the play button to hear the audio</div>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice' || ex.type === 'listening') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt.replace(/'/g, "\\'")}')" data-value="${opt.replace(/"/g, '&quot;')}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Check Answer</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Next →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            stopSpeaking();
+            
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Distinction! Excellent work! You are ready for the GESE Grade 2 exam!';
+            } else if (totalScore >= 75) {
+                message = '🥇 Merit! Very good! Just a little more practice with prepositions and descriptions.';
+            } else if (totalScore >= 60) {
+                message = '✅ Pass! Good job! Review the grammar sections and try again.';
+            } else {
+                message = '📚 Keep practicing! Focus on prepositions, there is/are, and have got.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+
+        window.addEventListener('beforeunload', stopSpeaking);
+    </script>
+</body>
+</html>

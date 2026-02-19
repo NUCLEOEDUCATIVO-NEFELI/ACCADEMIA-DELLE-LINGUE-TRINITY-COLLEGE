@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE Foundation Reading - Complete Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #e8f5e9;
+            --dark: #263238;
+            --border: #c8e6c9;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --a2-color: #1565c0;
+            --warning: #ef6c00;
+            --task1: #e3f2fd;
+            --task2: #fff3e0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3e0;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--a2-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .task-box {
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 5px solid;
+        }
+
+        .task1-box {
+            background: var(--task1);
+            border-color: #1565c0;
+        }
+
+        .task2-box {
+            background: var(--task2);
+            border-color: #ef6c00;
+        }
+
+        .task-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .reading-text {
+            background: white;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            line-height: 1.8;
+            font-family: Georgia, serif;
+        }
+
+        .question-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .strategy-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .strategy-list li {
+            padding: 0.75rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .strategy-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .highlight {
+            background: #fff59d;
+            padding: 0 0.25rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE Foundation Reading</h1>
+            <p>Complete Guide to Task 1 & Task 2 (A2 Level)</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE Foundation Reading Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE Foundation Reading Guide</h1>
+            <p class="page-subtitle">Master Task 1 (Long Reading) and Task 2 (Multi-text Reading)</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('task1', this)">Task 1: Long Reading</button>
+            <button class="nav-tab" onclick="showSection('task2', this)">Task 2: Multi-text</button>
+            <button class="nav-tab" onclick="showSection('strategies', this)">Strategies</button>
+            <button class="nav-tab" onclick="showSection('practice', this)">Practice</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">ISE Foundation Reading Exam Overview</div>
+                <div class="card-body">
+                    <p>The <strong>Reading section</strong> of ISE Foundation consists of two tasks completed in <strong>60 minutes</strong> (30 minutes per task). These tasks test your ability to understand main ideas, specific information, and detailed facts from texts at A2 level.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Key Facts:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Total time:</strong> 60 minutes for both tasks (20 mins advised for Task 1, 30 mins for Task 2)</li>
+                            <li><strong>Total questions:</strong> 30 (15 per task)</li>
+                            <li><strong>Text types:</strong> Simple factual texts on familiar topics</li>
+                            <li><strong>Subject areas:</strong> Holidays, shopping, school/work, hobbies, food, weekend activities, jobs, places, home life, weather, free time, dates, natural world</li>
+                        </ul>
+                    </div>
+
+                    <div class="task-box task1-box">
+                        <div class="task-title">Task 1: Long Reading</div>
+                        <p><strong>Text:</strong> One text of approximately 300 words (5 paragraphs)</p>
+                        <p><strong>Questions:</strong> 15 questions in three sections</p>
+                        <p><strong>Time advised:</strong> 20 minutes</p>
+                    </div>
+
+                    <div class="task-box task2-box">
+                        <div class="task-title">Task 2: Multi-text Reading</div>
+                        <p><strong>Text:</strong> 3-4 short texts on the same topic</p>
+                        <p><strong>Questions:</strong> 15 questions in three sections</p>
+                        <p><strong>Time advised:</strong> 30 minutes</p>
+                        <p><strong>Note:</strong> Information from these texts is used in Task 3 (Reading into Writing)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Reading Skills Tested</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Skill</th>
+                                <th>Description</th>
+                                <th>Tested In</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Skimming</td>
+                                <td>Reading quickly for general idea/main purpose</td>
+                                <td>Task 1 Q1-5, Task 2 Q16-20</td>
+                            </tr>
+                            <tr>
+                                <td>Scanning</td>
+                                <td>Looking for specific information (names, dates, numbers)</td>
+                                <td>All questions</td>
+                            </tr>
+                            <tr>
+                                <td>Reading for gist</td>
+                                <td>Understanding main idea of paragraphs</td>
+                                <td>Task 1 Q1-5, Task 2 Q16-20</td>
+                            </tr>
+                            <tr>
+                                <td>Reading for detail (sentence level)</td>
+                                <td>Understanding specific factual information</td>
+                                <td>Task 1 Q6-10, Task 2 Q21-25</td>
+                            </tr>
+                            <tr>
+                                <td>Reading for detail (word level)</td>
+                                <td>Finding exact words or phrases from text</td>
+                                <td>Task 1 Q11-15, Task 2 Q26-30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 1 SECTION -->
+        <section id="task1" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: #1565c0;">Task 1: Long Reading (20 minutes)</div>
+                <div class="card-body">
+                    <div class="task1-box" style="margin-bottom: 1.5rem;">
+                        <p><strong>Text:</strong> 300 words, 5 paragraphs</p>
+                        <p><strong>Total questions:</strong> 15 (5 per section)</p>
+                        <p><strong>Marks:</strong> 15 marks (50% of reading score)</p>
+                    </div>
+
+                    <h4>Section 1: Title Matching (Questions 1-5)</h4>
+                    <div class="question-box">
+                        <p><strong>What you do:</strong> Match 6 titles to 5 paragraphs. One title is not used (distraction).</p>
+                        <p><strong>Skill:</strong> Understanding main idea of each paragraph</p>
+                        <p><strong>Strategy:</strong> Read the text quickly first, then match titles to paragraphs</p>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example Question:</strong><br>
+                        Read the text about Iceland. Choose the best title for each paragraph.<br><br>
+                        <strong>Titles:</strong><br>
+                        A) Volcanic activity<br>
+                        B) Winter sports<br>
+                        C) Geography and location<br>
+                        D) The capital city<br>
+                        E) Climate and weather<br>
+                        F) Tourist attractions<br><br>
+                        <strong>Tip:</strong> Look for topic sentences (usually first sentence of paragraph) to identify main idea.
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">Section 2: Selecting True Statements (Questions 6-10)</h4>
+                    <div class="question-box">
+                        <p><strong>What you do:</strong> Choose 5 true statements from 8 options. 3 statements are false or not mentioned.</p>
+                        <p><strong>Skill:</strong> Understanding specific factual information at sentence level</p>
+                        <p><strong>Strategy:</strong> Scan for keywords, then read carefully to verify</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>True/False/Not Given Explained:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>TRUE:</strong> The statement matches the information in the text (may use synonyms)</li>
+                            <li><strong>FALSE:</strong> The statement contradicts the text (opposite information)</li>
+                            <li><strong>NOT GIVEN:</strong> The information is not mentioned in the text</li>
+                        </ul>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example Statements:</strong><br>
+                        1. Iceland is located in the North Atlantic Ocean. (TRUE - matches text)<br>
+                        2. The capital of Iceland is Akureyri. (FALSE - contradicts text, Reykjavik is capital)<br>
+                        3. Iceland has a population of 5 million people. (NOT GIVEN - not mentioned in text)
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">Section 3: Completing Sentences (Questions 11-15)</h4>
+                    <div class="question-box">
+                        <p><strong>What you do:</strong> Complete sentences with exact words or phrases from the text (up to 3 words).</p>
+                        <p><strong>Skill:</strong> Finding specific information at word/phrase level</p>
+                        <p><strong>Strategy:</strong> Scan for the sentence stem, then copy the exact words</p>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong><br>
+                        Text: "The best time to visit Iceland is during the summer months when the weather is milder."<br><br>
+                        Question: The best time to visit Iceland is during the __________ when the weather is milder.<br>
+                        Answer: <strong>summer months</strong> (exact words from text)
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Important Rules for Gap-fill:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Use <strong>exact words</strong> from the text (no changing!)</li>
+                            <li>Maximum <strong>3 words</strong></li>
+                            <li>Spelling must be correct</li>
+                            <li>Grammar must fit the sentence</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Sample Task 1 Text: "A Visit to Iceland"</div>
+                <div class="card-body">
+                    <div class="reading-text">
+                        <h4>Paragraph 1</h4>
+                        <p>Iceland is a small island nation located in the North Atlantic Ocean, just south of the Arctic Circle. Despite its name, Iceland is not completely covered in ice. In fact, the country has a surprisingly mild climate thanks to the warm ocean currents that flow around its coast. The population of Iceland is only about 370,000 people, with most living in the capital city, Reykjavik.</p>
+
+                        <h4>Paragraph 2</h4>
+                        <p>One of Iceland's most famous features is its volcanic activity. The country has over 130 volcanic mountains, and eruptions occur every few years. This geothermal activity creates natural hot springs, which both locals and tourists enjoy. The Blue Lagoon, a large outdoor swimming pool filled with warm mineral water, is one of the most popular attractions for visitors.</p>
+
+                        <h4>Paragraph 3</h4>
+                        <p>The weather in Iceland can change very quickly. In winter, temperatures usually stay around 0°C, not as cold as you might expect. Summer temperatures rarely go above 15°C. Because Iceland is so far north, it experiences long days in summer when the sun barely sets, and very short days in winter with only a few hours of daylight.</p>
+
+                        <h4>Paragraph 4</h4>
+                        <p>Tourism has become very important to Iceland's economy. Visitors come to see the dramatic landscapes, including huge waterfalls, black sand beaches, and massive glaciers. Whale watching is another popular activity. Many tourists also hope to see the Northern Lights, the colourful natural light display that appears in the winter sky.</p>
+
+                        <h4>Paragraph 5</h4>
+                        <p>For those who enjoy outdoor activities, Iceland offers excellent opportunities for hiking, horse riding, and snow sports. The Icelandic horse is a special breed that has lived on the island for over a thousand years. These small, strong horses are famous for their friendly nature and unique way of walking.</p>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Practice Questions:</strong>
+                        <ol style="margin-left: 1.5rem;">
+                            <li>Match titles to paragraphs (Geography, Volcanoes, Weather, Tourism, Activities)</li>
+                            <li>Which statements are true? (e.g., "Iceland is completely covered in ice" - FALSE)</li>
+                            <li>Complete: The capital city of Iceland is __________.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 2 SECTION -->
+        <section id="task2" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: #ef6c00;">Task 2: Multi-text Reading (30 minutes)</div>
+                <div class="card-body">
+                    <div class="task2-box" style="margin-bottom: 1.5rem;">
+                        <p><strong>Texts:</strong> 3-4 short texts (100-150 words each) on the same topic</p>
+                        <p><strong>Total questions:</strong> 15 (5 per section)</p>
+                        <p><strong>Marks:</strong> 15 marks (50% of reading score)</p>
+                        <p><strong>Important:</strong> Information from these texts is used in Task 3 (Reading into Writing)</p>
+                    </div>
+
+                    <h4>Section 1: Multiple Matching (Questions 16-20)</h4>
+                    <div class="question-box">
+                        <p><strong>What you do:</strong> Match descriptions or questions to the correct text (A, B, C, or D).</p>
+                        <p><strong>Skill:</strong> Understanding main idea/purpose of each text</p>
+                        <p><strong>Strategy:</strong> Read all texts quickly first, then match</p>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong><br>
+                        You read 4 short texts about different people's holidays.<br><br>
+                        <strong>Question:</strong> "Which person went on holiday with their family?"<br>
+                        <strong>Answer:</strong> Text C<br><br>
+                        <strong>Tip:</strong> Look for names and who they went with in each text.
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">Section 2: Selecting True Statements (Questions 21-25)</h4>
+                    <div class="question-box">
+                        <p><strong>What you do:</strong> Choose 5 true statements from 8 options (3 are false).</p>
+                        <p><strong>Skill:</strong> Understanding specific information across multiple texts</p>
+                        <p><strong>Strategy:</strong> Scan for keywords, check which text contains the information</p>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example Statements:</strong><br>
+                        1. Maria stayed in a hotel by the beach. (Check Text A)<br>
+                        2. Tom went hiking in the mountains. (Check Text B)<br>
+                        3. The weather was bad during the holiday. (Check all texts - might be false)<br>
+                        4. Someone travelled by plane. (Check all texts)
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">Section 3: Gap-fill from Bank (Questions 26-30)</h4>
+                    <div class="question-box">
+                        <p><strong>What you do:</strong> Complete summary notes using words from a list (more words than gaps).</p>
+                        <p><strong>Skill:</strong> Finding specific information and understanding synonyms</p>
+                        <p><strong>Strategy:</strong> Read the summary first, then scan texts for matching information</p>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Example:</strong><br>
+                        <strong>Word bank:</strong> beach, mountains, expensive, train, hotel, camping, sunny, crowded, flight, relaxed<br><br>
+                        <strong>Summary:</strong><br>
+                        Maria's holiday: She stayed at a (26) __________ by the (27) __________. The weather was (28) __________ every day. She travelled by (29) __________. She felt very (30) __________.<br><br>
+                        <strong>Tip:</strong> Some words in the bank are distractors (not used).
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Important for Task 3 (Reading into Writing):</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Task 3 asks you to write using information from THESE texts</li>
+                            <li>Pay attention to: dates, names, places, activities, opinions</li>
+                            <li>Make mental notes of what each person did</li>
+                            <li>You can look back at these texts during Task 3</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Sample Task 2 Texts: "Different Holidays"</div>
+                <div class="card-body">
+                    <div class="reading-text">
+                        <h4>Text A - Maria's Beach Holiday</h4>
+                        <p>Last summer, I went to Spain with my family. We stayed in a lovely hotel right next to the beach. The weather was fantastic - sunny and hot every single day! We spent most of our time swimming and sunbathing. In the evenings, we tried lots of delicious Spanish food at local restaurants. We travelled there by plane, which took about three hours. It was quite expensive, but definitely worth it. I felt so relaxed after the holiday.</p>
+
+                        <h4>Text B - Tom's Adventure</h4>
+                        <p>I'm not really a beach person, so I went hiking in Scotland with my best friend. We stayed in cheap hostels and campsites to save money. The weather wasn't great - it rained a lot! But we didn't mind. We walked for hours every day through beautiful mountains and forests. We saw some amazing wildlife, including deer and eagles. We travelled by train, which was a long journey but very scenic. It was an active holiday, and I came back feeling fit and healthy.</p>
+
+                        <h4>Text C - The Johnson Family City Break</h4>
+                        <p>My family and I visited Paris for a long weekend. We stayed in a small apartment in the city centre. It was quite crowded everywhere because it was peak tourist season. We visited all the famous sights - the Eiffel Tower, the Louvre museum, and Notre Dame cathedral. We travelled by Eurostar train from London, which was quick and easy. The best part was the food - we ate croissants and drank coffee at a different café every morning!</p>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Practice Questions:</strong>
+                        <ol style="margin-left: 1.5rem;">
+                            <li>Which person stayed in a hotel? (Maria)</li>
+                            <li>Which person travelled by train? (Tom and Johnson family)</li>
+                            <li>Which person went with friends, not family? (Tom)</li>
+                            <li>Complete: Maria's holiday was __________ but worth it.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRATEGIES SECTION -->
+        <section id="strategies" class="section">
+            <div class="card">
+                <div class="card-header">Reading Strategies for ISE Foundation</div>
+                <div class="card-body">
+                    
+                    <h4>1. Skimming (for gist/main idea)</h4>
+                    <div class="example-box">
+                        <strong>How to skim:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Read the <strong>title</strong> and any headings</li>
+                            <li>Read the <strong>first sentence</strong> of each paragraph (topic sentence)</li>
+                            <li>Look at any <strong>pictures or diagrams</strong></li>
+                            <li>Read the <strong>last paragraph</strong> (conclusion)</li>
+                            <li>Do NOT read every word - get the general idea only</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">2. Scanning (for specific information)</h4>
+                    <div class="example-box">
+                        <strong>How to scan:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Look for <strong>names, dates, numbers, places</strong> (easy to spot)</li>
+                            <li>Look for <strong>keywords</strong> from the question</li>
+                            <li>Move your eyes <strong>quickly</strong> over the text</li>
+                            <li>When you find the information, <strong>stop and read carefully</strong></li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">3. Dealing with Unknown Words</h4>
+                    <div class="rule-box">
+                        <strong>Don't panic if you don't know a word!</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Look at the context:</strong> Read the sentences before and after</li>
+                            <li><strong>Look for synonyms:</strong> The text might explain it using different words</li>
+                            <li><strong>Check if it's important:</strong> If you can answer the question without it, ignore it!</li>
+                            <li><strong>Look for word parts:</strong> Prefixes (un-, re-) and suffixes (-tion, -ment)</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">4. Time Management</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Time</th>
+                                <th>What to Do</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Task 1 - First reading</td>
+                                <td>3 minutes</td>
+                                <td>Skim text for general idea</td>
+                            </tr>
+                            <tr>
+                                <td>Task 1 - Questions 1-5</td>
+                                <td>5 minutes</td>
+                                <td>Title matching</td>
+                            </tr>
+                            <tr>
+                                <td>Task 1 - Questions 6-10</td>
+                                <td>6 minutes</td>
+                                <td>True/False statements</td>
+                            </tr>
+                            <tr>
+                                <td>Task 1 - Questions 11-15</td>
+                                <td>6 minutes</td>
+                                <td>Gap-fill</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Task 1 Total</strong></td>
+                                <td><strong>20 minutes</strong></td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td>Task 2 - First reading</td>
+                                <td>5 minutes</td>
+                                <td>Skim all texts</td>
+                            </tr>
+                            <tr>
+                                <td>Task 2 - All questions</td>
+                                <td>25 minutes</td>
+                                <td>Matching, true/false, gap-fill</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Task 2 Total</strong></td>
+                                <td><strong>30 minutes</strong></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Question Type Strategies</div>
+                <div class="card-body">
+                    
+                    <h4>Title Matching (Q1-5, Q16-20)</h4>
+                    <ul class="strategy-list">
+                        <li>Read all titles first and underline keywords</li>
+                        <li>Read paragraph 1 and match to a title</li>
+                        <li>Check: Does the title cover the MAIN idea, not just a detail?</li>
+                        <li>Don't use a title if it only matches one sentence</li>
+                        <li>Remember: One title is NOT used (distraction)</li>
+                    </ul>
+
+                    <h4 style="margin-top: 1.5rem;">True/False/Not Given (Q6-10, Q21-25)</h4>
+                    <ul class="strategy-list">
+                        <li>Read the statement carefully - underline keywords</li>
+                        <li>Scan the text for those keywords or synonyms</li>
+                        <li>If you find matching information: Is it the same (TRUE) or opposite (FALSE)?</li>
+                        <li>If you can't find the information: It's NOT GIVEN</li>
+                        <li>Be careful with extreme words (always, never, all, none) - often false</li>
+                    </ul>
+
+                    <h4 style="margin-top: 1.5rem;">Gap-fill (Q11-15, Q26-30)</h4>
+                    <ul class="strategy-list">
+                        <li>Read the sentence stem carefully</li>
+                        <li>Scan for the exact words in the text</li>
+                        <li>Copy the answer exactly (spelling must be correct)</li>
+                        <li>Check the word fits grammatically (singular/plural, verb form)</li>
+                        <li>Maximum 3 words - don't write more!</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRACTICE SECTION -->
+        <section id="practice" class="section">
+            <div class="card">
+                <div class="card-header">Practice Exercises</div>
+                <div class="card-body">
+                    
+                    <h4>Exercise 1: Identifying Question Types</h4>
+                    <div class="question-box">
+                        <p>Look at these questions and identify which skill they test:</p>
+                        <ol style="margin-left: 1.5rem;">
+                            <li>"Choose the best title for paragraph 3." (Skimming/Gist)</li>
+                            <li>"Complete the sentence with a word from the text." (Scanning/Detail)</li>
+                            <li>"Which of these statements are true according to the text?" (Reading for detail)</li>
+                            <li>"Which text describes a city holiday?" (Multiple matching)</li>
+                        </ol>
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">Exercise 2: Synonym Recognition</h4>
+                    <div class="question-box">
+                        <p>Match the words from the question to synonyms in the text:</p>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Question: "expensive" → Text: "cost a lot of money"</li>
+                            <li>Question: "happy" → Text: "delighted, pleased"</li>
+                            <li>Question: "start" → Text: "begin, commence"</li>
+                            <li>Question: "big" → Text: "large, huge, enormous"</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">Exercise 3: True/False/Not Given Practice</h4>
+                    <div class="reading-text" style="margin: 1rem 0;">
+                        <p><strong>Text:</strong> "The Blue Lagoon is one of Iceland's most popular tourist attractions. It is a large outdoor swimming pool filled with warm mineral water. Visitors can relax in the water while enjoying the beautiful surrounding landscape."</p>
+                    </div>
+                    <div class="question-box">
+                        <p>Decide if these statements are True, False, or Not Given:</p>
+                        <ol style="margin-left: 1.5rem;">
+                            <li>The Blue Lagoon is in Iceland. (TRUE)</li>
+                            <li>The water in the Blue Lagoon is cold. (FALSE - contradicts "warm")</li>
+                            <li>The Blue Lagoon is the most popular attraction in Iceland. (NOT GIVEN - "one of" ≠ "the most")</li>
+                            <li>Visitors can buy food at the Blue Lagoon. (NOT GIVEN - not mentioned)</li>
+                        </ol>
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">Exercise 4: Gap-fill Practice</h4>
+                    <div class="reading-text" style="margin: 1rem 0;">
+                        <p><strong>Text:</strong> "Tom went hiking in Scotland with his best friend. They stayed in cheap hostels to save money. The weather wasn't great - it rained a lot!"</p>
+                    </div>
+                    <div class="question-box">
+                        <p>Complete the sentences (max 3 words):</p>
+                        <ol style="margin-left: 1.5rem;">
+                            <li>Tom went hiking with his __________. (best friend)</li>
+                            <li>They stayed in __________ to save money. (cheap hostels)</li>
+                            <li>The weather was __________ during their trip. (not great / rainy)</li>
+                        </ol>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Remember:</strong> In the real exam, spelling must be correct and you must use exact words from the text for gap-fill questions!
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Final Checklist for Reading Exam</div>
+                <div class="card-body">
+                    <ul class="strategy-list">
+                        <li>I skim the text first before looking at questions</li>
+                        <li>I read the questions carefully and underline keywords</li>
+                        <li>I scan for specific information rather than reading every word</li>
+                        <li>I check my answers for Task 1 before starting Task 2</li>
+                        <li>I manage my time (20 mins Task 1, 30 mins Task 2)</li>
+                        <li>For gap-fill, I copy exact words from the text</li>
+                        <li>I check my spelling in gap-fill answers</li>
+                        <li>I remember that one title in Task 1 is not used</li>
+                        <li>I know that 3 statements in Q6-10 and Q21-25 are false</li>
+                        <li>I use information from Task 2 texts in Task 3 (Writing)</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity ISE Foundation Reading Preparation</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 8 - Exam Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: #f5f5f0;
+            color: #212529;
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #1e3a5f;
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid #dc2626;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: normal;
+        }
+
+        .timer {
+            background: white;
+            color: #1e3a5f;
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            font-family: monospace;
+        }
+
+        .exam-badge {
+            display: inline-block;
+            background: #dc2626;
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #276749;
+            width: 0%;
+            transition: width 0.3s;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid #d4d4c8;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: #6c757d;
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            color: #1e3a5f;
+            background: #f5f5f0;
+        }
+
+        .nav-tab.active {
+            color: #1e3a5f;
+            border-bottom-color: #dc2626;
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid #d4d4c8;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            background: #f5f5f0;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #d4d4c8;
+            font-weight: bold;
+            color: #1e3a5f;
+            font-size: 1rem;
+            text-transform: uppercase;
+            border-left: 4px solid #dc2626;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid #1e3a5f;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .gese8-box {
+            background: #f8d7da;
+            border-left: 4px solid #721c24;
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .examiner-section {
+            background: #f8f9fa;
+            border: 2px solid #1e3a5f;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .examiner-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #1e3a5f;
+            color: white;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .examiner-avatar {
+            width: 60px;
+            height: 60px;
+            background: #1e3a5f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            float: left;
+            margin-right: 1rem;
+        }
+
+        .examiner-text {
+            font-size: 1.1rem;
+            color: #212529;
+            padding-left: 80px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .candidate-section {
+            background: #fff8e1;
+            border: 2px solid #c9a227;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .candidate-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: #c9a227;
+            color: #000;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .response-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .response-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid #d4d4c8;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .response-btn:hover:not(:disabled) {
+            border-color: #c9a227;
+            background: #f5f5f0;
+        }
+
+        .response-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .response-btn.correct {
+            background: #d4edda;
+            border-color: #276749;
+            color: #276749;
+        }
+
+        .response-btn.wrong {
+            background: #f8d7da;
+            border-color: #c53030;
+            color: #c53030;
+        }
+
+        .btn-primary {
+            background: #1e3a5f;
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0.5rem;
+        }
+
+        .btn-primary:hover {
+            background: #152a45;
+        }
+
+        .btn-gese8 {
+            background: #721c24;
+        }
+
+        .btn-gese8:hover {
+            background: #5a161c;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #d4d4c8;
+            flex-wrap: wrap;
+        }
+
+        .feedback {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border: 1px solid #276749;
+            color: #276749;
+        }
+
+        .feedback.info {
+            background: #e7f3ff;
+            border: 1px solid #1e3a5f;
+            color: #1e3a5f;
+        }
+
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .phase-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #d4d4c8;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            font-weight: bold;
+        }
+
+        .phase-step.active {
+            background: #1e3a5f;
+            color: white;
+        }
+
+        .results-container {
+            background: white;
+            border: 2px solid #276749;
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: #f5f5f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #1e3a5f;
+            border: 4px solid #c9a227;
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .grade-distinction {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .grade-merit {
+            background: #c0c0c0;
+            color: #000;
+        }
+
+        .grade-pass {
+            background: #cd7f32;
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timer {
+                margin-top: 1rem;
+            }
+            .examiner-text {
+                padding-left: 0;
+                margin-top: 1rem;
+            }
+            .examiner-avatar {
+                float: none;
+                margin: 0 auto;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>Trinity GESE Grade 8</h1>
+                <div class="exam-badge">CEFR B2.2 • 15 Minutes</div>
+            </div>
+            <div class="timer" id="timer">15:00</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="goToSection(0)">📋 About</button>
+            <button class="nav-tab" onclick="goToSection(1)">📌 Topic</button>
+            <button class="nav-tab" onclick="goToSection(2)">🎯 Phase 1</button>
+            <button class="nav-tab" onclick="goToSection(3)">🎭 Phase 2</button>
+            <button class="nav-tab" onclick="goToSection(4)">💬 Phase 3</button>
+            <button class="nav-tab" onclick="goToSection(5)" id="results-tab" style="display:none">📊 Results</button>
+        </div>
+
+        <!-- SEZIONE 0: INTRO -->
+        <div class="section active" id="section-0">
+            <div class="card">
+                <div class="card-header">About GESE Grade 8 Exam</div>
+                <div class="card-body">
+                    <div class="gese8-box">
+                        <strong>GESE Grade 8 (CEFR B2.2)</strong> - 15 minutes, 3 phases:
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Topic Discussion (5 min)</li>
+                            <li>Interactive Task (4 min)</li>
+                            <li>Conversation Task (6 min)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="phase-indicator">
+                        <div class="phase-step active">1</div>
+                        <div class="phase-step">2</div>
+                        <div class="phase-step">3</div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Key Language Functions:</strong> Reported speech, expressing impossibility, speculation, persuasion, discouragement
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary btn-gese8" onclick="startExam()">Start Exam →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 1: TOPIC -->
+        <div class="section" id="section-1">
+            <div class="card">
+                <div class="card-header">Your Topic</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>"The Ethics of Artificial Intelligence in Healthcare"</strong>
+                    </div>
+                    
+                    <p style="margin-bottom: 1rem;"><strong>Discussion Points:</strong></p>
+                    <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                        <li>Current AI applications in medicine</li>
+                        <li>Ethical dilemmas and data privacy</li>
+                        <li>Impossibility of replacing human doctors</li>
+                        <li>Speculation on future developments</li>
+                        <li>Personal stance on regulation</li>
+                    </ul>
+
+                    <div class="navigation">
+                        <button class="btn-primary" onclick="goToSection(0)">← Back</button>
+                        <button class="btn-primary btn-gese8" onclick="goToSection(2)">Begin Exam →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 2: PHASE 1 - TOPIC DISCUSSION -->
+        <div class="section" id="section-2">
+            <div class="card">
+                <div class="card-header">Phase 1: Topic Discussion (5 min)</div>
+                <div class="card-body">
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            Good morning. I'd like to discuss your topic on AI in healthcare. What current applications of AI in medicine do you find most significant?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section">
+                        <div class="candidate-label">YOUR RESPONSE - Use reported speech!</div>
+                        <div class="response-options">
+                            <button class="response-btn" onclick="checkAnswer(2, this, true, 25)">
+                                What strikes me as most significant is diagnostic imaging. Experts have claimed that AI can now detect certain cancers with greater accuracy than human radiologists. That said, I am convinced that we still need the human element for final decisions.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(2, this, false, 0)">
+                                AI is used in hospitals for many things.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(2, this, false, 0)">
+                                Doctors use computers to help patients.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(2, this, false, 0)">
+                                Technology is important in medicine today.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="feedback-2"></div>
+                    
+                    <div class="navigation" id="nav-2" style="display: none;">
+                        <button class="btn-primary" onclick="goToSection(1)">← Back</button>
+                        <button class="btn-primary btn-gese8" onclick="goToSection(3)">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Grammar Help</div>
+                <div class="card-body">
+                    <p><strong>Reported Speech:</strong> "Experts have claimed that...", "Critics have argued that...", "It has been suggested that..."</p>
+                    <p style="margin-top: 0.5rem;"><strong>Expressing Impossibility:</strong> "It would be impossible to...", "couldn't possibly..."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 3: PHASE 2 - INTERACTIVE -->
+        <div class="section" id="section-3">
+            <div class="card">
+                <div class="card-header">Phase 2: Interactive Task (4 min)</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>Scenario:</strong> Your friend wants to drop out of university to start a tech business. Persuade them to reconsider or support them.
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER (Your friend)</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            I've been thinking about leaving university. I've got this brilliant app idea. My parents are against it, but I'm 22 and feel like I'm wasting time. What do you think?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section">
+                        <div class="candidate-label">YOUR RESPONSE - Persuade and explore options!</div>
+                        <div class="response-options">
+                            <button class="response-btn" onclick="checkAnswer(3, this, true, 30)">
+                                I can see why you're tempted, but have you considered the risks? If I were you, I'd think carefully about what you're giving up. You might want to consider finishing your degree first - it would be impossible to return easily once you've left. What exactly is your business plan?
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(3, this, false, 0)">
+                                I think you should stay at university.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(3, this, false, 0)">
+                                Starting a business is very difficult.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(3, this, false, 0)">
+                                Your parents are right, listen to them.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="feedback-3"></div>
+                    
+                    <div class="navigation" id="nav-3" style="display: none;">
+                        <button class="btn-primary" onclick="goToSection(2)">← Back</button>
+                        <button class="btn-primary btn-gese8" onclick="goToSection(4)">Continue →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 4: PHASE 3 - CONVERSATION -->
+        <div class="section" id="section-4">
+            <div class="card">
+                <div class="card-header">Phase 3: Conversation Task (6 min)</div>
+                <div class="card-body">
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            Let's talk about work-life balance. Some people say it's impossible to achieve a true balance in today's competitive world. What's your view on this?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section">
+                        <div class="candidate-label">YOUR RESPONSE - Speculate and use reported speech!</div>
+                        <div class="response-options">
+                            <button class="response-btn" onclick="checkAnswer(4, this, true, 25)">
+                                I wouldn't say it's impossible, though I admit it's challenging. Researchers have claimed that the concept itself is outdated - they suggest we should aim for integration rather than balance. Previous generations might have had an easier time separating work from personal life, but that's no longer feasible in the digital age.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(4, this, false, 0)">
+                                I think work-life balance is very important for everyone.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(4, this, false, 0)">
+                                People work too much these days and get stressed.
+                            </button>
+                            <button class="response-btn" onclick="checkAnswer(4, this, false, 0)">
+                                Technology makes it difficult to stop working.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="feedback-4"></div>
+                    
+                    <div class="navigation" id="nav-4" style="display: none;">
+                        <button class="btn-primary" onclick="goToSection(3)">← Back</button>
+                        <button class="btn-primary btn-gese8" onclick="showMoreConversation()">More Questions →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 5: RISULTATI -->
+        <div class="section" id="section-5">
+            <div class="results-container">
+                <h2 style="color: #1e3a5f; margin-bottom: 1rem;">🎉 Exam Completed!</h2>
+                
+                <div class="score-circle" id="final-score">0%</div>
+                
+                <div class="grade-badge" id="grade-badge">Grade</div>
+                
+                <p style="font-size: 1.1rem; margin: 1rem 0;" id="result-message"></p>
+
+                <div style="text-align: left; max-width: 600px; margin: 2rem auto; background: #f5f5f0; padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: #1e3a5f; margin-bottom: 1rem;">Feedback:</h3>
+                    <ul id="feedback-list" style="margin-left: 1.5rem; line-height: 2;"></ul>
+                </div>
+
+                <div class="navigation">
+                    <button class="btn-primary btn-gese8" onclick="location.reload()">Try Again</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VARIABILI GLOBALI
+        let timeRemaining = 900; // 15 minuti
+        let timerInterval = null;
+        let currentSection = 0;
+        let totalScore = 0;
+        let maxScore = 80; // 25+30+25
+        let answeredSections = [false, false, false, false, false, false];
+
+        // AVVIA TIMER
+        function startTimer() {
+            if (timerInterval) return;
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    alert("Time's up!");
+                    finishExam();
+                }
+            }, 1000);
+        }
+
+        // NAVIGAZIONE SEMPLICE E DIRETTA
+        function goToSection(num) {
+            // Nascondi tutte le sezioni
+            for (let i = 0; i <= 5; i++) {
+                const section = document.getElementById('section-' + i);
+                if (section) {
+                    section.classList.remove('active');
+                }
+            }
+            
+            // Mostra la sezione richiesta
+            const target = document.getElementById('section-' + num);
+            if (target) {
+                target.classList.add('active');
+            }
+            
+            // Aggiorna tab attivo
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach((tab, index) => {
+                if (index === num) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            currentSection = num;
+            updateProgress();
+        }
+
+        // INIZIA ESAME
+        function startExam() {
+            startTimer();
+            goToSection(1);
+        }
+
+        // CONTROLLA RISPOSTA
+        function checkAnswer(sectionNum, btn, isCorrect, points) {
+            // Disabilita tutti i bottoni nella sezione
+            const section = document.getElementById('section-' + sectionNum);
+            if (!section) return;
+            
+            const buttons = section.querySelectorAll('.response-btn');
+            buttons.forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+            
+            // Mostra feedback
+            const feedback = document.getElementById('feedback-' + sectionNum);
+            if (feedback) {
+                if (isCorrect) {
+                    feedback.className = 'feedback show correct';
+                    feedback.innerHTML = '✅ Excellent! Grade 8 level performance with sophisticated structures.';
+                    totalScore += points;
+                } else {
+                    feedback.className = 'feedback show info';
+                    feedback.innerHTML = '❌ Too simple. Use reported speech, speculation, and persuasive language.';
+                }
+            }
+            
+            // Mostra navigazione
+            const nav = document.getElementById('nav-' + sectionNum);
+            if (nav) {
+                nav.style.display = 'flex';
+            }
+            
+            // Marca come risposto
+            answeredSections[sectionNum] = true;
+            updateProgress();
+        }
+
+        // AGGIORNA PROGRESSO
+        function updateProgress() {
+            let answered = 0;
+            for (let i = 2; i <= 4; i++) {
+                if (answeredSections[i]) answered++;
+            }
+            const percent = (answered / 3) * 100;
+            document.getElementById('progress').style.width = percent + '%';
+        }
+
+        // MOSTRA ALTRA CONVERSAZIONE
+        function showMoreConversation() {
+            // Per semplicità, andiamo direttamente ai risultati
+            finishExam();
+        }
+
+        // FINISCI ESAME
+        function finishExam() {
+            clearInterval(timerInterval);
+            
+            // Mostra tab risultati
+            const resultsTab = document.getElementById('results-tab');
+            if (resultsTab) {
+                resultsTab.style.display = 'block';
+            }
+            
+            goToSection(5);
+            
+            // Calcola percentuale
+            const percentage = Math.round((totalScore / maxScore) * 100);
+            const scoreElement = document.getElementById('final-score');
+            if (scoreElement) {
+                scoreElement.textContent = percentage + '%';
+            }
+            
+            // Determina voto
+            const badge = document.getElementById('grade-badge');
+            const message = document.getElementById('result-message');
+            
+            if (percentage >= 80) {
+                if (badge) {
+                    badge.className = 'grade-badge grade-distinction';
+                    badge.textContent = 'DISTINCTION 🏆';
+                }
+                if (message) message.textContent = 'Exceptional B2.2 performance! Sophisticated use of persuasion, reported speech, and speculation.';
+            } else if (percentage >= 60) {
+                if (badge) {
+                    badge.className = 'grade-badge grade-merit';
+                    badge.textContent = 'MERIT 🥈';
+                }
+                if (message) message.textContent = 'Very good! Strong control of Grade 8 language functions.';
+            } else if (percentage >= 40) {
+                if (badge) {
+                    badge.className = 'grade-badge grade-pass';
+                    badge.textContent = 'PASS ✅';
+                }
+                if (message) message.textContent = 'Good effort! You demonstrated ability to handle abstract topics at B2.2 level.';
+            } else {
+                if (badge) {
+                    badge.style.background = '#6c757d';
+                    badge.style.color = 'white';
+                    badge.textContent = 'NOT PASSED';
+                }
+                if (message) message.textContent = 'Keep practicing! Focus on reported speech, impossibility, and persuasive structures.';
+            }
+            
+            // Lista feedback
+            const list = document.getElementById('feedback-list');
+            if (list) {
+                list.innerHTML = `
+                    <li>${totalScore >= 25 ? '✅' : '⚠️'} Reported speech with verbs (claimed, suggested)</li>
+                    <li>${totalScore >= 50 ? '✅' : '⚠️'} Expressing impossibility (would be impossible)</li>
+                    <li>${totalScore >= 80 ? '✅' : '⚠️'} Persuasion (If I were you..., You might want to)</li>
+                `;
+            }
+        }
+
+        // INIZIALIZZAZIONE
+        window.onload = function() {
+            goToSection(0);
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,1535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 10 - Exam Simulation (C1.1)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --trinity-blue: #1e3a5f;
+            --trinity-red: #dc2626;
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #c9a227;
+            --success: #276749;
+            --error: #c53030;
+            --light: #f5f5f0;
+            --dark: #212529;
+            --border: #d4d4c8;
+            --bg-card: #ffffff;
+            --presentation-purple: #4a148c;
+            --discussion-teal: #00695c;
+            --interactive-indigo: #283593;
+            --listening-amber: #ef6c00;
+            --conversation-crimson: #c62828;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--trinity-blue) 0%, #0d1f33 100%);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--trinity-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .timer {
+            background: white;
+            color: var(--trinity-blue);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: 'Courier New', monospace;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .exam-badge {
+            display: inline-block;
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .nav-tab {
+            padding: 1rem 1.2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--trinity-blue);
+            border-bottom-color: var(--trinity-red);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--trinity-blue);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--trinity-red);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .phase-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .badge-presentation { background: #f3e5f5; color: var(--presentation-purple); border: 1px solid #ce93d8; }
+        .badge-discussion { background: #e0f2f1; color: var(--discussion-teal); border: 1px solid #80cbc4; }
+        .badge-interactive { background: #e8eaf6; color: var(--interactive-indigo); border: 1px solid #9fa8da; }
+        .badge-listening { background: #fff3e0; color: var(--listening-amber); border: 1px solid #ffcc80; }
+        .badge-conversation { background: #ffebee; color: var(--conversation-crimson); border: 1px solid #ef9a9a; }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid #1976d2;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .warning-box {
+            background: #fff8e1;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .c1-box {
+            background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%);
+            border-left: 4px solid #7b1fa2;
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .examiner-section {
+            background: #f8f9fa;
+            border: 2px solid var(--trinity-blue);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-radius: 4px;
+        }
+
+        .examiner-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--trinity-blue);
+            color: white;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .examiner-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--trinity-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            float: left;
+            margin-right: 1rem;
+        }
+
+        .examiner-text {
+            font-size: 1.1rem;
+            color: var(--dark);
+            padding-left: 80px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+            font-style: italic;
+        }
+
+        .candidate-section {
+            background: #fff8e1;
+            border: 2px solid var(--accent);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            border-radius: 4px;
+        }
+
+        .candidate-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--accent);
+            color: #000;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 4px;
+        }
+
+        .response-options {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .response-btn {
+            padding: 1.25rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            text-align: left;
+            border-radius: 4px;
+            line-height: 1.5;
+        }
+
+        .response-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background: var(--light);
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .response-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .response-btn.correct {
+            background: #e8f5e9;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .response-btn.wrong {
+            background: #ffebee;
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #e0e0e0;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--success), #4caf50);
+            transition: width 0.5s ease;
+        }
+
+        .btn-primary {
+            background: var(--trinity-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background: #152a45;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .feedback {
+            padding: 1.25rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            display: none;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            border: 1px solid var(--success);
+            color: #2e7d32;
+        }
+
+        .feedback.info {
+            background: #e3f2fd;
+            border: 1px solid #1976d2;
+            color: #1565c0;
+        }
+
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .phase-step {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            font-weight: bold;
+            position: relative;
+            font-size: 0.9rem;
+            border: 3px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .phase-step.active {
+            background: var(--trinity-blue);
+            color: white;
+            border-color: var(--trinity-red);
+            transform: scale(1.1);
+        }
+
+        .phase-step.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .phase-step::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: var(--border);
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+        .phase-step:last-child::after {
+            display: none;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 4px;
+            margin: 1rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .language-focus {
+            background: #f3e5f5;
+            border-left: 4px solid #7b1fa2;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .function-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .function-item {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--trinity-blue);
+        }
+
+        .presentation-outline {
+            background: white;
+            border: 2px solid var(--presentation-purple);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .outline-item {
+            background: #f3e5f5;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-left: 3px solid var(--presentation-purple);
+            border-radius: 0 4px 4px 0;
+        }
+
+        .results-container {
+            background: white;
+            border: 2px solid var(--success);
+            padding: 2.5rem;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--light) 0%, #e0e0e0 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1.5rem auto;
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--trinity-blue);
+            border: 6px solid var(--accent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            font-size: 1.4rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            border-radius: 4px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .grade-distinction {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            color: #000;
+            box-shadow: 0 2px 10px rgba(255, 215, 0, 0.4);
+        }
+
+        .grade-merit {
+            background: linear-gradient(135deg, #c0c0c0 0%, #e0e0e0 100%);
+            color: #000;
+        }
+
+        .grade-pass {
+            background: linear-gradient(135deg, #cd7f32 0%, #d2691e 100%);
+            color: white;
+        }
+
+        .topic-selection {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .topic-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .topic-card:hover {
+            border-color: var(--trinity-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .topic-card.selected {
+            border-color: var(--trinity-blue);
+            background: #e3f2fd;
+        }
+
+        .listening-task {
+            background: #fff3e0;
+            border: 2px solid var(--listening-amber);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timer {
+                margin-top: 1rem;
+            }
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            .nav-tab {
+                font-size: 0.75rem;
+                padding: 0.75rem;
+            }
+            .response-options {
+                grid-template-columns: 1fr;
+            }
+            .phase-step {
+                width: 40px;
+                height: 40px;
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>Trinity GESE Grade 10</h1>
+                <div class="exam-badge">CEFR C1.1 • 25 Minutes • Advanced Stage</div>
+            </div>
+            <div class="timer" id="timer">25:00</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('intro', this)">📋 About Exam</button>
+            <button class="nav-tab" onclick="showSection('video', this)">🎥 Video Example</button>
+            <button class="nav-tab" onclick="showSection('presentation', this)">🎤 Presentation</button>
+            <button class="nav-tab" onclick="showSection('discussion', this)">💬 Discussion</button>
+            <button class="nav-tab" onclick="showSection('interactive', this)">🎯 Interactive</button>
+            <button class="nav-tab" onclick="showSection('listening', this)">👂 Listening</button>
+            <button class="nav-tab" onclick="showSection('conversation', this)">🗣️ Conversation</button>
+            <button class="nav-tab" onclick="showSection('results', this)" id="results-tab" style="display:none">📊 Results</button>
+        </div>
+
+        <!-- INTRO SECTION -->
+        <section id="intro" class="section active">
+            <div class="card">
+                <div class="card-header">About GESE Grade 10 Exam (C1.1)</div>
+                <div class="card-body">
+                    <div class="c1-box">
+                        <strong>GESE Grade 10</strong> represents CEFR C1.1 (Advanced). At this level, you must demonstrate 
+                        sophisticated discourse management, handle abstract concepts with nuance, and use complex grammatical structures with precision and fluency. 
+                        The exam takes <strong>25 minutes</strong> and includes five distinct phases.
+                    </div>
+
+                    <h3 style="color: var(--trinity-blue); margin: 1.5rem 0 1rem;">Exam Format (5 Phases)</h3>
+                    
+                    <div class="phase-indicator">
+                        <div class="phase-step active">1</div>
+                        <div class="phase-step">2</div>
+                        <div class="phase-step">3</div>
+                        <div class="phase-step">4</div>
+                        <div class="phase-step">5</div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap; text-align: center;">
+                        <div style="flex: 1; min-width: 120px;">
+                            <span class="phase-badge badge-presentation">Presentation</span>
+                            <br><small style="color: var(--secondary);">5 min</small>
+                        </div>
+                        <div style="flex: 1; min-width: 120px;">
+                            <span class="phase-badge badge-discussion">Discussion</span>
+                            <br><small style="color: var(--secondary);">5 min</small>
+                        </div>
+                        <div style="flex: 1; min-width: 120px;">
+                            <span class="phase-badge badge-interactive">Interactive</span>
+                            <br><small style="color: var(--secondary);">5 min</small>
+                        </div>
+                        <div style="flex: 1; min-width: 120px;">
+                            <span class="phase-badge badge-listening">Listening</span>
+                            <br><small style="color: var(--secondary);">3 min</small>
+                        </div>
+                        <div style="flex: 1; min-width: 120px;">
+                            <span class="phase-badge badge-conversation">Conversation</span>
+                            <br><small style="color: var(--secondary);">6 min</small>
+                        </div>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Language Functions at Grade 10 (C1):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Developing an argument with supporting evidence and examples</li>
+                            <li>Defending a point of view against challenging counter-arguments</li>
+                            <li>Expressing beliefs and opinions with nuanced qualification</li>
+                            <li>Summarising complex information, ideas and arguments concisely</li>
+                            <li>Evaluating different standpoints and drawing reasoned conclusions</li>
+                            <li>Speculating about hypothetical scenarios and their implications</li>
+                            <li>Managing interaction with sophistication (interrupting politely, redirecting, holding the floor)</li>
+                        </ul>
+                    </div>
+
+                    <div class="language-focus">
+                        <strong>Key Grammar for Grade 10 (C1):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Complex cleft sentences (What I find particularly concerning is... / The reason why... is that...)</li>
+                            <li>Advanced concessive structures (Notwithstanding..., Be that as it may..., Much as...)</li>
+                            <li>Sophisticated conditionals and subjunctive (Were it not for..., Should you..., Supposing...)</li>
+                            <li>Emphatic inversion (Rarely has..., Never before..., Little did...)</li>
+                            <li>Discourse markers for formal register (Furthermore, Conversely, In light of..., With regard to...)</li>
+                            <li>Hedging and tentative language (It could be postulated that..., One might argue..., It is conceivable that...)</li>
+                        </ul>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary" onclick="startExam()">Start Exam Simulation →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SECTION -->
+        <section id="video" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: #d32f2f;">
+                    <span>🎥 Official Trinity GESE Grade 10 Video</span>
+                    <span class="phase-badge badge-discussion">Example</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>Watch this official Trinity GESE Grade 10 exam video</strong> to understand the format, level of language, and interaction style expected at C1.1 level. Pay attention to how the candidate manages the discussion and uses sophisticated language functions.
+                    </div>
+
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/-gzSV8eGnl0" 
+                            title="Trinity GESE Grade 10 Exam Video" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Video Analysis Tasks:</strong>
+                        <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Notice how the candidate initiates and maintains the Topic Discussion phase</li>
+                            <li>Observe the Interactive phase - how does the candidate control the direction?</li>
+                            <li>Listen for examples of hedging language and concessive clauses</li>
+                            <li>Identify how the candidate defends their viewpoint when challenged</li>
+                            <li>Note the transition signals used between different parts of the discussion</li>
+                        </ol>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary" onclick="showSection('intro', document.querySelectorAll('.nav-tab')[0])">← Back to Intro</button>
+                        <button class="btn-primary" onclick="moveToPresentation()">Continue to Presentation Task →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Video Reflection Questions</div>
+                <div class="card-body">
+                    <div class="function-list">
+                        <div class="function-item">
+                            <strong>1. Presentation Structure</strong>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem;">How did the candidate organise their formal presentation? What discourse markers indicated transitions between sections?</p>
+                        </div>
+                        <div class="function-item">
+                            <strong>2. Handling Challenges</strong>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem;">When the examiner challenged a point, how did the candidate respond? Did they concede, defend, or qualify their position?</p>
+                        </div>
+                        <div class="function-item">
+                            <strong>3. Interactive Control</strong>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem;">How did the candidate maintain control during the Interactive phase? What questions did they ask to elicit information?</p>
+                        </div>
+                        <div class="function-item">
+                            <strong>4. Listening Skills</strong>
+                            <p style="margin-top: 0.5rem; font-size: 0.9rem;">How did the candidate demonstrate inference and deduction in the Listening phase?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRESENTATION SECTION -->
+        <section id="presentation" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--presentation-purple);">
+                    <span>Phase 1: Formal Topic Presentation</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~5 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="c1-box">
+                        <strong>Your Task:</strong> Deliver a formal presentation on a discursive topic of your choice. 
+                        The presentation must have a clear structure: introduction, development of points with examples, and conclusion inviting questions.
+                    </div>
+
+                    <h3 style="color: var(--presentation-purple); margin: 1.5rem 0 1rem;">Select Your Topic Area:</h3>
+                    
+                    <div class="topic-selection" id="topicSelection">
+                        <div class="topic-card" onclick="selectTopic(this, 'ai')">
+                            <h4>🤖 Artificial Intelligence</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--secondary);">"The Ethical Implications of Artificial Intelligence in Decision-Making"</p>
+                        </div>
+                        <div class="topic-card" onclick="selectTopic(this, 'education')">
+                            <h4>📚 Education Systems</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--secondary);">"Standardised Testing: Assessing the Assessors"</p>
+                        </div>
+                        <div class="topic-card" onclick="selectTopic(this, 'urban')">
+                            <h4>🏙️ Urban Development</h4>
+                            <p style="font-size: 0.9rem; margin-top: 0.5rem; color: var(--secondary);">"Gentrification: Urban Renewal or Social Cleansing?"</p>
+                        </div>
+                    </div>
+
+                    <div id="presentationOutline" style="display: none;">
+                        <div class="presentation-outline">
+                            <h4 style="color: var(--presentation-purple); margin-bottom: 1rem;">Presentation Structure: <span id="selectedTopicName"></span></h4>
+                            
+                            <div class="outline-item">
+                                <strong>Introduction:</strong> Hook the audience, establish relevance, present thesis statement
+                                <br><em style="font-size: 0.9rem; color: var(--secondary);">"What I propose to examine today is..." / "The central thesis I wish to put forward is..."</em>
+                            </div>
+                            <div class="outline-item">
+                                <strong>Point 1:</strong> Present first argument with supporting evidence
+                                <br><em style="font-size: 0.9rem; color: var(--secondary);">"To begin with, it is important to recognise..." / "The primary consideration is..."</em>
+                            </div>
+                            <div class="outline-item">
+                                <strong>Point 2:</strong> Develop counter-argument or alternative perspective
+                                <br><em style="font-size: 0.9rem; color: var(--secondary);">"Conversely, one might argue..." / "However, this view fails to account for..."</em>
+                            </div>
+                            <div class="outline-item">
+                                <strong>Point 3:</strong> Synthesis and evaluation
+                                <br><em style="font-size: 0.9rem; color: var(--secondary);">"When we weigh these factors..." / "The crux of the matter appears to be..."</em>
+                            </div>
+                            <div class="outline-item">
+                                <strong>Conclusion:</strong> Summarise key points, restate position, invite discussion
+                                <br><em style="font-size: 0.9rem; color: var(--secondary);">"In conclusion, I would contend that..." / "I now invite your questions and comments..."</em>
+                            </div>
+                        </div>
+
+                        <div class="examiner-section">
+                            <div class="examiner-label">EXAMINER</div>
+                            <div class="examiner-avatar">👨‍🏫</div>
+                            <div class="examiner-text">
+                                Thank you for that comprehensive presentation. You raised several thought-provoking points. I'd like to start by asking you to elaborate on your second point regarding the counter-arguments. You mentioned that the opposing view fails to account for certain factors. Could you specify what you consider to be the most significant oversight in the counter-argument?
+                            </div>
+                        </div>
+
+                        <div class="candidate-section">
+                            <div class="candidate-label">YOUR RESPONSE (Defend & Elaborate)</div>
+                            <div class="response-options">
+                                <button class="response-btn" onclick="checkPresentationAnswer(this, true)">
+                                    What I was alluding to is the fundamental assumption that underpins the opposing view—namely, that [specific factor]. What the critics seem to overlook is the longitudinal data suggesting [evidence]. Were we to accept their argument at face value, we would essentially be ignoring the compound effect of [complex factor], which, as I see it, fundamentally undermines their position.
+                                </button>
+                                <button class="response-btn" onclick="checkPresentationAnswer(this, false)">
+                                    I think the counter-argument is wrong because it doesn't consider important factors. Many people believe this but they are mistaken. The data shows clearly that my view is correct.
+                                </button>
+                                <button class="response-btn" onclick="checkPresentationAnswer(this, false)">
+                                    Yes, the counter-argument has some good points but I disagree with it. There are many reasons why my view is better.
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="feedback" id="presentation-feedback"></div>
+                    </div>
+
+                    <div class="navigation" id="presentation-nav" style="display: none;">
+                        <button class="btn-primary" onclick="moveToDiscussion()">Continue to Topic Discussion →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- DISCUSSION SECTION -->
+        <section id="discussion" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--discussion-teal);">
+                    <span>Phase 2: Topic Discussion</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~5 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>Candidate-led discussion:</strong> You must initiate and maintain the discussion, 
+                        respond to challenges, defend your viewpoint, and invite the examiner's comments.
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="discussion-examiner-text">
+                            You mentioned in your presentation that this issue affects developed nations disproportionately. However, I'm not entirely convinced. Surely emerging economies face equally significant, if not greater, challenges in this domain?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="discussion-candidate">
+                        <div class="candidate-label">YOU (Acknowledge, Counter, Invite)</div>
+                        <div class="response-options" id="discussion-options">
+                            <button class="response-btn" onclick="checkDiscussionAnswer(this, true, 0)">
+                                That's a valid observation, and I wouldn't dispute that emerging economies face severe challenges. However, the distinction I was drawing concerns [specific factor]. Be that as it may, you're absolutely right to highlight the global dimension. To what extent do you think international cooperation could mitigate these disparities?
+                            </button>
+                            <button class="response-btn" onclick="checkDiscussionAnswer(this, false, 0)">
+                                No, I think developed countries have more problems with this issue. Emerging economies are different.
+                            </button>
+                            <button class="response-btn" onclick="checkDiscussionAnswer(this, false, 0)">
+                                Yes, you are right. All countries have this problem equally.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="discussion-feedback"></div>
+
+                    <div class="examiner-section" id="discussion-challenge-2" style="display: none; margin-top: 2rem;">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            I see your point about international cooperation, but isn't there a risk that such frameworks merely serve the interests of the most powerful nations? How would you address concerns about neo-colonialism in these arrangements?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="discussion-candidate-2" style="display: none;">
+                        <div class="candidate-label">YOU (Defend with Nuance)</div>
+                        <div class="response-options" id="discussion-options-2">
+                            <button class="response-btn" onclick="checkDiscussionAnswer(this, true, 1)">
+                                That is undoubtedly a risk that cannot be dismissed lightly. The historical precedent you allude to is certainly troubling. Nevertheless, I would argue that contemporary frameworks incorporate more robust safeguards. What concerns me more, frankly, is the implementation gap rather than the intent. Would you agree that enforcement mechanisms are the critical weakness?
+                            </button>
+                            <button class="response-btn" onclick="checkDiscussionAnswer(this, false, 1)">
+                                I don't think neo-colonialism is relevant here. We are talking about modern cooperation.
+                            </button>
+                            <button class="response-btn" onclick="checkDiscussionAnswer(this, false, 1)">
+                                Yes, powerful countries always control everything. This is a big problem.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="navigation" id="discussion-nav" style="display: none;">
+                        <button class="btn-primary" onclick="moveToInteractive()">Continue to Interactive Task →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">C1 Discussion Strategies</div>
+                <div class="card-body">
+                    <div class="function-list">
+                        <div class="function-item">
+                            <strong>Acknowledging Opposition</strong><br>
+                            <em>"I take your point, but..." / "That is a valid criticism, however..." / "Be that as it may..."</em>
+                        </div>
+                        <div class="function-item">
+                            <strong>Qualifying Statements</strong><br>
+                            <em>"With certain reservations..." / "Broadly speaking, though with exceptions..." / "In the main, albeit not universally..."</em>
+                        </div>
+                        <div class="function-item">
+                            <strong>Inviting Contribution</strong><br>
+                            <em>"What is your perspective on...?" / "How do you weigh the relative merits?" / "Where do you stand on this issue?"</em>
+                        </div>
+                        <div class="function-item">
+                            <strong>Holding the Floor</strong><br>
+                            <em>"If I might just elaborate on that..." / "To return to my earlier point..." / "What I was suggesting was..."</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTERACTIVE SECTION -->
+        <section id="interactive" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--interactive-indigo);">
+                    <span>Phase 3: Interactive Task</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~5 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="c1-box">
+                        <strong>The examiner will present a prompt.</strong> You must ask questions to find out more information, 
+                        make comments, and maintain the interaction. <strong>You control the direction.</strong>
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER (Prompt)</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" style="font-style: normal; font-weight: 500;">
+                            "Your local council is proposing to ban all private vehicles from the city centre, claiming it will reduce pollution and improve quality of life. However, local business owners are strongly opposed, arguing it will destroy their trade. I'm a fellow resident with mixed feelings about the proposal."
+                        </div>
+                    </div>
+
+                    <div class="candidate-section">
+                        <div class="candidate-label">YOU (Initiate the Interaction)</div>
+                        <div class="response-options">
+                            <button class="response-btn" onclick="checkInteractiveAnswer(this, true, 0)">
+                                That's a contentious issue indeed. To help me understand your position better, could you clarify what aspects of the proposal concern you most? Is it the economic impact on businesses, or do you have reservations about the environmental claims?
+                            </button>
+                            <button class="response-btn" onclick="checkInteractiveAnswer(this, false, 0)">
+                                I think cars should be banned from city centres. Pollution is bad.
+                            </button>
+                            <button class="response-btn" onclick="checkInteractiveAnswer(this, false, 0)">
+                                Do you agree with the ban or not?
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="interactive-feedback-1"></div>
+
+                    <div class="examiner-section" id="interactive-response-1" style="display: none; margin-top: 2rem;">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            Well, I can see both sides. The environmental benefits are appealing, but I worry about elderly residents who rely on cars to reach medical appointments, and small businesses that depend on passing trade. What do you think about those concerns?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="interactive-candidate-2" style="display: none;">
+                        <div class="candidate-label">YOU (Develop the Discussion)</div>
+                        <div class="response-options" id="interactive-options-2">
+                            <button class="response-btn" onclick="checkInteractiveAnswer(this, true, 1)">
+                                You've raised crucial points about vulnerable groups. That said, might we not argue that improved public transport and delivery services could mitigate those issues? Furthermore, have you considered the long-term economic benefits of a cleaner environment? I'm curious to know whether you've seen the council's proposed mitigation strategies.
+                            </button>
+                            <button class="response-btn" onclick="checkInteractiveAnswer(this, false, 1)">
+                                Public transport is the solution. Elderly people can use buses.
+                            </button>
+                            <button class="response-btn" onclick="checkInteractiveAnswer(this, false, 1)">
+                                Yes, these are big problems. The ban is difficult.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="interactive-feedback-2"></div>
+
+                    <div class="navigation" id="interactive-nav" style="display: none;">
+                        <button class="btn-primary" onclick="moveToListening()">Continue to Listening Task →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LISTENING SECTION -->
+        <section id="listening" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--listening-amber);">
+                    <span>Phase 4: Listening Task</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~3 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="listening-task">
+                        <strong>Task:</strong> The examiner will read three short passages. 
+                        <br><strong>Type 1 (x2):</strong> Suggest a suitable ending to incomplete passages.
+                        <br><strong>Type 2 (x1):</strong> Answer a question about what you've heard.
+                        <br><br>
+                        <em>Note: The examiner reads each passage ONCE only. Listen for attitude, mood, and implicit meaning.</em>
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" style="font-style: normal;">
+                            "I'm going to read you three short passages. After I've finished each one, I'd like you to either suggest a suitable ending or answer a question. I'll then move on to the next passage. Are you ready?"
+                        </div>
+                    </div>
+
+                    <div class="card" style="margin: 1.5rem 0; background: #fafafa;">
+                        <div class="card-body">
+                            <h4 style="color: var(--listening-amber); margin-bottom: 1rem;">Passage 1 (Type 1 - Incomplete)</h4>
+                            <div style="background: white; padding: 1rem; border-left: 3px solid var(--listening-amber); font-style: italic; margin-bottom: 1rem;">
+                                "The professor had spent three decades researching the rare manuscript, convinced it held the key to understanding the lost civilisation. When the museum finally agreed to let him examine it privately, he trembled with anticipation. As he carefully opened the fragile pages, his eyes widened in disbelief. After all these years, he realised that..."
+                            </div>
+                            
+                            <div class="candidate-section" style="margin: 0;">
+                                <div class="candidate-label">Suggest a suitable ending:</div>
+                                <div class="response-options">
+                                    <button class="response-btn" onclick="checkListeningAnswer(this, true, 0)">
+                                        ...the document was a forgery, rendering his entire academic career built upon a fundamental misconception.
+                                    </button>
+                                    <button class="response-btn" onclick="checkListeningAnswer(this, false, 0)">
+                                        ...he was happy to finally see the book.
+                                    </button>
+                                    <button class="response-btn" onclick="checkListeningAnswer(this, false, 0)">
+                                        ...the museum was very old.
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="feedback" id="listening-feedback-1"></div>
+                        </div>
+                    </div>
+
+                    <div class="card" id="listening-2" style="margin: 1.5rem 0; background: #fafafa; display: none;">
+                        <div class="card-body">
+                            <h4 style="color: var(--listening-amber); margin-bottom: 1rem;">Passage 2 (Type 1 - Incomplete)</h4>
+                            <div style="background: white; padding: 1rem; border-left: 3px solid var(--listening-amber); font-style: italic; margin-bottom: 1rem;">
+                                "The board meeting had been tense from the outset. The CEO's proposal for expansion was met with stony silence. When the finance director finally spoke, her voice was measured but carried an unmistakable edge. She methodically dismantled every assumption in the business plan, citing market volatility and cash flow projections. By the time she finished, it was evident that..."
+                            </div>
+                            
+                            <div class="candidate-section" style="margin: 0;">
+                                <div class="candidate-label">Suggest a suitable ending:</div>
+                                <div class="response-options">
+                                    <button class="response-btn" onclick="checkListeningAnswer(this, true, 1)">
+                                        ...the proposal would face formidable opposition, if not outright rejection, from the majority of stakeholders present.
+                                    </button>
+                                    <button class="response-btn" onclick="checkListeningAnswer(this, false, 1)">
+                                        ...the meeting was finished and everyone went home.
+                                    </button>
+                                    <button class="response-btn" onclick="checkListeningAnswer(this, false, 1)">
+                                        ...the CEO was happy with the presentation.
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="feedback" id="listening-feedback-2"></div>
+                        </div>
+                    </div>
+
+                    <div class="card" id="listening-3" style="margin: 1.5rem 0; background: #fafafa; display: none;">
+                        <div class="card-body">
+                            <h4 style="color: var(--listening-amber); margin-bottom: 1rem;">Passage 3 (Type 2 - Question)</h4>
+                            <div style="background: white; padding: 1rem; border-left: 3px solid var(--listening-amber); font-style: italic; margin-bottom: 1rem;">
+                                "The artist's latest exhibition has drawn mixed reviews from critics. While some praise the bold use of unconventional materials, others dismiss the work as pretentious and lacking substantive meaning. The artist herself remains characteristically enigmatic, refusing to explain her intentions and suggesting that interpretation should be left entirely to the viewer. Gallery attendance, however, has reached record levels."
+                            </div>
+                            
+                            <div style="background: #e3f2fd; padding: 0.75rem; margin-bottom: 1rem; border-radius: 4px;">
+                                <strong>Question:</strong> What is the implicit contradiction presented in this passage?
+                            </div>
+                            
+                            <div class="candidate-section" style="margin: 0;">
+                                <div class="candidate-label">Your answer:</div>
+                                <div class="response-options">
+                                    <button class="response-btn" onclick="checkListeningAnswer(this, true, 2)">
+                                        Despite the critical controversy and accusations of pretension, the exhibition enjoys unprecedented public popularity, suggesting a disconnect between critical opinion and public taste.
+                                    </button>
+                                    <button class="response-btn" onclick="checkListeningAnswer(this, false, 2)">
+                                        The artist uses unconventional materials in her work.
+                                    </button>
+                                    <button class="response-btn" onclick="checkListeningAnswer(this, false, 2)">
+                                        Critics do not like the exhibition.
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="feedback" id="listening-feedback-3"></div>
+                        </div>
+                    </div>
+
+                    <div class="navigation" id="listening-nav" style="display: none;">
+                        <button class="btn-primary" onclick="moveToConversation()">Continue to Conversation →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONVERSATION SECTION -->
+        <section id="conversation" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--conversation-crimson);">
+                    <span>Phase 5: Conversation Task</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~6 minutes (2 topics)</span>
+                </div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>Subject Areas for Grade 10:</strong> List A (Communication, Education, The Environment, The Media, Science and Technology, Young People and Society) OR List B (Equal Opportunities, Cultural Differences, The World of Work, Wealth and Poverty, Law and Order, Social Issues).
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            Let's talk about education. Some commentators argue that the traditional university model is becoming obsolete given the rise of online learning and vocational alternatives. To what extent do you believe conventional higher education institutions still serve a valuable purpose?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section">
+                        <div class="candidate-label">YOU (Developed Response)</div>
+                        <div class="response-options">
+                            <button class="response-btn" onclick="checkConversationAnswer(this, true, 0)">
+                                That is a rather sweeping assertion, and while I wouldn't entirely dismiss it, I think it warrants careful unpacking. What strikes me is that the debate often presents a false dichotomy between traditional and alternative models. Rarely has the university been merely about content delivery; rather, it serves as a crucible for critical thinking and peer-to-peer learning. That said, I concede that institutions must evolve. Where do you stand on the balance between accessibility and academic rigour?
+                            </button>
+                            <button class="response-btn" onclick="checkConversationAnswer(this, false, 0)">
+                                Universities are still important because you need a degree to get a good job. Online learning is not the same.
+                            </button>
+                            <button class="response-btn" onclick="checkConversationAnswer(this, false, 0)">
+                                I think both options are good. It depends on the person.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="conversation-feedback-1"></div>
+
+                    <div class="examiner-section" id="conversation-topic-2" style="display: none; margin-top: 2rem;">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            Thank you. Now let's talk about science and technology. There is growing concern about the concentration of power in big tech companies. Some advocate for strict regulation, while others argue this would stifle innovation. How would you approach this dilemma?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="conversation-candidate-2" style="display: none;">
+                        <div class="candidate-label">YOU (Speculate & Evaluate)</div>
+                        <div class="response-options" id="conversation-options-2">
+                            <button class="response-btn" onclick="checkConversationAnswer(this, true, 1)">
+                                This is undoubtedly one of the defining challenges of our era. Were we to impose draconian regulations, we might indeed curb the dynamism that drives progress. Conversely, unchecked monopolies pose existential risks to democratic discourse. I am inclined to believe that a middle path—targeted antitrust measures coupled with transparency requirements—offers the most viable solution. What concerns me, however, is the implementation lag. Do you think international consensus is achievable?
+                            </button>
+                            <button class="response-btn" onclick="checkConversationAnswer(this, false, 1)">
+                                Big tech companies have too much power and should be regulated. They are dangerous for society.
+                            </button>
+                            <button class="response-btn" onclick="checkConversationAnswer(this, false, 1)">
+                                Regulation is bad for business. Innovation is more important.
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="conversation-feedback-2"></div>
+
+                    <div class="navigation" id="conversation-nav" style="display: none;">
+                        <button class="btn-primary" onclick="finishExam()">Finish Exam →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS SECTION -->
+        <section id="results" class="section">
+            <div class="results-container">
+                <h2 style="color: var(--trinity-blue); margin-bottom: 1rem; font-size: 2rem;">🎓 Exam Completed!</h2>
+                
+                <div class="score-circle" id="final-score">--</div>
+                
+                <div class="grade-badge" id="grade-badge">Grade</div>
+                
+                <p style="font-size: 1.2rem; margin: 1.5rem 0; line-height: 1.6;" id="result-message"></p>
+
+                <div style="text-align: left; max-width: 700px; margin: 2rem auto; background: var(--light); padding: 2rem; border-radius: 8px; border: 1px solid var(--border);">
+                    <h3 style="color: var(--trinity-blue); margin-bottom: 1.5rem; border-bottom: 2px solid var(--trinity-red); padding-bottom: 0.5rem;">Examiner's Detailed Feedback:</h3>
+                    <ul id="feedback-list" style="margin-left: 0; line-height: 2; list-style: none;">
+                        <!-- Feedback items will be inserted here -->
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem; background: #e3f2fd; padding: 1.5rem; border-radius: 8px; border-left: 4px solid #1976d2;">
+                    <h4 style="color: #1565c0; margin-bottom: 0.5rem;">📹 Video Reference</h4>
+                    <p style="font-size: 0.95rem;">Compare your performance with the official Trinity video you watched. Note areas where the candidate demonstrated sophisticated language use that you can incorporate into your own speaking.</p>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn-primary" onclick="location.reload()" style="margin-right: 1rem;">Try Again</button>
+                    <button class="btn-primary" onclick="showSection('video', document.querySelectorAll('.nav-tab')[1])" style="background: #d32f2f;">Re-watch Video</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Timer functionality
+        let timeRemaining = 1500; // 25 minutes in seconds
+        let timerInterval;
+        let currentPhase = 0;
+        let score = 0;
+        let selectedTopic = null;
+        const maxScore = 200;
+
+        // Navigation and scoring variables
+        let discussionStep = 0;
+        let interactiveStep = 0;
+        let listeningStep = 0;
+        let conversationStep = 0;
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    finishExam();
+                }
+            }, 1000);
+        }
+
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            updateProgress();
+            window.scrollTo(0, 0);
+        }
+
+        function updateProgress() {
+            const phases = ['intro', 'video', 'presentation', 'discussion', 'interactive', 'listening', 'conversation', 'results'];
+            const currentIndex = phases.findIndex(p => document.getElementById(p).classList.contains('active'));
+            const percent = Math.min(((currentIndex + 1) / phases.length) * 100, 100);
+            document.getElementById('progress').style.width = percent + '%';
+        }
+
+        function startExam() {
+            startTimer();
+            showSection('video', document.querySelectorAll('.nav-tab')[1]);
+        }
+
+        function moveToPresentation() {
+            currentPhase = 1;
+            showSection('presentation', document.querySelectorAll('.nav-tab')[2]);
+        }
+
+        function selectTopic(card, topic) {
+            document.querySelectorAll('.topic-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            selectedTopic = topic;
+            
+            const topicNames = {
+                'ai': 'Artificial Intelligence Ethics',
+                'education': 'Standardised Testing',
+                'urban': 'Urban Gentrification'
+            };
+            
+            document.getElementById('selectedTopicName').textContent = topicNames[topic];
+            document.getElementById('presentationOutline').style.display = 'block';
+            document.getElementById('presentationOutline').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function checkPresentationAnswer(btn, isCorrect) {
+            document.querySelectorAll('#presentationOutline .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById('presentation-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ <strong>Excellent!</strong> You used a cleft sentence ("What I was alluding to..."), sophisticated vocabulary ("underpins", "mitigate"), and a conditional structure ("Were we to accept..."). This demonstrates C1-level control.' : 
+                '❌ <strong>Try to include:</strong> Complex cleft sentences, formal discourse markers, and conditional structures. The correct answer demonstrates sophisticated nominalisation and formal register.';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 25;
+            document.getElementById('presentation-nav').style.display = 'flex';
+        }
+
+        function moveToDiscussion() {
+            currentPhase = 2;
+            showSection('discussion', document.querySelectorAll('.nav-tab')[3]);
+        }
+
+        function checkDiscussionAnswer(btn, isCorrect, step) {
+            const buttons = step === 0 ? 
+                document.querySelectorAll('#discussion-options .response-btn') : 
+                document.querySelectorAll('#discussion-options-2 .response-btn');
+            
+            buttons.forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById(step === 0 ? 'discussion-feedback' : 'discussion-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ <strong>Sophisticated!</strong> You acknowledged the opposition ("That\'s a valid observation"), used a concessive ("Be that as it may"), and invited contribution. Excellent discourse management.' : 
+                '❌ <strong>Aim for:</strong> Acknowledgement of opposing views, concessive structures, and questions that invite the examiner to contribute. Avoid simplistic agreement or disagreement.';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 20;
+
+            if (step === 0) {
+                document.getElementById('discussion-challenge-2').style.display = 'block';
+                document.getElementById('discussion-candidate-2').style.display = 'block';
+                document.getElementById('discussion-challenge-2').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                document.getElementById('discussion-nav').style.display = 'flex';
+            }
+        }
+
+        function moveToInteractive() {
+            currentPhase = 3;
+            showSection('interactive', document.querySelectorAll('.nav-tab')[4]);
+        }
+
+        function checkInteractiveAnswer(btn, isCorrect, step) {
+            const feedbackId = step === 0 ? 'interactive-feedback-1' : 'interactive-feedback-2';
+            const nextSectionId = step === 0 ? 'interactive-response-1' : '';
+            const nextCandidateId = step === 0 ? 'interactive-candidate-2' : '';
+
+            document.querySelectorAll(step === 0 ? '#interactive .response-btn' : '#interactive-options-2 .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById(feedbackId);
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ <strong>Strong interaction!</strong> You asked open questions to elicit information, showed active listening, and developed the discussion with further questions. Good control of the interaction.' : 
+                '❌ <strong>Remember:</strong> Ask open questions (not yes/no), make comments that build on what the examiner says, and maintain the flow. You control the direction.';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 20;
+
+            if (step === 0) {
+                document.getElementById(nextSectionId).style.display = 'block';
+                document.getElementById(nextCandidateId).style.display = 'block';
+                document.getElementById(nextSectionId).scrollIntoView({ behavior: 'smooth' });
+            } else {
+                document.getElementById('interactive-nav').style.display = 'flex';
+            }
+        }
+
+        function moveToListening() {
+            currentPhase = 4;
+            showSection('listening', document.querySelectorAll('.nav-tab')[5]);
+        }
+
+        function checkListeningAnswer(btn, isCorrect, step) {
+            const parentCard = btn.closest('.card');
+            parentCard.querySelectorAll('.response-btn').forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById(`listening-feedback-${step + 1}`);
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ <strong>Excellent inference!</strong> You identified the implicit meaning and attitude. Your ending demonstrates understanding of narrative tone and logical conclusion.' : 
+                '❌ <strong>Listen for:</strong> Tone, attitude, and implicit meaning. The correct answer reflects the nuanced, often ironic or critical tone of the passage.';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 15;
+
+            if (step < 2) {
+                setTimeout(() => {
+                    document.getElementById(`listening-${step + 2}`).style.display = 'block';
+                    document.getElementById(`listening-${step + 2}`).scrollIntoView({ behavior: 'smooth' });
+                }, 1000);
+            } else {
+                document.getElementById('listening-nav').style.display = 'flex';
+            }
+        }
+
+        function moveToConversation() {
+            currentPhase = 5;
+            showSection('conversation', document.querySelectorAll('.nav-tab')[6]);
+        }
+
+        function checkConversationAnswer(btn, isCorrect, step) {
+            const buttons = step === 0 ? 
+                document.querySelectorAll('#conversation .response-btn') : 
+                document.querySelectorAll('#conversation-options-2 .response-btn');
+            
+            buttons.forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById(`conversation-feedback-${step + 1}`);
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ <strong>C1 Performance!</strong> You used emphatic inversion ("Rarely has..."), qualified your views, and invited contribution. Sophisticated vocabulary and complex grammatical structures.' : 
+                '❌ <strong>Aim higher:</strong> Use tentative language, complex sentence structures, and rhetorical techniques. Avoid simplistic statements.';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 25;
+
+            if (step === 0) {
+                document.getElementById('conversation-topic-2').style.display = 'block';
+                document.getElementById('conversation-candidate-2').style.display = 'block';
+                document.getElementById('conversation-topic-2').scrollIntoView({ behavior: 'smooth' });
+            } else {
+                document.getElementById('conversation-nav').style.display = 'flex';
+            }
+        }
+
+        function finishExam() {
+            clearInterval(timerInterval);
+            document.getElementById('results-tab').style.display = 'block';
+            showSection('results', document.getElementById('results-tab'));
+
+            const percentage = Math.round((score / maxScore) * 100);
+            
+            document.getElementById('final-score').textContent = percentage + '%';
+
+            const badge = document.getElementById('grade-badge');
+            const message = document.getElementById('result-message');
+            
+            if (percentage >= 80) {
+                badge.className = 'grade-badge grade-distinction';
+                badge.textContent = 'DISTINCTION 🏆';
+                message.textContent = 'Exceptional C1.1 performance! You demonstrated sophisticated discourse management, nuanced argumentation, and mastery of complex grammatical structures. Your ability to handle abstract concepts and maintain control of interactions reflects true advanced proficiency.';
+            } else if (percentage >= 65) {
+                badge.className = 'grade-badge grade-merit';
+                badge.textContent = 'MERIT 🥈';
+                message.textContent = 'Very good C1.1 performance! You showed strong command of advanced language functions and good interactive skills. With more practice on hedging and complex inversion structures, you could achieve Distinction.';
+            } else if (percentage >= 50) {
+                badge.className = 'grade-badge grade-pass';
+                badge.textContent = 'PASS ✅';
+                message.textContent = 'Good effort at C1.1 level. You demonstrated ability to handle complex topics, but need to develop more sophisticated grammatical control and discourse management strategies.';
+            } else {
+                badge.style.background = '#6c757d';
+                badge.style.color = 'white';
+                badge.textContent = 'NOT PASSED';
+                message.textContent = 'Keep practicing! Focus on developing C1-level language: complex cleft sentences, concessive clauses, tentative language, and strategies for managing extended discourse.';
+            }
+
+            const feedbackList = document.getElementById('feedback-list');
+            feedbackList.innerHTML = `
+                <li style="margin-bottom: 0.5rem;">${score >= 25 ? '✅' : '⚠️'} <strong>Formal Presentation:</strong> Structure, discourse markers, and invitation for questions</li>
+                <li style="margin-bottom: 0.5rem;">${score >= 50 ? '✅' : '⚠️'} <strong>Topic Discussion:</strong> Defending viewpoints and developing arguments</li>
+                <li style="margin-bottom: 0.5rem;">${score >= 70 ? '✅' : '⚠️'} <strong>Interactive Task:</strong> Controlling direction and maintaining flow</li>
+                <li style="margin-bottom: 0.5rem;">${score >= 85 ? '✅' : '⚠️'} <strong>Listening Task:</strong> Inference, deduction, and attitude recognition</li>
+                <li style="margin-bottom: 0.5rem;">${score >= 110 ? '✅' : '⚠️'} <strong>Conversation Task:</strong> Speculation, evaluation, and complex grammar</li>
+                <li style="margin-bottom: 0.5rem; margin-top: 1rem; border-top: 1px solid #ddd; padding-top: 1rem;">
+                    <strong>Key C1 Structures to Master:</strong><br>
+                    • Cleft sentences: "What concerns me is..."<br>
+                    • Concessive: "Be that as it may..." / "Notwithstanding..."<br>
+                    • Inversion: "Rarely has..." / "Were we to..."<br>
+                    • Hedging: "It could be postulated that..."
+                </li>
+            `;
+        }
+
+        window.onload = () => {
+            updateProgress();
+        };
+    </script>
+</body>
+</html>

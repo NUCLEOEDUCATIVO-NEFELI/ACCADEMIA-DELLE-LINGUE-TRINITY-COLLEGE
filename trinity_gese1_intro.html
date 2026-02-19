@@ -1,0 +1,1614 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 1 - Introduction (Pre-A1) - 50 Esercizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --trinity-blue: #1e3a5f;
+            --trinity-red: #dc2626;
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #c9a227;
+            --success: #276749;
+            --error: #c53030;
+            --light: #f5f5f0;
+            --dark: #212529;
+            --border: #d4d4c8;
+            --bg-card: #ffffff;
+            --level-a1: #276749;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--trinity-blue);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--trinity-red);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .exam-badge {
+            display: inline-block;
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .breadcrumbs {
+            background: var(--bg-card);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--trinity-red);
+        }
+
+        .page-title {
+            font-size: 1.75rem;
+            color: var(--trinity-blue);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--trinity-blue);
+            border-bottom-color: var(--trinity-red);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--trinity-blue);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--trinity-red);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--trinity-blue);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .vocab-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .vocab-table th {
+            background: var(--trinity-blue);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .vocab-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .vocab-table tr:hover {
+            background: var(--light);
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--trinity-blue);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--trinity-blue);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .listening-box {
+            background: #f0f9ff;
+            border: 2px dashed var(--trinity-blue);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .play-btn {
+            background: var(--trinity-blue);
+            color: white;
+            border: none;
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 1rem;
+        }
+
+        .play-btn:hover {
+            background: var(--trinity-red);
+            transform: scale(1.1);
+        }
+
+        .play-btn.playing {
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .listening-text {
+            font-style: italic;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: #d4edda;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: #f8d7da;
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: #f8d7da;
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--trinity-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #152a45;
+        }
+
+        .btn-check {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .btn-check:hover {
+            background: #b8941f;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 200px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--trinity-blue) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 0;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--accent);
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .image-placeholder {
+            width: 200px;
+            height: 150px;
+            background: var(--light);
+            border: 2px dashed var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 4rem;
+        }
+
+        .phonetic {
+            font-family: 'Courier New', monospace;
+            color: var(--secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.85rem; flex: 1 1 50%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.3rem; }
+            .page-title { font-size: 1.4rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 150px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🇬🇧</div>
+            <h1>Trinity College London - GESE Grade 1</h1>
+            <p>Graded Examinations in Spoken English - Initial Stage (Pre-A1)</p>
+            <div class="exam-badge">CEFR Pre-A1 • 5 Minutes Exam</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="index.html">Home</a>
+            <span>›</span>
+            <a href="#">Trinity GESE</a>
+            <span>›</span>
+            <strong>Grade 1 - Introduction (50 Exercises)</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🎯 GESE Grade 1: Introduction</h1>
+            <p class="page-subtitle">Exchange greetings • Give personal information • Identify items • Numbers 1-20 • Colours</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('exam-info', this)">📋 Exam Info</button>
+            <button class="nav-tab" onclick="showSection('vocabulary', this)">📝 Vocabulary</button>
+            <button class="nav-tab" onclick="showSection('grammar', this)">🔤 Grammar</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 50 Exercises</button>
+        </nav>
+
+        <!-- SEZIONE EXAM INFO -->
+        <section id="exam-info" class="section active">
+            <div class="card">
+                <div class="card-header">About GESE Grade 1 Exam</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>Exam Duration:</strong> 5 minutes<br>
+                        <strong>CEFR Level:</strong> Pre-A1 (Initial Stage)<br>
+                        <strong>Format:</strong> One-to-one conversation with Trinity examiner
+                    </div>
+
+                    <h3 style="color: var(--trinity-blue); margin: 1.5rem 0 1rem 0;">Language Functions</h3>
+                    <ul style="margin-left: 2rem; line-height: 2;">
+                        <li>Exchange greetings with the examiner</li>
+                        <li>Give personal information (name, age)</li>
+                        <li>Identify and name items from the vocabulary list</li>
+                        <li>Leave-taking (say goodbye)</li>
+                    </ul>
+
+                    <h3 style="color: var(--trinity-blue); margin: 1.5rem 0 1rem 0;">What the Examiner Will Ask</h3>
+                    <div class="warning-box">
+                        <strong>Example questions:</strong><br>
+                        • "What's your name?"<br>
+                        • "How old are you?"<br>
+                        • "What colour is this?"<br>
+                        • "How many [objects]?"<br>
+                        • "What's this?" (pointing to object/picture)
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Exam Tips for Grade 1</div>
+                <div class="card-body">
+                    <ul style="margin-left: 2rem; line-height: 2;">
+                        <li>Speak clearly and loudly</li>
+                        <li>Use short, simple answers</li>
+                        <li>Listen carefully to the examiner's instructions</li>
+                        <li>Don't worry about mistakes - keep talking!</li>
+                        <li>Practice saying numbers 1-20 fluently</li>
+                        <li>Know your colours and basic objects</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE VOCABULARY -->
+        <section id="vocabulary" class="section">
+            <div class="card">
+                <div class="card-header">Personal Information</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>English</th>
+                                <th>Italian</th>
+                                <th>Pronunciation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>My name is...</td><td>Il mio nome è...</td><td class="phonetic">/maɪ neɪm ɪz/</td></tr>
+                            <tr><td>I am... (years old)</td><td>Ho... anni</td><td class="phonetic">/aɪ æm/</td></tr>
+                            <tr><td>Hello / Hi</td><td>Ciao / Salve</td><td class="phonetic">/həˈləʊ/ /haɪ/</td></tr>
+                            <tr><td>Goodbye / Bye</td><td>Arrivederci / Ciao</td><td class="phonetic">/ˌɡʊdˈbaɪ/ /baɪ/</td></tr>
+                            <tr><td>Good morning</td><td>Buongiorno</td><td class="phonetic">/ˌɡʊd ˈmɔːnɪŋ/</td></tr>
+                            <tr><td>Good afternoon</td><td>Buon pomeriggio</td><td class="phonetic">/ˌɡʊd ˌɑːftəˈnuːn/</td></tr>
+                            <tr><td>Thank you</td><td>Grazie</td><td class="phonetic">/θæŋk juː/</td></tr>
+                            <tr><td>Please</td><td>Per favore</td><td class="phonetic">/pliːz/</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Numbers 1-20</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Number</th>
+                                <th>Word</th>
+                                <th>Pronunciation</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>1</td><td>One</td><td class="phonetic">/wʌn/</td></tr>
+                            <tr><td>2</td><td>Two</td><td class="phonetic">/tuː/</td></tr>
+                            <tr><td>3</td><td>Three</td><td class="phonetic">/θriː/</td></tr>
+                            <tr><td>4</td><td>Four</td><td class="phonetic">/fɔː/</td></tr>
+                            <tr><td>5</td><td>Five</td><td class="phonetic">/faɪv/</td></tr>
+                            <tr><td>6</td><td>Six</td><td class="phonetic">/sɪks/</td></tr>
+                            <tr><td>7</td><td>Seven</td><td class="phonetic">/ˈsevn/</td></tr>
+                            <tr><td>8</td><td>Eight</td><td class="phonetic">/eɪt/</td></tr>
+                            <tr><td>9</td><td>Nine</td><td class="phonetic">/naɪn/</td></tr>
+                            <tr><td>10</td><td>Ten</td><td class="phonetic">/ten/</td></tr>
+                            <tr><td>11</td><td>Eleven</td><td class="phonetic">/ɪˈlevn/</td></tr>
+                            <tr><td>12</td><td>Twelve</td><td class="phonetic">/twelv/</td></tr>
+                            <tr><td>13</td><td>Thirteen</td><td class="phonetic">/ˌθɜːˈtiːn/</td></tr>
+                            <tr><td>14</td><td>Fourteen</td><td class="phonetic">/ˌfɔːˈtiːn/</td></tr>
+                            <tr><td>15</td><td>Fifteen</td><td class="phonetic">/ˌfɪfˈtiːn/</td></tr>
+                            <tr><td>16</td><td>Sixteen</td><td class="phonetic">/ˌsɪksˈtiːn/</td></tr>
+                            <tr><td>17</td><td>Seventeen</td><td class="phonetic">/ˌsevnˈtiːn/</td></tr>
+                            <tr><td>18</td><td>Eighteen</td><td class="phonetic">/ˌeɪˈtiːn/</td></tr>
+                            <tr><td>19</td><td>Nineteen</td><td class="phonetic">/ˌnaɪnˈtiːn/</td></tr>
+                            <tr><td>20</td><td>Twenty</td><td class="phonetic">/ˈtwenti/</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Colours</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Colour</th>
+                                <th>Italian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Red</td><td>Rosso</td></tr>
+                            <tr><td>Blue</td><td>Blu</td></tr>
+                            <tr><td>Green</td><td>Verde</td></tr>
+                            <tr><td>Yellow</td><td>Giallo</td></tr>
+                            <tr><td>Orange</td><td>Arancione</td></tr>
+                            <tr><td>Purple</td><td>Viola</td></tr>
+                            <tr><td>Pink</td><td>Rosa</td></tr>
+                            <tr><td>Black</td><td>Nero</td></tr>
+                            <tr><td>White</td><td>Bianco</td></tr>
+                            <tr><td>Brown</td><td>Marrone</td></tr>
+                            <tr><td>Grey</td><td>Grigio</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Classroom Objects & Body Parts</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Object</th>
+                                <th>Italian</th>
+                                <th>Object</th>
+                                <th>Italian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Book</td><td>Libro</td><td>Head</td><td>Testa</td></tr>
+                            <tr><td>Pen</td><td>Penna</td><td>Eye</td><td>Occhio</td></tr>
+                            <tr><td>Pencil</td><td>Matita</td><td>Ear</td><td>Orecchio</td></tr>
+                            <tr><td>Bag</td><td>Borsa</td><td>Nose</td><td>Naso</td></tr>
+                            <tr><td>Chair</td><td>Sedia</td><td>Mouth</td><td>Bocca</td></tr>
+                            <tr><td>Table</td><td>Tavolo</td><td>Hand</td><td>Mano</td></tr>
+                            <tr><td>Door</td><td>Porta</td><td>Arm</td><td>Braccio</td></tr>
+                            <tr><td>Window</td><td>Finestra</td><td>Leg</td><td>Gamba</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Animals</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Animal</th>
+                                <th>Italian</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Dog</td><td>Cane</td><td>Domestic</td></tr>
+                            <tr><td>Cat</td><td>Gatto</td><td>Domestic</td></tr>
+                            <tr><td>Fish</td><td>Pesce</td><td>Domestic</td></tr>
+                            <tr><td>Bird</td><td>Uccello</td><td>Domestic/Wild</td></tr>
+                            <tr><td>Cow</td><td>Mucca</td><td>Farm</td></tr>
+                            <tr><td>Horse</td><td>Cavallo</td><td>Farm</td></tr>
+                            <tr><td>Sheep</td><td>Pecora</td><td>Farm</td></tr>
+                            <tr><td>Pig</td><td>Maiale</td><td>Farm</td></tr>
+                            <tr><td>Elephant</td><td>Elefante</td><td>Wild</td></tr>
+                            <tr><td>Lion</td><td>Leone</td><td>Wild</td></tr>
+                            <tr><td>Tiger</td><td>Tigre</td><td>Wild</td></tr>
+                            <tr><td>Bear</td><td>Orso</td><td>Wild</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Clothes</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Item</th>
+                                <th>Italian</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>T-shirt</td><td>Maglietta</td></tr>
+                            <tr><td>Shirt</td><td>Camicia</td></tr>
+                            <tr><td>Shoes</td><td>Scarpe</td></tr>
+                            <tr><td>Socks</td><td>Calzini</td></tr>
+                            <tr><td>Hat</td><td>Cappello</td></tr>
+                            <tr><td>Coat</td><td>Cappotto</td></tr>
+                            <tr><td>Trousers / Pants</td><td>Pantaloni</td></tr>
+                            <tr><td>Dress</td><td>Vestito</td></tr>
+                            <tr><td>Skirt</td><td>Gonna</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE GRAMMAR -->
+        <section id="grammar" class="section">
+            <div class="card">
+                <div class="card-header">Verb "To Be" - Present Simple</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Subject</th>
+                                <th>Affirmative</th>
+                                <th>Negative</th>
+                                <th>Question</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>I</td><td>I <strong>am</strong></td><td>I am not / I'm not</td><td>Am I...?</td></tr>
+                            <tr><td>You</td><td>You <strong>are</strong></td><td>You are not / You aren't</td><td>Are you...?</td></tr>
+                            <tr><td>He/She/It</td><td>He/She/It <strong>is</strong></td><td>He/She/It is not / isn't</td><td>Is he/she/it...?</td></tr>
+                            <tr><td>We</td><td>We <strong>are</strong></td><td>We are not / We aren't</td><td>Are we...?</td></tr>
+                            <tr><td>They</td><td>They <strong>are</strong></td><td>They are not / They aren't</td><td>Are they...?</td></tr>
+                    </table>
+
+                    <div class="info-box" style="margin-top: 1.5rem;">
+                        <strong>Examples:</strong><br>
+                        • I <strong>am</strong> seven years old.<br>
+                        • She <strong>is</strong> my friend.<br>
+                        • They <strong>are</strong> red shoes.<br>
+                        • <strong>Is</strong> this a pen? Yes, it <strong>is</strong>. / No, it <strong>isn't</strong>.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Question Words</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th>Question Word</th>
+                                <th>Use</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>What</strong></td><td>Things/Objects</td><td>What is this? It's a book.</td></tr>
+                            <tr><td><strong>How old</strong></td><td>Age</td><td>How old are you? I'm ten.</td></tr>
+                            <tr><td><strong>How many</strong></td><td>Quantity (countable)</td><td>How many pens? Three pens.</td></tr>
+                            <tr><td><strong>What colour</strong></td><td>Colour</td><td>What colour is it? It's blue.</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Demonstratives: This / That / These / Those</div>
+                <div class="card-body">
+                    <table class="vocab-table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Singular (one)</th>
+                                <th>Plural (more than one)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td><strong>Near</strong> (close to you)</td><td>this</td><td>these</td></tr>
+                            <tr><td><strong>Far</strong> (not close)</td><td>that</td><td>those</td></tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box" style="margin-top: 1.5rem;">
+                        <strong>Examples:</strong><br>
+                        • <strong>This</strong> is my pen. (one thing, near)<br>
+                        • <strong>That</strong> is a bird. (one thing, far)<br>
+                        • <strong>These</strong> are my books. (many things, near)<br>
+                        • <strong>Those</strong> are cows. (many things, far)
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Imperatives (Commands)</div>
+                <div class="card-body">
+                    <p>The examiner may use these commands during the test:</p>
+                    <ul style="margin-left: 2rem; margin-top: 1rem; line-height: 2;">
+                        <li><strong>Stand up</strong> - Alzati</li>
+                        <li><strong>Sit down</strong> - Siediti</li>
+                        <li><strong>Come here</strong> - Vieni qui</li>
+                        <li><strong>Go to</strong> - Vai a</li>
+                        <li><strong>Show me</strong> - Mostrami</li>
+                        <li><strong>Point to</strong> - Indica</li>
+                        <li><strong>Give me</strong> - Dammi</li>
+                        <li><strong>Touch</strong> - Tocca</li>
+                        <li><strong>Look at</strong> - Guarda</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEZIONE ESERCIZI -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Gli esercizi verranno caricati qui dinamicamente -->
+                </div>
+
+                <!-- SEZIONE PUNTEGGIO FINALE -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Congratulations! You completed all exercises!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Try Again
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London - GESE Grade 1 Preparation</p>
+            <p style="font-size: 0.85rem; margin-top: 0.5rem;">Official preparation material for Graded Examinations in Spoken English</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database degli esercizi (50 totali) - Trinity GESE Grade 1 (Pre-A1)
+        const exercises = [
+            // ESERCIZI 1-10: Greetings and Personal Information (Listening focus)
+            {
+                id: 1,
+                type: 'listening',
+                audioText: "Hello! What's your name?",
+                question: 'Listen and choose the correct response:',
+                options: ['I am seven', 'My name is Marco', 'I am a student', 'Thank you'],
+                correct: 'My name is Marco',
+                explanation: '✅ Correct! When asked "What\'s your name?", answer with "My name is..."',
+                errorExplanation: '❌ The correct answer is "My name is..."'
+            },
+            {
+                id: 2,
+                type: 'listening',
+                audioText: "How old are you?",
+                question: 'Listen and choose the correct response:',
+                options: ['I am fine', 'I am ten years old', 'My name is Anna', 'I am from Italy'],
+                correct: 'I am ten years old',
+                explanation: '✅ Correct! When asked "How old are you?", answer with your age.',
+                errorExplanation: '❌ Answer with your age: "I am [number] years old"'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'Which is the correct greeting for the morning?',
+                options: ['Good morning', 'Good night', 'Goodbye', 'See you'],
+                correct: 'Good morning',
+                explanation: '✅ Correct! "Good morning" is used until 12:00.',
+                errorExplanation: '❌ "Good morning" is the correct morning greeting'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'Complete: "______ name is Sarah." (My/Your)',
+                correct: ['My'],
+                explanation: '✅ Correct! "My name is..." to introduce yourself.'
+            },
+            {
+                id: 5,
+                type: 'listening',
+                audioText: "Goodbye! See you!",
+                question: 'What is the appropriate response?',
+                options: ['Hello!', 'Goodbye! Bye!', 'Thank you', 'Please'],
+                correct: 'Goodbye! Bye!',
+                explanation: '✅ Correct! Reply with "Goodbye" or "Bye" when someone says goodbye.',
+                errorExplanation: '❌ Reply with "Goodbye" or "Bye"'
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: 'How do you say "Grazie" in English?',
+                options: ['Please', 'Thank you', 'Sorry', 'Excuse me'],
+                correct: 'Thank you',
+                explanation: '✅ Correct! "Thank you" = "Grazie"',
+                errorExplanation: '❌ "Thank you" means "Grazie"'
+            },
+            {
+                id: 7,
+                type: 'fill',
+                question: 'Complete the dialogue: A: "How are you?" B: "I ______ fine, thank you." (am/is/are)',
+                correct: ['am'],
+                explanation: '✅ Correct! "I am fine" - use "am" with "I".'
+            },
+            {
+                id: 8,
+                type: 'listening',
+                audioText: "Good afternoon!",
+                question: 'What time of day is this greeting used?',
+                options: ['Morning (before 12:00)', 'Afternoon (12:00-18:00)', 'Evening (after 18:00)', 'Night'],
+                correct: 'Afternoon (12:00-18:00)',
+                explanation: '✅ Correct! "Good afternoon" is used from 12:00 to 18:00.',
+                errorExplanation: '❌ "Good afternoon" = 12:00 to 18:00'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'Choose the polite word: "______ you!"',
+                options: ['Thank', 'Please', 'Sorry', 'Hello'],
+                correct: 'Thank',
+                explanation: '✅ Correct! "Thank you!" is polite.',
+                errorExplanation: '❌ "Thank you" is the polite expression'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'Complete: "I ______ seven years old." (am/is/are)',
+                correct: ['am'],
+                explanation: '✅ Correct! Use "am" with "I": I am seven years old.'
+
+            },
+
+            // ESERCIZI 11-20: Numbers 1-20
+            {
+                id: 11,
+                type: 'listening',
+                audioText: "I have three books.",
+                question: 'Which number do you hear?',
+                options: ['2', '3', '4', '5'],
+                correct: '3',
+                explanation: '✅ Correct! "Three" = 3',
+                errorExplanation: '❌ The number is "three" (3)'
+            },
+            {
+                id: 12,
+                type: 'choice',
+                question: 'How do you write "15" in words?',
+                options: ['Fiveteen', 'Fifteen', 'Fifty', 'Fivteen'],
+                correct: 'Fifteen',
+                explanation: '✅ Correct! 15 = fifteen (not "fiveteen"!)',
+                errorExplanation: '❌ 15 is spelled "fifteen"'
+            },
+            {
+                id: 13,
+                type: 'fill',
+                question: 'Write the number: "twelve" = ______',
+                correct: ['12'],
+                explanation: '✅ Correct! Twelve = 12'
+            },
+            {
+                id: 14,
+                type: 'listening',
+                audioText: "She is thirteen years old.",
+                question: 'How old is she?',
+                options: ['3', '13', '30', '33'],
+                correct: '13',
+                explanation: '✅ Correct! "Thirteen" = 13',
+                errorExplanation: '❌ "Thirteen" = 13 (not 30!)'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Which number comes after "eighteen"?',
+                options: ['Sixteen', 'Seventeen', 'Nineteen', 'Twenty'],
+                correct: 'Nineteen',
+                explanation: '✅ Correct! After 18 (eighteen) comes 19 (nineteen).',
+                errorExplanation: '❌ After eighteen comes nineteen (19)'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Complete the sequence: 5, 10, ______, 20',
+                correct: ['15', 'fifteen'],
+                explanation: '✅ Correct! Counting by fives: 5, 10, 15, 20.'
+            },
+            {
+                id: 17,
+                type: 'listening',
+                audioText: "I see eleven birds in the tree.",
+                question: 'How many birds?',
+                options: ['1', '7', '11', '70'],
+                correct: '11',
+                explanation: '✅ Correct! "Eleven" = 11',
+                errorExplanation: '❌ "Eleven" = 11'
+            },
+            {
+                id: 18,
+                type: 'choice',
+                question: 'Spell the number: 20',
+                options: ['Twelvety', 'Twenty', 'Twelveteen', 'Twoty'],
+                correct: 'Twenty',
+                explanation: '✅ Correct! 20 = twenty',
+                errorExplanation: '❌ 20 is spelled "twenty"'
+            },
+            {
+                id: 19,
+                type: 'fill',
+                question: 'Write in words: "14" = ______',
+                correct: ['fourteen', 'Fourteen'],
+                explanation: '✅ Correct! 14 = fourteen'
+            },
+            {
+                id: 20,
+                type: 'listening',
+                audioText: "How many pens? One, two, three, four, five, six, seven, eight. Eight pens.",
+                question: 'How many pens are there?',
+                options: ['7', '8', '9', '10'],
+                correct: '8',
+                explanation: '✅ Correct! The speaker counts to eight.',
+                errorExplanation: '❌ The count goes up to eight (8)'
+
+            },
+
+            // ESERCIZI 21-30: Colours
+            {
+                id: 21,
+                type: 'choice',
+                question: 'What colour is a banana?',
+                options: ['Red', 'Blue', 'Yellow', 'Green'],
+                correct: 'Yellow',
+                explanation: '✅ Correct! Bananas are yellow.',
+                errorExplanation: '❌ Bananas are yellow'
+            },
+            {
+                id: 22,
+                type: 'listening',
+                audioText: "The sky is blue and the grass is green.",
+                question: 'What colour is the grass?',
+                options: ['Blue', 'Green', 'Yellow', 'Red'],
+                correct: 'Green',
+                explanation: '✅ Correct! Grass is green.',
+                errorExplanation: '❌ The grass is green'
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: 'Complete: "Apples can be red or ______." (green/yellow)',
+                correct: ['green', 'Green'],
+                explanation: '✅ Correct! Apples are often red or green.'
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: 'Which colour do you get mixing red and white?',
+                options: ['Orange', 'Purple', 'Pink', 'Brown'],
+                correct: 'Pink',
+                explanation: '✅ Correct! Red + white = pink.',
+                errorExplanation: '❌ Red + white makes pink'
+            },
+            {
+                id: 25,
+                type: 'listening',
+                audioText: "I have a black cat and a white dog.",
+                question: 'What colour is the cat?',
+                options: ['White', 'Black', 'Brown', 'Grey'],
+                correct: 'Black',
+                explanation: '✅ Correct! The cat is black.',
+                errorExplanation: '❌ The cat is black'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Complete: "Oranges are ______." (orange/blue)',
+                correct: ['orange', 'Orange'],
+                explanation: '✅ Correct! Oranges are orange.'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'What colour is the sun?',
+                options: ['Blue', 'Yellow', 'Black', 'Purple'],
+                correct: 'Yellow',
+                explanation: '✅ Correct! The sun is yellow.',
+                errorExplanation: '❌ The sun is yellow'
+            },
+            {
+                id: 28,
+                type: 'listening',
+                audioText: "She is wearing a purple dress and brown shoes.",
+                question: 'What colour are her shoes?',
+                options: ['Purple', 'Brown', 'Black', 'Red'],
+                correct: 'Brown',
+                explanation: '✅ Correct! Her shoes are brown.',
+                errorExplanation: '❌ The shoes are brown'
+            },
+            {
+                id: 29,
+                type: 'fill',
+                question: 'The colour of the sea is usually ______.',
+                correct: ['blue', 'Blue'],
+                explanation: '✅ Correct! The sea is usually blue.'
+            },
+            {
+                id: 30,
+                type: 'choice',
+                question: 'Which is NOT a primary colour?',
+                options: ['Red', 'Blue', 'Green', 'Yellow'],
+                correct: 'Green',
+                explanation: '✅ Correct! Primary colours are red, blue, and yellow. Green is secondary.',
+                errorExplanation: '❌ Green is not a primary colour (red, blue, yellow are)'
+
+            },
+
+            // ESERCIZI 31-40: Objects and Animals (This/That/These/Those)
+            {
+                id: 31,
+                type: 'choice',
+                question: 'Point to something near you. What do you say?',
+                options: ['That is a pen', 'This is a pen', 'These are pens', 'Those are pens'],
+                correct: 'This is a pen',
+                explanation: '✅ Correct! Use "this" for one thing near you.',
+                errorExplanation: '❌ Use "this" for one thing near you'
+            },
+            {
+                id: 32,
+                type: 'listening',
+                audioText: "This is my book. That is your pen.",
+                question: 'Which object is near the speaker?',
+                options: ['The pen', 'The book', 'Both', 'Neither'],
+                correct: 'The book',
+                explanation: '✅ Correct! "This" = near, "That" = far. The book is near.',
+                errorExplanation: '❌ "This" indicates something near (the book)'
+            },
+            {
+                id: 33,
+                type: 'fill',
+                question: 'Complete for plural objects near you: "______ are my books." (This/These)',
+                correct: ['These'],
+                explanation: '✅ Correct! "These" for plural things near you.'
+            },
+            {
+                id: 34,
+                type: 'choice',
+                question: 'What is the plural of "that"?',
+                options: ['This', 'These', 'Those', 'They'],
+                correct: 'Those',
+                explanation: '✅ Correct! That → Those (singular → plural, far).',
+                errorExplanation: '❌ "That" becomes "those" in plural'
+            },
+            {
+                id: 35,
+                type: 'listening',
+                audioText: "Look at those birds in the tree! They are black and white.",
+                question: 'Where are the birds?',
+                options: ['Near the speaker', 'Far from the speaker', 'On the ground', 'In a cage'],
+                correct: 'Far from the speaker',
+                explanation: '✅ Correct! "Those" indicates things far away.',
+                errorExplanation: '❌ "Those" means far from the speaker'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'A baby dog is called a ______.',
+                correct: ['puppy', 'Puppy', 'puppies'],
+                explanation: '✅ Correct! A baby dog is a puppy.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'Which animal says "moo"?',
+                options: ['Sheep', 'Cow', 'Pig', 'Horse'],
+                correct: 'Cow',
+                explanation: '✅ Correct! Cows say "moo".',
+                errorExplanation: '❌ The cow says "moo"'
+            },
+            {
+                id: 38,
+                type: 'listening',
+                audioText: "This animal is big, grey, and has a long nose. It likes water.",
+                question: 'What animal is it?',
+                options: ['Lion', 'Elephant', 'Tiger', 'Bear'],
+                correct: 'Elephant',
+                explanation: '✅ Correct! Elephants are big, grey, with long trunks (noses).',
+                errorExplanation: '❌ Elephants are big, grey with long noses'
+            },
+            {
+                id: 39,
+                type: 'fill',
+                question: 'Cats eat ______. (fish/meat/grass)',
+                correct: ['fish', 'Fish', 'meat', 'Meat'],
+                explanation: '✅ Correct! Cats eat fish (and meat).'
+            },
+            {
+                id: 40,
+                type: 'choice',
+                question: 'Which animal lives on a farm and gives us wool?',
+                options: ['Cow', 'Pig', 'Sheep', 'Horse'],
+                correct: 'Sheep',
+                explanation: '✅ Correct! Sheep give us wool.',
+                errorExplanation: '❌ Sheep give us wool'
+
+            },
+
+            // ESERCIZI 41-50: Body Parts, Clothes & Mixed Review
+            {
+                id: 41,
+                type: 'listening',
+                audioText: "Touch your nose! Now touch your ears!",
+                question: 'How many body parts does the speaker mention?',
+                options: ['1', '2', '3', '4'],
+                correct: '2',
+                explanation: '✅ Correct! Nose and ears = 2 body parts.',
+                errorExplanation: '❌ Two body parts: nose and ears'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'We see with our ______.',
+                correct: ['eyes', 'Eyes'],
+                explanation: '✅ Correct! We see with our eyes.'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'Which do you wear on your feet?',
+                options: ['Hat', 'Shirt', 'Shoes', 'Gloves'],
+                correct: 'Shoes',
+                explanation: '✅ Correct! Shoes go on feet.',
+                errorExplanation: '❌ Shoes are worn on feet'
+            },
+            {
+                id: 44,
+                type: 'listening',
+                audioText: "I have two hands and ten fingers.",
+                question: 'How many fingers does the speaker have?',
+                options: ['2', '5', '10', '20'],
+                correct: '10',
+                explanation: '✅ Correct! The speaker has ten fingers.',
+                errorExplanation: '❌ The speaker says "ten fingers"'
+            },
+            {
+                id: 45,
+                type: 'fill',
+                question: 'Complete with the verb "to be": "She ______ my friend." (am/is/are)',
+                correct: ['is'],
+                explanation: '✅ Correct! She is / He is / It is.'
+            },
+            {
+                id: 46,
+                type: 'choice',
+                question: 'What do you wear when it is cold?',
+                options: ['T-shirt', 'Coat', 'Shorts', 'Sandals'],
+                correct: 'Coat',
+                explanation: '✅ Correct! A coat keeps you warm when cold.',
+                errorExplanation: '❌ You wear a coat when cold'
+            },
+            {
+                id: 47,
+                type: 'listening',
+                audioText: "Stand up, please. Show me your book. Point to the door.",
+                question: 'How many commands does the speaker give?',
+                options: ['2', '3', '4', '5'],
+                correct: '3',
+                explanation: '✅ Correct! Three commands: Stand up, Show me, Point to.',
+                errorExplanation: '❌ Three commands given'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'The opposite of "big" is ______.',
+                correct: ['small', 'Small', 'little', 'Little'],
+                explanation: '✅ Correct! Big ↔ Small.'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'Which sentence is correct?',
+                options: ['I am a student', 'I is a student', 'I are a student', 'I be a student'],
+                correct: 'I am a student',
+                explanation: '✅ Correct! "I am" is correct.',
+                errorExplanation: '❌ "I am" is the correct form'
+            },
+            {
+                id: 50,
+                type: 'listening',
+                audioText: "Hello! My name is Emma. I am eight years old. I have a red bag and a blue pen. Goodbye!",
+                question: 'What colour is Emma\'s bag?',
+                options: ['Blue', 'Red', 'Green', 'Yellow'],
+                correct: 'Red',
+                explanation: '✅ Correct! Emma has a red bag. Well done completing all exercises!',
+                errorExplanation: '❌ Emma\'s bag is red'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+        let isPlaying = false;
+
+        // Text-to-Speech per gli esercizi di ascolto
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel(); // Stop any current speech
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-GB'; // British English for Trinity
+                utterance.rate = 0.8; // Slightly slower for learners
+                utterance.pitch = 1;
+                
+                utterance.onstart = () => {
+                    isPlaying = true;
+                    document.querySelector('.play-btn').classList.add('playing');
+                };
+                
+                utterance.onend = () => {
+                    isPlaying = false;
+                    document.querySelector('.play-btn').classList.remove('playing');
+                };
+                
+                window.speechSynthesis.speak(utterance);
+            } else {
+                alert('Text-to-speech not supported in this browser. Please use Chrome, Edge, or Safari.');
+            }
+        }
+
+        function stopSpeaking() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                isPlaying = false;
+                const btn = document.querySelector('.play-btn');
+                if (btn) btn.classList.remove('playing');
+            }
+        }
+
+        function showSection(id, btn) {
+            // Stop any playing audio when switching sections
+            stopSpeaking();
+            
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Exercise ${ex.id} - ${ex.type === 'listening' ? '🔊 Listening' : ex.type === 'choice' ? '📝 Multiple Choice' : '✏️ Fill in the Blank'}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Exercise ${currentExercise + 1} of ${exercises.length}</div>
+            `;
+
+            // Se è un esercizio di ascolto, aggiungi il player
+            if (ex.type === 'listening') {
+                html += `
+                    <div class="listening-box">
+                        <button class="play-btn" onclick="speak('${ex.audioText.replace(/'/g, "\\'")}')" title="Click to listen">▶️</button>
+                        <div style="font-weight: bold; color: var(--trinity-blue); margin-bottom: 0.5rem;">🔊 Listen carefully</div>
+                        <div class="listening-text">Click the play button to hear the audio</div>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice' || ex.type === 'listening') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt.replace(/'/g, "\\'")}')" data-value="${opt.replace(/"/g, '&quot;')}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Check Answer</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Next →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            // Stop audio before moving to next
+            stopSpeaking();
+            
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Distinction! Excellent work! You are ready for the GESE Grade 1 exam!';
+            } else if (totalScore >= 75) {
+                message = '🥇 Merit! Very good! Just a little more practice needed.';
+            } else if (totalScore >= 60) {
+                message = '✅ Pass! Good job! Review the vocabulary and try again.';
+            } else {
+                message = '📚 Keep practicing! Review the vocabulary section and try the exercises again.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            // Shuffle exercises for variety
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Shuffle exercises initially for variety
+            exercises.sort(() => Math.random() - 0.5);
+        });
+
+        // Stop audio when leaving page
+        window.addEventListener('beforeunload', stopSpeaking);
+    </script>
+</body>
+</html>

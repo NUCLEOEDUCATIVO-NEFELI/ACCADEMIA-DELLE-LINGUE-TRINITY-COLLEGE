@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE I (B1) - Interview Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1565c0;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #e3f2fd;
+            --dark: #263238;
+            --border: #bbdefb;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --b1-color: #1565c0;
+            --warning: #ef6c00;
+            --purple: #7b1fa2;
+            --purple-light: #f3e5f5;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d47a1 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .danger-box {
+            background: #ffebee;
+            border-left: 4px solid var(--error);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: var(--purple-light);
+            border-left: 4px solid var(--purple);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .task-example {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .timing-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .score-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 1.5rem 0;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 20px;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid white;
+        }
+
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .subject-item {
+            background: var(--light);
+            padding: 0.75rem;
+            border-left: 3px solid var(--accent);
+            font-size: 0.9rem;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .assessment-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .assessment-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .assessment-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .form-template {
+            background: #fafafa;
+            border: 2px dashed var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .assessment-grid { grid-template-columns: 1fr; }
+            .subject-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE I (B1) Interview</h1>
+            <p>Speaking & Listening Exam - Complete Task Guide</p>
+            <div class="level-badge">18 Minutes Total</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE I Interview Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE I Interview Complete Guide</h1>
+            <p class="page-subtitle">Speaking & Listening Tasks, Assessment & Preparation Strategies</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('topic', this)">Topic Task</button>
+            <button class="nav-tab" onclick="showSection('conversation', this)">Conversation</button>
+            <button class="nav-tab" onclick="showSection('listening', this)">Listening Tasks</button>
+            <button class="nav-tab" onclick="showSection('assessment', this)">Assessment</button>
+            <button class="nav-tab" onclick="showSection('preparation', this)">Preparation</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">Interview Structure Overview</div>
+                <div class="card-body">
+                    <p>The ISE I Interview is a one-to-one speaking and listening exam with a Trinity examiner. It lasts <strong>18 minutes</strong> (16 minutes exam + 2 minutes administration) and consists of <strong>4 assessed tasks</strong>.</p>
+
+                    <div class="instruction-box">
+                        <strong>Exam Breakdown:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Topic Discussion Task:</strong> 4 minutes (speaking)</li>
+                            <li><strong>Conversation Task:</strong> 4 minutes (2 min portfolio + 2 min subject area)</li>
+                            <li><strong>Independent Listening Task 1:</strong> 4.5 minutes</li>
+                            <li><strong>Independent Listening Task 2:</strong> 5.5 minutes</li>
+                        </ul>
+                    </div>
+
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>Before the Exam (2 minutes)</h4>
+                            <p>Examiner greets candidate, checks identification, and explains procedure. Candidate hands over Topic Form.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Topic Task (4 minutes)</h4>
+                            <p>Discussion of candidate's prepared topic using the Topic Form. Examiner asks questions about all 4 points.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Conversation Task (4 minutes)</h4>
+                            <p>2 minutes discussing portfolio + 2 minutes on one subject area chosen by examiner.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Independent Listening Task 1 (4.5 minutes)</h4>
+                            <p>Listen twice to recording, answer 6 questions with 1-2 words each.</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>Independent Listening Task 2 (5.5 minutes)</h4>
+                            <p>Listen twice, report gist, report 6 facts, answer 4 follow-up questions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Key Differences from ISE Foundation (A2)</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>ISE Foundation (A2)</th>
+                                <th>ISE I (B1)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Total Time</strong></td>
+                                <td>13 minutes</td>
+                                <td>18 minutes</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Topic Task</strong></td>
+                                <td>4 minutes</td>
+                                <td>4 minutes (more abstract discussion)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Conversation</strong></td>
+                                <td>2 minutes (subject area only)</td>
+                                <td>4 minutes (portfolio + subject area)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Listening Tasks</strong></td>
+                                <td>2 tasks (8 minutes)</td>
+                                <td>2 tasks (10 minutes, more complex)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Language</strong></td>
+                                <td>Concrete, everyday topics</td>
+                                <td>Abstract ideas, predictions, opinions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Portfolio Discussion</strong></td>
+                                <td>Not included</td>
+                                <td>2 minutes mandatory discussion</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">B1 Language Functions Required</div>
+                <div class="card-body">
+                    <p>You must demonstrate these functions throughout the interview:</p>
+                    <div class="subject-grid">
+                        <div class="subject-item">
+                            <strong>Describing past actions</strong><br>
+                            Indefinite & recent past<br>
+                            "I've been interested in..."
+                        </div>
+                        <div class="subject-item">
+                            <strong>Describing the future</strong><br>
+                            Intentions & predictions<br>
+                            "I'm planning to...", "I think..."
+                        </div>
+                        <div class="subject-item">
+                            <strong>Expressing certainty/uncertainty</strong><br>
+                            "Definitely", "probably", "might"
+                        </div>
+                        <div class="subject-item">
+                            <strong>Giving reasons & opinions</strong><br>
+                            "The reason is...", "In my opinion..."
+                        </div>
+                        <div class="subject-item">
+                            <strong>Expressing obligation</strong><br>
+                            "I have to...", "I need to..."
+                        </div>
+                        <div class="subject-item">
+                            <strong>Asking for information</strong><br>
+                            "What do you think about...?"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOPIC TASK SECTION -->
+        <section id="topic" class="section">
+            <div class="card">
+                <div class="card-header">Topic Discussion Task <span class="timing-badge">4 minutes</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> You prepare a topic before the exam and complete a <strong>Topic Form</strong> with 4 discussion points. The examiner uses this form to ask questions in random order. You must ask the examiner at least one question about your topic.
+                    </div>
+
+                    <h4>The Topic Form:</h4>
+                    <div class="form-template">
+                        <strong>INTEGRATED SKILLS IN ENGLISH — TOPIC FORM (ISE I)</strong><br><br>
+                        Candidate name: _______________<br>
+                        Title of topic: <strong>CRICKET</strong><br><br>
+                        <strong>Discussion Points (4 required):</strong><br><br>
+                        1. How long I've been interested in cricket<br>
+                        2. Why I love my team<br>
+                        3. My next match<br>
+                        4. What's better – playing or watching?<br><br>
+                        <em>The examiner will use these points to ask questions. Order is random.</em>
+                    </div>
+
+                    <h4>Choosing Your Topic:</h4>
+                    <div class="success-box">
+                        <strong>✓ Good Topic Choices:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Something you genuinely enjoy talking about</li>
+                            <li>Allows discussion of past, present, and future</li>
+                            <li>Enables demonstration of B1 language functions</li>
+                            <li>Not from the 6 conversation subject areas</li>
+                            <li>You can bring a small item (photo, ticket, medal) to support discussion</li>
+                        </ul>
+                    </div>
+
+                    <div class="danger-box">
+                        <strong>✗ Avoid These Topics:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Travel, Money, Fashion, Rules & Regulations, Health & Fitness, Learning a Foreign Language (these are for Conversation task)</li>
+                            <li>Topics you can't discuss for 4 minutes</li>
+                            <li>Topics requiring specialized knowledge</li>
+                            <li>Memorized speeches or presentations</li>
+                        </ul>
+                    </div>
+
+                    <h4>Sample Topic Discussion:</h4>
+                    <div class="example-box">
+                        <strong>Examiner:</strong> "So, tell me about how you became interested in cricket."<br><br>
+                        <strong>Candidate:</strong> "Well, I've been interested in cricket since I was about eight years old. My father used to play in a local team, and he took me to watch my first match. I remember being fascinated by the atmosphere in the stadium. Since then, I've been following cricket regularly. In fact, I've been playing in a local team for the past three years."<br><br>
+                        <strong>Examiner:</strong> "What about your next match?"<br><br>
+                        <strong>Candidate:</strong> "We're playing against our biggest rivals next Saturday. I'm really looking forward to it because we lost to them last season, so we need to win this time. I'm going to practice every evening this week to prepare. Do you enjoy watching cricket, examiner?"
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Key Strategies:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Speak in sustained turns (don't give one-word answers)</li>
+                            <li>Elaborate with examples and details</li>
+                            <li>Refer back to previous points and forward to upcoming ones</li>
+                            <li>Use a range of tenses: past experiences, current habits, future plans</li>
+                            <li>Ask the examiner a genuine question about your topic</li>
+                            <li>Don't memorize a script - the examiner will interrupt to encourage spontaneity</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONVERSATION TASK SECTION -->
+        <section id="conversation" class="section">
+            <div class="card">
+                <div class="card-header">Conversation Task <span class="timing-badge">4 minutes</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Two parts: (1) <strong>2 minutes discussing your portfolio</strong>, and (2) <strong>2 minutes on one subject area</strong> chosen by the examiner. You must ask at least one question about the portfolio and one about the subject area.
+                    </div>
+
+                    <h4>Part A: Portfolio Discussion (2 minutes)</h4>
+                    <p>The examiner has already assessed your portfolio and will ask about your written work. Be prepared to:</p>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Explain what you wrote and why you chose those tasks</li>
+                        <li>Discuss challenges you faced while writing</li>
+                        <li>Talk about what you learned from the process</li>
+                        <li>Give examples from your portfolio pieces</li>
+                        <li><strong>Ask the examiner at least one question about your portfolio</strong> (e.g., "What did you think of my conclusion in the article?")</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Exchange:</strong><br><br>
+                        <strong>Examiner:</strong> "I see you wrote about learning languages. Why did you choose that topic?"<br><br>
+                        <strong>Candidate:</strong> "I chose it because I'm currently learning English and I find the process really interesting. In my article, I discussed different methods like using apps and watching films. I found it challenging to organize my ideas clearly. What did you think of my suggestions for language learning, examiner?"
+                    </div>
+
+                    <h4>Part B: Subject Area Conversation (2 minutes)</h4>
+                    <p>The examiner chooses <strong>one</strong> of these 6 subject areas:</p>
+                    <div class="subject-grid">
+                        <div class="subject-item">Travel</div>
+                        <div class="subject-item">Money</div>
+                        <div class="subject-item">Fashion</div>
+                        <div class="subject-item">Rules & Regulations</div>
+                        <div class="subject-item">Health & Fitness</div>
+                        <div class="subject-item">Learning a Foreign Language</div>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Important:</strong> You must ask the examiner at least one question about the subject area. This is mandatory for a pass.
+                    </div>
+
+                    <h4>Sample Subject Area Questions:</h4>
+                    <div class="task-example">
+                        <strong>Travel:</strong><br>
+                        "What's the most interesting place you've visited?"<br>
+                        "Do you prefer traveling alone or with others?"<br>
+                        "How do you think travel will change in the future?"
+                    </div>
+                    <div class="task-example">
+                        <strong>Money:</strong><br>
+                        "Do you think young people should learn about money management at school?"<br>
+                        "Is it better to save money or spend it on experiences?"
+                    </div>
+                    <div class="task-example">
+                        <strong>Learning a Foreign Language:</strong><br>
+                        "What do you think is the most difficult thing about learning English?"<br>
+                        "Do you think it's easier to learn a language when you're young?"
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Conversation Strategies:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Initiate conversation - don't just wait for questions</li>
+                            <li>Give opinions with reasons ("I think... because...")</li>
+                            <li>Show interest in the examiner's responses</li>
+                            <li>Use repair strategies if you don't understand ("Sorry, do you mean...?")</li>
+                            <li>Maintain eye contact and use natural body language</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- LISTENING TASKS SECTION -->
+        <section id="listening" class="section">
+            <div class="card">
+                <div class="card-header">Independent Listening Task 1 <span class="timing-badge">4.5 minutes</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Listen twice to a recording (approximately 1 minute) of basic information (descriptive or narrative). Answer 6 questions with <strong>one or two words</strong>. You may take notes.
+                    </div>
+
+                    <h4>Task Structure:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Recording type:</strong> Descriptive or narrative (e.g., describing a process, telling a short story)</li>
+                        <li><strong>Length:</strong> Approximately 1 minute</li>
+                        <li><strong>Plays:</strong> Twice</li>
+                        <li><strong>Questions:</strong> 6 factual questions requiring specific information</li>
+                        <li><strong>Answers:</strong> 1-2 words only (phrases not accepted)</li>
+                        <li><strong>Scoring:</strong> 1 mark per correct answer (total 6 marks)</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Recording (about emus):</strong><br><br>
+                        "Emus are large birds that live in Australia. They prefer open country rather than forests. They can run very fast - up to 50 kilometres per hour. Emus eat plants and insects. They are brown in color and have very good eyesight."<br><br>
+                        <strong>Sample Questions:</strong><br>
+                        1. "Where do emus live?" → "Australia" (1 word)<br>
+                        2. "What kind of places do they prefer?" → "Open country" (2 words)<br>
+                        3. "How fast can they run?" → "50 kilometres per hour" (too long - just "50 km/h" or "50 kilometres")<br>
+                        4. "What do they eat?" → "Plants" or "Insects" (1 word)
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>First Listening - Get the Gist</strong>
+                        <p>Listen for overall understanding. Don't worry about details. Identify the topic and general context.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Second Listening - Extract Details</strong>
+                        <p>Focus on specific information: numbers, times, dates, names, places, adjectives. Write key words quickly.</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Key Strategies:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Listen for <strong>content words</strong> (nouns, verbs, adjectives, numbers) - ignore grammar words</li>
+                            <li>Write abbreviations during listening (e.g., "7pm" instead of "seven o'clock")</li>
+                            <li>Check spelling if you write full words</li>
+                            <li>Answer all 6 questions - no penalty for wrong answers</li>
+                            <li>Stick to 1-2 words - longer answers may not be accepted</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Independent Listening Task 2 <span class="timing-badge">5.5 minutes</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Listen twice to a factual exposition (approximately 1 minute 15 seconds). First, report the <strong>gist</strong> (main idea). Then report <strong>6 facts</strong> from the recording. Finally, answer <strong>4 follow-up questions</strong> from the examiner.
+                    </div>
+
+                    <h4>Task Structure:</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 1 - First Listening:</strong><br>
+                        Listen for gist. The examiner will ask: "What is the speaker talking about?" or "What is the main topic?"<br><br>
+                        <strong>Your response:</strong> A general statement in 1-2 sentences (e.g., "The speaker is talking about the benefits of learning foreign languages and how it affects brain development.")
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 2 - Second Listening:</strong><br>
+                        Listen for specific facts. Take notes on the provided paper.<br><br>
+                        <strong>After listening:</strong> Report 6 facts to the examiner. These can be simple statements.<br>
+                        <em>Example: "The speaker said that learning languages improves memory." / "He mentioned that bilingual people are better at multitasking."</em>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 3 - Follow-up Questions:</strong><br>
+                        The examiner asks 4 questions about the recording content.<br><br>
+                        <em>Example: "According to the speaker, why do children learn languages faster than adults?"</em>
+                    </div>
+
+                    <h4>Assessment Criteria (Task 2 only):</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Score</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>4</td>
+                                <td>Identifies main points and specific details accurately. Responds promptly and accurately to questions.</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Identifies main points and most specific details. Responds to questions with minor hesitation or inaccuracy.</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Identifies some main points and details. Requires repetition of questions or provides incomplete answers.</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Identifies few points. Has difficulty responding to questions even when repeated.</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>No performance to assess or task not attempted.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning-box">
+                        <strong>Note-Taking Tips:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Use abbreviations and symbols (&, +, →, ↑)</li>
+                            <li>Write keywords only - don't try to write full sentences</li>
+                            <li>Organize notes spatially (left side for main ideas, right for details)</li>
+                            <li>Number your facts 1-6 as you hear them</li>
+                            <li>Notes are not assessed - only your oral responses count</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ASSESSMENT SECTION -->
+        <section id="assessment" class="section">
+            <div class="card">
+                <div class="card-header">How the Interview is Assessed</div>
+                <div class="card-body">
+                    <p>The interview is assessed using different methods for speaking and listening tasks:</p>
+
+                    <h4>Speaking Assessment (Topic + Conversation Tasks)</h4>
+                    <p>Both speaking tasks are assessed together using <strong>four criteria</strong> on a scale of 1-4:</p>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>What Examiners Look For</th>
+                                <th>Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Communicative Effectiveness</strong></td>
+                                <td>Task fulfilment, appropriate turn-taking, initiating and maintaining interaction, elaborating responses</td>
+                                <td>25%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Interactive Listening</strong></td>
+                                <td>Understanding examiner questions, responding appropriately, asking for clarification when needed</td>
+                                <td>25%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Language Control</strong></td>
+                                <td>Range and accuracy of grammar, vocabulary precision, B1 structures (conditionals, passives, modals)</td>
+                                <td>25%</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Delivery</strong></td>
+                                <td>Pronunciation, intonation, fluency, appropriate speed, clear articulation</td>
+                                <td>25%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>Score Interpretation:</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Score</th>
+                                <th>Meaning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>4</strong></td>
+                                <td>Excellent achievement - at the upper end of B1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>3</strong></td>
+                                <td>Appropriate achievement - at the middle of B1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>2</strong></td>
+                                <td>Acceptable achievement - of B1 level, possibly newly qualified</td>
+                            </tr>
+                            <tr>
+                                <td><strong>1</strong></td>
+                                <td>Non-achievement - not at B1 level</td>
+                            </tr>
+                            <tr>
+                                <td><strong>0</strong></td>
+                                <td>No performance to rate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Listening Assessment</div>
+                <div class="card-body">
+                    <h4>Task 1 Scoring:</h4>
+                    <p><strong>Objective scoring:</strong> 1 mark per correct answer (6 marks total)</p>
+
+                    <h4>Task 2 Scoring:</h4>
+                    <p><strong>Rating scale 0-4:</strong> Based on number of facts reported correctly and promptness of response</p>
+
+                    <div class="instruction-box">
+                        <strong>Combined Listening Score (out of 8):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Task 1: 6 marks (objective)</li>
+                            <li>Task 2: Rated 0-4, then weighted</li>
+                            <li>Total converted to score out of 8</li>
+                        </ul>
+                    </div>
+
+                    <h4>Pass Requirements:</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Skill</th>
+                                <th>Total Marks</th>
+                                <th>Pass</th>
+                                <th>Merit</th>
+                                <th>Distinction</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Speaking</td>
+                                <td>16</td>
+                                <td>8</td>
+                                <td>12</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <td>Listening</td>
+                                <td>8</td>
+                                <td>4</td>
+                                <td>5</td>
+                                <td>7</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Sample Performance Descriptors</div>
+                <div class="card-body">
+                    <div class="example-box">
+                        <strong>Score 3 (Appropriate achievement) - Communicative Effectiveness:</strong><br>
+                        "Fulfils the task appropriately. Initiates and responds appropriately. Maintains and develops the interaction appropriately (e.g., expanding and developing ideas, and showing understanding of what the examiner said). Deals with communication problems well."
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Score 2 (Acceptable achievement) - Language Control:</strong><br>
+                        "Uses an acceptable range of grammatical structures/lexis to deal with topics at this level. Shows a relatively acceptable level of grammatical accuracy and lexical precision. Errors do not impede communication."
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Score 4 (Excellent achievement) - Delivery:</strong><br>
+                        "Clearly intelligible. Uses focal stress and intonation effectively. Speaks promptly and fluently. Requires no careful listening."
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREPARATION SECTION -->
+        <section id="preparation" class="section">
+            <div class="card">
+                <div class="card-header">Topic Task Preparation</div>
+                <div class="card-body">
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Choose Your Topic Wisely</strong>
+                        <p>Select something you genuinely enjoy and can talk about for 4 minutes. Avoid the 6 conversation subject areas. Consider: hobbies, sports, music, films, books, personal experiences.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Plan Your 4 Discussion Points</strong>
+                        <p>Each point should allow you to demonstrate B1 language functions:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Point 1: Past experiences ("How I started...")</li>
+                            <li>Point 2: Present habits/routines ("What I do now...")</li>
+                            <li>Point 3: Future plans ("What I'm going to do...")</li>
+                            <li>Point 4: Opinions/comparisons ("What I think about...")</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Practice with a Partner</strong>
+                        <p>Give your Topic Form to a friend/teacher. Have them ask questions in random order. Practice:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Speaking for 30-45 seconds per answer</li>
+                            <li>Using varied tenses and vocabulary</li>
+                            <li>Asking questions back to the examiner</li>
+                            <li>Recovering from interruptions</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Prepare a Small Item</strong>
+                        <p>You can bring a photo, ticket, medal, or small object to support your topic. This can help if you get nervous - it gives you something concrete to refer to.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Conversation Task Preparation</div>
+                <div class="card-body">
+                    <h4>Portfolio Discussion:</h4>
+                    <ul class="checklist">
+                        <li>Remember what you wrote in your portfolio</li>
+                        <li>Prepare to explain why you chose each task</li>
+                        <li>Think about difficulties you faced and how you solved them</li>
+                        <li>Prepare at least 2 questions to ask the examiner about your work</li>
+                    </ul>
+
+                    <h4>Subject Area Preparation:</h4>
+                    <p>Practice discussing all 6 subject areas. For each, prepare to:</p>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Give personal experiences</li>
+                        <li>Express opinions with reasons</li>
+                        <li>Make predictions about the future</li>
+                        <li>Ask the examiner questions</li>
+                    </ul>
+
+                    <div class="rule-box">
+                        <strong>Sample Questions to Ask the Examiner:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>"Do you think...?"</li>
+                            <li>"Have you ever...?"</li>
+                            <li>"What do you think about...?"</li>
+                            <li>"Do you prefer... or...?"</li>
+                            <li>"Why do you think...?"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Listening Task Preparation</div>
+                <div class="card-body">
+                    <h4>Task 1 Preparation:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Practice listening for specific information (numbers, dates, names)</li>
+                        <li>Train yourself to write abbreviations quickly</li>
+                        <li>Practice answering in exactly 1-2 words</li>
+                        <li>Listen to short recordings about everyday topics</li>
+                    </ul>
+
+                    <h4>Task 2 Preparation:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Practice identifying gist (main topic) vs. details</li>
+                        <li>Develop note-taking skills using abbreviations</li>
+                        <li>Practice reporting facts in your own words</li>
+                        <li>Listen to short talks/lectures and summarize</li>
+                    </ul>
+
+                    <div class="success-box">
+                        <strong>Recommended Practice Resources:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Trinity sample audio files at trinitycollege.com/ISEI</li>
+                            <li>BBC Learning English - 6 Minute English</li>
+                            <li>Short documentaries or educational podcasts</li>
+                            <li>Practice with sample questions from Trinity website</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Exam Day Tips</div>
+                <div class="card-body">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>Before the Exam</h4>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Arrive early and bring your ID</li>
+                                <li>Bring your Topic Form (completed)</li>
+                                <li>Bring a pen for note-taking</li>
+                                <li>Wear comfortable clothes</li>
+                                <li>Stay calm - the examiner wants you to succeed</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>During the Speaking Tasks</h4>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Speak clearly and at a natural pace</li>
+                                <li>Don't memorize scripts - be spontaneous</li>
+                                <li>If you don't understand, ask for repetition</li>
+                                <li>Make eye contact with the examiner</li>
+                                <li>Remember to ask your mandatory questions</li>
+                            </ul>
+                        </div>
+                        <div class="timeline-item">
+                            <h4>During the Listening Tasks</h4>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Use the preparation time to read questions</li>
+                                <li>Take notes even if you're not sure - you hear it twice</li>
+                                <li>Don't leave answers blank - guess if unsure</li>
+                                <li>For Task 2, number your facts 1-6 as you hear them</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE I (B1) Interview Guide</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

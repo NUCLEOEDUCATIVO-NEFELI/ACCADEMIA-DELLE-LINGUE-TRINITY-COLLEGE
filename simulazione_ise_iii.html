@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE III (C1) - Full Exam Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6a1b9a;
+            --secondary: #455a64;
+            --accent: #ff8f00;
+            --light: #f3e5f5;
+            --dark: #263238;
+            --border: #ce93d8;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --warning: #ef6c00;
+            --info: #0277bd;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #4a148c 100%);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .timer {
+            background: white;
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: monospace;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .exam-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .section-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .section-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .section-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .section-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section-tab.completed {
+            color: var(--success);
+            border-bottom-color: var(--success);
+        }
+
+        .exam-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .exam-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instructions {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .reading-text {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            max-height: 600px;
+            overflow-y: auto;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .paragraph {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .question {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .options {
+            margin-left: 1rem;
+        }
+
+        .option {
+            display: block;
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .option:hover {
+            background: var(--light);
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            font-family: inherit;
+            font-size: 0.95rem;
+            border-radius: 4px;
+        }
+
+        select {
+            padding: 0.4rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            margin-left: 0.5rem;
+        }
+
+        .writing-area {
+            width: 100%;
+            min-height: 350px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            font-family: 'Georgia', serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+            border-radius: 4px;
+        }
+
+        .word-count {
+            text-align: right;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .word-count.warning {
+            color: var(--warning);
+            font-weight: bold;
+        }
+
+        .word-count.error {
+            color: var(--error);
+            font-weight: bold;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: #4a148c;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #37474f;
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-success:hover {
+            background: #1b5e20;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        .results {
+            background: white;
+            border: 2px solid var(--success);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            border: 4px solid var(--primary);
+        }
+
+        .answer-key {
+            background: #f5f5f5;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            text-align: left;
+            border-left: 3px solid var(--primary);
+        }
+
+        .correct-answer {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .your-answer {
+            color: var(--primary);
+        }
+
+        .wrong-answer {
+            color: var(--error);
+            text-decoration: line-through;
+        }
+
+        .infographic {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .infographic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-box {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .level-info {
+            background: var(--light);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .genre-selector {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .timer-warning {
+            animation: pulse 1s infinite;
+            color: var(--error);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .highlight-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timer {
+                margin-top: 1rem;
+            }
+            .section-tabs {
+                flex-wrap: wrap;
+            }
+            .infographic-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>Trinity ISE III (C1) Exam Simulation</h1>
+                <p style="opacity: 0.9; font-size: 0.9rem;">Reading & Writing | 2 Hours | CEFR C1 Level</p>
+            </div>
+            <div class="timer" id="timer">120:00</div>
+        </div>
+    </header>
+
+    <div class="exam-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+
+        <div class="section-tabs">
+            <button class="section-tab active" onclick="showSection('task1', this)">Task 1: Long Reading</button>
+            <button class="section-tab" onclick="showSection('task2', this)">Task 2: Multi-text</button>
+            <button class="section-tab" onclick="showSection('task3', this)">Task 3: Reading into Writing</button>
+            <button class="section-tab" onclick="showSection('task4', this)">Task 4: Extended Writing</button>
+            <button class="section-tab" onclick="showSection('results', this)" id="results-tab" style="display:none">Results</button>
+        </div>
+
+        <!-- TASK 1: LONG READING -->
+        <section id="task1" class="exam-section active">
+            <div class="card">
+                <div class="card-header">
+                    <span>Task 1 — Long Reading (20 minutes)</span>
+                    <span style="font-size: 0.9rem; font-weight: normal;">15 questions</span>
+                </div>
+                <div class="card-body">
+                    <div class="level-info">
+                        <strong>ISE III (C1) Level:</strong> Text length approximately 700 words | Complex abstract ideas, nuanced argumentation, implicit meaning
+                    </div>
+
+                    <div class="instructions">
+                        <strong>Instructions:</strong> Read the text about the nature of progress and answer questions 1-15. 
+                        For questions 1-5, choose the best title for each paragraph. For questions 6-10, choose 5 true statements. 
+                        For questions 11-15, complete the sentences with exact words from the text (maximum 3 words).
+                    </div>
+
+                    <div class="reading-text">
+                        <h3 style="text-align: center; margin-bottom: 1rem;">Rethinking Progress: Beyond Economic Growth</h3>
+                        
+                        <div class="paragraph">
+                            <strong>Paragraph 1</strong><br>
+                            For decades, the notion of progress has been inextricably linked to economic expansion. Nations have measured their success primarily through Gross Domestic Product (GDP), equating increased output with improved wellbeing. Yet this paradigm is increasingly being challenged by economists, environmentalists, and social theorists who argue that relentless growth is neither sustainable nor necessarily conducive to human flourishing. The limitations of GDP as a metric have become glaringly apparent: it counts pollution and environmental degradation as economic activity, while ignoring unpaid care work, community cohesion, and environmental stewardship.
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Paragraph 2</strong><br>
+                            The environmental consequences of growth-centric policies have reached critical proportions. Climate change, biodiversity loss, and resource depletion are not distant threats but present realities that disproportionately affect the most vulnerable populations. Proponents of "degrowth" argue that wealthy nations must deliberately scale down resource consumption to stay within planetary boundaries. This is not merely an environmental imperative but a moral one, requiring a fundamental reimagining of prosperity that decouples human wellbeing from material accumulation.
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Paragraph 3</strong><br>
+                            Critics of degrowth contend that economic contraction would inevitably lead to unemployment, social unrest, and diminished innovation. They maintain that technological advancement and green growth can reconcile environmental concerns with continued economic expansion. However, this perspective arguably underestimates the scale of transformation required and overestimates our capacity for technological fixes. Historical evidence suggests that efficiency gains are typically offset by increased consumption—a phenomenon known as the Jevons paradox—rendering purely technological solutions insufficient.
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Paragraph 4</strong><br>
+                            Alternative frameworks for measuring societal progress have gained traction in recent years. The Genuine Progress Indicator (GPI), for instance, adjusts economic output for environmental costs and social factors. Similarly, Bhutan's Gross National Happiness index prioritizes psychological wellbeing, cultural preservation, and ecological diversity over pure economic metrics. These approaches reflect a growing recognition that quality of life cannot be reduced to monetary transactions. They suggest that progress might be better understood as the enhancement of capabilities and freedoms rather than the accumulation of goods.
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Paragraph 5</strong><br>
+                            The transition to post-growth societies requires not merely policy adjustments but profound cultural shifts. It demands that we question deeply ingrained assumptions about success, status, and the good life. This is perhaps the most formidable obstacle, as the growth paradigm is embedded in our institutions, narratives, and identities. Nevertheless, the urgency of converging environmental crises may force a reckoning sooner than anticipated. The question is whether we can navigate this transformation deliberately and equitably, or whether it will be imposed upon us by ecological limits.
+                        </div>
+                    </div>
+
+                    <!-- Questions 1-5: Title Matching -->
+                    <div class="question">
+                        <div class="question-number">Questions 1-5: Title Matching</div>
+                        <p style="margin-bottom: 1rem;">Choose the best title for each paragraph from A-F below. There is one extra title.</p>
+                        
+                        <div style="background: white; padding: 1rem; margin-bottom: 1rem; border: 1px solid #ddd; border-radius: 4px;">
+                            <strong>Titles:</strong><br>
+                            A. The inadequacy of conventional economic metrics<br>
+                            B. Alternative measures of societal success<br>
+                            C. The cultural obstacles to transformation<br>
+                            D. Refuting objections to economic contraction<br>
+                            E. Environmental and ethical imperatives for change<br>
+                            F. The historical evolution of economic theory
+                        </div>
+
+                        <div class="options">
+                            <label class="option">1. Paragraph 1: 
+                                <select id="q1" onchange="saveAnswer(1, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                            <label class="option">2. Paragraph 2: 
+                                <select id="q2" onchange="saveAnswer(2, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                            <label class="option">3. Paragraph 3: 
+                                <select id="q3" onchange="saveAnswer(3, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                            <label class="option">4. Paragraph 4: 
+                                <select id="q4" onchange="saveAnswer(4, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                            <label class="option">5. Paragraph 5: 
+                                <select id="q5" onchange="saveAnswer(5, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Questions 6-10: True Statements -->
+                    <div class="question">
+                        <div class="question-number">Questions 6-10: True Statements</div>
+                        <p style="margin-bottom: 1rem;">Choose 5 true statements from A-H according to the text.</p>
+                        
+                        <div class="options">
+                            <label class="option"><input type="checkbox" id="q6a" value="A" onchange="saveCheckbox(6, 'A')"> A. GDP counts environmental damage as positive economic activity.</label>
+                            <label class="option"><input type="checkbox" id="q6b" value="B" onchange="saveCheckbox(6, 'B')"> B. Degrowth advocates argue that wealthy nations must reduce consumption.</label>
+                            <label class="option"><input type="checkbox" id="q6c" value="C" onchange="saveCheckbox(6, 'C')"> C. Critics believe green growth can solve environmental problems without economic contraction.</label>
+                            <label class="option"><input type="checkbox" id="q6d" value="D" onchange="saveCheckbox(6, 'D')"> D. The Jevons paradox demonstrates that efficiency always reduces overall consumption.</label>
+                            <label class="option"><input type="checkbox" id="q6e" value="E" onchange="saveCheckbox(6, 'E')"> E. Bhutan's Gross National Happiness prioritizes wellbeing over pure economic metrics.</label>
+                            <label class="option"><input type="checkbox" id="q6f" value="F" onchange="saveCheckbox(6, 'F')"> F. The GPI adjusts economic output for environmental and social factors.</label>
+                            <label class="option"><input type="checkbox" id="q6g" value="G" onchange="saveCheckbox(6, 'G')"> G. The growth paradigm is deeply embedded in our institutions and identities.</label>
+                            <label class="option"><input type="checkbox" id="q6h" value="H" onchange="saveCheckbox(6, 'H')"> H. The text suggests ecological limits may force transformation regardless of our preferences.</label>
+                        </div>
+                    </div>
+
+                    <!-- Questions 11-15: Sentence Completion -->
+                    <div class="question">
+                        <div class="question-number">Questions 11-15: Sentence Completion</div>
+                        <p style="margin-bottom: 1rem;">Complete the sentences with exact words from the text (maximum 3 words).</p>
+                        
+                        <div class="options">
+                            <label class="option">11. Nations have equated increased output with improved <input type="text" id="q11" class="text-input" style="width: 200px; display: inline;" onchange="saveText(11, this.value)">.</label>
+                            <label class="option">12. Environmental consequences disproportionately affect the most <input type="text" id="q12" class="text-input" style="width: 200px; display: inline;" onchange="saveText(12, this.value)"> populations.</label>
+                            <label class="option">13. The Jevons paradox describes how efficiency gains are offset by increased <input type="text" id="q13" class="text-input" style="width: 200px; display: inline;" onchange="saveText(13, this.value)">.</label>
+                            <label class="option">14. Progress might be understood as the enhancement of <input type="text" id="q14" class="text-input" style="width: 200px; display: inline;" onchange="saveText(14, this.value)">.</label>
+                            <label class="option">15. The transition requires that we question deeply ingrained assumptions about <input type="text" id="q15" class="text-input" style="width: 200px; display: inline;" onchange="saveText(15, this.value)">.</label>
+                        </div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn" onclick="showSection('task2', this)">Next: Task 2 →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 2: MULTI-TEXT READING -->
+        <section id="task2" class="exam-section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Task 2 — Multi-text Reading (20 minutes)</span>
+                    <span style="font-size: 0.9rem; font-weight: normal;">15 questions</span>
+                </div>
+                <div class="card-body">
+                    <div class="level-info">
+                        <strong>ISE III (C1) Level:</strong> 4 texts, approximately 700 words total | One text is an infographic | Abstract concepts, multiple perspectives
+                    </div>
+
+                    <div class="instructions">
+                        <strong>Instructions:</strong> Read the four texts about artificial intelligence and human autonomy and answer questions 16-30. 
+                        For questions 16-20, match descriptions to texts. For questions 21-25, choose 5 true statements. 
+                        For questions 26-30, complete the notes with exact words from the texts.
+                    </div>
+
+                    <div class="reading-text">
+                        <h3 style="text-align: center; margin-bottom: 1rem;">Artificial Intelligence and the Future of Human Autonomy</h3>
+                        
+                        <div class="paragraph">
+                            <strong>Text A — Philosophical Perspective</strong><br>
+                            The proliferation of algorithmic decision-making systems raises profound questions about human agency and moral responsibility. When an AI system recommends medical treatment, judicial sentencing, or financial investments, who bears ultimate responsibility for the outcomes? The delegation of consequential decisions to opaque systems threatens to erode the capacity for human judgment that has historically defined moral maturity. We risk becoming "moral crumple zones"—humans who absorb blame when algorithmic systems fail, while being systematically excluded from meaningful participation in decisions that affect our lives.
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Text B — Technologist's Viewpoint</strong><br>
+                            Dr. Elena Vasquez, AI Research Director: "The fear of losing autonomy to machines is largely misplaced. Throughout history, humans have developed tools that augment rather than replace human capabilities. The printing press didn't eliminate critical thinking; it democratized knowledge. Similarly, AI systems can handle routine cognitive tasks, freeing humans to engage in higher-order reasoning, creativity, and ethical deliberation. The key is designing systems that are transparent, explainable, and subject to meaningful human oversight. We must resist both uncritical adoption and reflexive technophobia."
+                        </div>
+
+                        <div class="paragraph">
+                            <strong>Text C — Sociological Analysis</strong><br>
+                            The integration of predictive algorithms into social institutions represents a fundamental shift in how societies organize knowledge and power. These systems don't merely reflect existing social patterns; they actively reshape them through feedback loops. When predictive policing algorithms direct law enforcement resources, they create the very patterns they claim to predict. This "performative" aspect of algorithmic governance means that questions of bias and fairness cannot be reduced to technical optimization. They require sustained democratic deliberation about the kind of society we wish to create.
+                        </div>
+
+                        <div class="infographic">
+                            <strong>Text D — Infographic: AI Adoption and Public Attitudes (2024)</strong>
+                            <div class="infographic-grid">
+                                <div class="info-box">
+                                    <h4>🏥 Healthcare AI</h4>
+                                    <p style="font-size: 1.5rem; color: var(--primary);">68%</p>
+                                    <p>Support diagnostic AI</p>
+                                    <p style="font-size: 0.9rem; color: var(--secondary);">But only 23% trust AI alone</p>
+                                </div>
+                                <div class="info-box">
+                                    <h4>⚖️ Criminal Justice</h4>
+                                    <p style="font-size: 1.5rem; color: var(--primary);">41%</p>
+                                    <p>Support risk assessment</p>
+                                    <p style="font-size: 0.9rem; color: var(--secondary);">54% concerned about bias</p>
+                                </div>
+                                <div class="info-box">
+                                    <h4>💼 Employment</h4>
+                                    <p style="font-size: 1.5rem; color: var(--primary);">35%</p>
+                                    <p>Fear job displacement</p>
+                                    <p style="font-size: 0.9rem; color: var(--secondary);">Highest in manufacturing</p>
+                                </div>
+                                <div class="info-box">
+                                    <h4>🎓 Education</h4>
+                                    <p style="font-size: 1.5rem; color: var(--primary);">72%</p>
+                                    <p>Support personalized learning</p>
+                                    <p style="font-size: 0.9rem; color: var(--secondary);">If teacher oversight maintained</p>
+                                </div>
+                            </div>
+                            <p style="margin-top: 1rem; font-size: 0.9rem;"><strong>Key Trend:</strong> Support for AI drops significantly when systems operate without human oversight</p>
+                        </div>
+                    </div>
+
+                    <!-- Questions 16-20: Text Matching -->
+                    <div class="question">
+                        <div class="question-number">Questions 16-20: Text Matching</div>
+                        <p style="margin-bottom: 1rem;">Which text (A, B, C, or D) does each statement refer to? You can use any letter more than once.</p>
+                        
+                        <div class="options">
+                            <label class="option">16. Presents empirical data on public attitudes toward technology: 
+                                <select id="q16" onchange="saveAnswer(16, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </label>
+                            <label class="option">17. Questions the allocation of responsibility in automated systems: 
+                                <select id="q17" onchange="saveAnswer(17, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </label>
+                            <label class="option">18. Argues that AI can enhance rather than diminish human capabilities: 
+                                <select id="q18" onchange="saveAnswer(18, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </label>
+                            <label class="option">19. Examines how algorithms actively construct social reality: 
+                                <select id="q19" onchange="saveAnswer(19, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </label>
+                            <label class="option">20. Suggests that technical solutions are insufficient for addressing algorithmic bias: 
+                                <select id="q20" onchange="saveAnswer(20, this.value)">
+                                    <option value="">Select...</option>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Questions 21-25: True Statements -->
+                    <div class="question">
+                        <div class="question-number">Questions 21-25: True Statements</div>
+                        <p style="margin-bottom: 1rem;">Choose 5 true statements from A-H according to the texts.</p>
+                        
+                        <div class="options">
+                            <label class="option"><input type="checkbox" id="q21a" value="A" onchange="saveCheckbox(21, 'A')"> A. The term "moral crumple zones" refers to humans who absorb blame for algorithmic failures.</label>
+                            <label class="option"><input type="checkbox" id="q21b" value="B" onchange="saveCheckbox(21, 'B')"> B. Dr. Vasquez compares AI to the printing press as a tool for democratization.</label>
+                            <label class="option"><input type="checkbox" id="q21c" value="C" onchange="saveCheckbox(21, 'C')"> C. Predictive algorithms merely reflect existing social patterns without changing them.</label>
+                            <label class="option"><input type="checkbox" id="q21d" value="D" onchange="saveCheckbox(21, 'D')"> D. 68% of people support AI in healthcare diagnostics.</label>
+                            <label class="option"><input type="checkbox" id="q21e" value="E" onchange="saveCheckbox(21, 'E')"> E. Support for AI decreases when systems lack human oversight.</label>
+                            <label class="option"><input type="checkbox" id="q21f" value="F" onchange="saveCheckbox(21, 'F')"> F. The highest job displacement fears are in the technology sector.</label>
+                            <label class="option"><input type="checkbox" id="q21g" value="G" onchange="saveCheckbox(21, 'G')"> G. Algorithmic systems can create the patterns they claim to predict.</label>
+                            <label class="option"><input type="checkbox" id="q21h" value="H" onchange="saveCheckbox(21, 'H')"> H. Questions of algorithmic fairness require democratic deliberation.</label>
+                        </div>
+                    </div>
+
+                    <!-- Questions 26-30: Notes Completion -->
+                    <div class="question">
+                        <div class="question-number">Questions 26-30: Notes Completion</div>
+                        <p style="margin-bottom: 1rem;">Complete the notes with exact words from the texts (maximum 3 words).</p>
+                        
+                        <div style="background: white; padding: 1rem; border: 1px solid #ddd; border-radius: 4px;">
+                            <strong>Notes: AI and Human Autonomy</strong><br><br>
+                            <strong>Philosophical Concerns:</strong><br>
+                            • Delegation to <input type="text" id="q26" class="text-input" style="width: 200px; display: inline;" onchange="saveText(26, this.value)"> threatens human judgment<br>
+                            • Risk of becoming <input type="text" id="q27" class="text-input" style="width: 200px; display: inline;" onchange="saveText(27, this.value)"><br><br>
+                            <strong>Technological Optimism:</strong><br>
+                            • AI can handle <input type="text" id="q28" class="text-input" style="width: 200px; display: inline;" onchange="saveText(28, this.value)"><br>
+                            • Frees humans for higher-order <input type="text" id="q29" class="text-input" style="width: 200px; display: inline;" onchange="saveText(29, this.value)"><br><br>
+                            <strong>Sociological Insights:</strong><br>
+                            • Algorithms have a <input type="text" id="q30" class="text-input" style="width: 200px; display: inline;" onchange="saveText(30, this.value)"> aspect
+                        </div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="showSection('task1', this)">← Back to Task 1</button>
+                        <button class="btn" onclick="showSection('task3', this)">Next: Task 3 →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 3: READING INTO WRITING -->
+        <section id="task3" class="exam-section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Task 3 — Reading into Writing (40 minutes)</span>
+                    <span style="font-size: 0.9rem; font-weight: normal;">200-230 words</span>
+                </div>
+                <div class="card-body">
+                    <div class="level-info">
+                        <strong>ISE III (C1) Level:</strong> Synthesize and evaluate information from Task 2 texts | Develop coherent argument | Use own words
+                    </div>
+
+                    <div class="instructions">
+                        <strong>Instructions:</strong> Use the information from Texts A-D in Task 2 to write a discursive essay (200-230 words) 
+                        for an academic journal about the relationship between artificial intelligence and human autonomy. 
+                        Do not copy from the texts. Use your own words as far as possible.
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Writing Task</div>
+                        <p>Write a discursive essay (200-230 words) for an academic journal about AI and human autonomy.</p>
+                        <div style="background: white; padding: 1rem; margin: 1rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                            <strong>You should:</strong><br>
+                            <div style="margin-left: 1rem; margin-top: 0.5rem;">
+                                • evaluate different perspectives on AI's impact on human autonomy<br>
+                                • analyze the tension between technological efficiency and human agency<br>
+                                • present a balanced conclusion with your own assessment
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="genre-selector">
+                        <strong>Discursive Essay Format Reminder:</strong><br>
+                        <div style="margin-left: 1rem; margin-top: 0.5rem; font-size: 0.9rem;">
+                            • Formal academic register with sophisticated vocabulary<br>
+                            • Objective presentation of multiple viewpoints<br>
+                            • Use of hedging language (appears to, suggests that, arguably)<br>
+                            • Complex sentence structures with subordinate clauses<br>
+                            • Cohesive devices showing contrast (whereas, conversely, nevertheless)<br>
+                            • Conclusion weighing evidence without being dogmatic
+                        </div>
+                    </div>
+
+                    <div style="background: #f9f9f9; padding: 1rem; margin-bottom: 1rem; border-radius: 4px;">
+                        <strong>Planning Space</strong> (No marks given for planning notes)<br>
+                        <textarea class="writing-area" style="min-height: 100px; background: white;" placeholder="Make notes here..."></textarea>
+                    </div>
+
+                    <div>
+                        <strong>Your Essay</strong>
+                        <textarea id="task3writing" class="writing-area" placeholder="Write your essay here (200-230 words)..." oninput="countWords(this, 'count3', 200, 230)"></textarea>
+                        <div class="word-count" id="wordCount3">Word count: <span id="count3">0</span> / 200-230 words</div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="showSection('task2', this)">← Back to Task 2</button>
+                        <button class="btn" onclick="showSection('task4', this)">Next: Task 4 →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 4: EXTENDED WRITING -->
+        <section id="task4" class="exam-section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Task 4 — Extended Writing (40 minutes)</span>
+                    <span style="font-size: 0.9rem; font-weight: normal;">200-230 words</span>
+                </div>
+                <div class="card-body">
+                    <div class="level-info">
+                        <strong>ISE III (C1) Level:</strong> Independent sophisticated argumentation | Abstract concepts | Nuanced evaluation
+                    </div>
+
+                    <div class="instructions">
+                        <strong>Instructions:</strong> Write your answer in 200-230 words. No reading texts are provided for this task. 
+                        Use your own ideas and knowledge.
+                    </div>
+
+                    <div class="question">
+                        <div class="question-number">Writing Task</div>
+                        <p>Write a discursive essay (200-230 words) on the following topic:</p>
+                        <div style="background: white; padding: 1rem; margin: 1rem 0; border: 1px solid #ddd; border-radius: 4px; font-weight: 500;">
+                            "In an age of information abundance, ignorance is increasingly a choice rather than a circumstance."
+                        </div>
+                        <div style="background: white; padding: 1rem; margin: 1rem 0; border: 1px solid #ddd; border-radius: 4px;">
+                            <strong>In your essay, you should:</strong><br>
+                            <div style="margin-left: 1rem; margin-top: 0.5rem;">
+                                • examine the assumption that information availability equals knowledge acquisition<br>
+                                • consider psychological, structural, and technological barriers to understanding<br>
+                                • evaluate whether responsibility for ignorance lies with individuals or systems<br>
+                                • reach a nuanced conclusion acknowledging complexity
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="genre-selector">
+                        <strong>Discursive Essay at C1 Level:</strong><br>
+                        <div style="margin-left: 1rem; margin-top: 0.5rem; font-size: 0.9rem;">
+                            • Sophisticated academic register with precise lexical choices<br>
+                            • Recognition of complexity and avoidance of simplistic positions<br>
+                            • Use of epistemic modality (may, might, could, arguably, seemingly)<br>
+                            • Reference to abstract concepts (epistemology, cognitive biases, structural inequality)<br>
+                            • Subtle argumentative moves (conceding points, refining claims)<br>
+                            • Conclusion that synthesizes rather than merely summarizes
+                        </div>
+                    </div>
+
+                    <div style="background: #f9f9f9; padding: 1rem; margin-bottom: 1rem; border-radius: 4px;">
+                        <strong>Planning Space</strong> (No marks given for planning notes)<br>
+                        <textarea class="writing-area" style="min-height: 100px; background: white;" placeholder="Make notes here..."></textarea>
+                    </div>
+
+                    <div>
+                        <strong>Your Essay</strong>
+                        <textarea id="task4writing" class="writing-area" placeholder="Write your essay here (200-230 words)..." oninput="countWords(this, 'count4', 200, 230)"></textarea>
+                        <div class="word-count" id="wordCount4">Word count: <span id="count4">0</span> / 200-230 words</div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="showSection('task3', this)">← Back to Task 3</button>
+                        <button class="btn btn-success" onclick="submitExam()">Submit Exam</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS SECTION -->
+        <section id="results" class="exam-section">
+            <div class="results">
+                <h2 style="color: var(--primary); margin-bottom: 1rem;">Exam Completed!</h2>
+                <div class="score-circle" id="finalScore">--</div>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Your Score: <span id="scoreText">Calculating...</span></p>
+                
+                <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+                    <h3 style="color: var(--primary); margin-bottom: 1rem;">Answer Key - Task 1</h3>
+                    <div class="answer-key">
+                        <p><strong>Title Matching (1 mark each):</strong></p>
+                        <p>1. <span class="correct-answer">A</span> (The inadequacy of conventional economic metrics) - Your answer: <span id="ans1" class="your-answer">--</span></p>
+                        <p>2. <span class="correct-answer">E</span> (Environmental and ethical imperatives for change) - Your answer: <span id="ans2" class="your-answer">--</span></p>
+                        <p>3. <span class="correct-answer">D</span> (Refuting objections to economic contraction) - Your answer: <span id="ans3" class="your-answer">--</span></p>
+                        <p>4. <span class="correct-answer">B</span> (Alternative measures of societal success) - Your answer: <span id="ans4" class="your-answer">--</span></p>
+                        <p>5. <span class="correct-answer">C</span> (The cultural obstacles to transformation) - Your answer: <span id="ans5" class="your-answer">--</span></p>
+                    </div>
+                    
+                    <div class="answer-key">
+                        <p><strong>True Statements (1 mark each - any 5 of):</strong> A, B, C, E, F, G, H</p>
+                        <p style="font-size: 0.9rem; color: var(--secondary);">
+                            False: D (Jevons paradox shows efficiency is offset by increased consumption, not reduced)
+                        </p>
+                    </div>
+
+                    <div class="answer-key">
+                        <p><strong>Sentence Completion (1 mark each):</strong></p>
+                        <p>11. <span class="correct-answer">wellbeing</span> - Your answer: <span id="ans11" class="your-answer">--</span></p>
+                        <p>12. <span class="correct-answer">vulnerable</span> - Your answer: <span id="ans12" class="your-answer">--</span></p>
+                        <p>13. <span class="correct-answer">consumption</span> - Your answer: <span id="ans13" class="your-answer">--</span></p>
+                        <p>14. <span class="correct-answer">capabilities and freedoms</span> - Your answer: <span id="ans14" class="your-answer">--</span></p>
+                        <p>15. <span class="correct-answer">success, status, and the good life</span> - Your answer: <span id="ans15" class="your-answer">--</span></p>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 2rem 0 1rem;">Answer Key - Task 2</h3>
+                    <div class="answer-key">
+                        <p><strong>Text Matching (1 mark each):</strong></p>
+                        <p>16. <span class="correct-answer">D</span> - Your answer: <span id="ans16" class="your-answer">--</span></p>
+                        <p>17. <span class="correct-answer">A</span> - Your answer: <span id="ans17" class="your-answer">--</span></p>
+                        <p>18. <span class="correct-answer">B</span> - Your answer: <span id="ans18" class="your-answer">--</span></p>
+                        <p>19. <span class="correct-answer">C</span> - Your answer: <span id="ans19" class="your-answer">--</span></p>
+                        <p>20. <span class="correct-answer">C</span> - Your answer: <span id="ans20" class="your-answer">--</span></p>
+                    </div>
+
+                    <div class="answer-key">
+                        <p><strong>True Statements (1 mark each - any 5 of):</strong> A, B, D, E, G, H</p>
+                        <p style="font-size: 0.9rem; color: var(--secondary);">
+                            False: C (algorithms actively reshape patterns, not merely reflect), F (highest in manufacturing, not technology)
+                        </p>
+                    </div>
+
+                    <div class="answer-key">
+                        <p><strong>Notes Completion (1 mark each):</strong></p>
+                        <p>26. <span class="correct-answer">opaque systems</span> - Your answer: <span id="ans26" class="your-answer">--</span></p>
+                        <p>27. <span class="correct-answer">moral crumple zones</span> - Your answer: <span id="ans27" class="your-answer">--</span></p>
+                        <p>28. <span class="correct-answer">routine cognitive tasks</span> - Your answer: <span id="ans28" class="your-answer">--</span></p>
+                        <p>29. <span class="correct-answer">reasoning, creativity, and ethical deliberation</span> - Your answer: <span id="ans29" class="your-answer">--</span></p>
+                        <p>30. <span class="correct-answer">performative</span> - Your answer: <span id="ans30" class="your-answer">--</span></p>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="color: var(--success);">Writing Tasks Assessment (C1 Level)</h4>
+                        <p style="margin-top: 0.5rem;"><strong>Task 3 - Reading into Writing:</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Synthesizes complex information from multiple perspectives</li>
+                            <li>Evaluates arguments rather than merely describing them</li>
+                            <li>Uses sophisticated hedging and epistemic language</li>
+                            <li>Maintains formal academic register throughout</li>
+                            <li>Develops nuanced conclusion acknowledging complexity</li>
+                            <li>Word count: 200-230 words</li>
+                        </ul>
+                        
+                        <p style="margin-top: 1rem;"><strong>Task 4 - Extended Writing:</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Engages with abstract epistemological questions</li>
+                            <li>Avoids simplistic binary positions</li>
+                            <li>Demonstrates awareness of structural vs. individual factors</li>
+                            <li>Uses precise, sophisticated vocabulary appropriately</li>
+                            <li>Constructs complex, well-developed arguments</li>
+                            <li>Word count: 200-230 words</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #fff3e0; padding: 1rem; margin-top: 1rem; border-radius: 4px; border-left: 4px solid var(--warning);">
+                        <h4 style="color: var(--warning);">ISE III Grade Boundaries (Reading)</h4>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                            <strong>Distinction:</strong> 27-30 correct | <strong>Merit:</strong> 24-26 correct | <strong>Pass:</strong> 18-23 correct | <strong>Fail:</strong> Below 18
+                        </p>
+                    </div>
+
+                    <div style="background: var(--light); padding: 1rem; margin-top: 1rem; border-radius: 4px;">
+                        <h4 style="color: var(--primary);">C1 Language Features Expected</h4>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                            <strong>Grammar:</strong> Mixed conditionals, passive voice, cleft sentences, participle clauses, subjunctive mood<br>
+                            <strong>Discourse:</strong> Notwithstanding, albeit, conversely, by the same token, inasmuch as<br>
+                            <strong>Vocabulary:</strong> Idiomatic usage, collocations, connotation awareness, field-specific terminology
+                        </p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn" onclick="location.reload()">Start New Exam</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Timer functionality
+        let timeRemaining = 7200; // 120 minutes in seconds
+        let timerInterval;
+        const answers = {};
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                const timerElement = document.getElementById('timer');
+                timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+                
+                // Warning colors
+                if (timeRemaining < 600) { // Less than 10 minutes
+                    timerElement.classList.add('timer-warning');
+                }
+                if (timeRemaining < 300) { // Less than 5 minutes
+                    timerElement.style.background = '#ffcdd2';
+                    timerElement.style.color = '#c62828';
+                }
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        // Navigation
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.exam-section').forEach(s => s.classList.remove('active'));
+            
+            if (sectionId !== 'intro') {
+                document.getElementById(sectionId).classList.add('active');
+            }
+            
+            document.querySelectorAll('.section-tab').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const totalQuestions = 30;
+            let answered = 0;
+            
+            // Check multiple choice and text inputs
+            for (let i = 1; i <= 30; i++) {
+                if (answers[i] && (Array.isArray(answers[i]) ? answers[i].length > 0 : answers[i] !== '')) {
+                    answered++;
+                }
+            }
+            
+            // Check writing tasks
+            const task3 = document.getElementById('task3writing').value;
+            const task4 = document.getElementById('task4writing').value;
+            if (task3 && task3.length > 50) answered += 2;
+            if (task4 && task4.length > 50) answered += 2;
+            
+            const percent = Math.min((answered / totalQuestions) * 100, 100);
+            document.getElementById('progress').style.width = percent + '%';
+        }
+
+        // Save answers
+        function saveAnswer(qNum, value) {
+            answers[qNum] = value;
+            updateProgress();
+        }
+
+        function saveCheckbox(qNum, value) {
+            if (!answers[qNum]) answers[qNum] = [];
+            const index = answers[qNum].indexOf(value);
+            if (index > -1) {
+                answers[qNum].splice(index, 1);
+            } else {
+                // Limit to 5 selections for questions 6 and 21
+                if (answers[qNum].length < 5) {
+                    answers[qNum].push(value);
+                } else {
+                    // Uncheck the box visually if trying to select more than 5
+                    document.getElementById(`q${qNum}${value.toLowerCase()}`).checked = false;
+                    alert('Please select only 5 statements.');
+                    return;
+                }
+            }
+            updateProgress();
+        }
+
+        function saveText(qNum, value) {
+            answers[qNum] = value;
+            updateProgress();
+        }
+
+        function countWords(textarea, counterId, min, max) {
+            const text = textarea.value.trim();
+            const words = text.split(/\s+/).filter(w => w.length > 0);
+            const count = words.length;
+            const counterElement = document.getElementById(counterId);
+            const wordCountDiv = document.getElementById('wordCount' + counterId.replace('count', ''));
+            
+            counterElement.textContent = count;
+            
+            // Visual feedback for word count
+            wordCountDiv.classList.remove('warning', 'error');
+            if (count < min || count > max) {
+                if (count > max + 30 || count < min - 30) {
+                    wordCountDiv.classList.add('error');
+                } else {
+                    wordCountDiv.classList.add('warning');
+                }
+            }
+            
+            updateProgress();
+        }
+
+        // Submit exam
+        function submitExam() {
+            clearInterval(timerInterval);
+            
+            let score = 0;
+            const correctAnswers = {
+                1: 'A', 2: 'E', 3: 'D', 4: 'B', 5: 'C',
+                16: 'D', 17: 'A', 18: 'B', 19: 'C', 20: 'C'
+            };
+            
+            // Check title matching and text matching
+            for (let i = 1; i <= 5; i++) {
+                if (answers[i] === correctAnswers[i]) score++;
+                displayAnswer(i, answers[i], correctAnswers[i]);
+            }
+            
+            for (let i = 16; i <= 20; i++) {
+                if (answers[i] === correctAnswers[i]) score++;
+                displayAnswer(i, answers[i], correctAnswers[i]);
+            }
+            
+            // Display text answers (sentence completion)
+            for (let i = 11; i <= 15; i++) {
+                displayTextAnswer(i, answers[i]);
+            }
+            
+            for (let i = 26; i <= 30; i++) {
+                displayTextAnswer(i, answers[i]);
+            }
+            
+            // Calculate percentage (out of 20 marked questions)
+            const percentage = Math.round((score / 20) * 100);
+            document.getElementById('finalScore').textContent = percentage + '%';
+            document.getElementById('scoreText').textContent = `${score}/20 objective questions correct (Writing tasks require manual assessment)`;
+            
+            document.getElementById('results-tab').style.display = 'block';
+            showSection('results', document.getElementById('results-tab'));
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function displayAnswer(qNum, userAns, correctAns) {
+            const element = document.getElementById('ans' + qNum);
+            if (element) {
+                element.textContent = userAns || '--';
+                if (userAns === correctAns) {
+                    element.classList.add('correct-answer');
+                } else if (userAns) {
+                    element.classList.add('wrong-answer');
+                }
+            }
+        }
+
+        function displayTextAnswer(qNum, userAns) {
+            const element = document.getElementById('ans' + qNum);
+            if (element) {
+                element.textContent = userAns || '--';
+            }
+        }
+
+        window.onload = startTimer;
+    </script>
+</body>
+</html>

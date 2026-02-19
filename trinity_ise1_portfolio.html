@@ -1,0 +1,1292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE I (B1) - Portfolio Complete Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1565c0;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #e3f2fd;
+            --dark: #263238;
+            --border: #bbdefb;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --b1-color: #1565c0;
+            --warning: #ef6c00;
+            --purple: #7b1fa2;
+            --purple-light: #f3e5f5;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d47a1 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .danger-box {
+            background: #ffebee;
+            border-left: 4px solid var(--error);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .success-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: var(--purple-light);
+            border-left: 4px solid var(--purple);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .task-example {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .word-count-badge {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .section-badge {
+            display: inline-block;
+            background: var(--purple);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .assessment-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .assessment-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .assessment-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .assessment-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 30px;
+            margin: 1.5rem 0;
+        }
+
+        .timeline:before {
+            content: '';
+            position: absolute;
+            left: 10px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-left: 20px;
+        }
+
+        .timeline-item:before {
+            content: '';
+            position: absolute;
+            left: -24px;
+            top: 5px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid white;
+        }
+
+        .form-template {
+            background: #fafafa;
+            border: 2px dashed var(--border);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .assessment-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+<base target="_blank">
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE I (B1) Portfolio</h1>
+            <p>Complete Guide to Portfolio Tasks, Assessment & Submission</p>
+            <div class="level-badge">20% of Total Grade</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE I Portfolio Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE I Portfolio Complete Guide</h1>
+            <p class="page-subtitle">Understanding Tasks, Requirements, Assessment & Submission</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('tasks', this)">Task Types</button>
+            <button class="nav-tab" onclick="showSection('assessment', this)">Assessment</button>
+            <button class="nav-tab" onclick="showSection('preparation', this)">Preparation</button>
+            <button class="nav-tab" onclick="showSection('submission', this)">Submission</button>
+            <button class="nav-tab" onclick="showSection('rules', this)">Rules & Penalties</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">What is the ISE I Portfolio?</div>
+                <div class="card-body">
+                    <p>The Portfolio is a collection of your <strong>best written work</strong> that you prepare before the exam. It accounts for <strong>20% of your final grade</strong> and allows you to demonstrate your writing ability without the pressure of exam conditions.</p>
+
+                    <div class="instruction-box">
+                        <strong>Key Characteristics:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Learner-led:</strong> You choose tasks from the official Trinity list</li>
+                            <li><strong>Resource-rich:</strong> Use dictionaries, grammar books, online resources, word processors</li>
+                            <li><strong>Process-oriented:</strong> Draft, edit, and revise until satisfied</li>
+                            <li><strong>Authentic:</strong> Write about real topics that interest you</li>
+                            <li><strong>Integrated:</strong> Tasks relate to the 12 ISE I subject areas</li>
+                        </ul>
+                    </div>
+
+                    <div class="assessment-grid">
+                        <div class="assessment-card">
+                            <div class="assessment-title">3 Tasks Required</div>
+                            <p>One from each section: Correspondence, Factual Writing, Creative/Descriptive Writing</p>
+                        </div>
+                        <div class="assessment-card">
+                            <div class="assessment-title">Word Count Ranges</div>
+                            <p>Section 1: 70-80 words<br>Section 2: 110-130 words<br>Section 3: 110-130 words</p>
+                        </div>
+                        <div class="assessment-card">
+                            <div class="assessment-title">Preparation Time</div>
+                            <p>Trinity recommends 6-12 weeks of preparation. Work at your own pace.</p>
+                        </div>
+                        <div class="assessment-card">
+                            <div class="assessment-title">Teacher Feedback</div>
+                            <p>One feedback form per task only. Teachers cannot correct your work directly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Portfolio vs. Controlled Written Exam</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Aspect</th>
+                                <th>Portfolio (20%)</th>
+                                <th>Controlled Written Exam (30%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Time</strong></td>
+                                <td>6-12 weeks preparation</td>
+                                <td>2 hours exam conditions</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Resources</strong></td>
+                                <td>Dictionaries, grammar books, internet, word processors allowed</td>
+                                <td>No external resources permitted</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tasks</strong></td>
+                                <td>3 tasks (one from each section)</td>
+                                <td>2 tasks (Reading into Writing + Extended Writing)</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Word Count</strong></td>
+                                <td>70-80 / 110-130 / 110-130</td>
+                                <td>Approximately 150 words each</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Feedback</strong></td>
+                                <td>Teacher feedback allowed (one per task)</td>
+                                <td>No feedback - independent work</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Drafting</strong></td>
+                                <td>Multiple drafts encouraged</td>
+                                <td>Single draft only</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">The 12 Subject Areas</div>
+                <div class="card-body">
+                    <p>All portfolio tasks relate to these subject areas. Choose tasks that interest you or you have knowledge about:</p>
+                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1rem;">
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Travel</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Money</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Fashion</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Rules & Regulations</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Health & Fitness</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Learning Languages</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Festivals</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Transport</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Special Occasions</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Entertainment</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Music</div>
+                        <div style="background: var(--light); padding: 0.75rem; border-left: 3px solid var(--accent);">Recent Personal Experiences</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK TYPES SECTION -->
+        <section id="tasks" class="section">
+            <div class="card">
+                <div class="card-header">Section 1: Correspondence <span class="word-count-badge">70-80 words</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Types:</strong> Personal letters, informal/formal emails, notes
+                    </div>
+
+                    <h4>Sample Task 1:</h4>
+                    <div class="task-example">
+                        <strong>Task:</strong> A radio station has asked your class to present a short music programme. Write a letter to the radio station saying which songs your class has chosen, why you have chosen these songs and if you think the programme will be popular. <span class="word-count-badge">70-80 words</span>
+                    </div>
+
+                    <h4>Sample Task 2:</h4>
+                    <div class="task-example">
+                        <strong>Task:</strong> Last year you travelled a long way to your school or job every day. Write an email to a friend describing how you had to travel there, saying what you did while you were travelling and giving your opinion about this experience. <span class="word-count-badge">70-80 words</span>
+                    </div>
+
+                    <h4>Sample Task 3:</h4>
+                    <div class="task-example">
+                        <strong>Task:</strong> You have recently won two cinema tickets for a new film in a competition and want to invite your friend. Write an email to a friend explaining what you had to do in the competition, what film you want to see and if you think your friend will enjoy it. <span class="word-count-badge">70-80 words</span>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Key Features for Correspondence:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Appropriate greeting (Dear..., Hi..., Hello...)</li>
+                            <li>Clear purpose stated early</li>
+                            <li>Informal register for friends (contractions, phrasal verbs)</li>
+                            <li>Formal register for official letters (no contractions, formal vocabulary)</li>
+                            <li>Appropriate closing (Best wishes, Yours sincerely, Take care)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Section 2: Factual Writing <span class="word-count-badge">110-130 words</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Types:</strong> Articles, reports, reviews
+                    </div>
+
+                    <h4>Sample Task 1 (Article):</h4>
+                    <div class="task-example">
+                        <strong>Task:</strong> You recently performed in a concert. Write an article for a music magazine describing what you did at the concert and saying what you had to do to prepare. Give your opinion of the concert. <span class="word-count-badge">110-130 words</span>
+                    </div>
+
+                    <h4>Sample Task 2 (Report):</h4>
+                    <div class="task-example">
+                        <strong>Task:</strong> Write a report for your English class about language-learning activities. Say what activities you have to do to learn a foreign language and what activities you found unhelpful. Say what activities you might do in the future to improve your language skills. <span class="word-count-badge">110-130 words</span>
+                    </div>
+
+                    <h4>Sample Task 3 (Review):</h4>
+                    <div class="task-example">
+                        <strong>Task:</strong> Write a review for a travel magazine of a city you have visited in the last year. Give your impressions of the accommodation and tourist attractions. Say how long you think visitors to the city need to spend there. <span class="word-count-badge">110-130 words</span>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Key Features for Factual Writing:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Articles:</strong> Title, engaging opening, factual information, personal opinion, direct address to reader</li>
+                            <li><strong>Reports:</strong> Clear headings, objective information, structured paragraphs, recommendations</li>
+                            <li><strong>Reviews:</strong> Description of item, balanced evaluation, specific examples, recommendation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Section 3: Creative/Descriptive Writing <span class="word-count-badge">110-130 words</span></div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Types:</strong> Stories, diary entries, descriptions
+                    </div>
+
+                    <h4>Sample Task 1 (Diary):</h4>
+                    <div class="task-example">
+                        <strong>Task:</strong> Your friend has just become a vegetarian. Write your diary explaining why your friend has become a vegetarian, giving your opinion of your friend's decision and saying if you think more people will become vegetarians in the future. <span class="word-count-badge">110-130 words</span>
+                    </div>
+
+                    <h4>Sample Task 2 (Story):</h4>
+                    <div class="task-example">
+                        <strong>Task:</strong> Write a story for a writing competition called 'An Interesting Person'. Say what you were doing when you met this person, explain why the person was interesting and say if you might meet this person again. <span class="word-count-badge">110-130 words</span>
+                    </div>
+
+                    <h4>Sample Task 3 (Description):</h4>
+                    <div class="task-example">
+                        <strong>Task:</strong> An older person showed you a photograph of a birthday party from when he/she was a teenager. Write a description for a teenage magazine saying what the young people in the photograph were wearing and giving your opinion of these clothes. Say what you prefer wearing to parties. <span class="word-count-badge">110-130 words</span>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Key Features for Creative/Descriptive Writing:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Stories:</strong> Clear narrative arc, setting, characters, dialogue (optional), resolution</li>
+                            <li><strong>Diary entries:</strong> Date, informal register, personal feelings, reflections</li>
+                            <li><strong>Descriptions:</strong> Sensory details, vivid adjectives, spatial organization, comparisons</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Word Count Rules (Critical!)</div>
+                <div class="card-body">
+                    <div class="danger-box">
+                        <strong>⚠️ WARNING:</strong> Any text over the stated maximum word length range <strong>will NOT be marked</strong> by the examiner and will affect the grade awarded.
+                    </div>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Section</th>
+                                <th>Word Count</th>
+                                <th>What Counts</th>
+                                <th>What Does NOT Count</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Section 1: Correspondence</td>
+                                <td><span class="word-count-badge">70-80 words</span></td>
+                                <td>All words in the body</td>
+                                <td>Addresses, dates, subject lines</td>
+                            </tr>
+                            <tr>
+                                <td>Section 2: Factual Writing</td>
+                                <td><span class="word-count-badge">110-130 words</span></td>
+                                <td>All words in the text</td>
+                                <td>Title, headings, quotations</td>
+                            </tr>
+                            <tr>
+                                <td>Section 3: Creative Writing</td>
+                                <td><span class="word-count-badge">110-130 words</span></td>
+                                <td>All words in the text</td>
+                                <td>Title, story starter (if provided), date (diary)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="success-box">
+                        <strong>✓ Best Practice:</strong> Always write the word count at the end of each task. Use your word processor's word count tool or count manually. Stay within the range - being under is better than being over!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ASSESSMENT SECTION -->
+        <section id="assessment" class="section">
+            <div class="card">
+                <div class="card-header">How the Portfolio is Assessed</div>
+                <div class="card-body">
+                    <p>The portfolio is assessed by a Trinity examiner using four main criteria. Understanding these criteria helps you focus your efforts:</p>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>Weight</th>
+                                <th>What Examiners Look For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Task Fulfilment</strong></td>
+                                <td>25%</td>
+                                <td>All parts of task completed, appropriate format, relevant content, word count within range</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Organisation</strong></td>
+                                <td>25%</td>
+                                <td>Clear paragraphs, logical flow, appropriate openings/closings, cohesive devices</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Language Control</strong></td>
+                                <td>25%</td>
+                                <td>Grammar accuracy, vocabulary range, B1 structures (conditionals, passives, modals), spelling</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Appropriacy</strong></td>
+                                <td>25%</td>
+                                <td>Correct register (formal/informal), style suitable for genre, effect on target reader</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Sample Assessment Grade C (Pass):</strong><br>
+                        "This is a satisfactory execution of the task, with the main points covered. The task is within the stated word length range at 136 words. The text has not been divided into paragraphs and as a consequence is quite difficult to follow. The required functions are covered (talking about events in the indefinite and recent past and giving reasons). There is a satisfactory level of accuracy and appropriacy with the grammatical, lexical and functional items of the level. However, the range is quite restricted."
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Task Weighting & Marks</div>
+                <div class="card-body">
+                    <div class="warning-box">
+                        <strong>Important:</strong> The three portfolio tasks do NOT have equal weighting. Section 1 (Correspondence) carries less weight than Sections 2 and 3.
+                    </div>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Task Section</th>
+                                <th>Word Count</th>
+                                <th>Weighting</th>
+                                <th>Maximum Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Section 1: Correspondence</td>
+                                <td>70-80 words</td>
+                                <td>20%</td>
+                                <td>4 marks</td>
+                            </tr>
+                            <tr>
+                                <td>Section 2: Factual Writing</td>
+                                <td>110-130 words</td>
+                                <td>40%</td>
+                                <td>8 marks</td>
+                            </tr>
+                            <tr>
+                                <td>Section 3: Creative/Descriptive</td>
+                                <td>110-130 words</td>
+                                <td>40%</td>
+                                <td>8 marks</td>
+                            </tr>
+                            <tr style="background: var(--light); font-weight: bold;">
+                                <td>TOTAL</td>
+                                <td>-</td>
+                                <td>100%</td>
+                                <td>20 marks</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="instruction-box">
+                        <strong>Pass Requirements:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>To pass the Portfolio component: <strong>minimum 10 out of 20 marks</strong></li>
+                            <li>Merit: <strong>14 out of 20 marks</strong></li>
+                            <li>Distinction: <strong>17 out of 20 marks</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Understanding Grades</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Grade</th>
+                                <th>Description</th>
+                                <th>Characteristics</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>A (Distinction)</strong></td>
+                                <td>Excellent</td>
+                                <td>All requirements met with sophistication, wide range of language, excellent organisation, minimal errors</td>
+                            </tr>
+                            <tr>
+                                <td><strong>B (Merit)</strong></td>
+                                <td>Very Good</td>
+                                <td>All requirements met well, good range of language, well organised, few errors</td>
+                            </tr>
+                            <tr>
+                                <td><strong>C (Pass)</strong></td>
+                                <td>Satisfactory</td>
+                                <td>Main requirements met, adequate range, satisfactory organisation, some errors but meaning clear</td>
+                            </tr>
+                            <tr>
+                                <td><strong>D (Borderline)</strong></td>
+                                <td>Weak</td>
+                                <td>Some requirements met, limited range, organisation issues, errors may impede meaning</td>
+                            </tr>
+                            <tr>
+                                <td><strong>E (Fail)</strong></td>
+                                <td>Does not meet criteria</td>
+                                <td>Major requirements missing, very limited range, poor organisation, errors impede understanding</td>
+                            </tr>
+                            <tr>
+                                <td><strong>U (Ungraded)</strong></td>
+                                <td>Academic dishonesty</td>
+                                <td>Plagiarism detected - zero marks awarded</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- PREPARATION SECTION -->
+        <section id="preparation" class="section">
+            <div class="card">
+                <div class="card-header">Step-by-Step Preparation Process</div>
+                <div class="card-body">
+                    <div class="timeline">
+                        <div class="timeline-item">
+                            <h4>Week 1-2: Task Selection</h4>
+                            <p>Review all 15 tasks (5 per section) from the official Trinity list. Choose tasks that:</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Interest you personally</li>
+                                <li>You have knowledge/experience about</li>
+                                <li>Allow you to demonstrate B1 language functions</li>
+                            </ul>
+                            <p><strong>Tip:</strong> Attempt more than 3 tasks initially so you can select your best work.</p>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h4>Week 3-4: First Drafts</h4>
+                            <p>Write first drafts of your chosen tasks. Focus on:</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Answering all parts of the prompt</li>
+                                <li>Getting your ideas down</li>
+                                <li>Rough word count (don't worry about exact limits yet)</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h4>Week 5: Teacher Feedback</h4>
+                            <p>Submit drafts to your teacher for feedback using the official form:</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>One feedback form per task ONLY</li>
+                                <li>Teacher will tick relevant comments</li>
+                                <li>No direct corrections on your text</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h4>Week 6-8: Redrafting</h4>
+                            <p>Study feedback carefully and rewrite:</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Address all points on feedback form</li>
+                                <li>Check word count carefully</li>
+                                <li>Improve grammar and vocabulary</li>
+                                <li>Refine organisation and paragraphs</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h4>Week 9-10: Final Editing</h4>
+                            <p>Polish your work to final standard:</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Proofread for spelling errors</li>
+                                <li>Check punctuation carefully</li>
+                                <li>Verify word counts (write at end of each task)</li>
+                                <li>Ensure consistent formatting</li>
+                            </ul>
+                        </div>
+
+                        <div class="timeline-item">
+                            <h4>Week 11-12: Final Preparation</h4>
+                            <p>Prepare for submission:</p>
+                            <ul style="margin-left: 1.5rem;">
+                                <li>Complete Portfolio Cover Sheet</li>
+                                <li>Attach Student Portfolio Feedback Forms</li>
+                                <li>Organize in correct order: Section 1, 2, 3</li>
+                                <li>Place in Trinity colour-coded file</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Teacher Feedback Form Explained</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Critical Rule:</strong> Teachers can only give feedback using the official <strong>Student Portfolio Feedback Form</strong>. They cannot correct your work directly or give verbal feedback beyond this form.
+                    </div>
+
+                    <div class="form-template">
+                        <strong>STUDENT PORTFOLIO FEEDBACK FORM</strong><br><br>
+                        Candidate name: _______________<br>
+                        Teacher name: _______________<br>
+                        Date: _______________<br>
+                        Task section: Section 1 / 2 / 3<br>
+                        Centre: _______________<br><br>
+                        <strong>Advice to the student (Teacher ticks relevant boxes):</strong><br><br>
+                        ☐ Parts of the task have not been completed<br>
+                        ☐ The task does not meet the requirements set<br>
+                        ☐ This work does not appear to be entirely your own<br>
+                        ☐ Your work contains some irrelevant details/repetition<br>
+                        ☐ You should add some more ideas<br>
+                        ☐ You should give more description<br>
+                        ☐ The format/style/register are not appropriate<br>
+                        ☐ The task is too long/short<br>
+                        ☐ You should check and improve paragraphing<br>
+                        ☐ You need to add an introduction/conclusion<br>
+                        ☐ You need to check grammar<br>
+                        ☐ You should use a greater range of grammatical structures<br>
+                        ☐ You should use a greater range of vocabulary<br>
+                        ☐ You should check spellings<br>
+                        ☐ You should check punctuation
+                    </div>
+
+                    <div class="success-box">
+                        <strong>How to Use Feedback:</strong>
+                        <ol style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Read all ticked comments carefully</li>
+                            <li>Prioritize task fulfilment issues first</li>
+                            <li>Check if word count is correct</li>
+                            <li>Revise grammar and vocabulary</li>
+                            <li>Rewrite the task addressing all points</li>
+                            <li>Submit final version with this form attached</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">B1 Language Functions to Demonstrate</div>
+                <div class="card-body">
+                    <p>Your portfolio should showcase these B1 language functions:</p>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Example Structures</th>
+                                <th>Example Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Talking about past events</td>
+                                <td>Past simple, Present perfect</td>
+                                <td>"I visited Paris last year" / "I've recently started..."</td>
+                            </tr>
+                            <tr>
+                                <td>Expressing future plans</td>
+                                <td>Going to, Present continuous, Would like to</td>
+                                <td>"I'm going to study medicine" / "I'd like to travel..."</td>
+                            </tr>
+                            <tr>
+                                <td>Expressing opinions</td>
+                                <td>I think..., In my opinion..., I believe...</td>
+                                <td>"In my opinion, this is the best approach..."</td>
+                            </tr>
+                            <tr>
+                                <td>Giving reasons</td>
+                                <td>Because, The reason is..., That's why...</td>
+                                <td>"I chose this because it offers more flexibility"</td>
+                            </tr>
+                            <tr>
+                                <td>Making comparisons</td>
+                                <td>More/less than, -er than, Not as...as</td>
+                                <td>"This option is more expensive than the other"</td>
+                            </tr>
+                            <tr>
+                                <td>Expressing certainty/uncertainty</td>
+                                <td>Definitely, Probably, Might, May</td>
+                                <td>"It will probably rain tomorrow" / "I might go..."</td>
+                            </tr>
+                            <tr>
+                                <td>Describing processes</td>
+                                <td>First, Then, Next, Finally</td>
+                                <td>"First, you need to prepare the ingredients"</td>
+                            </tr>
+                            <tr>
+                                <td>Making suggestions</td>
+                                <td>Why don't we..., How about..., I suggest...</td>
+                                <td>"Why don't we meet at 6pm?"</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUBMISSION SECTION -->
+        <section id="submission" class="section">
+            <div class="card">
+                <div class="card-header">Portfolio Cover Sheet</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Mandatory:</strong> Every portfolio must include the official Portfolio Cover Sheet, completed accurately.
+                    </div>
+
+                    <div class="form-template">
+                        <strong>INTEGRATED SKILLS IN ENGLISH — PORTFOLIO COVER SHEET</strong><br><br>
+                        Candidate name: _________________________<br>
+                        Candidate number: _________________________<br>
+                        Centre name and number: _________________________<br><br>
+                        <table style="width: 100%; border-collapse: collapse;" border="1">
+                            <tr>
+                                <th>Task Section</th>
+                                <th>Task Number</th>
+                                <th>Task</th>
+                                <th>Word Count</th>
+                            </tr>
+                            <tr>
+                                <td>Section 1<br>Correspondence</td>
+                                <td>___</td>
+                                <td>_________________</td>
+                                <td>___</td>
+                            </tr>
+                            <tr>
+                                <td>Section 2<br>Factual writing</td>
+                                <td>___</td>
+                                <td>_________________</td>
+                                <td>___</td>
+                            </tr>
+                            <tr>
+                                <td>Section 3<br>Creative/descriptive</td>
+                                <td>___</td>
+                                <td>_________________</td>
+                                <td>___</td>
+                            </tr>
+                        </table><br>
+                        <strong>Declaration:</strong><br>
+                        I declare to the best of my knowledge that the contents of this portfolio are the work of the candidate named above.<br><br>
+                        Signed by the candidate's teacher: _______________<br>
+                        Date: _______________<br><br>
+                        <em>This form must be attached to your portfolio tasks.</em>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Important:</strong> Tasks must be presented in section order: Section 1, then Section 2, then Section 3. Each task must have its corresponding Student Portfolio Feedback Form attached.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Submission Checklist</div>
+                <div class="card-body">
+                    <p>Before submitting your portfolio, ensure you have:</p>
+                    <ul class="checklist">
+                        <li>Three tasks only (one from each section)</li>
+                        <li>Each task from the current year's official Trinity list</li>
+                        <li>Task question number written on each piece of work</li>
+                        <li>Word count written at the end of each task</li>
+                        <li>All word counts within the specified ranges</li>
+                        <li>Portfolio Cover Sheet completed and attached</li>
+                        <li>Student Portfolio Feedback Form attached to each task</li>
+                        <li>Tasks ordered: Section 1, Section 2, Section 3</li>
+                        <li>Work placed in Trinity colour-coded file</li>
+                        <li>No drafts included (final versions only)</li>
+                        <li>No corrected versions with teacher's marks</li>
+                        <li>Teacher's signature on Cover Sheet</li>
+                        <li>Submitted at least one day before examiner's visit</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">What Happens After Submission?</div>
+                <div class="card-body">
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Examiner Assessment</strong>
+                        <p>The Trinity examiner assesses your portfolio before or during the Interview component. They use the four criteria: Task Fulfilment, Organisation, Language Control, and Appropriacy.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Interview Discussion</strong>
+                        <p>During your Speaking exam, the examiner will discuss your portfolio with you (2 minutes). Be prepared to:</p>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Explain what you wrote and why</li>
+                            <li>Discuss challenges you faced</li>
+                            <li>Talk about what you learned</li>
+                            <li>Ask the examiner a question about your work</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Results</strong>
+                        <p>You will NOT receive portfolio results on the day of the Interview. Results are sent to your centre via the Results Summary Slip, normally within 6-8 weeks of completing all components.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Quality Assurance</strong>
+                        <p>A 10% sample of portfolios is photocopied and sent to Trinity's London office for quality assurance and moderation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RULES SECTION -->
+        <section id="rules" class="section">
+            <div class="card">
+                <div class="card-header">Critical Rules & Regulations</div>
+                <div class="card-body">
+                    <div class="danger-box">
+                        <strong>⚠️ ZERO TOLERANCE:</strong> Breaking these rules will result in a <strong>U (Ungraded)</strong> grade (zero marks) for the portfolio or even disqualification.
+                    </div>
+
+                    <h4>Absolute Prohibitions:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1.5rem;">
+                        <li><strong>Plagiarism:</strong> Copying text from any source and presenting it as your own</li>
+                        <li><strong>Teacher correction:</strong> Teachers must NOT correct, add to, or remove anything from your final task</li>
+                        <li><strong>Mixed levels:</strong> Tasks must be from ISE I only - not mixed with ISE 0 or ISE II tasks</li>
+                        <li><strong>Wrong year:</strong> Tasks must be from the current examination year (January-December)</li>
+                        <li><strong>More than 3 tasks:</strong> Submit exactly 3 tasks - no more, no less</li>
+                        <li><strong>Drafts included:</strong> Do not include draft versions in final submission</li>
+                    </ul>
+
+                    <h4>Word Count Penalties:</h4>
+                    <div class="warning-box">
+                        <strong>Exceeding maximum word count:</strong> Any text over the stated maximum word length range <strong>will NOT be marked</strong> and will affect your grade. The examiner stops reading at the word limit.
+                    </div>
+
+                    <h4>Acceptable Support:</h4>
+                    <div class="success-box">
+                        <strong>✓ You CAN use:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Dictionaries and grammar reference books</li>
+                            <li>Online resources and encyclopedias</li>
+                            <li>Word processors with spell-check</li>
+                            <li>One feedback form per task from your teacher</li>
+                            <li>Quotations (clearly marked and attributed)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Consequences of Rule Breaking</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Issue</th>
+                                <th>Result</th>
+                                <th>Consequence</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Plagiarism/copying</td>
+                                <td>Grade: <strong>U (Ungraded)</strong></td>
+                                <td>Zero marks for portfolio. Photocopy sent to London office.</td>
+                            </tr>
+                            <tr>
+                                <td>Wrong tasks selected</td>
+                                <td>Grade: <strong>N (Not Assessed)</strong></td>
+                                <td>Zero marks. Portfolio photocopied and sent to London.</td>
+                            </tr>
+                            <tr>
+                                <td>Word count exceeded</td>
+                                <td>Text not marked</td>
+                                <td>Lower grade due to incomplete assessment.</td>
+                            </tr>
+                            <tr>
+                                <td>Teacher corrected work</td>
+                                <td>Academic dishonesty</td>
+                                <td>Possible disqualification.</td>
+                            </tr>
+                            <tr>
+                                <td>Mixed level tasks</td>
+                                <td>Grade: <strong>N (Not Assessed)</strong></td>
+                                <td>Zero marks for portfolio.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Best Practice Tips</div>
+                <div class="card-body">
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Start Early</strong>
+                        <p>Begin portfolio work 10-12 weeks before your exam date. Rushing leads to mistakes and lower quality.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Attempt Extra Tasks</strong>
+                        <p>Try 4-5 tasks initially, then select your best 3 for submission. This gives you options.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Use Technology</strong>
+                        <p>Use word processors with spell-check. But don't rely solely on them - proofread manually too.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Check Word Count Carefully</strong>
+                        <p>Leave 10% buffer below maximum. If limit is 130 words, aim for 115-125 to be safe.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>Keep It Your Own</strong>
+                        <p>Never copy from the internet, textbooks, or other students. Examiners can detect plagiarism.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">6</span>
+                        <strong>Prepare for Discussion</strong>
+                        <p>Remember what you wrote! The examiner will ask about your portfolio in the Speaking test.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE I (B1) Portfolio Guide</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

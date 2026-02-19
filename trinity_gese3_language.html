@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 3 - Exam Preparation (50 Exercises)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #64748b;
+            --accent: #dc2626;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --border: #e2e8f0;
+            --success: #166534;
+            --success-bg: #dcfce7;
+            --error: #991b1b;
+            --error-bg: #fee2e2;
+            --trinity-red: #e31837;
+            --trinity-blue: #003366;
+            --parchment: #fafaf9;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--trinity-blue) 0%, var(--primary) 100%);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--trinity-red);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--trinity-red);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--trinity-blue);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            font-weight: 500;
+            border-radius: 0.375rem;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--trinity-red);
+            border-bottom-color: var(--trinity-red);
+            background: #fef2f2;
+            font-weight: 600;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(to right, #f8fafc, #ffffff);
+            padding: 1.25rem 1.5rem;
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+            color: var(--trinity-blue);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #dbeafe;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .topic-card {
+            background: #f8fafc;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .topic-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .topic-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grammar-box {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .grammar-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .score-label {
+            font-weight: 600;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .score-value {
+            font-size: 1.75rem;
+            color: var(--trinity-blue);
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 9999px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--trinity-red), #ef4444);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 9999px;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--trinity-blue);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            position: relative;
+        }
+
+        .question-type-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--dark);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .listening-box {
+            background: #f0f9ff;
+            border: 2px solid #0ea5e9;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-audio {
+            background: #0ea5e9;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(14, 165, 233, 0.2);
+        }
+
+        .btn-audio:hover {
+            background: #0284c7;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 8px -1px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-audio:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .transcript-box {
+            background: white;
+            border: 1px solid #bae6fd;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #0369a1;
+            display: none;
+        }
+
+        .transcript-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--primary);
+            background: #eff6ff;
+            transform: translateX(4px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1.25rem;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            margin-bottom: 1rem;
+            border: 2px solid;
+            border-radius: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--trinity-red);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            box-shadow: 0 4px 6px -1px rgba(220, 38, 38, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #b91c1c;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 8px -1px rgba(220, 38, 38, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--secondary);
+            background: var(--light);
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 200px;
+            padding: 0.75rem 1rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin: 0 0.25rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--trinity-blue) 0%, var(--primary) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            margin: 1.5rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .final-message {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .exercise-counter {
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .vocab-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .vocab-item {
+            background: white;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .vocab-icon {
+            font-size: 1.25rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { flex: 1 1 calc(50% - 0.5rem); text-align: center; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 160px; }
+            .topic-grid { grid-template-columns: 1fr; }
+        }
+
+        .hint-text {
+            font-size: 0.875rem;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .matching-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .matching-item {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .matching-item:hover {
+            border-color: var(--primary);
+            background: #eff6ff;
+        }
+
+        .matching-item.selected {
+            background: #dbeafe;
+            border-color: var(--primary);
+        }
+
+        .matching-item.matched {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity College London</h1>
+            <p>Graded Examinations in Spoken English (GESE) - Grade 3</p>
+            <span class="badge">CEFR A2.1 Level</span>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">GESE Exams</a>
+            <span>›</span>
+            <strong>Grade 3 Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🎓 GESE Grade 3 Exam Preparation</h1>
+            <p class="page-subtitle">50 Interactive Exercises covering all syllabus requirements: Daily Routines, Past Events, Abilities, Directions & School Life</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">📋 Syllabus</button>
+            <button class="nav-tab" onclick="showSection('grammar', this)">Grammar</button>
+            <button class="nav-tab" onclick="showSection('vocabulary', this)">Vocabulary</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 50 Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">GESE Grade 3 Exam Overview</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Exam Format:</strong> 7-minute conversation with an examiner covering personal information, daily routines, past events, and abilities.
+                    </div>
+                    
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">⏰ Daily Routines</div>
+                            <p>Describe your daily activities using present simple and continuous tenses.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">📅 Past Events</div>
+                            <p>Talk about where you were and how you felt using <em>was/were</em>.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🎯 Abilities</div>
+                            <p>Express what you can and can't do (sports, hobbies, skills).</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🧭 Directions</div>
+                            <p>Give simple directions using prepositions of place and movement.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🏫 School Life</div>
+                            <p>Discuss subjects, teachers, and your school routine.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">☀️ Weather & Time</div>
+                            <p>Describe weather conditions and tell the time/dates.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Communicative Skills Required</div>
+                <div class="card-body">
+                    <ul style="margin-left: 1.5rem; line-height: 2;">
+                        <li>Exchange greetings and personal information</li>
+                        <li>Describe daily routines and times</li>
+                        <li>Give dates (ordinal numbers: 1st, 2nd, 3rd)</li>
+                        <li>Express ability and inability (can/can't)</li>
+                        <li>Give very simple directions and locations</li>
+                        <li>Describe current activities (present continuous)</li>
+                        <li>Describe states in the past (was/were)</li>
+                        <li>Ask simple questions about everyday life</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRAMMAR SECTION -->
+        <section id="grammar" class="section">
+            <div class="card">
+                <div class="card-header">Key Grammar Points</div>
+                <div class="card-body">
+                    <div class="grammar-box">
+                        <div class="grammar-title">🕐 Present Continuous (now, at the moment)</div>
+                        <p><strong>Form:</strong> am/is/are + verb-ing</p>
+                        <p><em>I am studying English. / She is playing tennis. / They are watching TV.</em></p>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">🎯 Can / Can't (Ability)</div>
+                        <p><strong>Form:</strong> can + verb (infinitive without to)</p>
+                        <p><em>I can swim. / He can't ride a bike. / Can you play the guitar?</em></p>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">⏮️ Past Simple - To Be (was/were)</div>
+                        <p><strong>Form:</strong> I/he/she/it was | You/we/they were</p>
+                        <p><em>I was at school yesterday. / They were happy. / Was it cold? Yes, it was.</em></p>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">🧭 Prepositions</div>
+                        <p><strong>Place:</strong> near, in front of, behind, opposite, between</p>
+                        <p><strong>Movement:</strong> from, to, up, down, along, across</p>
+                        <p><strong>Time:</strong> on Monday, in the morning, at 5 o'clock</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VOCABULARY SECTION -->
+        <section id="vocabulary" class="section">
+            <div class="card">
+                <div class="card-header">Essential Vocabulary by Topic</div>
+                <div class="card-body">
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: var(--primary); margin-bottom: 0.75rem;">🏫 School Subjects</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">📐</span> Maths</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔬</span> Science</div>
+                            <div class="vocab-item"><span class="vocab-icon">📚</span> English</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎨</span> Art</div>
+                            <div class="vocab-item"><span class="vocab-icon">⚽</span> PE (Physical Education)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎵</span> Music</div>
+                            <div class="vocab-item"><span class="vocab-icon">🗺️</span> Geography</div>
+                            <div class="vocab-item"><span class="vocab-icon">📜</span> History</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: var(--primary); margin-bottom: 0.75rem;">⏰ Daily Routine</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">🌅</span> get up</div>
+                            <div class="vocab-item"><span class="vocab-icon">🍳</span> have breakfast</div>
+                            <div class="vocab-item"><span class="vocab-icon">🚌</span> go to school</div>
+                            <div class="vocab-item"><span class="vocab-icon">🍽️</span> have lunch</div>
+                            <div class="vocab-item"><span class="vocab-icon">📖</span> do homework</div>
+                            <div class="vocab-item"><span class="vocab-icon">🛁</span> have a shower</div>
+                            <div class="vocab-item"><span class="vocab-icon">🛏️</span> go to bed</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: var(--primary); margin-bottom: 0.75rem;">☀️ Weather</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">☀️</span> sunny</div>
+                            <div class="vocab-item"><span class="vocab-icon">☁️</span> cloudy</div>
+                            <div class="vocab-item"><span class="vocab-icon">🌧️</span> rainy</div>
+                            <div class="vocab-item"><span class="vocab-icon">❄️</span> snowy</div>
+                            <div class="vocab-item"><span class="vocab-icon">💨</span> windy</div>
+                            <div class="vocab-item"><span class="vocab-icon">🌫️</span> foggy</div>
+                            <div class="vocab-item"><span class="vocab-icon">🌡️</span> hot/cold/warm/cool</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="color: var(--primary); margin-bottom: 0.75rem;">🗓️ Dates & Time</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">1️⃣</span> first</div>
+                            <div class="vocab-item"><span class="vocab-icon">2️⃣</span> second</div>
+                            <div class="vocab-item"><span class="vocab-icon">3️⃣</span> third</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎂</span> birthday</div>
+                            <div class="vocab-item"><span class="vocab-icon">📅</span> Monday-Sunday</div>
+                            <div class="vocab-item"><span class="vocab-icon">🕐</span> o'clock</div>
+                            <div class="vocab-item"><span class="vocab-icon">🕑</span> half past</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Exercises loaded dynamically -->
+                </div>
+
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Congratulations! Exam Practice Complete!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn-primary" onclick="restartExercises()" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                            🔄 Practice Again
+                        </button>
+                        <button class="btn-secondary" onclick="showSection('overview', document.querySelector('.nav-tab'))" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                            📋 Review Syllabus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="font-weight: 600; color: var(--trinity-blue); margin-bottom: 0.5rem;">Trinity College London GESE Grade 3 Preparation</p>
+            <p style="font-size: 0.9rem;">Based on official Trinity GESE Grade 3 Syllabus (CEFR A2.1)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Trinity GESE Grade 3 Exercise Database (50 exercises)
+        const exercises = [
+            // EXERCISES 1-10: Personal Info & Daily Routines
+            {
+                id: 1,
+                type: 'listening',
+                audioText: "Hello! My name is Sarah. I am twelve years old and I live in London. I go to school every day by bus.",
+                question: "How old is Sarah?",
+                options: ["Ten", "Twelve", "Fourteen", "Eleven"],
+                correct: "Twelve",
+                explanation: "✅ Correct! Sarah says 'I am twelve years old'.",
+                errorExplanation: "❌ Listen again. Sarah says she is twelve years old."
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: "Complete: I ______ (get) up at 7 o'clock every morning.",
+                correct: ["get"],
+                explanation: "✅ Correct! We use present simple for routines: 'I get up'."
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: "What time do you go to bed?",
+                options: ["I go to bed at half past nine.", "I am going to bed.", "I went to bed late.", "I sleep eight hours."],
+                correct: "I go to bed at half past nine.",
+                explanation: "✅ Correct! We use present simple for daily routines.",
+                errorExplanation: "❌ For routines, use present simple (I go), not continuous (I am going) or past (I went)."
+            },
+            {
+                id: 4,
+                type: 'listening',
+                audioText: "My daily routine is busy. I wake up at seven, have breakfast at half past seven, and then I go to school at eight o'clock. I have lunch at school at one o'clock.",
+                question: "What time does the speaker have breakfast?",
+                options: ["7:00", "7:30", "8:00", "1:00"],
+                correct: "7:30",
+                explanation: "✅ Correct! The speaker has breakfast at half past seven (7:30).",
+                errorExplanation: "❌ The speaker says 'half past seven' which is 7:30."
+            },
+            {
+                id: 5,
+                type: 'fill',
+                question: "I ______ (have) breakfast at 8 o'clock, and ______ I go to school.",
+                correct: ["have then", "have, then"],
+                explanation: "✅ Correct! 'Then' links routines in sequence."
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: "Which sentence is correct for a daily routine?",
+                options: ["I am having breakfast every day.", "I has breakfast every day.", "I have breakfast every day.", "I breakfast have every day."],
+                correct: "I have breakfast every day.",
+                explanation: "✅ Correct! Present simple: I/you/we/they + verb.",
+                errorExplanation: "❌ Daily routines use present simple: Subject + verb (I have)."
+            },
+            {
+                id: 7,
+                type: 'listening',
+                audioText: "On school days, I get up early. But on weekends, I get up late, usually at ten o'clock. I love sleeping in on Saturdays!",
+                question: "What time does the speaker get up on Saturdays?",
+                options: ["Early", "At seven", "At ten", "At eight"],
+                correct: "At ten",
+                explanation: "✅ Correct! On weekends/Saturdays, the speaker gets up at ten.",
+                errorExplanation: "❌ The speaker says 'on weekends... at ten o'clock'."
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: "Complete with the correct preposition: I go to school ______ Monday ______ Friday.",
+                correct: ["from to", "from, to"],
+                explanation: "✅ Correct! 'From... to...' shows the start and end."
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: "What is the correct order for a morning routine?",
+                options: ["Get up → Have breakfast → Go to school", "Go to school → Get up → Have breakfast", "Have breakfast → Get up → Go to school", "Get up → Go to school → Have breakfast"],
+                correct: "Get up → Have breakfast → Go to school",
+                explanation: "✅ Correct! Logical order: wake up, eat, then go to school.",
+                errorExplanation: "❌ Think about the logical order of your morning!"
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: "Every day I ______ (study) English at school.",
+                correct: ["study"],
+                explanation: "✅ Correct! Present simple for habitual actions."
+
+            },
+
+            // EXERCISES 11-20: Present Continuous (Current Activities)
+            {
+                id: 11,
+                type: 'choice',
+                question: "What is the correct form of 'play' in present continuous?",
+                options: ["I play tennis now.", "I am playing tennis now.", "I playing tennis now.", "I plays tennis now."],
+                correct: "I am playing tennis now.",
+                explanation: "✅ Correct! Present continuous: am/is/are + verb-ing.",
+                errorExplanation: "❌ Present continuous needs 'am/is/are' + verb-ing."
+            },
+            {
+                id: 12,
+                type: 'listening',
+                audioText: "Look at this photo! This is my family. My mum is cooking dinner, my dad is watching TV, and my little sister is playing with her toys. I am doing my homework!",
+                question: "What is the speaker's dad doing?",
+                options: ["Cooking dinner", "Watching TV", "Playing with toys", "Doing homework"],
+                correct: "Watching TV",
+                explanation: "✅ Correct! The dad is watching TV.",
+                errorExplanation: "❌ The speaker says 'my dad is watching TV'."
+            },
+            {
+                id: 13,
+                type: 'fill',
+                question: "Look! It ______ (rain) outside right now.",
+                correct: ["is raining", "'s raining"],
+                explanation: "✅ Correct! 'Right now' = present continuous."
+            },
+            {
+                id: 14,
+                type: 'choice',
+                question: "Which sentence uses present continuous correctly?",
+                options: ["She is swim in the pool.", "She is swimming in the pool.", "She swimming in the pool.", "She are swimming in the pool."],
+                correct: "She is swimming in the pool.",
+                explanation: "✅ Correct! She + is + swimming.",
+                errorExplanation: "❌ Remember: Subject + am/is/are + verb-ing."
+            },
+            {
+                id: 15,
+                type: 'listening',
+                audioText: "Be quiet please! The students are taking an exam. The teacher is writing on the board, and everyone is working hard.",
+                question: "Why should you be quiet?",
+                options: ["The teacher is writing", "The students are taking an exam", "Everyone is working", "The board is noisy"],
+                correct: "The students are taking an exam",
+                explanation: "✅ Correct! The students are taking an exam, so be quiet!",
+                errorExplanation: "❌ The audio says 'students are taking an exam' - this is why we need quiet."
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: "At the moment, I ______ (sit) at my desk and I ______ (write) an email.",
+                correct: ["am sitting am writing", "'m sitting 'm writing", "am sitting, am writing"],
+                explanation: "✅ Correct! 'At the moment' = present continuous."
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: "Choose the correct sentence:",
+                options: ["They are play football now.", "They playing football now.", "They are playing football now.", "They is playing football now."],
+                correct: "They are playing football now.",
+                explanation: "✅ Correct! They + are + playing.",
+                errorExplanation: "❌ 'They' uses 'are' in present continuous."
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: "Shh! The baby ______ (sleep). Don't make noise!",
+                correct: ["is sleeping", "'s sleeping"],
+                explanation: "✅ Correct! Current activity = present continuous."
+            },
+            {
+                id: 19,
+                type: 'listening',
+                audioText: "Hello? Hi! Where are you? I'm waiting for you at the cinema. The film is starting in five minutes! Hurry up!",
+                question: "Where is the speaker?",
+                options: ["At home", "At school", "At the cinema", "At a restaurant"],
+                correct: "At the cinema",
+                explanation: "✅ Correct! The speaker is waiting at the cinema.",
+                errorExplanation: "❌ The speaker says 'waiting for you at the cinema'."
+            },
+            {
+                id: 20,
+                type: 'choice',
+                question: "What is your brother doing right now?",
+                options: ["He plays video games.", "He is playing video games.", "He playing video games.", "He play video games."],
+                correct: "He is playing video games.",
+                explanation: "✅ Correct! 'Right now' needs present continuous.",
+                errorExplanation: "❌ 'Right now' indicates the action is happening at this moment."
+
+            },
+
+            // EXERCISES 21-30: Can/Can't (Abilities)
+            {
+                id: 21,
+                type: 'choice',
+                question: "Which sentence is correct?",
+                options: ["I can swimming.", "I can swim.", "I can to swim.", "I can swims."],
+                correct: "I can swim.",
+                explanation: "✅ Correct! Can + verb (infinitive without to).",
+                errorExplanation: "❌ After 'can', use the base form of the verb (swim), not swimming or to swim."
+            },
+            {
+                id: 22,
+                type: 'listening',
+                audioText: "I love sports! I can play tennis and I can swim very fast. But I can't play the piano, and I can't ride a horse. It's too difficult!",
+                question: "What can the speaker do?",
+                options: ["Play the piano", "Ride a horse", "Play tennis", "Ride a bike"],
+                correct: "Play tennis",
+                explanation: "✅ Correct! The speaker can play tennis and swim.",
+                errorExplanation: "❌ The speaker says 'I can play tennis'."
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: "A: ______ you speak English? B: Yes, I ______.",
+                correct: ["Can can", "Can, can"],
+                explanation: "✅ Correct! Question: Can you...? Answer: Yes, I can."
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: "Which ability is correct?",
+                options: ["She cans dance.", "She can dances.", "She can dance.", "She can to dance."],
+                correct: "She can dance.",
+                explanation: "✅ Correct! She + can + verb.",
+                errorExplanation: "❌ 'Can' doesn't change for he/she/it. Use base verb after can."
+            },
+            {
+                id: 25,
+                type: 'fill',
+                question: "I ______ (can/negative) play the guitar, but I ______ play the piano.",
+                correct: ["can't can", "cannot can"],
+                explanation: "✅ Correct! Can't = cannot (negative of can)."
+            },
+            {
+                id: 26,
+                type: 'listening',
+                audioText: "My sister is very talented. She can speak three languages: English, Spanish, and French. She can also play the violin beautifully. But she can't cook at all!",
+                question: "What can't the sister do?",
+                options: ["Speak French", "Play the violin", "Cook", "Speak Spanish"],
+                correct: "Cook",
+                explanation: "✅ Correct! The sister can't cook.",
+                errorExplanation: "❌ The audio says 'she can't cook at all'."
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: "Ask about ability: ______?",
+                options: ["You can swim?", "Can you swim?", "Do you can swim?", "Are you can swim?"],
+                correct: "Can you swim?",
+                explanation: "✅ Correct! Can + subject + verb?",
+                errorExplanation: "❌ Questions with 'can' start with Can: Can you...?"
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: "My brother ______ (can) ride a bike, but he ______ (can/negative) swim.",
+                correct: ["can can't", "can, can't", "can cannot"],
+                explanation: "✅ Correct! Can for positive, can't for negative."
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: "Complete the question: ______ play football?",
+                options: ["Can he", "He can", "Does he can", "Is he can"],
+                correct: "Can he",
+                explanation: "✅ Correct! Can + he/she/it + verb?",
+                errorExplanation: "❌ Questions start with the auxiliary verb 'Can'."
+            },
+            {
+                id: 30,
+                type: 'listening',
+                audioText: "In my free time, I can skateboard and I can rollerblade. I'm not very good at sports that need a ball, so I can't play basketball or tennis well.",
+                question: "What sport can the speaker do?",
+                options: ["Basketball", "Tennis", "Skateboard", "Football"],
+                correct: "Skateboard",
+                explanation: "✅ Correct! The speaker can skateboard and rollerblade.",
+                errorExplanation: "❌ The speaker says 'I can skateboard'."
+
+            },
+
+            // EXERCISES 31-40: Past Simple (Was/Were)
+            {
+                id: 31,
+                type: 'choice',
+                question: "Choose the correct past tense of 'to be':",
+                options: ["I was, You were", "I were, You was", "I am, You are", "I be, You be"],
+                correct: "I was, You were",
+                explanation: "✅ Correct! I/he/she/it was | You/we/they were.",
+                errorExplanation: "❌ Remember: I was, You were, He/She/It was, We/They were."
+            },
+            {
+                id: 32,
+                type: 'listening',
+                audioText: "Yesterday was my birthday. I was very happy! My parents were at home, and my friends were at my party. It was a great day!",
+                question: "Who was at the party?",
+                options: ["Only parents", "Only friends", "Parents and friends", "Nobody"],
+                correct: "Parents and friends",
+                explanation: "✅ Correct! Parents and friends were at the party.",
+                errorExplanation: "❌ The audio says 'My parents were at home, and my friends were at my party'."
+            },
+            {
+                id: 33,
+                type: 'fill',
+                question: "Yesterday I ______ (be) at school, but today I ______ (be) at home.",
+                correct: ["was am"],
+                explanation: "✅ Correct! Yesterday = past (was), Today = present (am)."
+            },
+            {
+                id: 34,
+                type: 'choice',
+                question: "Which sentence is correct?",
+                options: ["They was happy.", "They were happy.", "They are happy yesterday.", "They be happy."],
+                correct: "They were happy.",
+                explanation: "✅ Correct! They + were (past plural).",
+                errorExplanation: "❌ 'They' uses 'were' in the past tense."
+            },
+            {
+                id: 35,
+                type: 'fill',
+                question: "The weather ______ (be) terrible last weekend. It ______ (be) cold and rainy.",
+                correct: ["was was"],
+                explanation: "✅ Correct! Weather 'it' uses was (singular)."
+            },
+            {
+                id: 36,
+                type: 'listening',
+                audioText: "Last summer, I was in Spain with my family. The beaches were beautiful, and the food was delicious. We were there for two weeks.",
+                question: "Where was the speaker last summer?",
+                options: ["In Italy", "In France", "In Spain", "In England"],
+                correct: "In Spain",
+                explanation: "✅ Correct! The speaker was in Spain.",
+                errorExplanation: "❌ The speaker says 'I was in Spain'."
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: "Make the question: ______ at school yesterday?",
+                options: ["Was you", "Were you", "Did you be", "Are you"],
+                correct: "Were you",
+                explanation: "✅ Correct! Were + you + ...?",
+                errorExplanation: "❌ 'You' uses 'were' in questions: Were you...?"
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: "A: ______ she at the cinema last night? B: No, she ______.",
+                correct: ["Was wasn't", "Was, wasn't"],
+                explanation: "✅ Correct! Was she...? No, she wasn't."
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: "Complete: My friends ______ late for class yesterday.",
+                options: ["was", "were", "are", "is"],
+                correct: "were",
+                explanation: "✅ Correct! Friends (plural) + were.",
+                errorExplanation: "❌ Plural subjects (friends) use 'were'."
+            },
+            {
+                id: 40,
+                type: 'listening',
+                audioText: "When I was five years old, I was very small. My hair was blonde, and my eyes were blue. Now I am taller, and my hair is brown!",
+                question: "What colour was the speaker's hair when they were five?",
+                options: ["Brown", "Black", "Blonde", "Red"],
+                correct: "Blonde",
+                explanation: "✅ Correct! The hair was blonde when they were five.",
+                errorExplanation: "❌ The speaker says 'My hair was blonde' (when I was five)."
+
+            },
+
+            // EXERCISES 41-50: Directions, Prepositions & School
+            {
+                id: 41,
+                type: 'choice',
+                question: "Which preposition is correct? 'The bank is ______ the school and the supermarket.'",
+                options: ["between", "next", "opposite", "behind"],
+                correct: "between",
+                explanation: "✅ Correct! Between = in the middle of two things.",
+                errorExplanation: "❌ 'Between' is used with 'and' for two things."
+            },
+            {
+                id: 42,
+                type: 'listening',
+                audioText: "To get to the library, go straight along this road, then turn left at the traffic lights. The library is opposite the park, next to the big supermarket.",
+                question: "Where is the library?",
+                options: ["Next to the park", "Opposite the park", "Behind the supermarket", "At the traffic lights"],
+                correct: "Opposite the park",
+                explanation: "✅ Correct! The library is opposite the park.",
+                errorExplanation: "❌ The directions say 'opposite the park'."
+            },
+            {
+                id: 43,
+                type: 'fill',
+                question: "Go ______ this street, then turn right ______ the corner.",
+                correct: ["along at", "along, at"],
+                explanation: "✅ Correct! Go along (movement) + at the corner."
+            },
+            {
+                id: 44,
+                type: 'choice',
+                question: "Which is a correct direction?",
+                options: ["Turn left the corner.", "Go straight ahead.", "Walk to along the road.", "Turn to right."],
+                correct: "Go straight ahead.",
+                explanation: "✅ Correct! 'Go straight ahead' or 'Go along'.",
+                errorExplanation: "❌ We say 'turn left/right' (no 'to') or 'go straight ahead'."
+            },
+            {
+                id: 45,
+                type: 'fill',
+                question: "The cinema is ______ front ______ the shopping centre.",
+                correct: ["in of", "in, of"],
+                explanation: "✅ Correct! In front of (preposition of place)."
+            },
+            {
+                id: 46,
+                type: 'listening',
+                audioText: "My favourite subject is Geography because I like learning about different countries. I also enjoy Art, but I don't like Maths. It's too difficult!",
+                question: "What is the speaker's favourite subject?",
+                options: ["Art", "Maths", "Geography", "History"],
+                correct: "Geography",
+                explanation: "✅ Correct! The favourite subject is Geography.",
+                errorExplanation: "❌ The speaker says 'My favourite subject is Geography'."
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: "Which preposition of time is correct? 'I have English ______ Monday morning.'",
+                options: ["at", "in", "on", "by"],
+                correct: "on",
+                explanation: "✅ Correct! On + days (on Monday).",
+                errorExplanation: "❌ Use 'on' for days and dates, 'at' for times, 'in' for months/years."
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: "I study English ______ the morning, ______ 9 o'clock ______ Friday.",
+                correct: ["in at on", "in, at, on"],
+                explanation: "✅ Correct! In the morning, at 9, on Friday."
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: "What is the date today? (Choose the best answer)",
+                options: ["It's Monday.", "It's the 15th of March.", "It's spring.", "It's morning."],
+                correct: "It's the 15th of March.",
+                explanation: "✅ Correct! Dates use ordinal numbers: 1st, 2nd, 15th.",
+                errorExplanation: "❌ The question asks for the date (e.g., 15th March), not the day (Monday)."
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: "Complete with was/were: Yesterday ______ the third of June. My friends and I ______ at school. The weather ______ sunny and we ______ happy!",
+                correct: ["was were was were"],
+                explanation: "✅ Excellent! You've completed all 50 exercises! Well done!"
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+        let speechSynthesis = window.speechSynthesis;
+        let currentUtterance = null;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function speakText(text) {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            
+            speechSynthesis.speak(utterance);
+            currentUtterance = utterance;
+        }
+
+        function stopSpeaking() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let typeBadge = '';
+            if (ex.type === 'listening') typeBadge = '🎧 Listening';
+            else if (ex.type === 'choice') typeBadge = '📝 Multiple Choice';
+            else if (ex.type === 'fill') typeBadge = '✏️ Fill in the Blank';
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Exercise ${ex.id} - ${typeBadge}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Question ${currentExercise + 1} of ${exercises.length}</div>
+            `;
+
+            if (ex.type === 'listening') {
+                html += `
+                    <div class="listening-box">
+                        <div class="audio-controls">
+                            <button class="btn-audio" onclick="speakText('${ex.audioText.replace(/'/g, "\\'")}')" id="playBtn">
+                                ▶️ Play Audio
+                            </button>
+                            <button class="btn-secondary" onclick="document.getElementById('transcript').classList.toggle('show')">
+                                👁️ Show Transcript
+                            </button>
+                        </div>
+                        <div class="transcript-box" id="transcript">
+                            "${ex.audioText}"
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="question-box">
+                            <div class="question-type-badge">${typeBadge}</div>
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice' || ex.type === 'listening') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt.replace(/'/g, "\\'")}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                        <div class="hint-text">Press Enter or click Verify when ready</div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary" onclick="checkFill()" style="background: var(--primary);">✓ Verify Answer</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Next Question →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fdf4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fef2f2';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            stopSpeaking();
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Outstanding! You are ready for the GESE Grade 3 exam! Your English is excellent!';
+            } else if (totalScore >= 70) {
+                message = '👍 Great job! You have a good understanding of Grade 3 topics. Review the grammar section to improve further.';
+            } else if (totalScore >= 50) {
+                message = '💪 Good effort! Keep practicing daily routines, past tense (was/were), and abilities (can/can\'t).';
+            } else {
+                message = '📚 Keep studying! Focus on the basics: present simple vs. continuous, can/can\'t, and was/were. You can do it!';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        // Shuffle exercises on initial load
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+
+        // Clean up speech synthesis when leaving page
+        window.addEventListener('beforeunload', function() {
+            stopSpeaking();
+        });
+    </script>
+</body>
+</html>

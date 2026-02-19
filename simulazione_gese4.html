@@ -1,0 +1,1189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 4 - Exam Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --trinity-blue: #1e3a5f;
+            --trinity-red: #dc2626;
+            --primary: #1e3a5f;
+            --secondary: #6c757d;
+            --accent: #c9a227;
+            --success: #276749;
+            --error: #c53030;
+            --light: #f5f5f0;
+            --dark: #212529;
+            --border: #d4d4c8;
+            --bg-card: #ffffff;
+            --topic-green: #2e7d32;
+            --conversation-purple: #6a1b9a;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--trinity-blue);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--trinity-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.6rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .timer {
+            background: white;
+            color: var(--trinity-blue);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            font-family: monospace;
+        }
+
+        .exam-badge {
+            display: inline-block;
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .nav-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.85rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--trinity-blue);
+            border-bottom-color: var(--trinity-red);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--trinity-blue);
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--trinity-red);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .info-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--trinity-blue);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .topic-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--topic-green);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .conversation-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--conversation-purple);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .examiner-section {
+            background: #f8f9fa;
+            border: 2px solid var(--trinity-blue);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .examiner-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--trinity-blue);
+            color: white;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .examiner-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--trinity-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            float: left;
+            margin-right: 1rem;
+        }
+
+        .examiner-text {
+            font-size: 1.1rem;
+            color: var(--dark);
+            padding-left: 80px;
+            min-height: 60px;
+            display: flex;
+            align-items: center;
+        }
+
+        .candidate-section {
+            background: #fff8e1;
+            border: 2px solid var(--accent);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .candidate-label {
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            background: var(--accent);
+            color: #000;
+            padding: 0.25rem 1rem;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .response-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .response-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+            text-align: left;
+        }
+
+        .response-btn:hover:not(:disabled) {
+            border-color: var(--accent);
+            background: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .response-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .response-btn.correct {
+            background: #d4edda;
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .response-btn.wrong {
+            background: #f8d7da;
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        .btn-primary {
+            background: var(--trinity-blue);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #152a45;
+        }
+
+        .btn-topic {
+            background: var(--topic-green);
+        }
+
+        .btn-topic:hover {
+            background: #1b5e20;
+        }
+
+        .btn-conversation {
+            background: var(--conversation-purple);
+        }
+
+        .btn-conversation:hover {
+            background: #4a148c;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .feedback {
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: #d4edda;
+            border: 1px solid var(--success);
+            color: var(--success);
+        }
+
+        .feedback.info {
+            background: #e7f3ff;
+            border: 1px solid var(--trinity-blue);
+            color: var(--trinity-blue);
+        }
+
+        .phase-indicator {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .phase-step {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0.5rem;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .phase-step.active {
+            background: var(--trinity-blue);
+            color: white;
+        }
+
+        .phase-step.completed {
+            background: var(--success);
+            color: white;
+        }
+
+        .phase-step::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: var(--border);
+            left: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: -1;
+        }
+
+        .phase-step:last-child::after {
+            display: none;
+        }
+
+        .vocab-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .vocab-item {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 1rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .vocab-item:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .vocab-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .vocab-word {
+            font-weight: bold;
+            color: var(--trinity-blue);
+            font-size: 0.9rem;
+        }
+
+        .vocab-phonetic {
+            font-size: 0.8rem;
+            color: var(--secondary);
+            font-family: 'Courier New', monospace;
+        }
+
+        .results-container {
+            background: white;
+            border: 2px solid var(--success);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--trinity-blue);
+            border: 4px solid var(--accent);
+        }
+
+        .grade-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .grade-distinction {
+            background: #ffd700;
+            color: #000;
+        }
+
+        .grade-merit {
+            background: #c0c0c0;
+            color: #000;
+        }
+
+        .grade-pass {
+            background: #cd7f32;
+            color: white;
+        }
+
+        .grammar-box {
+            background: #f3e5f5;
+            border-left: 4px solid #7b1fa2;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .topic-form {
+            background: white;
+            border: 2px solid var(--topic-green);
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .topic-point {
+            background: #e8f5e9;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            border-left: 3px solid var(--topic-green);
+        }
+
+        .scenario-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border: 2px solid #ff9800;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+        }
+
+        .scenario-title {
+            font-size: 1.2rem;
+            color: #e65100;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+
+        .interactive-choice {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            margin: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-block;
+            width: calc(50% - 2rem);
+            vertical-align: top;
+        }
+
+        .interactive-choice:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+
+        .interactive-choice.selected {
+            border-color: var(--success);
+            background: #e8f5e9;
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timer {
+                margin-top: 1rem;
+            }
+            .nav-tabs {
+                flex-wrap: wrap;
+            }
+            .response-options {
+                grid-template-columns: 1fr;
+            }
+            .interactive-choice {
+                width: 100%;
+                margin: 0.5rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>Trinity GESE Grade 4 </h1>
+                <div class="exam-badge">CEFR A2.2/B1 • 10 Minutes</div>
+            </div>
+            <div class="timer" id="timer">10:00</div>
+        </div>
+    </header>
+
+    <div class="main-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('intro', this)">📋 About Exam</button>
+            <button class="nav-tab" onclick="showSection('topic', this)">📌 Topic</button>
+            <button class="nav-tab" onclick="showSection('phase1', this)">🎯 Topic Discussion</button>
+            <button class="nav-tab" onclick="showSection('phase2', this)">💬 Conversation</button>
+            <button class="nav-tab" onclick="showSection('results', this)" id="results-tab" style="display:none">📊 Results</button>
+        </div>
+
+        <!-- INTRO SECTION -->
+        <section id="intro" class="section active">
+            <div class="card">
+                <div class="card-header">About GESE Grade 4 Exam</div>
+                <div class="card-body">
+                    <div class="info-box">
+                        <strong>GESE Grade 4</strong> is a significant step up, introducing longer, more detailed discussions 
+                        and hypothetical situations. It corresponds to <strong>CEFR A2.2/B1 threshold</strong> level and takes 
+                        approximately <strong>10 minutes</strong>.
+                    </div>
+
+                    <h3 style="color: var(--trinity-blue); margin: 1.5rem 0 1rem;">Exam Format (4 Parts)</h3>
+                    
+                    <div class="phase-indicator">
+                        <div class="phase-step active">1</div>
+                        <div class="phase-step">2</div>
+                        <div class="phase-step">3</div>
+                        <div class="phase-step">4</div>
+                    </div>
+                    <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Topic<br>Discussion<br><small>(2.5 min)</small></div>
+                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Conversation<br>Task<br><small>(2.5 min)</small></div>
+                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Picture<br>Discussion<br><small>(2.5 min)</small></div>
+                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Listening<br>& Response<br><small>(2.5 min)</small></div>
+                    </div>
+
+                    <div class="topic-box">
+                        <strong>🎯 Key Features of Grade 4:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Longer, more detailed Topic discussion with follow-up questions</li>
+                            <li>Conversation task with unpredictable questions</li>
+                            <li>Picture comparison with speculation</li>
+                            <li>Listening task with detailed response required</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Language Functions at Grade 4:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Describing past experiences in detail (Past continuous + simple)</li>
+                            <li>Talking about hypothetical situations (If + past simple, would)</li>
+                            <li>Expressing opinions and justifying them</li>
+                            <li>Speculating about future possibilities</li>
+                            <li>Describing processes and procedures</li>
+                            <li>Making suggestions and recommendations</li>
+                        </ul>
+                    </div>
+
+                    <div class="grammar-box">
+                        <strong>Key Grammar for Grade 4:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Past continuous vs Past simple (While I was walking, I saw...)</li>
+                            <li>Second conditional (If I won the lottery, I would...)</li>
+                            <li>Present perfect with ever/never (Have you ever...?)</li>
+                            <li>Modals of deduction (must, might, can't)</li>
+                            <li>Passive voice (simple forms)</li>
+                            <li>Reported speech (said that, told me)</li>
+                        </ul>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary" onclick="startExam()">Start Exam Simulation →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TOPIC PREPARATION SECTION -->
+        <section id="topic" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: var(--topic-green);">The Topic Task - Preparation</div>
+                <div class="card-body">
+                    <div class="topic-box">
+                        <strong>Your Topic:</strong> "An Unforgettable Journey I Took"
+                        <p style="margin-top: 0.5rem;">In Grade 4, your topic should allow for detailed discussion and personal opinions. 
+                        Choose something you can talk about at length with specific examples.</p>
+                    </div>
+
+                    <div class="topic-form">
+                        <h3 style="color: var(--topic-green); margin-bottom: 1rem;">📝 Topic Form</h3>
+                        <p style="margin-bottom: 1rem;">Complete these discussion points:</p>
+                        
+                        <div class="topic-point">
+                            <strong>Point 1:</strong> Where and when I went, and who with
+                        </div>
+                        <div class="topic-point">
+                            <strong>Point 2:</strong> How I travelled and where I stayed
+                        </div>
+                        <div class="topic-point">
+                            <strong>Point 3:</strong> Something unexpected that happened during the trip
+                        </div>
+                        <div class="topic-point">
+                            <strong>Point 4:</strong> Why this journey was memorable and if I would go back
+                        </div>
+                    </div>
+
+                    <div class="conversation-box">
+                        <strong>💡 Grade 4 Tip:</strong> Be ready for follow-up questions! The examiner will ask for more details 
+                        like <em>"What would you do differently?"</em> or <em>"How did you feel when that happened?"</em>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn-primary btn-topic" onclick="moveToPhase1()">Go to Exam →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Advanced Language for Your Topic</div>
+                <div class="card-body">
+                    <div class="vocab-grid">
+                        <div class="vocab-item" onclick="speak('While I was travelling, I met')">
+                            <div class="vocab-icon">✈️</div>
+                            <div class="vocab-word">While I was...ing, I...</div>
+                            <div class="vocab-phonetic">Past continuous</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('If I could go back, I would stay longer')">
+                            <div class="vocab-icon">🤔</div>
+                            <div class="vocab-word">If I..., I would...</div>
+                            <div class="vocab-phonetic">2nd conditional</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('I have never seen anything like it')">
+                            <div class="vocab-icon">👁️</div>
+                            <div class="vocab-word">I have never...</div>
+                            <div class="vocab-phonetic">Present perfect</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('It must have been the most beautiful place')">
+                            <div class="vocab-icon">🏆</div>
+                            <div class="vocab-word">It must have been...</div>
+                            <div class="vocab-phonetic">Modals of deduction</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('I would definitely recommend visiting')">
+                            <div class="vocab-icon">👍</div>
+                            <div class="vocab-word">I would recommend...</div>
+                            <div class="vocab-phonetic">Giving advice</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('The best thing about it was')">
+                            <div class="vocab-icon">⭐</div>
+                            <div class="vocab-word">The best thing was...</div>
+                            <div class="vocab-phonetic">Evaluating</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 1: TOPIC DISCUSSION -->
+        <section id="phase1" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Part 1: Topic Discussion</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~2.5 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="topic-box">
+                        <strong>Your Topic:</strong> An Unforgettable Journey I Took
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="phase1-examiner-text">
+                            Good morning! Please tell me about your unforgettable journey. Where exactly did you go, and what made it so memorable?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="phase1-candidate" style="display: none;">
+                        <div class="candidate-label">YOU (Candidate)</div>
+                        <div class="response-options" id="phase1-options">
+                            <!-- Options inserted by JS -->
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="phase1-feedback"></div>
+
+                    <div class="navigation" id="phase1-nav" style="display: none;">
+                        <button class="btn-primary" onclick="nextPhase1Question()">Continue →</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Grammar Help: Complex Past & Conditionals</div>
+                <div class="card-body">
+                    <div class="grammar-box">
+                        <strong>Past Continuous + Past Simple:</strong><br>
+                        <em>"While I was walking in the mountains, I saw an amazing sunset"</em><br>
+                        <em>"I was travelling by train when I met my old friend"</em>
+                    </div>
+                    <div class="grammar-box" style="background: #e8f5e9; border-color: var(--topic-green);">
+                        <strong>Second Conditional (Hypothetical):</strong><br>
+                        <em>"If I had more money, I would travel around the world"</em><br>
+                        <em>"If I could go back, I would stay for a month"</em>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 2: CONVERSATION TASK -->
+        <section id="phase2" class="section">
+            <div class="card">
+                <div class="card-header">
+                    <span>Part 2: Conversation Task</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~2.5 minutes</span>
+                </div>
+                <div class="card-body">
+                    <div class="conversation-box">
+                        <strong>Conversation Focus:</strong> Technology and Daily Life
+                    </div>
+
+                    <div class="examiner-section">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text" id="phase2-examiner-text">
+                            Let's talk about technology. How do you think mobile phones have changed the way we communicate?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="phase2-candidate">
+                        <div class="candidate-label">YOU (Candidate)</div>
+                        <div class="response-options" id="phase2-options">
+                            <button class="response-btn" onclick="checkPhase2Answer(this, true)">I think mobile phones have completely changed communication because now we can contact anyone instantly, whereas before we had to wait</button>
+                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">I have a mobile phone</button>
+                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">Mobile phones are good</button>
+                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">I use my phone every day</button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="phase2-feedback"></div>
+
+                    <div class="navigation" id="phase2-nav" style="display: none;">
+                        <button class="btn-primary btn-conversation" onclick="showScenarioTask()">Next: Scenario Task →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scenario/Hypothetical Task -->
+            <div class="card" id="scenario-card" style="display: none;">
+                <div class="card-header">Hypothetical Situation</div>
+                <div class="card-body">
+                    <div class="scenario-box">
+                        <div class="scenario-title">🎭 Scenario</div>
+                        <p>Imagine you won a free trip to any country in the world for two weeks.</p>
+                    </div>
+
+                    <div class="examiner-section" id="scenario-examiner" style="display: block;">
+                        <div class="examiner-label">EXAMINER</div>
+                        <div class="examiner-avatar">👨‍🏫</div>
+                        <div class="examiner-text">
+                            If you could go anywhere in the world, where would you choose and what would you do there?
+                        </div>
+                    </div>
+
+                    <div class="candidate-section" id="scenario-candidate">
+                        <div class="candidate-label">YOUR RESPONSE (Use: If I..., I would...)</div>
+                        <div class="response-options" id="scenario-options">
+                            <button class="response-btn" onclick="checkScenarioAnswer(this, true)">If I could go anywhere, I would choose Japan because I have always wanted to see Tokyo. I would visit ancient temples and try authentic sushi</button>
+                            <button class="response-btn" onclick="checkScenarioAnswer(this, false)">I want to go to Japan</button>
+                            <button class="response-btn" onclick="checkScenarioAnswer(this, false)">Japan is a nice country</button>
+                            <button class="response-btn" onclick="checkScenarioAnswer(this, false)">I will go to Tokyo</button>
+                        </div>
+                    </div>
+
+                    <div class="feedback" id="scenario-feedback"></div>
+
+                    <div class="navigation" id="scenario-nav" style="display: none;">
+                        <button class="btn-primary" onclick="finishExam()">Finish Exam →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS SECTION -->
+        <section id="results" class="section">
+            <div class="results-container">
+                <h2 style="color: var(--trinity-blue); margin-bottom: 1rem;">🎉 Exam Completed!</h2>
+                
+                <div class="score-circle" id="final-score">--</div>
+                
+                <div class="grade-badge" id="grade-badge">Grade</div>
+                
+                <p style="font-size: 1.1rem; margin: 1rem 0;" id="result-message"></p>
+
+                <div style="text-align: left; max-width: 600px; margin: 2rem auto; background: var(--light); padding: 1.5rem; border-radius: 8px;">
+                    <h3 style="color: var(--trinity-blue); margin-bottom: 1rem;">Examiner's Feedback:</h3>
+                    <ul id="feedback-list" style="margin-left: 1.5rem; line-height: 2;">
+                        <!-- Feedback items will be inserted here -->
+                    </ul>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn-primary" onclick="location.reload()">Try Again</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Timer functionality
+        let timeRemaining = 600; // 10 minutes in seconds
+        let timerInterval;
+        let currentPhase = 1;
+        let phase1Question = 0;
+        let score = 0;
+
+        // Phase 1 Questions - Detailed Topic Discussion
+        const phase1Questions = [
+            {
+                examiner: "Good morning! Please tell me about your unforgettable journey. Where exactly did you go, and what made it so memorable?",
+                options: [
+                    "I went to Peru two years ago with my family. It was unforgettable because I saw Machu Picchu, which I had always dreamed of visiting",
+                    "I like travelling very much",
+                    "I went on holiday last year",
+                    "Peru is a nice country"
+                ],
+                correct: "I went to Peru two years ago with my family. It was unforgettable because I saw Machu Picchu, which I had always dreamed of visiting",
+                feedback: "Excellent! You gave specific details (when, where, who with) and explained why it was special",
+                points: 20
+            },
+            {
+                examiner: "Tell me more about getting there. How did you travel, and was the journey comfortable?",
+                options: [
+                    "We flew to Lima, which took about twelve hours. While we were flying, I watched three films! It was quite comfortable but I couldn't sleep well",
+                    "We went by plane",
+                    "The journey was long",
+                    "I like flying"
+                ],
+                correct: "We flew to Lima, which took about twelve hours. While we were flying, I watched three films! It was quite comfortable but I couldn't sleep well",
+                feedback: "Great use of past continuous! You described the journey in detail with specific information",
+                points: 20
+            },
+            {
+                examiner: "Did anything unexpected happen during your trip? How did you deal with it?",
+                options: [
+                    "Actually, yes! While we were hiking in the mountains, it suddenly started snowing, which was unusual. We had to wait in a small café until it stopped, but it turned out to be a lovely experience",
+                    "Nothing happened",
+                    "It snowed",
+                    "We waited in a café"
+                ],
+                correct: "Actually, yes! While we were hiking in the mountains, it suddenly started snowing, which was unusual. We had to wait in a small café until it stopped, but it turned out to be a lovely experience",
+                feedback: "Perfect! You used past continuous (while we were hiking) and explained the situation with detail",
+                points: 20
+            },
+            {
+                examiner: "If you could go back to Peru, what would you do differently?",
+                options: [
+                    "If I could go back, I would definitely stay longer, maybe three weeks instead of two. I would also visit the Amazon rainforest, which we didn't have time for",
+                    "I want to go back",
+                    "I would stay longer",
+                    "The Amazon is nice"
+                ],
+                correct: "If I could go back, I would definitely stay longer, maybe three weeks instead of two. I would also visit the Amazon rainforest, which we didn't have time for",
+                feedback: "Excellent second conditional! You gave specific details about what you would do differently",
+                points: 20
+            },
+            {
+                examiner: "Have you ever had a similar experience in another country? Would you recommend Peru to others?",
+                options: [
+                    "I have never seen anything quite like Machu Picchu before. I would absolutely recommend Peru, especially to people who love history and nature. It must be one of the most beautiful countries in the world",
+                    "Yes, I recommend it",
+                    "Peru is beautiful",
+                    "I have been to other countries"
+                ],
+                correct: "I have never seen anything quite like Machu Picchu before. I would absolutely recommend Peru, especially to people who love history and nature. It must be one of the most beautiful countries in the world",
+                feedback: "Excellent! You used present perfect (have never seen), would recommend, and modal of deduction (must be)",
+                points: 20
+            }
+        ];
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                const minutes = Math.floor(timeRemaining / 60);
+                const seconds = timeRemaining % 60;
+                document.getElementById('timer').textContent = 
+                    `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    finishExam();
+                }
+            }, 1000);
+        }
+
+        function showSection(sectionId, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(sectionId).classList.add('active');
+            
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const totalQuestions = phase1Questions.length + 2; // +2 for conversation tasks
+            let answered = phase1Question + (currentPhase > 1 ? 2 : 0);
+            const percent = Math.min((answered / totalQuestions) * 100, 100);
+            document.getElementById('progress').style.width = percent + '%';
+        }
+
+        function startExam() {
+            startTimer();
+            showSection('topic', document.querySelectorAll('.nav-tab')[1]);
+        }
+
+        function moveToPhase1() {
+            currentPhase = 1;
+            showSection('phase1', document.querySelectorAll('.nav-tab')[2]);
+            loadPhase1Question();
+        }
+
+        // PHASE 1 FUNCTIONS
+        function loadPhase1Question() {
+            if (phase1Question >= phase1Questions.length) {
+                moveToPhase2();
+                return;
+            }
+
+            const q = phase1Questions[phase1Question];
+            document.getElementById('phase1-examiner-text').textContent = q.examiner;
+            
+            const optionsDiv = document.getElementById('phase1-options');
+            optionsDiv.innerHTML = '';
+            
+            const shuffled = [...q.options].sort(() => Math.random() - 0.5);
+            shuffled.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'response-btn';
+                btn.textContent = opt;
+                btn.onclick = () => checkPhase1Answer(btn, opt === q.correct, q);
+                optionsDiv.appendChild(btn);
+            });
+
+            document.getElementById('phase1-candidate').style.display = 'block';
+            document.getElementById('phase1-nav').style.display = 'none';
+            document.getElementById('phase1-feedback').className = 'feedback';
+            document.getElementById('phase1-feedback').style.display = 'none';
+        }
+
+        function checkPhase1Answer(btn, isCorrect, question) {
+            document.querySelectorAll('#phase1-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b.textContent === question.correct) {
+                    b.classList.add('correct');
+                } else if (b === btn && !isCorrect) {
+                    b.classList.add('wrong');
+                }
+            });
+
+            const feedback = document.getElementById('phase1-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? '✅ ' + question.feedback : '❌ The correct answer is: "' + question.correct + '"<br>' + question.feedback;
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += question.points;
+            document.getElementById('phase1-nav').style.display = 'flex';
+        }
+
+        function nextPhase1Question() {
+            phase1Question++;
+            loadPhase1Question();
+        }
+
+        // PHASE 2 FUNCTIONS
+        function moveToPhase2() {
+            currentPhase = 2;
+            showSection('phase2', document.querySelectorAll('.nav-tab')[3]);
+        }
+
+        function checkPhase2Answer(btn, isCorrect) {
+            document.querySelectorAll('#phase2-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById('phase2-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ Excellent! You gave a detailed opinion with specific reasons and contrast (whereas).' : 
+                '❌ Try to give a detailed opinion with specific examples and reasons. Use linking words like "whereas" or "however".';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 25;
+            document.getElementById('phase2-nav').style.display = 'flex';
+        }
+
+        function showScenarioTask() {
+            document.getElementById('scenario-card').style.display = 'block';
+            document.getElementById('scenario-card').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function checkScenarioAnswer(btn, isCorrect) {
+            document.querySelectorAll('#scenario-options .response-btn').forEach(b => {
+                b.disabled = true;
+                if (b === btn) {
+                    b.classList.add(isCorrect ? 'correct' : 'wrong');
+                }
+            });
+
+            const feedback = document.getElementById('scenario-feedback');
+            feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
+            feedback.innerHTML = isCorrect ? 
+                '✅ Perfect second conditional! You used "If I could..., I would..." with specific details and reasons.' : 
+                '❌ Remember to use the second conditional: "If I could..., I would..." (not "I will" or just "I want")';
+            feedback.style.display = 'block';
+
+            if (isCorrect) score += 25;
+            document.getElementById('scenario-nav').style.display = 'flex';
+        }
+
+        function finishExam() {
+            clearInterval(timerInterval);
+            document.getElementById('results-tab').style.display = 'block';
+            showSection('results', document.getElementById('results-tab'));
+
+            const maxScore = 150;
+            const percentage = Math.round((score / maxScore) * 100);
+            
+            document.getElementById('final-score').textContent = percentage + '%';
+
+            const badge = document.getElementById('grade-badge');
+            const message = document.getElementById('result-message');
+            
+            if (percentage >= 80) {
+                badge.className = 'grade-badge grade-distinction';
+                badge.textContent = 'DISTINCTION 🏆';
+                message.textContent = 'Outstanding! You used complex grammatical structures with fluency and accuracy!';
+            } else if (percentage >= 60) {
+                badge.className = 'grade-badge grade-merit';
+                badge.textContent = 'MERIT 🥈';
+                message.textContent = 'Very good! You communicated effectively with good range of language.';
+            } else if (percentage >= 40) {
+                badge.className = 'grade-badge grade-pass';
+                badge.textContent = 'PASS ✅';
+                message.textContent = 'Good effort! You showed ability to handle more complex interactions.';
+            } else {
+                badge.style.background = '#6c757d';
+                badge.style.color = 'white';
+                badge.textContent = 'NOT PASSED';
+                message.textContent = 'Keep practicing! Focus on past continuous and second conditional structures.';
+            }
+
+            const feedbackList = document.getElementById('feedback-list');
+            feedbackList.innerHTML = `
+                <li>${score >= 20 ? '✅' : '⚠️'} Detailed topic presentation with specific examples</li>
+                <li>${score >= 40 ? '✅' : '⚠️'} Using <strong>past continuous</strong> (While I was...ing)</li>
+                <li>${score >= 60 ? '✅' : '⚠️'} <strong>Past simple</strong> vs <strong>past continuous</strong> contrast</li>
+                <li>${score >= 80 ? '✅' : '⚠️'} <strong>Second conditional</strong> (If I..., I would...)</li>
+                <li>${score >= 100 ? '✅' : '⚠️'} <strong>Present perfect</strong> with ever/never</li>
+                <li>${score >= 120 ? '✅' : '⚠️'} Modal verbs of deduction (<em>must be, can't be</em>)</li>
+                <li>${score >= 135 ? '✅' : '⚠️'} Giving recommendations with reasons</li>
+                <li>${score >= 145 ? '✅' : '⚠️'} Using linking words (<em>whereas, although, however</em>)</li>
+            `;
+        }
+
+        function speak(text) {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+                const utterance = new SpeechSynthesisUtterance(text);
+                utterance.lang = 'en-GB';
+                utterance.rate = 0.8;
+                window.speechSynthesis.speak(utterance);
+            }
+        }
+
+        window.onload = () => {
+            updateProgress();
+        };
+    </script>
+</body>
+</html>

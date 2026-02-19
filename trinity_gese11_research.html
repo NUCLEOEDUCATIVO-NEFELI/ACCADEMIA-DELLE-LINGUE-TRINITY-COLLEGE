@@ -1,0 +1,1821 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity College London - Grade 11 (C1.2) - Advanced Preparation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a237e;
+            --secondary: #455a64;
+            --accent: #b71c1c;
+            --light: #eceff1;
+            --dark: #263238;
+            --border: #cfd8dc;
+            --success: #1b5e20;
+            --success-bg: #c8e6c9;
+            --error: #b71c1c;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --c1-color: #6a1b9a;
+            --warning: #f57f17;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--c1-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--c1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #0d1642;
+        }
+
+        .btn-check {
+            background: var(--c1-color);
+            color: white;
+        }
+
+        .btn-check:hover {
+            background: #4a148c;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #d4a574;
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--c1-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .essay-section {
+            background: white;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+        }
+
+        .essay-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+            padding-bottom: 0.5rem;
+        }
+
+        .essay-step {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+            border-left: 3px solid var(--c1-color);
+        }
+
+        .essay-step h4 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin: 2rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .subject-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .subject-item {
+            background: var(--light);
+            padding: 0.75rem;
+            border-left: 3px solid var(--accent);
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+            .subject-list { grid-template-columns: 1fr; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity College London - Grade 11 (C1.2)</h1>
+            <p>Advanced Language: Nuanced Argumentation, Inference, and Complex Discourse</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity GESE</a>
+            <span>›</span>
+            <strong>Grade 11 (C1.2) - Advanced Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Grade 11 Advanced Grammar and Discourse</h1>
+            <p class="page-subtitle">Justifying Arguments, Inferring, Expressing Caution and Empathy</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('grammar', this)">Advanced Grammar</button>
+            <button class="nav-tab" onclick="showSection('essay', this)">Essay Writing</button>
+            <button class="nav-tab" onclick="showSection('video', this)">Video Prep</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">70 Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">Grade 11 Overview (C1.2 Level)</div>
+                <div class="card-body">
+                    <p>Grade 11 of the Trinity College London GESE exam corresponds to level C1.2 (advanced) of the CEFR. At this level, candidates demonstrate sophisticated mastery of complex grammatical structures, nuanced language use, and the ability to engage in abstract discourse.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Key Features of Grade 11:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Duration:</strong> 25 minutes (fully candidate-led discussion)</li>
+                            <li><strong>Topic Presentation:</strong> Formal presentation on a discursive topic (5 minutes)</li>
+                            <li><strong>Topic Discussion:</strong> Challenging ideas and defending arguments (5 minutes)</li>
+                            <li><strong>Interactive Task:</strong> Controlling the interaction through questioning (5 minutes)</li>
+                            <li><strong>Listening Task:</strong> Inferring meaning and predicting outcomes (3 minutes)</li>
+                            <li><strong>Conversation:</strong> Two subject areas from selected lists (6 minutes)</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Exam Tip:</strong> At Grade 11, you must demonstrate the ability to justify arguments, infer meaning, express caution, show empathy, challenge opinions, evaluate standpoints, and express reservations using sophisticated linguistic devices.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Subject Areas for Conversation</div>
+                <div class="card-body">
+                    <p>Candidates must prepare ONE of the following lists (List A or List B). The examiner will select two subject areas from your chosen list.</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem;">
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 1rem;">List A</h4>
+                            <div class="subject-list" style="display: block;">
+                                <div class="subject-item">Independence</div>
+                                <div class="subject-item">Ambitions</div>
+                                <div class="subject-item">Stereotypes</div>
+                                <div class="subject-item">Role models</div>
+                                <div class="subject-item">Competitiveness</div>
+                                <div class="subject-item">Young people's rights</div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 style="color: var(--primary); margin-bottom: 1rem;">List B</h4>
+                            <div class="subject-list" style="display: block;">
+                                <div class="subject-item">The media</div>
+                                <div class="subject-item">Advertising</div>
+                                <div class="subject-item">Lifestyles</div>
+                                <div class="subject-item">The arts</div>
+                                <div class="subject-item">Rights of the individual</div>
+                                <div class="subject-item">Economic issues</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ADVANCED GRAMMAR SECTION -->
+        <section id="grammar" class="section">
+            <div class="card">
+                <div class="card-header">Advanced Language Functions</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Grade 11 Language Functions:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Justifying an argument with sophisticated connectors</li>
+                            <li>Inferring and drawing conclusions tentatively</li>
+                            <li>Expressing caution and hedging</li>
+                            <li>Expressing empathy and sympathy</li>
+                            <li>Challenging arguments and opinions respectfully</li>
+                            <li>Evaluating different standpoints critically</li>
+                            <li>Expressing reservations and qualifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Complex Passive Structures with Modals</div>
+                <div class="card-body">
+                    <p>At C1.2 level, candidates must demonstrate mastery of complex passive constructions combined with modal verbs to express degrees of certainty, obligation, and speculation.</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Structure</th>
+                                <th>Function</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>should/must + have been + pp</td>
+                                <td>Deduction about past</td>
+                                <td>It <strong>must have been destroyed</strong> by the fire.</td>
+                            </tr>
+                            <tr>
+                                <td>could/might + have been + pp</td>
+                                <td>Possibility in past</td>
+                                <td>It <strong>could have been prevented</strong> with better planning.</td>
+                            </tr>
+                            <tr>
+                                <td>ought to + have been + pp</td>
+                                <td>Unfulfilled obligation</td>
+                                <td>He <strong>ought to have been informed</strong> earlier.</td>
+                            </tr>
+                            <tr>
+                                <td>needn't + have been + pp</td>
+                                <td>Unnecessary past action</td>
+                                <td>It <strong>needn't have been mentioned</strong> at the meeting.</td>
+                            </tr>
+                            <tr>
+                                <td>can't/couldn't + have been + pp</td>
+                                <td>Negative deduction</td>
+                                <td>It <strong>can't have been written</strong> by him.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Advanced Examples:</strong><br>
+                        • The report <strong>should have been submitted</strong> before the deadline, but the system failed.<br>
+                        • These measures <strong>might have been implemented</strong> earlier had the risks been recognized.<br>
+                        • The data <strong>is believed to have been manipulated</strong> for political purposes.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Hedging and Cautious Language</div>
+                <div class="card-body">
+                    <p>Expressing caution is essential at C1.2. Hedging allows you to soften statements, express degrees of certainty, and acknowledge limitations in your arguments.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Modal Verbs for Hedging:</strong><br>
+                        • <strong>may/might/could</strong> + infinitive (possibility)<br>
+                        • <strong>seems/appears to</strong> + infinitive (tentative observation)<br>
+                        • <strong>tends to</strong> + infinitive (general tendency)<br>
+                        • <strong>is likely/unlikely to</strong> + infinitive (probability)
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Examples of Hedging:</strong><br>
+                        • This <strong>might suggest that</strong> economic factors play a significant role.<br>
+                        • It <strong>could be argued that</strong> traditional methods remain effective.<br>
+                        • The evidence <strong>tends to indicate</strong> a correlation between the variables.<br>
+                        • This <strong>appears to be</strong> the most viable solution <strong>in most cases</strong>.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Advanced Hedging Phrases:</strong><br>
+                        • To a certain extent... / Up to a point...<br>
+                        • With certain reservations...<br>
+                        • Subject to verification...<br>
+                        • Barring unforeseen circumstances...<br>
+                        • All things being equal...
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Verbs Followed by Gerund and/or Infinitive</div>
+                <div class="card-body">
+                    <p>Grade 11 requires precise control of verb patterns, particularly verbs where meaning changes depending on whether they are followed by gerund or infinitive.</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Verb</th>
+                                <th>+ Gerund (-ing)</th>
+                                <th>+ Infinitive (to)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>forget</td>
+                                <td>Forget <strong>posting</strong> the letter. (forget that you did it)</td>
+                                <td>Forget <strong>to post</strong> the letter. (fail to do it)</td>
+                            </tr>
+                            <tr>
+                                <td>remember</td>
+                                <td>Remember <strong>meeting</strong> him. (past memory)</td>
+                                <td>Remember <strong>to meet</strong> him. (future obligation)</td>
+                            </tr>
+                            <tr>
+                                <td>stop</td>
+                                <td>Stop <strong>smoking</strong>. (quit an activity)</td>
+                                <td>Stop <strong>to smoke</strong>. (pause in order to smoke)</td>
+                            </tr>
+                            <tr>
+                                <td>regret</td>
+                                <td>Regret <strong>telling</strong> him. (past action)</td>
+                                <td>Regret <strong>to tell</strong> you... (formal bad news)</td>
+                            </tr>
+                            <tr>
+                                <td>try</td>
+                                <td>Try <strong>eating</strong> less. (experiment)</td>
+                                <td>Try <strong>to eat</strong> less. (make an effort)</td>
+                            </tr>
+                            <tr>
+                                <td>mean</td>
+                                <td>Doing that <strong>means</strong> leaving early. (involves)</td>
+                                <td>I <strong>mean to leave</strong> early. (intend)</td>
+                            </tr>
+                            <tr>
+                                <td>go on</td>
+                                <td>Go on <strong>talking</strong>. (continue)</td>
+                                <td>Go on <strong>to talk</strong> about... (change subject)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Advanced Reporting and Discourse Markers</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Signposting Expressions for Formal Discourse:</strong>
+                    </div>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Expressions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Opening</td>
+                                <td>I'd like to begin with..., To start with..., First and foremost...</td>
+                            </tr>
+                            <tr>
+                                <td>Adding points</td>
+                                <td>Furthermore, Moreover, In addition, What is more...</td>
+                            </tr>
+                            <tr>
+                                <td>Contrasting</td>
+                                <td>Conversely, On the contrary, Having said that, That being said...</td>
+                            </tr>
+                            <tr>
+                                <td>Conceding</td>
+                                <td>Admittedly, While it is true that..., I accept that..., Notwithstanding...</td>
+                            </tr>
+                            <tr>
+                                <td>Emphasizing</td>
+                                <td>It is worth noting that..., Significantly, Crucially...</td>
+                            </tr>
+                            <tr>
+                                <td>Concluding</td>
+                                <td>To conclude, In light of the above, Taking all factors into account...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Vague and Imprecise Language (C1.2 Feature):</strong><br>
+                        • <strong>Sort of</strong> / <strong>Kind of</strong> (softening)<br>
+                        • <strong>And so on</strong> / <strong>And the like</strong> (etc.)<br>
+                        • <strong>More or less</strong> / <strong>Give or take</strong> (approximately)<br>
+                        • <strong>Things like that</strong> / <strong>That sort of thing</strong> (generalization)<br>
+                        • <strong>A bit</strong> / <strong>Somewhat</strong> (slightly)
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Wish and Hope - Correct Patterns</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Wish + Past Perfect:</strong> Regrets about the past<br>
+                        • I wish I <strong>had studied</strong> harder. (but I didn't)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Wish + Past Simple:</strong> Present/future desires (unreal)<br>
+                        • I wish I <strong>knew</strong> the answer. (but I don't)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Hope + Present/Past:</strong> Real possibilities<br>
+                        • I hope you <strong>feel</strong> better soon.<br>
+                        • I hope you <strong>managed</strong> to finish it.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Common Error:</strong> Do not use "wish" + "would" for your own actions when you have control:<br>
+                        ❌ I wish I would study more.<br>
+                        ✅ I wish I studied more. / I wish I had studied more.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ESSAY WRITING SECTION -->
+        <section id="essay" class="section">
+            <div class="essay-section">
+                <h2 class="essay-title">How to Write the Grade 11 Discursive Essay</h2>
+                
+                <div class="instruction-box">
+                    <strong>Requirements:</strong> At Grade 11, you must prepare a <strong>Formal Topic Presentation</strong> - a discursive essay (approximately 400-500 words) that presents arguments, evaluates different standpoints, and reaches a balanced conclusion. You must provide a written copy to the examiner.
+                </div>
+
+                <div class="essay-step">
+                    <h4>Step 1: Choose a Discursive Topic</h4>
+                    <p>Your topic must be <strong>discursive</strong> (argumentative/debatable), not descriptive. Good topics present two or more valid perspectives.</p>
+                    <p><strong>Examples:</strong></p>
+                    <ul>
+                        <li>"To what extent does social media enhance or hinder interpersonal communication?"</li>
+                        <li>"Is competitiveness in education beneficial or detrimental to student wellbeing?"</li>
+                        <li>"Should governments prioritize economic growth over environmental protection?"</li>
+                    </ul>
+                    <p><strong>Avoid:</strong> "My family," "My holiday," "My favorite book" (these are descriptive, not discursive)</p>
+                </div>
+
+                <div class="essay-step">
+                    <h4>Step 2: Structure Your Essay</h4>
+                    <p><strong>Introduction (50-60 words):</strong></p>
+                    <ul>
+                        <li>Introduce the topic and its relevance</li>
+                        <li>Present the two/main sides of the argument</li>
+                        <li>Include a thesis statement outlining your position</li>
+                    </ul>
+                    
+                    <p><strong>Body Paragraph 1 - Counter-argument (100-120 words):</strong></p>
+                    <ul>
+                        <li>Present the opposing view fairly</li>
+                        <li>Use hedging language: "It could be argued that...", "Some might suggest..."</li>
+                        <li>Provide evidence or examples</li>
+                    </ul>
+
+                    <p><strong>Body Paragraph 2 - Your Argument (100-120 words):</strong></p>
+                    <ul>
+                        <li>Present your main argument with strong connectors</li>
+                        <li>Use signposting: "Conversely...", "However, a more compelling view is..."</li>
+                        <li>Support with logical reasoning and examples</li>
+                    </ul>
+
+                    <p><strong>Body Paragraph 3 - Synthesis/Evaluation (80-100 words):</strong></p>
+                    <ul>
+                        <li>Evaluate both positions critically</li>
+                        <li>Acknowledge limitations: "While the former argument has merit..."</li>
+                        <li>Express reservations where appropriate</li>
+                    </ul>
+
+                    <p><strong>Conclusion (50-60 words):</strong></p>
+                    <ul>
+                        <li>Summarize key points without repeating verbatim</li>
+                        <li>Restate position with qualification if necessary</li>
+                        <li>End with a thought-provoking final statement</li>
+                    </ul>
+                </div>
+
+                <div class="essay-step">
+                    <h4>Step 3: Use Advanced Connectors</h4>
+                    <p>Replace basic connectors with sophisticated alternatives:</p>
+                    <ul>
+                        <li>Instead of "but" → <strong>nevertheless, conversely, having said that</strong></li>
+                        <li>Instead of "also" → <strong>furthermore, moreover, in addition</strong></li>
+                        <li>Instead of "so" → <strong>consequently, as a result, therefore</strong></li>
+                        <li>Instead of "I think" → <strong>it could be argued that, the evidence suggests</strong></li>
+                    </ul>
+                </div>
+
+                <div class="essay-step">
+                    <h4>Step 4: Practice Delivery</h4>
+                    <ul>
+                        <li>Time yourself: Maximum 5 minutes speaking</li>
+                        <li>Maintain eye contact while referring to notes</li>
+                        <li>Use intonation to emphasize key points</li>
+                        <li>Prepare for challenging questions from the examiner</li>
+                    </ul>
+                </div>
+
+                <div class="rule-box">
+                    <strong>Sample Essay Opening:</strong><br>
+                    "While it is undeniable that technological advancement has revolutionized educational practices, the extent to which digital learning platforms enhance academic outcomes remains a subject of considerable debate. This presentation will evaluate both the purported benefits of increased accessibility and the potential drawbacks regarding student engagement, ultimately arguing that a hybrid approach may offer the most viable solution."
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Language for Challenging and Justifying</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Phrases</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Challenging politely</td>
+                                <td>"With respect, that assumes...", "That may be the case, however...", "I'm not entirely convinced that..."</td>
+                            </tr>
+                            <tr>
+                                <td>Justifying strongly</td>
+                                <td>"The evidence clearly indicates...", "It stands to reason that...", "There is compelling evidence to suggest..."</td>
+                            </tr>
+                            <tr>
+                                <td>Expressing reservations</td>
+                                <td>"I have certain reservations about...", "That being said, one must acknowledge...", "With certain caveats..."</td>
+                            </tr>
+                            <tr>
+                                <td>Expressing empathy</td>
+                                <td>"I appreciate that position, given that...", "One can certainly understand why...", "It is understandable that..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SECTION -->
+        <section id="video" class="section">
+            <div class="card">
+                <div class="card-header">Video Preparation Resource</div>
+                <div class="card-body">
+                    <p>The following video provides additional preparation material for Trinity GESE exams. Use this resource to supplement your study of pronunciation, fluency, and exam techniques.</p>
+                    
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/YzibDR_n9GY" 
+                            title="Trinity GESE Preparation Video" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>How to use this video:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Watch with subtitles first to understand content</li>
+                            <li>Watch again without subtitles to practice listening</li>
+                            <li>Pause and repeat phrases to practice pronunciation</li>
+                            <li>Note down useful expressions and discourse markers</li>
+                            <li>Practice shadowing (speaking along with the speaker)</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Note:</strong> While online videos are excellent supplementary resources, ensure you also practice with official Trinity materials and, if possible, mock exams with a qualified teacher.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Additional Online Resources</div>
+                <div class="card-body">
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Official Trinity Website:</strong> trinitycollege.com/GESE</li>
+                        <li><strong>Exam Information Booklet:</strong> Download the latest specifications</li>
+                        <li><strong>Sample Videos:</strong> Search for "Trinity GESE Grade 11 sample exam"</li>
+                        <li><strong>Podcasts:</strong> BBC World Service, TED Talks for advanced listening</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 70</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Exercises loaded dynamically -->
+                </div>
+
+                <!-- FINAL SCORE SECTION -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>Congratulations! You've completed all 70 exercises!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        Try All Exercises Again
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London GESE - Grade 11 (C1.2) Preparation</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database of 70 exercises for Grade 11 (C1.2)
+        const exercises = [
+            // EXERCISES 1-15: Complex Passive with Modals
+            {
+                id: 1,
+                type: 'choice',
+                question: 'The documents __________ before the meeting yesterday.',
+                options: ['should have been sent', 'should be sent', 'should have sent', 'should sent'],
+                correct: 'should have been sent',
+                explanation: 'Correct! Complex passive with modal perfect: should + have been + past participle for unfulfilled obligation in the past.',
+                errorExplanation: 'Use should have been + past participle for past unfulfilled obligation'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'The error __________ (can/avoid) if more care had been taken.',
+                correct: ['could have been avoided', 'might have been avoided'],
+                explanation: 'Correct! Modal perfect passive: could/might + have been + past participle.'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'He __________ about the changes; he looks surprised.',
+                options: ['can\'t have been told', 'can\'t be told', 'can\'t have told', 'can\'t told'],
+                correct: 'can\'t have been told',
+                explanation: 'Correct! Negative deduction about past: can\'t + have been + past participle.',
+                errorExplanation: 'Use can\'t have been + pp for negative deduction about past'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'The problem __________ (ought to/address) weeks ago.',
+                correct: ['ought to have been addressed'],
+                explanation: 'Correct! Ought to have been + past participle for unfulfilled past obligation.'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'The painting __________ by Picasso; the style is wrong.',
+                options: ['must have been painted', 'must have painted', 'must be painted', 'must painted'],
+                correct: 'must have been painted',
+                explanation: 'Correct! Deduction about past passive: must + have been + past participle.',
+                errorExplanation: 'Use must have been + pp for past deduction'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'The data __________ (believe/manipulate) for political reasons.',
+                correct: ['is believed to have been manipulated'],
+                explanation: 'Correct! Passive reporting with perfect infinitive: is believed to have been + pp.'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'You __________ at the interview; it was only a formality.',
+                options: ['needn\'t have been so nervous', 'needn\'t be so nervous', 'needn\'t have nervous', 'needn\'t to be nervous'],
+                correct: 'needn\'t have been so nervous',
+                explanation: 'Correct! Needn\'t + have + past participle for unnecessary past state.',
+                errorExplanation: 'Use needn\'t have been for unnecessary past state'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'The report __________ (should/publish) by now, but there were delays.',
+                correct: ['should have been published'],
+                explanation: 'Correct! Should have been + past participle for expected but unfulfilled action.'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'The suspect __________ at the scene; he has a solid alibi.',
+                options: ['couldn\'t have been seen', 'couldn\'t be seen', 'couldn\'t have seen', 'couldn\'t seen'],
+                correct: 'couldn\'t have been seen',
+                explanation: 'Correct! Impossibility in past passive: couldn\'t + have been + pp.',
+                errorExplanation: 'Use couldn\'t have been + pp for past impossibility'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'The decision __________ (may/influence) by external factors.',
+                correct: ['may have been influenced', 'might have been influenced'],
+                explanation: 'Correct! Possibility in past passive: may/might + have been + pp.'
+            },
+            {
+                id: 11,
+                type: 'choice',
+                question: 'The letter __________ last week, but it never arrived.',
+                options: ['should have been delivered', 'should be delivered', 'should have delivered', 'should delivered'],
+                correct: 'should have been delivered',
+                explanation: 'Correct! Expected past action: should + have been + pp.',
+                errorExplanation: 'Use should have been + pp for expected past action'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'The truth __________ (must/hide) for years.',
+                correct: ['must have been hidden'],
+                explanation: 'Correct! Strong deduction about past: must have been + pp.'
+            },
+            {
+                id: 13,
+                type: 'choice',
+                question: 'The project __________ earlier, but funding was cut.',
+                options: ['ought to have been completed', 'ought to be completed', 'ought to completed', 'ought have been completed'],
+                correct: 'ought to have been completed',
+                explanation: 'Correct! Ought to have been + pp for unfulfilled expectation.',
+                errorExplanation: 'Use ought to have been + pp'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'The mistake __________ (can/correct) if noticed earlier.',
+                correct: ['could have been corrected'],
+                explanation: 'Correct! Past possibility passive: could + have been + pp.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Such behavior __________ under any circumstances.',
+                options: ['should never have been tolerated', 'should never be tolerated', 'should never tolerated', 'should never have tolerated'],
+                correct: 'should never have been tolerated',
+                explanation: 'Correct! Strong criticism of past action with passive.',
+                errorExplanation: 'Use should never have been + pp'
+            },
+
+            // EXERCISES 16-30: Gerund vs Infinitive
+            {
+                id: 16,
+                type: 'fill',
+                question: 'I regret __________ (tell) you that your application was unsuccessful.',
+                correct: ['to tell'],
+                explanation: 'Correct! Regret + to-infinitive = formal announcement of bad news.'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: 'I regret __________ him the secret; he told everyone.',
+                options: ['telling', 'to tell', 'tell', 'told'],
+                correct: 'telling',
+                explanation: 'Correct! Regret + gerund = regret about past action.',
+                errorExplanation: 'Use regret + gerund for past actions you regret'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Do you remember __________ (meet) him at the conference?',
+                correct: ['meeting'],
+                explanation: 'Correct! Remember + gerund = past memory.'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: 'Please remember __________ the door when you leave.',
+                options: ['to lock', 'locking', 'lock', 'locked'],
+                correct: 'to lock',
+                explanation: 'Correct! Remember + to-infinitive = future obligation.',
+                errorExplanation: 'Use remember + to-infinitive for things you must do'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'I meant __________ (call) you yesterday, but I forgot.',
+                correct: ['to call'],
+                explanation: 'Correct! Mean + to-infinitive = intend.'
+            },
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Giving up smoking __________ leaving my comfort zone.',
+                options: ['means', 'mean', 'to mean', 'meaning'],
+                correct: 'means',
+                explanation: 'Correct! Mean + gerund = involve/entail.',
+                errorExplanation: 'Use mean + gerund when it involves something'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'He stopped __________ (smoke) when he realized the health risks.',
+                correct: ['smoking'],
+                explanation: 'Correct! Stop + gerund = quit an activity.'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: 'We stopped __________ directions because we were lost.',
+                options: ['to ask', 'asking', 'ask', 'asked'],
+                correct: 'to ask',
+                explanation: 'Correct! Stop + to-infinitive = pause in order to do something.',
+                errorExplanation: 'Use stop + to-infinitive when pausing to do something else'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Try __________ (eat) less sugar; you might feel better.',
+                correct: ['eating'],
+                explanation: 'Correct! Try + gerund = experiment/suggestion.'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'I tried __________ the jar, but it was stuck.',
+                options: ['to open', 'opening', 'open', 'opened'],
+                correct: 'to open',
+                explanation: 'Correct! Try + to-infinitive = make an effort.',
+                errorExplanation: 'Use try + to-infinitive when making an effort'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'She went on __________ (talk) about her trip for hours.',
+                correct: ['talking'],
+                explanation: 'Correct! Go on + gerund = continue same activity.'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: 'After discussing the budget, she went on __________ the marketing plan.',
+                options: ['to present', 'presenting', 'present', 'presented'],
+                correct: 'to present',
+                explanation: 'Correct! Go on + to-infinitive = change to new activity.',
+                errorExplanation: 'Use go on + to-infinitive when changing to a new subject'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'I forgot __________ (post) the letter, so it\'s still here.',
+                correct: ['to post'],
+                explanation: 'Correct! Forget + to-infinitive = fail to do something.'
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: 'I\'ll never forget __________ the Grand Canyon for the first time.',
+                options: ['seeing', 'to see', 'see', 'seen'],
+                correct: 'seeing',
+                explanation: 'Correct! Forget + gerund = loss of memory about past event.',
+                errorExplanation: 'Use forget + gerund for memories'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: 'He admitted __________ (make) a mistake in the calculation.',
+                correct: ['making', 'having made'],
+                explanation: 'Correct! Admit + gerund (perfect gerund possible for earlier action).'
+            },
+
+            // EXERCISES 31-45: Hedging and Cautious Language
+            {
+                id: 31,
+                type: 'choice',
+                question: 'It __________ that economic factors play a significant role.',
+                options: ['could be argued', 'is argued', 'argues', 'argued'],
+                correct: 'could be argued',
+                explanation: 'Correct! Hedging with modal passive: could be argued.',
+                errorExplanation: 'Use could be argued to hedge/soften your statement'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: 'The evidence __________ (tend/indicate) a strong correlation.',
+                correct: ['tends to indicate'],
+                explanation: 'Correct! Tentative language: tends to + verb.'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'This __________ the most viable solution in most cases.',
+                options: ['appears to be', 'appears being', 'is appearing', 'appears'],
+                correct: 'appears to be',
+                explanation: 'Correct! Tentative observation: appears to + infinitive.',
+                errorExplanation: 'Use appears to be for tentative observations'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'To a certain __________, I agree with your position.',
+                correct: ['extent'],
+                explanation: 'Correct! Hedging phrase: to a certain extent.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: '__________, the data supports your hypothesis, though further verification is needed.',
+                options: ['Up to a point', 'Up to point', 'To a point', 'At a point'],
+                correct: 'Up to a point',
+                explanation: 'Correct! Hedging phrase: up to a point.',
+                errorExplanation: 'Use "Up to a point" to partially agree'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'The results __________ (be/consistent) with previous findings.',
+                correct: ['appear to be consistent', 'seem to be consistent'],
+                explanation: 'Correct! Cautious language: appear/seem to be + adjective.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: '__________ unforeseen circumstances, the project should be completed by Friday.',
+                options: ['Barring', 'Except', 'Without', 'Unless'],
+                correct: 'Barring',
+                explanation: 'Correct! Formal hedging: barring unforeseen circumstances.',
+                errorExplanation: 'Use "Barring" meaning "except for/without"'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'It is __________ likely that prices will increase next year.',
+                correct: ['highly', 'reasonably'],
+                explanation: 'Correct! Softening adverb: highly/reasonably likely.'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: '__________ being equal, online learning offers significant advantages.',
+                options: ['All things', 'All thing', 'With all things', 'Things'],
+                correct: 'All things',
+                explanation: 'Correct! Hedging phrase: all things being equal.',
+                errorExplanation: 'Use "All things being equal" to assume ideal conditions'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'I have certain __________ about the feasibility of this plan.',
+                correct: ['reservations'],
+                explanation: 'Correct! Expressing caution: have reservations about.'
+            },
+            {
+                id: 41,
+                type: 'choice',
+                question: 'The proposal is feasible, __________ certain caveats.',
+                options: ['subject to', 'subjective to', 'subjecting to', 'subjects to'],
+                correct: 'subject to',
+                explanation: 'Correct! Formal hedging: subject to certain caveats.',
+                errorExplanation: 'Use "subject to" meaning "dependent on/under condition of"'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: '__________ speaking, the trend suggests gradual improvement.',
+                correct: ['Generally', 'Broadly'],
+                explanation: 'Correct! Vague language: generally/broadly speaking.'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'It __________ be suggested that alternative approaches merit consideration.',
+                options: ['might', 'must', 'should', 'will'],
+                correct: 'might',
+                explanation: 'Correct! Soft suggestion: might + be suggested.',
+                errorExplanation: 'Use "might" for tentative, polite suggestions'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'The findings are __________ consistent with the hypothesis.',
+                broadly: ['broadly', 'largely', 'generally'],
+                explanation: 'Correct! Softening adverb with positive adjective.'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'While this is true __________, the long-term effects remain unclear.',
+                options: ['to some extent', 'to some extents', 'at some extent', 'in some extent'],
+                correct: 'to some extent',
+                explanation: 'Correct! Partial agreement phrase: to some extent.',
+                errorExplanation: 'Use "to some extent" for partial agreement'
+            },
+
+            // EXERCISES 46-55: Wish and Hope
+            {
+                id: 46,
+                type: 'fill',
+                question: 'I wish I __________ (study) harder for the exam. (regret)',
+                correct: ['had studied'],
+                explanation: 'Correct! Wish + past perfect for past regrets.'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'I wish I __________ the answer to your question.',
+                options: ['knew', 'know', 'have known', 'had known'],
+                correct: 'knew',
+                explanation: 'Correct! Wish + past simple for present desires.',
+                errorExplanation: 'Use wish + past simple for present/future wishes'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'I hope you __________ (feel) better soon.',
+                correct: ['feel'],
+                explanation: 'Correct! Hope + present for future expectation.'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'She wishes she __________ more time to complete the project.',
+                options: ['had', 'have', 'has', 'having'],
+                correct: 'had',
+                explanation: 'Correct! Wish + past simple for unreal present.',
+                errorExplanation: 'Use wish + past simple (had) for unreal present'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'We hope the weather __________ (improve) by the weekend.',
+                correct: ['will improve', 'improves'],
+                explanation: 'Correct! Hope + will/present for future expectation.'
+            },
+            {
+                id: 51,
+                type: 'choice',
+                question: 'I wish they __________ so much noise right now.',
+                options: ['weren\'t making', 'aren\'t making', 'don\'t make', 'wouldn\'t make'],
+                correct: 'weren\'t making',
+                explanation: 'Correct! Wish + past continuous for present temporary situations.',
+                errorExplanation: 'Use wish + past continuous for ongoing present situations'
+            },
+            {
+                id: 52,
+                type: 'fill',
+                question: 'I hope you __________ (manage) to finish the report yesterday.',
+                correct: ['managed'],
+                explanation: 'Correct! Hope + past when referring to past time.'
+            },
+            {
+                id: 53,
+                type: 'choice',
+                question: 'I wish I __________ to the meeting yesterday.',
+                options: ['had gone', 'went', 'have gone', 'did go'],
+                correct: 'had gone',
+                explanation: 'Correct! Wish + past perfect for past regrets.',
+                errorExplanation: 'Use wish + past perfect for past regrets'
+            },
+            {
+                id: 54,
+                type: 'fill',
+                question: 'Do you wish you __________ (choose) a different career?',
+                correct: ['had chosen'],
+                explanation: 'Correct! Wish + past perfect for past life choices.'
+            },
+            {
+                id: 55,
+                type: 'choice',
+                question: 'I hope she __________ the news. She looked upset.',
+                options: ['hasn\'t heard', 'didn\'t hear', 'hadn\'t heard', 'not hear'],
+                correct: 'hasn\'t heard',
+                explanation: 'Correct! Hope + present perfect for recent past concern.',
+                errorExplanation: 'Use hope + present perfect for recent relevance'
+            },
+
+            // EXERCISES 56-62: Discourse Markers and Signposting
+            {
+                id: 56,
+                type: 'fill',
+                question: '__________, I would like to address the economic implications.',
+                correct: ['First and foremost', 'To begin with', 'Firstly'],
+                explanation: 'Correct! Formal signposting for first point.'
+            },
+            {
+                id: 57,
+                type: 'choice',
+                question: 'The policy is popular. __________, it fails to address root causes.',
+                options: ['Having said that', 'Saying that', 'That said having', 'Having that said'],
+                correct: 'Having said that',
+                explanation: 'Correct! Concessive signposting: having said that.',
+                errorExplanation: 'Use "Having said that" to introduce a contrast'
+            },
+            {
+                id: 58,
+                type: 'fill',
+                question: '__________, it is important to consider the environmental impact.',
+                correct: ['Furthermore', 'Moreover', 'In addition', 'Additionally'],
+                explanation: 'Correct! Additive signposting for additional points.'
+            },
+            {
+                id: 59,
+                type: 'choice',
+                question: '__________ the above arguments, I maintain that regulation is necessary.',
+                options: ['In light of', 'In the light', 'Light of', 'Under light of'],
+                correct: 'In light of',
+                explanation: 'Correct! Formal phrase: in light of = considering.',
+                errorExplanation: 'Use "In light of" meaning "considering/taking into account"'
+            },
+            {
+                id: 60,
+                type: 'fill',
+                question: '__________, it must be acknowledged that there are limitations.',
+                correct: ['Admittedly', 'Concededly'],
+                explanation: 'Correct! Concessive signposting to acknowledge counter-arguments.'
+            },
+            {
+                id: 61,
+                type: 'choice',
+                question: '__________, the evidence suggests a different conclusion.',
+                options: ['Conversely', 'Reverse', 'Inversely', 'Contrary'],
+                correct: 'Conversely',
+                explanation: 'Correct! Contrastive signposting: conversely.',
+                errorExplanation: 'Use "Conversely" to introduce an opposing view'
+            },
+            {
+                id: 62,
+                type: 'fill',
+                question: '__________ all factors into account, the benefits outweigh the drawbacks.',
+                correct: ['Taking', 'Taking into account all factors'],
+                explanation: 'Correct! Summative signposting for conclusions.'
+            },
+
+            // EXERCISES 63-70: Challenging and Justifying
+            {
+                id: 63,
+                type: 'choice',
+                question: '__________, that assumes all participants have equal access to resources.',
+                options: ['With respect', 'With respecting', 'Respecting', 'Respectful'],
+                correct: 'With respect',
+                explanation: 'Correct! Polite challenge: with respect.',
+                errorExplanation: 'Use "With respect" to politely disagree'
+            },
+            {
+                id: 64,
+                type: 'fill',
+                question: 'I\'m not entirely __________ by that argument.',
+                correct: ['convinced', 'persuaded'],
+                explanation: 'Correct! Tentative disagreement: not entirely convinced.'
+            },
+            {
+                id: 65,
+                type: 'choice',
+                question: '__________ that position, one must consider the historical context.',
+                options: ['While I accept', 'While accepting', 'Accepting while', 'While accept'],
+                correct: 'While I accept',
+                explanation: 'Correct! Concessive structure: while I accept...',
+                errorExplanation: 'Use "While I accept" to acknowledge before countering'
+            },
+            {
+                id: 66,
+                type: 'fill',
+                question: 'The evidence __________ indicates a need for further investigation.',
+                correct: ['clearly', 'strongly', 'compellingly'],
+                explanation: 'Correct! Emphatic adverb for justification.'
+            },
+            {
+                id: 67,
+                type: 'choice',
+                question: 'That may be the case, __________ it doesn\'t account for recent developments.',
+                options: ['however', 'but', 'yet', 'although'],
+                correct: 'however',
+                explanation: 'Correct! Formal contrast: however as sentence connector.',
+                errorExplanation: 'Use "however" after a comma for formal contrast'
+            },
+            {
+                id: 68,
+                type: 'fill',
+                question: 'It __________ to reason that increased funding would improve outcomes.',
+                correct: ['stands'],
+                explanation: 'Correct! Idiom: it stands to reason that.'
+            },
+            {
+                id: 69,
+                type: 'choice',
+                question: 'I can certainly __________ why you might think that, given the circumstances.',
+                options: ['understand', 'understood', 'understanding', 'have understood'],
+                correct: 'understand',
+                explanation: 'Correct! Expressing empathy: I can understand why...',
+                errorExplanation: 'Use "I can understand why" to show empathy'
+            },
+            {
+                id: 70,
+                type: 'fill',
+                question: '__________ mistake, this approach has consistently yielded positive results.',
+                correct: ['Make no', 'Make no mistake'],
+                explanation: 'Correct! Emphatic affirmation: make no mistake.'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Exercise ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Exercise ${currentExercise + 1} of ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Check</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Next</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += Math.floor(100 / exercises.length);
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += Math.floor(100 / exercises.length);
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = 'Outstanding! You have mastered C1.2 level grammar! Ready for Grade 11!';
+            } else if (totalScore >= 70) {
+                message = 'Excellent work! You show strong command of advanced structures. Review your errors.';
+            } else if (totalScore >= 50) {
+                message = 'Good effort! Continue practicing complex passives, hedging, and discourse markers.';
+            } else {
+                message = 'Keep studying! Focus on the theory sections and pay attention to formal structures.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>

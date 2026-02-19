@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ISE IV - Portfolio | Trinity College London C2</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a5f;
+            --primary-dark: #152a45;
+            --accent: #c9a227;
+            --bg-primary: #f5f5f0;
+            --bg-card: #ffffff;
+            --border: #d4d4c8;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --success: #276749;
+            --error: #c53030;
+            --level-c2: #0f172a;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--level-c2) 0%, #1e293b 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 0;
+            margin-bottom: 30px;
+            border-left: 5px solid var(--accent);
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            color: #000;
+            padding: 5px 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 15px;
+        }
+
+        .section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            padding: 30px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .section h3 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin: 25px 0 15px 0;
+        }
+
+        .info-box {
+            background: #fef3c7;
+            border-left: 4px solid var(--accent);
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 0.95rem;
+        }
+
+        .task-card {
+            background: #f8fafc;
+            border: 2px solid var(--border);
+            padding: 25px;
+            margin: 20px 0;
+            transition: all 0.3s;
+        }
+
+        .task-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .task-title {
+            font-size: 1.2rem;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .task-meta {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            background: var(--primary);
+            color: white;
+            padding: 5px 12px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .word-count {
+            background: var(--accent);
+            color: #000;
+        }
+
+        .prompt-box {
+            background: white;
+            border: 2px dashed var(--border);
+            padding: 20px;
+            margin: 15px 0;
+            font-style: italic;
+            color: var(--text-secondary);
+        }
+
+        .writing-area {
+            width: 100%;
+            min-height: 400px;
+            padding: 20px;
+            border: 2px solid var(--border);
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+            line-height: 1.8;
+            resize: vertical;
+            margin: 15px 0;
+        }
+
+        .writing-area:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .criteria-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .criteria-list li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .criteria-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .example-box {
+            background: #f0f9ff;
+            border-left: 4px solid #0369a1;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .example-box h4 {
+            color: #0369a1;
+            margin-bottom: 10px;
+        }
+
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .tip-card {
+            background: #f0fdf4;
+            border-left: 4px solid var(--success);
+            padding: 20px;
+        }
+
+        .tip-card h4 {
+            color: var(--success);
+            margin-bottom: 10px;
+        }
+
+        .timer {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--level-c2);
+            color: white;
+            padding: 15px 25px;
+            font-size: 1.5rem;
+            font-family: 'Courier New', monospace;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--border);
+            margin: 20px 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--accent);
+            transition: width 0.3s;
+        }
+
+        .feedback-panel {
+            display: none;
+            background: #f0fdf4;
+            border: 2px solid var(--success);
+            padding: 25px;
+            margin-top: 20px;
+        }
+
+        .feedback-panel.show {
+            display: block;
+        }
+
+        .score-display {
+            font-size: 3rem;
+            color: var(--success);
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .rubric-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .rubric-table th {
+            background: var(--primary);
+            color: white;
+            padding: 12px;
+            text-align: left;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .rubric-table td {
+            padding: 12px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .rubric-table tr:nth-child(even) {
+            background: #f8fafc;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header {
+                padding: 25px;
+            }
+            
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .timer {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin-bottom: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+
+    <!-- Timer per simulazione -->
+    <div class="timer" id="timer" style="display: none;">
+        ⏱️ <span id="timeDisplay">--:--</span>
+    </div>
+
+    <div class="container">
+        
+        <!-- Header -->
+        <div class="header">
+            <h1>ISE IV - Portfolio</h1>
+            <p>Certificazione C2 | Trinity College London</p>
+            <div class="badge">C2 - Mastery Level</div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="section">
+            <h2>📋 Informazioni sul Portfolio</h2>
+            
+            <div class="info-box">
+                <strong>Struttura ISE IV Portfolio:</strong><br>
+                Il Portfolio di ISE IV richiede <strong>3 task di scrittura</strong> selezionati da una lista di 15 task ufficiali Trinity. 
+                A differenza degli altri livelli ISE, il Portfolio IV include una sezione aggiuntiva: 
+                <strong>Critical/Analytical Writing</strong> oltre a Correspondence e Factual Writing.
+            </div>
+
+            <h3>Requisiti Generali:</h3>
+            <ul class="criteria-list">
+                <li><strong>Word count:</strong> 300-350 parole per ogni task</li>
+                <li><strong>Tempo di preparazione:</strong> 6-12 settimane (learner-led)</li>
+                <li><strong>Numero task:</strong> 3 obbligatori (1 per sezione)</li>
+                <li><strong>Sezioni:</strong> Correspondence | Factual Writing | Critical/Analytical Writing</li>
+                <li><strong>Valutazione:</strong> Task fulfilment, Organizzazione, Linguaggio, Registro</li>
+            </ul>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar" style="width: 0%"></div>
+            </div>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 0.9rem;">
+                Progresso: <span id="progressText">0/3 task completati</span>
+            </p>
+        </div>
+
+        <!-- TASK 1: CORRESPONDENCE -->
+        <div class="section" id="task1">
+            <h2>📧 Task 1: Correspondence (300-350 words)</h2>
+            
+            <div class="task-card">
+                <div class="task-header">
+                    <span class="task-title">Formal Email/Letter</span>
+                    <div class="task-meta">
+                        <span class="meta-item word-count">300-350 words</span>
+                        <span class="meta-item">C2 Level</span>
+                    </div>
+                </div>
+
+                <div class="prompt-box">
+                    <strong>Prompt ufficiale Trinity (Esempio):</strong><br><br>
+                    "You recently attended a conference on 'The Future of Artificial Intelligence in Education'. 
+                    Write a formal email to the conference organizer (approximately 350 words) in which you:
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Express your appreciation for the conference organization</li>
+                        <li>Critically evaluate two contrasting viewpoints presented during the conference</li>
+                        <li>Propose specific recommendations for future events based on your analysis"</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>💡 Esempio di struttura C2:</h4>
+                    <p><strong>Opening:</strong> Formal acknowledgment + specific praise for organizational aspects<br>
+                    <strong>Body:</strong> Critical comparison of two AI perspectives (e.g., optimist vs. pessimist) with nuanced evaluation<br>
+                    <strong>Recommendations:</strong> Evidence-based suggestions with clear rationale<br>
+                    <strong>Closing:</strong> Professional sign-off with forward-looking statement</p>
+                </div>
+
+                <h3>La tua risposta:</h3>
+                <textarea class="writing-area" id="correspondenceText" placeholder="Scrivi qui la tua email formale (300-350 parole)... 
+                
+Suggerimenti per il C2:
+- Usa register formale e sophisticated discourse markers (e.g., 'It is worth noting that...', 'This begs the question...')
+- Demonstra critical stance: non solo descrivere, ma valutare e sintetizzare
+- Structure: complex sentence variety, cleft sentences, inversion for emphasis
+- Evidence of audience awareness throughout"></textarea>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <span id="wordCount1">0</span> / 350 parole
+                        <span id="wordWarning1" style="color: var(--error); display: none;"> ⚠️ Word count non rispettato</span>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary" onclick="saveDraft(1)">💾 Salva Bozza</button>
+                        <button class="btn" onclick="submitTask(1)">✓ Invia Task</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🎯 Task Fulfilment</h4>
+                    <p>All three bullet points must be addressed with equal depth. Avoid superficial treatment - demonstrate critical engagement with each element.</p>
+                </div>
+                <div class="tip-card">
+                    <h4>📝 Registro Formale</h4>
+                    <p>Use: "I am writing to express..." | "It is my considered opinion that..." | "I would venture to suggest..."</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASK 2: FACTUAL WRITING -->
+        <div class="section" id="task2">
+            <h2>📊 Task 2: Factual Writing (300-350 words)</h2>
+            
+            <div class="task-card">
+                <div class="task-header">
+                    <span class="task-title">Report / Proposal / Article</span>
+                    <div class="task-meta">
+                        <span class="meta-item word-count">300-350 words</span>
+                        <span class="meta-item">C2 Level</span>
+                    </div>
+                </div>
+
+                <div class="prompt-box">
+                    <strong>Prompt ufficiale Trinity (Esempio):</strong><br><br>
+                    "Your university is considering implementing a 'Digital Detox Week' where all non-essential technology 
+                    would be banned campus-wide. Write a factual report (approximately 350 words) for the University Senate 
+                    in which you:
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Outline the potential benefits and drawbacks based on current research</li>
+                        <li>Analyze the feasibility of implementation across different departments</li>
+                        <li>Provide data-informed recommendations with anticipated outcomes"</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>💡 Struttura Report C2:</h4>
+                    <p><strong>Executive Summary:</strong> Concise overview of findings (1 paragraph)<br>
+                    <strong>Introduction:</strong> Context + methodology of analysis<br>
+                    <strong>Findings:</strong> Evidence-based analysis with clear subsections<br>
+                    <strong>Discussion:</strong> Critical evaluation of implications<br>
+                    <strong>Recommendations:</strong> Prioritized, actionable suggestions with rationale</p>
+                </div>
+
+                <h3>La tua risposta:</h3>
+                <textarea class="writing-area" id="factualText" placeholder="Scrivi qui il tuo report (300-350 parole)...
+
+Suggerimenti C2 per Factual Writing:
+- Use objective tone with occasional evaluative adverbs (notably, significantly, arguably)
+- Integrate 'source' references: 'Research indicates...', 'Evidence suggests...'
+- Complex nominal phrases: 'the implementation of technology-mediated learning environments'
+- Data visualization references: 'As illustrated in Figure 1...' (even if imaginary)
+- Hedging language for credibility: 'tends to', 'appears to', 'is likely to'"></textarea>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <span id="wordCount2">0</span> / 350 parole
+                        <span id="wordWarning2" style="color: var(--error); display: none;"> ⚠️ Word count non rispettato</span>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary" onclick="saveDraft(2)">💾 Salva Bozza</button>
+                        <button class="btn" onclick="submitTask(2)">✓ Invia Task</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>📈 Data Integration</h4>
+                    <p>Even invented statistics add credibility when presented objectively: 'A recent survey of 500 students revealed that...'</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🔍 Objectivity vs. Evaluation</h4>
+                    <p>Maintain factual tone while demonstrating critical analysis. Use phrases like: 'While this approach offers..., one must consider...'</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TASK 3: CRITICAL/ANALYTICAL WRITING -->
+        <div class="section" id="task3">
+            <h2>🧠 Task 3: Critical/Analytical Writing (300-350 words)</h2>
+            
+            <div class="info-box" style="background: #fee2e2; border-color: var(--error);">
+                <strong>⚠️ Nota importante:</strong> Questa sezione è <strong>UNICA di ISE IV</strong> e non presente negli altri livelli. 
+                Richiede capacità di analisi critica, sintesi di informazioni complesse e argomentazione sofisticata.
+            </div>
+            
+            <div class="task-card">
+                <div class="task-header">
+                    <span class="task-title">Critical Essay / Review / Analytical Article</span>
+                    <div class="task-meta">
+                        <span class="meta-item word-count">300-350 words</span>
+                        <span class="meta-item">C2 Only</span>
+                    </div>
+                </div>
+
+                <div class="prompt-box">
+                    <strong>Prompt ufficiale Trinity (Esempio):</strong><br><br>
+                    "Read the following two extracts on the concept of 'Universal Basic Income' (UBI):
+                    <br><br>
+                    <em>Extract A:</em> Economist arguing UBI is 'the only viable response to technological unemployment'<br>
+                    <em>Extract B:</em> Sociologist claiming UBI 'undermines the dignity of work and social cohesion'
+                    <br><br>
+                    Write a critical analysis (approximately 350 words) in which you:
+                    <ul style="margin-top: 10px; margin-left: 20px;">
+                        <li>Synthesize the core arguments from both perspectives</li>
+                        <li>Evaluate the validity and limitations of each position</li>
+                        <li>Develop your own nuanced stance, acknowledging complexity"</li>
+                    </ul>
+                </div>
+
+                <div class="example-box">
+                    <h4>💡 Approccio Critico C2:</h4>
+                    <p><strong>Introduction:</strong> Contextualize the debate + thesis statement showing nuanced position<br>
+                    <strong>Synthesis:</strong> Accurate representation of both views using sophisticated reporting verbs<br>
+                    <strong>Critical Evaluation:</strong> Identify strengths, weaknesses, assumptions, implications<br>
+                    <strong>Position:</strong> Original contribution that transcends binary thinking<br>
+                    <strong>Conclusion:</strong> Synthesis with forward-looking or provocative closing</p>
+                </div>
+
+                <h3>La tua risposta:</h3>
+                <textarea class="writing-area" id="criticalText" placeholder="Scrivi qui la tua analisi critica (300-350 parole)...
+
+Suggerimenti C2 per Critical Writing:
+- Reporting verbs: 'contends', 'asserts', 'implicitly suggests', 'fundamentally challenges'
+- Critical phrases: 'This argument overlooks...', 'A more nuanced interpretation would...', 'The dichotomy between X and Y proves artificial when...'
+- Synthesis markers: 'Conversely', 'By the same token', 'Notwithstanding these differences'
+- Demonstrate metacognition: 'Upon reflection', 'Critical examination reveals'
+- Avoid simplistic agreement/disagreement - show intellectual sophistication"></textarea>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                    <div>
+                        <span id="wordCount3">0</span> / 350 parole
+                        <span id="wordWarning3" style="color: var(--error); display: none;"> ⚠️ Word count non rispettato</span>
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary" onclick="saveDraft(3)">💾 Salva Bozza</button>
+                        <button class="btn btn-success" onclick="submitTask(3)">✓ Invia Task Finale</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <h4>🎭 Avoid Binary Thinking</h4>
+                    <p>C2 writing transcends 'pro vs. con'. Use: 'While X has merit, its universal application raises questions regarding...'</p>
+                </div>
+                <div class="tip-card">
+                    <h4>🧩 Synthesis vs. Summary</h4>
+                    <p>Don't just summarize both views. Show how they CONNECT, CONTRADICT, or COMPLEMENT each other in unexpected ways.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- RUBRIC & ASSESSMENT -->
+        <div class="section">
+            <h2>📊 Criteri di Valutazione ISE IV Portfolio</h2>
+            
+            <table class="rubric-table">
+                <thead>
+                    <tr>
+                        <th>Criterio</th>
+                        <th>Distinction (Pass with Distinction)</th>
+                        <th>Pass</th>
+                        <th>Fail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Task Fulfilment</strong></td>
+                        <td>All elements addressed with sophistication; original, nuanced treatment</td>
+                        <td>All elements addressed adequately; some depth</td>
+                        <td>Missing or superficial treatment of bullet points</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Organizzazione</strong></td>
+                        <td>Exceptional coherence; seamless paragraphing; sophisticated cohesive devices</td>
+                        <td>Clear organization; appropriate paragraphing; good cohesion</td>
+                        <td>Unclear structure; poor paragraphing; limited cohesion</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Linguaggio</strong></td>
+                        <td>Wide range of complex structures; precise vocabulary; natural C2 fluency</td>
+                        <td>Good range; mostly accurate; appropriate C2 attempts</td>
+                        <td>Limited range; frequent errors; below C2 standard</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Registro</strong></td>
+                        <td>Consistent, sophisticated register; excellent audience awareness</td>
+                        <td>Generally appropriate register; good audience awareness</td>
+                        <td>Inconsistent or inappropriate register</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="info-box">
+                <strong>Punteggio ISE IV Portfolio:</strong><br>
+                Ogni task viene valutato su 4 criteri (1-4 scale). Il totale per task è 16 punti. 
+                Per passare, devi ottenere almeno <strong>10/16 per task</strong> (62.5%). 
+                Per <strong>Pass with Distinction</strong>: almeno 13/16 per task.
+            </div>
+        </div>
+
+        <!-- FEEDBACK PANEL -->
+        <div class="feedback-panel" id="feedbackPanel">
+            <h2 style="text-align: center; color: var(--success);">🎉 Portfolio Completato!</h2>
+            <div class="score-display" id="finalScore">--%</div>
+            <p style="text-align: center; font-size: 1.1rem; margin-bottom: 20px;">
+                Punteggio stimato basato su word count, struttura e elementi C2 rilevati
+            </p>
+            
+            <div id="detailedFeedback"></div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="btn" onclick="resetPortfolio()">🔄 Riprova Portfolio</button>
+                <button class="btn btn-success" onclick="window.parent.postMessage({action: 'completeModule', module: 'ISE IV - Portfolio', score: document.getElementById('finalScore').textContent}, '*')">
+                    📤 Salva nel Registro
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Word count tracking
+        const texts = {
+            1: { element: document.getElementById('correspondenceText'), counter: document.getElementById('wordCount1'), warning: document.getElementById('wordWarning1'), min: 300, max: 350 },
+            2: { element: document.getElementById('factualText'), counter: document.getElementById('wordCount2'), warning: document.getElementById('wordWarning2'), min: 300, max: 350 },
+            3: { element: document.getElementById('criticalText'), counter: document.getElementById('wordCount3'), warning: document.getElementById('wordWarning3'), min: 300, max: 350 }
+        };
+
+        let completedTasks = 0;
+        let taskScores = {};
+
+        // Initialize word count listeners
+        Object.keys(texts).forEach(key => {
+            const t = texts[key];
+            t.element.addEventListener('input', function() {
+                const count = this.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+                t.counter.textContent = count;
+                
+                if (count < t.min || count > t.max) {
+                    t.warning.style.display = 'inline';
+                    t.counter.style.color = 'var(--error)';
+                } else {
+                    t.warning.style.display = 'none';
+                    t.counter.style.color = 'var(--success)';
+                }
+            });
+        });
+
+        function saveDraft(taskNum) {
+            const text = texts[taskNum].element.value;
+            localStorage.setItem('ise4_portfolio_task' + taskNum, text);
+            alert('Bozza Task ' + taskNum + ' salvata localmente!');
+        }
+
+        // Load drafts on startup
+        window.onload = function() {
+            Object.keys(texts).forEach(key => {
+                const saved = localStorage.getItem('ise4_portfolio_task' + key);
+                if (saved) {
+                    texts[key].element.value = saved;
+                    // Trigger word count update
+                    texts[key].element.dispatchEvent(new Event('input'));
+                }
+            });
+        };
+
+        function submitTask(taskNum) {
+            const t = texts[taskNum];
+            const count = t.element.value.trim().split(/\s+/).filter(w => w.length > 0).length;
+            
+            if (count < t.min || count > t.max) {
+                alert('⚠️ ATTENZIONE: Il word count deve essere tra ' + t.min + ' e ' + t.max + ' parole.\n\nAttuale: ' + count + ' parole.\n\nCorreggi prima di inviare.');
+                return;
+            }
+
+            if (t.element.value.trim().length < 100) {
+                alert('⚠️ Il testo sembra troppo breve o incompleto. Assicurati di aver sviluppato adeguatamente tutti i bullet points.');
+                return;
+            }
+
+            // Calculate estimated score based on C2 indicators
+            const score = calculateEstimatedScore(t.element.value, taskNum);
+            taskScores[taskNum] = score;
+            
+            completedTasks++;
+            updateProgress();
+            
+            // Visual feedback
+            t.element.style.background = '#f0fdf4';
+            t.element.style.borderColor = 'var(--success)';
+            
+            alert('✅ Task ' + taskNum + ' inviato!\n\nPunteggio stimato: ' + score + '%\n\n' + getFeedbackForScore(score));
+            
+            if (completedTasks === 3) {
+                showFinalFeedback();
+            }
+        }
+
+        function calculateEstimatedScore(text, taskNum) {
+            let score = 70; // Base passing score
+            
+            // Check C2 indicators
+            const c2Markers = [
+                'contends', 'asserts', 'implies', 'suggests', 'demonstrates',
+                'notwithstanding', 'conversely', 'furthermore', 'nevertheless',
+                'nuanced', 'sophisticated', 'complex', 'multifaceted',
+                'analysis', 'evaluation', 'synthesis', 'critical',
+                'upon reflection', 'it is worth noting', 'this begs the question',
+                'the dichotomy', 'artificial', 'merit', 'validity',
+                'implementation', 'feasibility', 'implications'
+            ];
+            
+            const textLower = text.toLowerCase();
+            let markersFound = 0;
+            c2Markers.forEach(marker => {
+                if (textLower.includes(marker)) markersFound++;
+            });
+            
+            // Adjust score based on markers
+            score += Math.min(markersFound * 2, 20);
+            
+            // Check sentence complexity (approximate by punctuation)
+            const sentenceCount = text.split(/[.!?]+/).filter(s => s.trim().length > 10).length;
+            const avgSentenceLength = text.split(/\s+/).length / (sentenceCount || 1);
+            
+            if (avgSentenceLength > 20) score += 5; // Complex sentences
+            if (avgSentenceLength > 25) score += 3; // Very complex
+            
+            // Check paragraph structure
+            const paragraphs = text.split(/\n\s*\n/).filter(p => p.trim().length > 50);
+            if (paragraphs.length >= 4) score += 5; // Good structure
+            
+            // Task 3 (Critical) gets bonus for analytical language
+            if (taskNum === 3) {
+                const analyticalWords = ['however', 'although', 'while', 'whereas', 'conversely', 'on the other hand', 'in contrast'];
+                let analyticalCount = 0;
+                analyticalWords.forEach(word => {
+                    if (textLower.includes(word)) analyticalCount++;
+                });
+                score += Math.min(analyticalCount * 2, 10);
+            }
+            
+            return Math.min(Math.max(Math.round(score), 60), 95); // Cap at 95 for estimated
+        }
+
+        function getFeedbackForScore(score) {
+            if (score >= 85) return "Eccellente! Dimostri padronanza C2 con linguaggio sofisticato e analisi critica.";
+            if (score >= 75) return "Molto buono! Buona gamma linguistica e organizzazione chiara.";
+            if (score >= 65) return "Sufficiente. Alcuni elementi C2 presenti, ma c'è spazio per migliorare la complessità.";
+            return "Necessita revisione. Verifica word count, struttura e uso di linguaggio C2.";
+        }
+
+        function updateProgress() {
+            const percent = (completedTasks / 3) * 100;
+            document.getElementById('progressBar').style.width = percent + '%';
+            document.getElementById('progressText').textContent = completedTasks + '/3 task completati';
+        }
+
+        function showFinalFeedback() {
+            const avgScore = Math.round((taskScores[1] + taskScores[2] + taskScores[3]) / 3);
+            document.getElementById('finalScore').textContent = avgScore + '%';
+            
+            let feedbackHTML = '<h3>Feedback dettagliato per task:</h3><ul style="list-style: none; padding: 0;">';
+            feedbackHTML += '<li style="padding: 10px; border-bottom: 1px solid var(--border);"><strong>Task 1 (Correspondence):</strong> ' + taskScores[1] + '% - ' + getTaskSpecificFeedback(1, taskScores[1]) + '</li>';
+            feedbackHTML += '<li style="padding: 10px; border-bottom: 1px solid var(--border);"><strong>Task 2 (Factual):</strong> ' + taskScores[2] + '% - ' + getTaskSpecificFeedback(2, taskScores[2]) + '</li>';
+            feedbackHTML += '<li style="padding: 10px;"><strong>Task 3 (Critical):</strong> ' + taskScores[3] + '% - ' + getTaskSpecificFeedback(3, taskScores[3]) + '</li>';
+            feedbackHTML += '</ul>';
+            
+            if (avgScore >= 80) {
+                feedbackHTML += '<div class="info-box" style="margin-top: 20px; background: #dcfce7; border-color: var(--success);"><strong>🎉 Ottimo lavoro!</strong> Il tuo Portfolio ISE IV è a livello Distinction. Continua così per l\'esame finale!</div>';
+            } else if (avgScore >= 65) {
+                feedbackHTML += '<div class="info-box" style="margin-top: 20px;"><strong>👍 Buon progresso!</strong> Hai raggiunto il livello Pass. Rivisedi i feedback per migliorare ulteriormente.</div>';
+            } else {
+                feedbackHTML += '<div class="info-box" style="margin-top: 20px; background: #fee2e2; border-color: var(--error);"><strong>⚠️ Necessita lavoro aggiuntivo.</strong> Studia i criteri C2 e ripeti l\'esercitazione.</div>';
+            }
+            
+            document.getElementById('detailedFeedback').innerHTML = feedbackHTML;
+            document.getElementById('feedbackPanel').classList.add('show');
+            
+            // Scroll to feedback
+            document.getElementById('feedbackPanel').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function getTaskSpecificFeedback(taskNum, score) {
+            const feedbacks = {
+                1: { high: "Register formale eccellente", medium: "Buona struttura email", low: "Verifica registro formale" },
+                2: { high: "Analisi obiettiva sofisticata", medium: "Buona integrazione dati", low: "Sviluppa maggiore obiettività" },
+                3: { high: "Criticità e sintesi eccellenti", medium: "Buona analisi comparativa", low: "Approfondisci la sintesi critica" }
+            };
+            
+            if (score >= 80) return feedbacks[taskNum].high;
+            if (score >= 65) return feedbacks[taskNum].medium;
+            return feedbacks[taskNum].low;
+        }
+
+        function resetPortfolio() {
+            if (!confirm('Sei sicuro di voler cancellare tutti i testi e ricominciare?')) return;
+            
+            Object.keys(texts).forEach(key => {
+                texts[key].element.value = '';
+                texts[key].element.style.background = 'white';
+                texts[key].element.style.borderColor = 'var(--border)';
+                localStorage.removeItem('ise4_portfolio_task' + key);
+            });
+            
+            completedTasks = 0;
+            taskScores = {};
+            updateProgress();
+            document.getElementById('feedbackPanel').classList.remove('show');
+            
+            // Reset word counters
+            document.getElementById('wordCount1').textContent = '0';
+            document.getElementById('wordCount2').textContent = '0';
+            document.getElementById('wordCount3').textContent = '0';
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Communication with parent window
+        window.addEventListener('message', function(event) {
+            if (event.data.action === 'requestProgress') {
+                event.source.postMessage({
+                    action: 'portfolioProgress',
+                    completed: completedTasks,
+                    total: 3,
+                    scores: taskScores
+                }, event.origin);
+            }
+        });
+    </script>
+
+</body>
+</html>

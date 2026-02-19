@@ -1,0 +1,1407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE III (C1) - Writing Complete Guide & Exercises</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #6a1b9a;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #f3e5f5;
+            --dark: #263238;
+            --border: #ce93d8;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --c1-color: #6a1b9a;
+            --warning: #ef6c00;
+            --info: #0277bd;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #4a148c 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .level-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #f3e5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .warning-box {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .info-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--info);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .task-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .task-card {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .task-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        .task-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .task-title {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .word-count {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .timing-badge {
+            display: inline-block;
+            background: var(--accent);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: bold;
+        }
+
+        .step-box {
+            background: #f5f5f5;
+            border-left: 3px solid var(--accent);
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .step-number {
+            display: inline-block;
+            background: var(--primary);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        .checklist {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .checklist li:before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .exercise-box {
+            background: #fff;
+            border: 2px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 8px;
+        }
+
+        .exercise-title {
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quiz-option {
+            display: block;
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+            background: #f5f5f5;
+            border: 1px solid #ddd;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .quiz-option:hover {
+            background: var(--light);
+            border-color: var(--primary);
+        }
+
+        .quiz-option.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+        }
+
+        .quiz-option.incorrect {
+            background: var(--error-bg);
+            border-color: var(--error);
+        }
+
+        .sample-text {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        .bullet-point {
+            background: #f9f9f9;
+            border-left: 3px solid var(--accent);
+            padding: 0.75rem;
+            margin: 0.5rem 0;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .task-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE III (C1) Writing</h1>
+            <p>Complete Preparation Guide & Practice Exercises</p>
+            <div class="level-badge">CEFR Level C1</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE III (C1) Writing Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE III Writing Complete Guide</h1>
+            <p class="page-subtitle">Task 3 & Task 4 • 80 Minutes • 200-230 Words Each</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('task3', this)">Task 3: Reading into Writing</button>
+            <button class="nav-tab" onclick="showSection('task4', this)">Task 4: Extended Writing</button>
+            <button class="nav-tab" onclick="showSection('genres', this)">Genres</button>
+            <button class="nav-tab" onclick="showSection('language', this)">C1 Language</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">ISE III Writing Exam Overview</div>
+                <div class="card-body">
+                    <p>The <strong>Writing</strong> component of ISE III (C1) consists of <strong>two tasks</strong> to be completed in <strong>80 minutes</strong> (40 minutes per task). You must write <strong>200-230 words</strong> for each task, demonstrating sophisticated language control, coherent organisation, and the ability to write for different purposes and audiences at C1 level.</p>
+
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-icon">📖</div>
+                            <div class="task-title">Task 3: Reading into Writing</div>
+                            <p>Use information from Task 2 reading texts<br><span class="word-count">200-230 words</span><br><span class="timing-badge">40 mins</span></p>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-icon">✍️</div>
+                            <div class="task-title">Task 4: Extended Writing</div>
+                            <p>Use your own ideas and knowledge<br><span class="word-count">200-230 words</span><br><span class="timing-badge">40 mins</span></p>
+                        </div>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Key Features at C1 Level:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Longer texts:</strong> 200-230 words (vs. 150-180 at B2)</li>
+                            <li><strong>Complex arguments:</strong> Nuanced discussion with multiple perspectives</li>
+                            <li><strong>Abstract topics:</strong> Ambitions, economic issues, rights of the individual</li>
+                            <li><strong>Sophisticated vocabulary:</strong> Academic collocations, abstract nouns</li>
+                            <li><strong>Advanced grammar:</strong> Inversion, subjunctive, mixed conditionals, nominalisation</li>
+                            <li><strong>Genre flexibility:</strong> Essays, reports, articles, reviews, formal correspondence</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Important:</strong> You must write in pen (not pencil) in the answer booklet provided. Plan your time carefully - 40 minutes per task including planning, writing, and checking.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Exam Format Summary</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Task</th>
+                                <th>Input</th>
+                                <th>Output</th>
+                                <th>Word Count</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Task 3</strong><br>Reading into Writing</td>
+                                <td>4 texts from Task 2 (Multi-text Reading)</td>
+                                <td>Article, essay, email/letter, review, or report</td>
+                                <td><span class="word-count">200-230 words</span></td>
+                                <td><span class="timing-badge">40 mins</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Task 4</strong><br>Extended Writing</td>
+                                <td>Task instructions only (no reading texts)</td>
+                                <td>Descriptive essay, discursive essay, article, email/letter, review, or report</td>
+                                <td><span class="word-count">200-230 words</span></td>
+                                <td><span class="timing-badge">40 mins</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="info-box">
+                        <strong>Total Writing Time:</strong> 80 minutes (40 minutes per task). You are not allowed to use dictionaries or any reference materials.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">C1 Writing Assessment Criteria</div>
+                <div class="card-body">
+                    <p>Your writing is assessed against four criteria at C1 level:</p>
+                    
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Task Fulfilment</strong>
+                        <p>Addressing all content points, appropriate genre and register, target reader awareness, word count.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Organisation and Structure</strong>
+                        <p>Clear paragraphing, logical progression, cohesive devices, appropriate format.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Language Control</strong>
+                        <p>Range and accuracy of grammar, vocabulary precision, spelling and punctuation.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>C1 Language Features</strong>
+                        <p>Complex sentence structures, nominalisation, sophisticated discourse markers, abstract vocabulary.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 3 SECTION -->
+        <section id="task3" class="section">
+            <div class="card">
+                <div class="card-header">Task 3: Reading into Writing (40 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Write <strong>200-230 words</strong> using information from the <strong>four texts in Task 2 (Multi-text Reading)</strong>. You must include <strong>three content points</strong> specified in the prompt and use your own words (copying from texts results in penalties).
+                    </div>
+
+                    <h4>Task Requirements:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Write <strong>200-230 words</strong> <span class="word-count">200-230 words</span></li>
+                        <li>Use information from <strong>all four texts in Task 2</strong></li>
+                        <li>Include <strong>three content points</strong> specified in the prompt (usually bullet points)</li>
+                        <li>Use your <strong>own words</strong> - do not copy directly from the texts</li>
+                        <li>Genre: Article, essay, formal/informal email, review, or report</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Task 3 Prompt:</strong><br><br>
+                        "Write an article (200-230 words) for a political magazine about economic inequality in your country. Use the information from texts A-D to:<br>
+                        <div class="bullet-point">» explain the causes of economic inequality</div>
+                        <div class="bullet-point">» evaluate the effectiveness of current government policies</div>
+                        <div class="bullet-point">» suggest practical solutions for reducing the wealth gap"</div>
+                    </div>
+
+                    <h4>Step-by-Step Approach:</h4>
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Analyse the Prompt (2 minutes)</strong>
+                        <p>Identify the three bullet points you must address. Note the genre (article) and register (formal/academic). Underline key requirements.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Review Task 2 Texts (5 minutes)</strong>
+                        <p>Go back to the four texts from Task 2. Identify relevant information for each bullet point. Make quick notes in your own words:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Text A: Causes → "globalisation and technological change"</li>
+                            <li>Text B: Current policies → "progressive taxation with mixed results"</li>
+                            <li>Text C: Solutions → "investment in education and infrastructure"</li>
+                            <li>Text D: Expert opinion → "minimum wage increases and wealth taxes"</li>
+                        </ul>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Plan Your Structure (3 minutes)</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>Introduction (30-35 words):</strong> Hook the reader and introduce the topic</li>
+                            <li><strong>Body Paragraph 1 (50-60 words):</strong> Address bullet point 1 with evidence from texts</li>
+                            <li><strong>Body Paragraph 2 (50-60 words):</strong> Address bullet point 2 with evaluation</li>
+                            <li><strong>Body Paragraph 3 (40-50 words):</strong> Address bullet point 3 + examples</li>
+                            <li><strong>Conclusion (30-35 words):</strong> Summary + forward-looking statement</li>
+                        </ul>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Write (25 minutes)</strong>
+                        <p>Write your response using sophisticated C1 language. Synthesise information from multiple texts.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>Check (5 minutes)</strong>
+                        <p>Verify word count, check all bullet points are addressed, correct grammar and spelling errors.</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Critical Success Factors for Task 3:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>✓ Synthesise - combine information from multiple texts</li>
+                            <li>✓ Include information from ALL four texts</li>
+                            <li>✓ Address all three bullet points explicitly</li>
+                            <li>✓ Use your own words - do not copy phrases from the reading texts</li>
+                            <li>✓ Use sophisticated linking words (furthermore, however, consequently)</li>
+                            <li>✓ Maintain consistent formal register throughout</li>
+                            <li>✓ Use C1 grammar structures (inversion, subjunctive, advanced conditionals)</li>
+                        </ul>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>Penalties Apply For:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Copying directly from the reading texts (plagiarism)</li>
+                            <li>Not addressing all three bullet points</li>
+                            <li>Not using information from all four texts</li>
+                            <li>Writing significantly under or over the word count (200-230 words)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 4 SECTION -->
+        <section id="task4" class="section">
+            <div class="card">
+                <div class="card-header">Task 4: Extended Writing (40 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Write <strong>200-230 words</strong> using <strong>your own ideas and knowledge</strong> (no reading texts provided). You must include <strong>two content points</strong> specified in the prompt. This task tests your ability to produce sophisticated, well-organised writing independently.
+                    </div>
+
+                    <h4>Task Requirements:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Write <strong>200-230 words</strong> <span class="word-count">200-230 words</span></li>
+                        <li><strong>No reading texts provided</strong> - use your own ideas and knowledge</li>
+                        <li>Include <strong>two content points</strong> specified in the prompt</li>
+                        <li>Genre: Descriptive essay, discursive essay, argumentative essay, article, formal/informal email/letter, review, or report</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Task 4 Prompt:</strong><br><br>
+                        "Write an essay (200-230 words) for your tutor discussing the impact of artificial intelligence on the workplace.<br>
+                        <div class="bullet-point">» evaluate the benefits and drawbacks of AI in employment</div>
+                        <div class="bullet-point">» suggest how workers can prepare for an AI-driven future"</div>
+                    </div>
+
+                    <h4>Approach for Task 4:</h4>
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Analyse the Prompt (3 minutes)</strong>
+                        <p>Identify the two bullet points. Determine the genre and register. Consider your target reader.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Brainstorm Ideas (5 minutes)</strong>
+                        <p>Generate ideas for both bullet points. Consider different perspectives and examples.</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Bullet 1 - Benefits: efficiency, automation of dangerous jobs, new job creation</li>
+                            <li>Bullet 1 - Drawbacks: unemployment, deskilling, inequality</li>
+                            <li>Bullet 2 - Preparation: lifelong learning, soft skills development, adaptability</li>
+                        </ul>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Plan Structure (2 minutes)</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li>Introduction: Contextualise the topic and outline your approach</li>
+                            <li>Body 1: Address bullet point 1 with balanced evaluation</li>
+                            <li>Body 2: Address bullet point 2 with practical suggestions</li>
+                            <li>Conclusion: Summarise main arguments and provide final thought</li>
+                        </ul>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">4</span>
+                        <strong>Write (25 minutes)</strong>
+                        <p>Produce your response with C1 language features.</p>
+                    </div>
+                    <div class="step-box">
+                        <span class="step-number">5</span>
+                        <strong>Check (5 minutes)</strong>
+                        <p>Verify word count, bullet points, grammar, vocabulary, and spelling.</p>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Key Differences from Task 3:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>No source texts - all ideas must be your own</li>
+                            <li>Two bullet points instead of three</li>
+                            <li>May require more original analysis and evaluation</li>
+                            <li>Greater freedom in argument development</li>
+                            <li>Same word count and time allocation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- GENRES SECTION -->
+        <section id="genres" class="section">
+            <div class="card">
+                <div class="card-header">Writing Genres at ISE III</div>
+                <div class="card-body">
+                    <p>At ISE III, you may be asked to write in various genres. Each has specific conventions, register requirements, and structural expectations.</p>
+
+                    <h4>1. Essay (Descriptive/Discursive/Argumentative)</h4>
+                    <div class="example-box">
+                        <strong>Characteristics:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Formal, academic register</li>
+                            <li>No contractions (don't → do not)</li>
+                            <li>No colloquialisms or idioms</li>
+                            <li>Objective tone (avoid "I think" - use "It could be argued that")</li>
+                            <li>Clear thesis statement</li>
+                            <li>Balanced argumentation with evidence</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem;"><strong>Structure:</strong> Introduction → Body (2-3 paragraphs) → Conclusion</p>
+                        <p><strong>Example task:</strong> "To what extent has social media improved communication? Discuss both sides and give your opinion."</p>
+                    </div>
+
+                    <h4>2. Article (Magazine/Online)</h4>
+                    <div class="example-box">
+                        <strong>Characteristics:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Engaging title</li>
+                            <li>Semi-formal to formal register (depending on publication)</li>
+                            <li>Rhetorical questions allowed</li>
+                            <li>Direct address to reader ("you") may be appropriate</li>
+                            <li>Sophisticated vocabulary and varied sentence structures</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem;"><strong>Structure:</strong> Title → Introduction (hook) → Body → Conclusion</p>
+                        <p><strong>Example task:</strong> "Write an article about the future of renewable energy."</p>
+                    </div>
+
+                    <h4>3. Formal Email/Letter</h4>
+                    <div class="example-box">
+                        <strong>Characteristics:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Highly formal register</li>
+                            <li>Complex sentence structures</li>
+                            <li>Formal conventions (Dear Sir/Madam, Yours faithfully)</li>
+                            <li>Persuasive or informative purpose</li>
+                            <li>Clear paragraphing with topic sentences</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem;"><strong>Structure:</strong> Address → Date → Salutation → Opening → Body → Closing → Sign-off</p>
+                        <p><strong>Example task:</strong> "Write a letter to a government minister proposing policy changes."</p>
+                    </div>
+
+                    <h4>4. Report</h4>
+                    <div class="example-box">
+                        <strong>Characteristics:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Objective, analytical tone</li>
+                            <li>Headings and subheadings (optional but helpful)</li>
+                            <li>Evidence-based analysis</li>
+                            <li>Recommendations section</li>
+                            <li>Impersonal style (passive voice acceptable)</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem;"><strong>Structure:</strong> Title → Introduction → Findings/Analysis → Recommendations → Conclusion</p>
+                        <p><strong>Example task:</strong> "Write a report on the impact of remote working on productivity."</p>
+                    </div>
+
+                    <h4>5. Review</h4>
+                    <div class="example-box">
+                        <strong>Characteristics:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Balanced evaluation (positive and negative aspects)</li>
+                            <li>Cultural context</li>
+                            <li>Nuanced opinion with justification</li>
+                            <li>Recommendation</li>
+                            <li>Engaging but sophisticated style</li>
+                        </ul>
+                        <p style="margin-top: 0.5rem;"><strong>Structure:</strong> Introduction (what reviewed) → Summary → Evaluation → Conclusion/Recommendation</p>
+                        <p><strong>Example task:</strong> "Review a recent documentary about climate change, evaluating its impact."</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Register and Tone Guide</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Formal (Essay/Report/Formal Letter)</th>
+                                <th>Semi-Formal (Article/Review)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Contractions</td>
+                                <td>Avoid (do not use don't)</td>
+                                <td>Avoid or minimal</td>
+                            </tr>
+                            <tr>
+                                <td>Phrasal verbs</td>
+                                <td>Avoid (use Latin-based alternatives)</td>
+                                <td>Limited use acceptable</td>
+                            </tr>
+                            <tr>
+                                <td>First person</td>
+                                <td>Avoid (use passive or "It could be argued")</td>
+                                <td>Occasional use acceptable</td>
+                            </tr>
+                            <tr>
+                                <td>Colloquialisms</td>
+                                <td>Avoid</td>
+                                <td>Avoid</td>
+                            </tr>
+                            <tr>
+                                <td>Sentence length</td>
+                                <td>Complex, varied</td>
+                                <td>Complex but engaging</td>
+                            </tr>
+                            <tr>
+                                <td>Vocabulary</td>
+                                <td>Academic, abstract</td>
+                                <td>Sophisticated but accessible</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- LANGUAGE SECTION -->
+        <section id="language" class="section">
+            <div class="card">
+                <div class="card-header">C1 Language Features</div>
+                <div class="card-body">
+                    <p>At ISE III (C1), you must demonstrate sophisticated language control. Here are the key features examiners look for:</p>
+
+                    <h4>1. Complex Sentence Structures</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Structure</th>
+                                <th>Example</th>
+                                <th>Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Inversion</td>
+                                <td>"Never before has technology transformed society so rapidly."</td>
+                                <td>Emphasis, formal writing</td>
+                            </tr>
+                            <tr>
+                                <td>Cleft sentences</td>
+                                <td>"What concerns policymakers most is the long-term impact."</td>
+                                <td>Emphasis</td>
+                            </tr>
+                            <tr>
+                                <td>Participle clauses</td>
+                                <td>"Having considered all options, the committee decided..."</td>
+                                <td>Formal, concise</td>
+                            </tr>
+                            <tr>
+                                <td>Passive voice</td>
+                                <td>"It has been suggested that..."</td>
+                                <td>Impersonal, academic</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>2. Advanced Conditionals</h4>
+                    <div class="example-box">
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>Mixed conditional:</strong> "If the government had acted sooner, unemployment would be lower now."</li>
+                            <li><strong>Inverted conditional:</strong> "Were the policy to be implemented, significant changes would follow."</li>
+                            <li><strong>Subjunctive:</strong> "It is essential that measures be taken to address this issue."</li>
+                        </ul>
+                    </div>
+
+                    <h4>3. Nominalisation</h4>
+                    <p>Turning verbs into nouns for more formal, abstract writing:</p>
+                    <div class="example-box">
+                        <ul style="margin-left: 2rem;">
+                            <li>"The implementation of the policy" (not "When they implemented the policy")</li>
+                            <li>"A thorough examination of the evidence" (not "When we examine the evidence thoroughly")</li>
+                            <li>"The rapid expansion of urban areas" (not "Urban areas expanded rapidly")</li>
+                        </ul>
+                    </div>
+
+                    <h4>4. Sophisticated Discourse Markers</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Basic (B2)</th>
+                                <th>Sophisticated (C1)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Addition</td>
+                                <td>Also, Furthermore</td>
+                                <td>Moreover, In addition, What is more</td>
+                            </tr>
+                            <tr>
+                                <td>Contrast</td>
+                                <td>But, However</td>
+                                <td>Nevertheless, Conversely, Notwithstanding</td>
+                            </tr>
+                            <tr>
+                                <td>Result</td>
+                                <td>So, Therefore</td>
+                                <td>Consequently, As a result, Thus</td>
+                            </tr>
+                            <tr>
+                                <td>Example</td>
+                                <td>For example</td>
+                                <td>For instance, By way of illustration</td>
+                            </tr>
+                            <tr>
+                                <td>Concession</td>
+                                <td>Although</td>
+                                <td>While it is true that..., Despite the fact that...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4>5. Hedging Language</h4>
+                    <p>At C1, show nuance by not being too absolute:</p>
+                    <div class="example-box">
+                        <ul style="margin-left: 2rem;">
+                            <li>"It could be argued that..." (not "This proves that...")</li>
+                            <li>"This suggests that..." (not "This means that...")</li>
+                            <li>"To some extent..." / "In certain circumstances..."</li>
+                            <li>"Arguably..." / "Potentially..." / "It appears that..."</li>
+                        </ul>
+                    </div>
+
+                    <h4>6. Abstract Vocabulary</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Basic</th>
+                                <th>C1 Abstract</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>problem</td>
+                                <td>issue, challenge, dilemma, predicament</td>
+                            </tr>
+                            <tr>
+                                <td>important</td>
+                                <td>crucial, pivotal, paramount, instrumental</td>
+                            </tr>
+                            <tr>
+                                <td>big</td>
+                                <td>substantial, considerable, significant, profound</td>
+                            </tr>
+                            <tr>
+                                <td>change</td>
+                                <td>transformation, shift, transition, modification</td>
+                            </tr>
+                            <tr>
+                                <td>think</td>
+                                <td>contend, posit, hypothesise, postulate</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Common Errors to Avoid at C1</div>
+                <div class="card-body">
+                    <div class="warning-box">
+                        <strong>Do Not:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Use contractions in formal writing (don't, can't, won't)</li>
+                            <li>Use phrasal verbs when formal alternatives exist (put up with → tolerate, look into → investigate)</li>
+                            <li>Use "I think" or "In my opinion" repeatedly (use "It could be argued," "Evidence suggests")</li>
+                            <li>Write overly simple sentences - combine ideas using subordination</li>
+                            <li>Use "very" + adjective (very big → substantial, very good → exemplary)</li>
+                            <li>Start sentences with "And" or "But"</li>
+                            <li>Use informal connectors (Besides, Anyway)</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Do:</strong>
+                        <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                            <li>Vary your sentence structures (simple, compound, complex)</li>
+                            <li>Use passive voice appropriately for impersonal tone</li>
+                            <li>Include specific examples to support arguments</li>
+                            <li>Use nominalisation for formal register</li>
+                            <li>Employ sophisticated discourse markers</li>
+                            <li>Show awareness of counterarguments</li>
+                            <li>Edit carefully for grammar and spelling errors</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="card">
+                <div class="card-header">Writing Practice Exercises</div>
+                <div class="card-body">
+                    <p>Test your understanding of ISE III Writing requirements with these interactive exercises.</p>
+
+                    <!-- Exercise 1 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 1: Word Count</div>
+                        <p><strong>What is the correct word count for each ISE III Writing task?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 150-180 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 200-230 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 100-130 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 250-280 words</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 2 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 2: Time Allocation</div>
+                        <p><strong>How much time do you have for each writing task?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 20 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 40 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 60 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 30 minutes</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 3 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 3: Task 3 Requirements</div>
+                        <p><strong>What must you do in Task 3 (Reading into Writing)?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Write about your own opinions only</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Use information from the four Task 2 reading texts</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Copy directly from the reading texts</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Write a creative story</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 4 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 4: Task 4 Requirements</div>
+                        <p><strong>What is the key difference in Task 4 (Extended Writing)?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) It is longer than Task 3</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) No reading texts are provided - use your own ideas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) You can use a dictionary</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) It is a group writing task</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 5 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 5: Content Points</div>
+                        <p><strong>How many content points (bullet points) must you address in Task 3?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 1 bullet point</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 2 bullet points</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) 3 bullet points</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 4 bullet points</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 6 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 6: Content Points Task 4</div>
+                        <p><strong>How many content points must you address in Task 4?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 1 bullet point</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 2 bullet points</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 3 bullet points</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) No bullet points</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 7 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 7: Using Source Texts</div>
+                        <p><strong>What should you do when using information from the reading texts in Task 3?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Copy phrases directly from the texts</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Use your own words to express the ideas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Only use information from one text</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Quote extensively with quotation marks</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 8 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 8: C1 Grammar</div>
+                        <p><strong>Which sentence demonstrates C1-level grammar?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) I think that pollution is bad for the environment.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Were the government to implement stricter policies, air quality would improve significantly.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Pollution affects many people around the world.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) We should stop pollution now.</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 9 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 9: Nominalisation</div>
+                        <p><strong>Which sentence uses nominalisation (C1 feature)?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) The government implemented the policy and this caused big changes.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) The implementation of the policy resulted in substantial transformation.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) When the government implemented the policy, things changed a lot.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) The policy was implemented by the government and changes happened.</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 10 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 10: Formal Register</div>
+                        <p><strong>Which phrase is appropriate for formal academic writing?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) I think that...</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) It could be argued that...</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) In my opinion...</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) I believe that...</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 11 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 11: Discourse Markers</div>
+                        <p><strong>Which discourse marker is most sophisticated (C1 level)?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) But</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) However</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) Notwithstanding</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Although</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 12 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 12: Hedging Language</div>
+                        <p><strong>Which sentence shows appropriate hedging at C1 level?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) This proves that climate change is caused by humans.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) The evidence suggests that human activity may be a significant contributing factor to climate change.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Climate change is definitely caused by humans.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) I am sure that humans cause climate change.</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Exercise Tips:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Click on the option you think is correct</li>
+                            <li>Green indicates correct; red indicates incorrect</li>
+                            <li>Review the relevant sections if you get questions wrong</li>
+                            <li>All answers are based on official Trinity College London specifications</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Writing Practice Activities</div>
+                <div class="card-body">
+                    <p>Develop your C1 writing skills with these practice activities:</p>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">✍️ Activity 1: Planning Practice</div>
+                        <p><strong>Task:</strong> Plan a Task 4 essay in 5 minutes.</p>
+                        
+                        <div class="sample-text">
+                            <strong>Prompt:</strong> "Write an essay (200-230 words) discussing the impact of social media on interpersonal relationships.<br>
+                            <div class="bullet-point">» evaluate the positive and negative effects</div>
+                            <div class="bullet-point">» suggest how individuals can maintain healthy online boundaries"</div>
+                        </div>
+
+                        <p style="margin-top: 1rem;"><strong>Your plan should include:</strong></p>
+                        <ul class="checklist">
+                            <li>Thesis statement</li>
+                            <li>Three main points for bullet 1 (positive/negative)</li>
+                            <li>Two practical suggestions for bullet 2</li>
+                            <li>Concluding thought</li>
+                            <li>Three sophisticated vocabulary items you will use</li>
+                            <li>One complex grammatical structure you will include</li>
+                        </ul>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">✍️ Activity 2: Nominalisation Practice</div>
+                        <p><strong>Transform these informal sentences into formal C1 writing using nominalisation:</strong></p>
+                        
+                        <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>"The government introduced new laws and this reduced pollution."
+                                <br>→ <em>"The introduction of new legislation resulted in a reduction in pollution levels."</em></li>
+                            <li>"Technology is changing quickly and this affects jobs."
+                                <br>→ <em>___________________________________________"</em></li>
+                            <li>"People are consuming more content online and traditional media is struggling."
+                                <br>→ <em>___________________________________________"</em></li>
+                            <li>"Schools need to adapt their teaching methods because students have different needs now."
+                                <br>→ <em>___________________________________________"</em></li>
+                        </ol>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">✍️ Activity 3: Discourse Marker Upgrade</div>
+                        <p><strong>Upgrade these basic connectors to C1 level:</strong></p>
+                        
+                        <table class="grammar-table" style="margin-top: 0.5rem;">
+                            <thead>
+                                <tr>
+                                    <th>Basic</th>
+                                    <th>Your C1 Upgrade</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>But the evidence is unclear.</td>
+                                    <td>_________________________</td>
+                                </tr>
+                                <tr>
+                                    <td>Also, there are economic benefits.</td>
+                                    <td>_________________________</td>
+                                </tr>
+                                <tr>
+                                    <td>So, policymakers must act.</td>
+                                    <td>_________________________</td>
+                                </tr>
+                                <tr>
+                                    <td>For example, Scandinavian countries...</td>
+                                    <td>_________________________</td>
+                                </tr>
+                                <tr>
+                                    <td>Although this is true, there are drawbacks.</td>
+                                    <td>_________________________</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <div class="example-box" style="margin-top: 1rem;">
+                            <strong>Possible answers:</strong> Nevertheless/However, the evidence remains ambiguous; Moreover/Furthermore, there are considerable economic benefits; Consequently/Thus, policymakers are compelled to take action; By way of illustration/For instance, Scandinavian countries...; While this may be the case, there are nonetheless significant drawbacks...
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">✍️ Activity 4: Timed Writing Practice</div>
+                        <p><strong>Task:</strong> Complete a full Task 4 essay in 40 minutes.</p>
+                        
+                        <div class="sample-text">
+                            <strong>Prompt:</strong> "Write an article (200-230 words) for a lifestyle magazine about work-life balance in the modern era.<br>
+                            <div class="bullet-point">» analyse the causes of poor work-life balance</div>
+                            <div class="bullet-point">» propose strategies for achieving better balance"</div>
+                        </div>
+
+                        <p style="margin-top: 1rem;"><strong>Time management:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li>0-5 min: Analyse prompt and brainstorm</li>
+                            <li>5-8 min: Plan structure</li>
+                            <li>8-33 min: Write</li>
+                            <li>33-40 min: Check and edit</li>
+                        </ul>
+
+                        <div class="warning-box" style="margin-top: 1rem;">
+                            <strong>Checklist for self-assessment:</strong>
+                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
+                                <li>Word count between 200-230?</li>
+                                <li>Both bullet points addressed?</li>
+                                <li>At least 3 C1 grammatical structures used?</li>
+                                <li>Nominalisation used?</li>
+                                <li>Sophisticated vocabulary?</li>
+                                <li>No contractions?</li>
+                                <li>Appropriate genre conventions?</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="exercise-box">
+                        <div class="exercise-title">✍️ Activity 5: Error Correction</div>
+                        <p><strong>Improve this B2-level paragraph to C1 standard:</strong></p>
+                        
+                        <div class="sample-text">
+                            "I think that social media is very bad for society. It makes people feel bad about themselves and they spend too much time on their phones. But it also helps people stay in touch with friends. So I believe we should use it less but not stop completely."
+                        </div>
+
+                        <p style="margin-top: 1rem;"><strong>Issues to address:</strong></p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Replace "I think" with impersonal phrase</li>
+                            <li>Upgrade "very bad" to sophisticated vocabulary</li>
+                            <li>Use nominalisation</li>
+                            <li>Replace basic connectors (But, So)</li>
+                            <li>Add hedging language for nuance</li>
+                            <li>Combine short sentences into complex structures</li>
+                        </ul>
+
+                        <div class="example-box" style="margin-top: 1rem;">
+                            <strong>C1 version:</strong><br>
+                            "It could be argued that social media has profoundly detrimental effects on societal wellbeing, contributing to diminished self-esteem and excessive screen time. Nevertheless, its capacity to facilitate interpersonal connections should not be underestimated. Consequently, a balanced approach involving moderated usage, rather than complete abstinence, would appear to be the most pragmatic solution."
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE III (C1) Writing Guide</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+
+        function checkAnswer(element, isCorrect) {
+            // Remove previous classes from siblings
+            const parent = element.parentElement;
+            const siblings = parent.querySelectorAll('.quiz-option');
+            siblings.forEach(sib => {
+                sib.classList.remove('correct', 'incorrect');
+                sib.style.pointerEvents = 'none';
+            });
+
+            // Add appropriate class
+            if (isCorrect) {
+                element.classList.add('correct');
+                showFeedback(parent, '✓ Correct! Well done.', 'success');
+            } else {
+                element.classList.add('incorrect');
+                // Highlight correct answer
+                siblings.forEach(sib => {
+                    if (sib.onclick.toString().includes('true')) {
+                        sib.classList.add('correct');
+                    }
+                });
+                showFeedback(parent, '✗ Incorrect. The correct answer is highlighted in green.', 'error');
+            }
+        }
+
+        function showFeedback(parent, message, type) {
+            const feedback = parent.querySelector('.feedback');
+            feedback.textContent = message;
+            feedback.style.display = 'block';
+            if (type === 'success') {
+                feedback.style.background = '#c8e6c9';
+                feedback.style.color = '#2e7d32';
+                feedback.style.border = '1px solid #81c784';
+            } else {
+                feedback.style.background = '#ffcdd2';
+                feedback.style.color = '#c62828';
+                feedback.style.border = '1px solid #ef9a9a';
+            }
+        }
+    </script>
+</body>
+</html>

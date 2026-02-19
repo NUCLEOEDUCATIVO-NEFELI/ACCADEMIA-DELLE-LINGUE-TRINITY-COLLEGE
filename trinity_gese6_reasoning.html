@@ -1,0 +1,1768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 6 - Academic Examination Preparation (50 Exercises)</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Source+Sans+Pro:wght@400;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a5f;
+            --secondary: #4a5568;
+            --accent: #8b4513;
+            --light: #f7f8fa;
+            --dark: #1a202c;
+            --border: #cbd5e0;
+            --success: #22543d;
+            --success-bg: #c6f6d5;
+            --error: #742a2a;
+            --error-bg: #fed7d7;
+            --trinity-red: #8b0000;
+            --trinity-blue: #1e3a5f;
+            --parchment: #faf9f6;
+            --academic-gold: #b8860b;
+            --academic-crimson: #722f37;
+        }
+
+        body {
+            font-family: 'Source Sans Pro', sans-serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.7;
+            min-height: 100vh;
+            font-size: 16px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--trinity-blue) 0%, #2c5282 100%);
+            color: white;
+            padding: 2.5rem 0;
+            border-bottom: 5px solid var(--academic-gold);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.15);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.15rem;
+            opacity: 0.95;
+            font-weight: 400;
+            font-style: italic;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--academic-gold);
+            color: white;
+            padding: 0.35rem 1rem;
+            border-radius: 2px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            margin-top: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            font-size: 0.9rem;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+            color: var(--academic-crimson);
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2.5rem;
+        }
+
+        .page-header {
+            margin-bottom: 2.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 4px double var(--academic-gold);
+            text-align: center;
+        }
+
+        .page-title {
+            font-family: 'Crimson Text', serif;
+            font-size: 2.25rem;
+            color: var(--trinity-blue);
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.5px;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.15rem;
+            font-weight: 400;
+            font-style: italic;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 3px solid var(--border);
+            margin-bottom: 2.5rem;
+            background: white;
+            flex-wrap: wrap;
+            gap: 0.25rem;
+            padding: 0.75rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+            font-family: 'Crimson Text', serif;
+        }
+
+        .nav-tab {
+            padding: 0.875rem 1.75rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.05rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            font-weight: 600;
+            border-radius: 2px;
+        }
+
+        .nav-tab:hover {
+            color: var(--academic-crimson);
+            background: #fff5f5;
+        }
+
+        .nav-tab.active {
+            color: var(--academic-crimson);
+            border-bottom-color: var(--academic-crimson);
+            background: #fef2f2;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 3px 6px -1px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(to right, #f7f8fa, #ffffff);
+            padding: 1.5rem;
+            border-bottom: 2px solid var(--border);
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: var(--trinity-blue);
+            font-size: 1.35rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            letter-spacing: 0.25px;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .instruction-box {
+            background: #ebf8ff;
+            border-left: 5px solid var(--trinity-blue);
+            padding: 1.25rem 1.75rem;
+            margin-bottom: 2rem;
+            border-radius: 0 4px 4px 0;
+            font-size: 1rem;
+            line-height: 1.8;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .topic-card {
+            background: #fafafa;
+            border: 2px solid var(--border);
+            padding: 1.75rem;
+            border-radius: 4px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .topic-card:hover {
+            border-color: var(--academic-gold);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--academic-gold);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .topic-card:hover::before {
+            opacity: 1;
+        }
+
+        .topic-title {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: var(--trinity-blue);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.15rem;
+        }
+
+        .grammar-box {
+            background: #fffbeb;
+            border: 1px solid #f6e05e;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .grammar-box::before {
+            content: 'GRAMMAR ANALYSIS';
+            position: absolute;
+            top: -10px;
+            left: 15px;
+            background: #f6e05e;
+            color: #744210;
+            padding: 2px 10px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .grammar-title {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: #744210;
+            margin-bottom: 1rem;
+            margin-top: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .academic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            background: white;
+            border: 2px solid var(--border);
+            font-size: 0.95rem;
+        }
+
+        .academic-table th {
+            background: var(--trinity-blue);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            border: 1px solid #2a4365;
+        }
+
+        .academic-table td {
+            padding: 1rem;
+            border: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        .academic-table tr:nth-child(even) {
+            background: #f7f8fa;
+        }
+
+        .academic-table tr:hover {
+            background: #edf2f7;
+        }
+
+        .game-container {
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.06);
+            font-family: 'Crimson Text', serif;
+        }
+
+        .score-label {
+            font-weight: 700;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        .score-value {
+            font-size: 2rem;
+            color: var(--academic-crimson);
+            font-weight: 700;
+            font-family: 'Crimson Text', serif;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 2px;
+            margin: 1.25rem 0;
+            overflow: hidden;
+            border: 1px solid #cbd5e0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--academic-crimson), #c53030);
+            width: 0%;
+            transition: width 0.6s ease;
+        }
+
+        .question-box {
+            background: white;
+            border: 3px solid var(--trinity-blue);
+            padding: 2.5rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            border-radius: 4px;
+            position: relative;
+        }
+
+        .question-type-badge {
+            position: absolute;
+            top: -14px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--academic-crimson);
+            color: white;
+            padding: 0.35rem 1.25rem;
+            border-radius: 2px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .question-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 1.35rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: var(--dark);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        .listening-box {
+            background: #f0fff4;
+            border: 2px solid #38a169;
+            border-radius: 4px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1.25rem;
+            margin-bottom: 1.25rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-audio {
+            background: #2f855a;
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 2px;
+            cursor: pointer;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-audio:hover {
+            background: #276749;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(47, 133, 90, 0.3);
+        }
+
+        .btn-audio:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .transcript-box {
+            background: white;
+            border: 1px solid #9ae6b4;
+            padding: 1.25rem;
+            border-radius: 4px;
+            margin-top: 1.25rem;
+            font-style: italic;
+            color: #22543d;
+            display: none;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            text-align: left;
+        }
+
+        .transcript-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .option-btn {
+            padding: 1.25rem 1.75rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            border-radius: 4px;
+            font-weight: 600;
+            text-align: left;
+            line-height: 1.5;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--academic-crimson);
+            background: #fff5f5;
+            transform: translateX(5px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.75;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1.5rem;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            margin-bottom: 1.5rem;
+            border: 3px solid;
+            border-radius: 4px;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.4s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--academic-crimson);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1.05rem;
+            cursor: pointer;
+            font-weight: 700;
+            border-radius: 2px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .btn-primary:hover {
+            background: #9b2c2c;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(114, 47, 55, 0.25);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--border);
+            padding: 0.875rem 1.75rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 2px;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--academic-crimson);
+            color: var(--academic-crimson);
+            background: #fff5f5;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 280px;
+            padding: 0.875rem 1.25rem;
+            border: 2px solid #a0aec0;
+            border-radius: 4px;
+            margin: 0 0.35rem;
+            font-size: 1.05rem;
+            font-family: 'Source Sans Pro', sans-serif;
+            transition: all 0.2s;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--academic-crimson);
+            box-shadow: 0 0 0 4px rgba(114, 47, 55, 0.1);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--trinity-blue) 0%, #2c5282 100%);
+            color: white;
+            padding: 3.5rem;
+            border-radius: 4px;
+            text-align: center;
+            margin-top: 2.5rem;
+            display: none;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 3px solid var(--academic-gold);
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.8s ease;
+        }
+
+        .final-score-value {
+            font-size: 4.5rem;
+            font-weight: 800;
+            color: white;
+            margin: 2rem 0;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+            font-family: 'Crimson Text', serif;
+        }
+
+        .final-message {
+            font-size: 1.35rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .exercise-counter {
+            background: var(--academic-crimson);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 2px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1.25rem;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            border: 2px solid white;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1.25rem; }
+        .mb-2 { margin-bottom: 1.25rem; }
+
+        .vocab-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1rem;
+            margin-top: 1.25rem;
+        }
+
+        .vocab-item {
+            background: white;
+            padding: 0.875rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 0.95rem;
+        }
+
+        .vocab-icon {
+            font-size: 1.25rem;
+        }
+
+        .analysis-box {
+            background: #fff5f5;
+            border-left: 5px solid var(--academic-crimson);
+            padding: 1.25rem 1.75rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .analysis-title {
+            font-family: 'Crimson Text', serif;
+            font-weight: 700;
+            color: var(--academic-crimson);
+            margin-bottom: 0.75rem;
+            font-size: 1.15rem;
+        }
+
+        .formula-box {
+            background: #ebf8ff;
+            border: 2px solid #4299e1;
+            padding: 1.25rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            text-align: center;
+            font-family: 'Crimson Text', serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #2b6cb0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { flex: 1 1 calc(50% - 0.5rem); text-align: center; font-size: 0.95rem; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.75rem; }
+            .page-title { font-size: 1.75rem; }
+            .final-score-value { font-size: 3.5rem; }
+            .fill-blank { width: 240px; }
+            .topic-grid { grid-template-columns: 1fr; }
+            .academic-table { font-size: 0.85rem; }
+            .academic-table th, .academic-table td { padding: 0.75rem; }
+        }
+
+        .hint-text {
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-top: 0.75rem;
+            font-style: italic;
+        }
+
+        .scholarly-note {
+            font-size: 0.85rem;
+            color: #744210;
+            background: #fffbeb;
+            padding: 0.75rem 1rem;
+            border-radius: 4px;
+            margin-top: 1rem;
+            border-left: 3px solid #f6e05e;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity College London</h1>
+            <p>Graded Examinations in Spoken English — Grade 6</p>
+            <span class="badge">CEFR B1 Level — Intermediate</span>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">GESE Examinations</a>
+            <span>›</span>
+            <strong>Grade 6 Academic Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">Academic Examination Preparation</h1>
+            <p class="page-subtitle">Comprehensive analysis of hypothetical scenarios, modal obligations, and retrospective speculation through 50 rigorous exercises</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">📋 Syllabus</button>
+            <button class="nav-tab" onclick="showSection('grammar', this)">Grammar</button>
+            <button class="nav-tab" onclick="showSection('vocabulary', this)">Lexicon</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 50 Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">GESE Grade 6: Examination Overview</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Examination Format:</strong> A 10-minute structured discourse examining the candidate's capacity to articulate hypothetical scenarios, discuss obligations and necessities, and engage in retrospective analysis of uncertain past events. The examination demands sophisticated manipulation of complex grammatical structures at CEFR B1 level.
+                    </div>
+                    
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">🔮 Second Conditional</div>
+                            <p>Articulation of hypothetical present/future scenarios contrary to current reality: <em>If + past simple, would + infinitive</em>.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">⏳ Present Perfect Duration</div>
+                            <p>Expression of temporal duration from past to present using <em>for</em> (period) and <em>since</em> (starting point).</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">⚖️ Modal Obligations</div>
+                            <p>Distinction between external compulsion (<em>have to</em>), internal necessity (<em>must</em>), and advisory recommendation (<em>should</em>).</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🎲 Past Speculation</div>
+                            <p>Retrospective conjecture regarding uncertain past events: <em>might/may/could + have + past participle</em>.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">📊 Continuous vs. Simple</div>
+                            <p>Contrastive analysis of completed actions versus ongoing processes in past narrative contexts.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🎯 Abstract Discourse</div>
+                            <p>Engagement with intangible concepts: dreams, ambitions, hypothetical life changes, and future aspirations.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Required Communicative Competencies</div>
+                <div class="card-body">
+                    <ul style="margin-left: 1.5rem; line-height: 2.2;">
+                        <li>Articulate hypothetical scenarios contrary to present reality</li>
+                        <li>Express temporal duration with precision using <em>for</em> and <em>since</em></li>
+                        <li>Negotiate degrees of obligation, necessity, and recommendation</li>
+                        <li>Engage in retrospective speculation regarding past possibilities</li>
+                        <li>Contrast completed actions with ongoing processes in narrative</li>
+                        <li>Discuss abstract concepts: ambitions, regrets, alternative histories</li>
+                        <li>Provide nuanced responses requiring complex grammatical structures</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRAMMAR SECTION -->
+        <section id="grammar" class="section">
+            <div class="card">
+                <div class="card-header">Grammatical Analysis & Syntactic Structures</div>
+                <div class="card-body">
+                    <div class="grammar-box">
+                        <div class="grammar-title">🔮 Second Conditional: Hypothetical Scenarios</div>
+                        <div class="formula-box">If + Past Simple, Would + Base Verb</div>
+                        <p><strong>Semantic Function:</strong> Expression of hypothetical present or future situations contrary to current reality.</p>
+                        <div class="analysis-box">
+                            <div class="analysis-title">Exemplification:</div>
+                            <p><em>If I won the lottery, I would travel around the world.</em> (I haven't won, but I imagine the consequence)</p>
+                            <p><em>If she studied harder, she would pass the exam.</em> (She doesn't study enough currently)</p>
+                        </div>
+                        <p class="scholarly-note"><strong>Academic Note:</strong> The second conditional distinguishes itself from the first through its examination of improbability rather than probability.</p>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">⚖️ Modal Verbs of Obligation: A Taxonomy</div>
+                        <table class="academic-table">
+                            <thead>
+                                <tr>
+                                    <th>Modal</th>
+                                    <th>Semantic Category</th>
+                                    <th>Illustrative Context</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>must</strong></td>
+                                    <td>Internal obligation / Strong necessity</td>
+                                    <td><em>I must finish this essay tonight.</em> (personal imperative)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>have to</strong></td>
+                                    <td>External obligation / Compulsion</td>
+                                    <td><em>I have to wear a uniform at work.</em> (external requirement)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>mustn't</strong></td>
+                                    <td>Prohibition (strong)</td>
+                                    <td><em>You mustn't touch that wire.</em> (danger/strict rule)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>don't have to</strong></td>
+                                    <td>Absence of necessity</td>
+                                    <td><em>You don't have to come if you're busy.</em> (optional)</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>should/shouldn't</strong></td>
+                                    <td>Advice / Recommendation</td>
+                                    <td><em>You should see a doctor.</em> (suggestion, weaker than must)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">🎲 Retrospective Speculation: Past Modals</div>
+                        <div class="formula-box">Might/May/Could + Have + Past Participle</div>
+                        <p><strong>Semantic Function:</strong> Conjecture regarding uncertain past events or alternative historical possibilities.</p>
+                        <div class="analysis-box">
+                            <div class="analysis-title">Exemplification:</div>
+                            <p><em>She might have forgotten the meeting.</em> (Possible explanation for absence)</p>
+                            <p><em>He could have taken the wrong bus.</em> (Alternative hypothesis)</p>
+                            <p><em>They may have already left.</em> (Speculative deduction)</p>
+                        </div>
+                        <p class="scholarly-note"><strong>Critical Distinction:</strong> <em>Can't have</em> indicates impossibility in the past; <em>must have</em> indicates strong certainty about past events.</p>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">⏳ Temporal Duration: For vs. Since</div>
+                        <table class="academic-table">
+                            <thead>
+                                <tr>
+                                    <th>Temporal Marker</th>
+                                    <th>Syntactic Requirement</th>
+                                    <th>Exemplification</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><strong>for</strong></td>
+                                    <td>Duration (period of time)</td>
+                                    <td><em>for three years, for two hours, for a long time</em></td>
+                                </tr>
+                                <tr>
+                                    <td><strong>since</strong></td>
+                                    <td>Starting point (specific time)</td>
+                                    <td><em>since 2019, since last Monday, since I was young</em></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <p class="scholarly-note"><strong>Mnemonic Device:</strong> <em>For</em> = <strong>FOR</strong> how long? <em>Since</em> = <strong>SINCE</strong> when?</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VOCABULARY SECTION -->
+        <section id="vocabulary" class="section">
+            <div class="card">
+                <div class="card-header">Academic Lexicon & Terminological Field</div>
+                <div class="card-body">
+                    <div style="margin-bottom: 2.5rem;">
+                        <h3 style="color: var(--trinity-blue); margin-bottom: 1rem; font-family: 'Crimson Text', serif; font-size: 1.35rem;">🔮 Hypothetical Discourse Markers</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">💭</span> suppose (supposing)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🤔</span> imagine</div>
+                            <div class="vocab-item"><span class="vocab-icon">❓</span> what if</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎭</span> pretend</div>
+                            <div class="vocab-item"><span class="vocab-icon">🌟</span> wish</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> otherwise</div>
+                            <div class="vocab-item"><span class="vocab-icon">⏰</span> in that case</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎯</span> provided that</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <h3 style="color: var(--trinity-blue); margin-bottom: 1rem; font-family: 'Crimson Text', serif; font-size: 1.35rem;">⚖️ Obligation & Necessity Spectrum</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">📋</span> obligatory</div>
+                            <div class="vocab-item"><span class="vocab-icon">✅</span> compulsory</div>
+                            <div class="vocab-item"><span class="vocab-icon">🚫</span> prohibited</div>
+                            <div class="vocab-item"><span class="vocab-icon">⚠️</span> forbidden</div>
+                            <div class="vocab-item"><span class="vocab-icon">💡</span> advisable</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎯</span> recommended</div>
+                            <div class="vocab-item"><span class="vocab-icon">🤷</span> optional</div>
+                            <div class="vocab-item"><span class="vocab-icon">⛔</span> banned</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2.5rem;">
+                        <h3 style="color: var(--trinity-blue); margin-bottom: 1rem; font-family: 'Crimson Text', serif; font-size: 1.35rem;">🎲 Speculative & Conjectural Terms</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">🤔</span> perhaps</div>
+                            <div class="vocab-item"><span class="vocab-icon">❓</span> presumably</div>
+                            <div class="vocab-item"><span class="vocab-icon">💭</span> supposedly</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎯</span> apparently</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔍</span> evidently</div>
+                            <div class="vocab-item"><span class="vocab-icon">🌟</span> definitely</div>
+                            <div class="vocab-item"><span class="vocab-icon">❌</span> unlikely</div>
+                            <div class="vocab-item"><span class="vocab-icon">✅</span> bound to</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="color: var(--trinity-blue); margin-bottom: 1rem; font-family: 'Crimson Text', serif; font-size: 1.35rem;">🎯 Abstract Conceptual Vocabulary</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">💭</span> ambition</div>
+                            <div class="vocab-item"><span class="vocab-icon">😔</span> regret</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎓</span> aspiration</div>
+                            <div class="vocab-item"><span class="vocab-icon">🌟</span> achievement</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> opportunity</div>
+                            <div class="vocab-item"><span class="vocab-icon">⚡</span> consequence</div>
+                            <div class="vocab-item"><span class="vocab-icon">🛤️</span> circumstance</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎭</span> scenario</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Exercises loaded dynamically -->
+                </div>
+
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2 style="font-family: 'Crimson Text', serif; font-size: 2.5rem; margin-bottom: 1rem;">Examination Complete</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <div style="margin-top: 2.5rem; display: flex; gap: 1.25rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn-primary" onclick="restartExercises()" style="font-size: 1.15rem; padding: 1.25rem 2.5rem;">
+                            Reattempt Examination
+                        </button>
+                        <button class="btn-secondary" onclick="showSection('overview', document.querySelector('.nav-tab'))" style="font-size: 1.15rem; padding: 1.25rem 2.5rem;">
+                            Review Syllabus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 2px solid var(--border); padding: 2.5rem; margin-top: 3.5rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="font-family: 'Crimson Text', serif; font-weight: 700; color: var(--trinity-blue); margin-bottom: 0.75rem; font-size: 1.25rem;">Trinity College London GESE Grade 6 Academic Preparation</p>
+            <p style="font-size: 0.95rem; font-style: italic;">Based on official Trinity GESE Grade 6 Syllabus (CEFR B1 — Threshold Level)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Trinity GESE Grade 6 Academic Exercise Database (50 exercises)
+        const exercises = [
+            // EXERCISES 1-10: Second Conditional (If + past, would + verb)
+            {
+                id: 1,
+                type: 'listening',
+                audioText: "I often think about what my life would be like if I lived in a different country. If I had the opportunity, I would move to Japan immediately. I would learn Japanese, and I would eat sushi every day. Unfortunately, I don't speak the language, so it's just a dream.",
+                question: "What would the speaker do if they had the opportunity?",
+                options: ["Learn Chinese", "Move to Japan", "Eat pizza every day", "Study French"],
+                correct: "Move to Japan",
+                explanation: "✅ Correct! The conditional construction: 'If I had the opportunity, I would move to Japan'.",
+                errorExplanation: "❌ The speaker explicitly states they would move to Japan if the opportunity arose."
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: "If I ______ (win) the lottery, I ______ (buy) a house by the sea and I ______ (travel) around the world.",
+                correct: ["won would buy would travel", "won 'd buy 'd travel"],
+                explanation: "✅ Correct! Second conditional: If + past simple, would + infinitive."
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: "Which sentence demonstrates correct second conditional structure?",
+                options: ["If I will have money, I would buy a car.", "If I had money, I would buy a car.", "If I have money, I would buy a car.", "If I had money, I will buy a car."],
+                correct: "If I had money, I would buy a car.",
+                explanation: "✅ Correct! If + past simple (had), would + infinitive (would buy).",
+                errorExplanation: "❌ Second conditional requires: If + past simple, would + base verb."
+            },
+            {
+                id: 4,
+                type: 'listening',
+                audioText: "My sister is always complaining about her job. If she worked harder, she would get a promotion. But she spends all day on social media instead of working. If I were her, I would look for a new job immediately!",
+                question: "What does the speaker think their sister should do?",
+                options: ["Work harder", "Spend more time on social media", "Stay in her current job", "Complain more"],
+                correct: "Work harder",
+                explanation: "✅ Correct! The conditional: 'If she worked harder, she would get a promotion'.",
+                errorExplanation: "❌ The speaker suggests that working harder would lead to promotion."
+            },
+            {
+                id: 5,
+                type: 'fill',
+                question: "If I ______ (be) you, I ______ (not/do) that. It's too risky!",
+                correct: ["were wouldn't do", "were would not do"],
+                explanation: "✅ Correct! 'If I were you' (subjunctive) + negative conditional."
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: "Complete with the correct form: If he ______ more time, he ______ join the club.",
+                options: ["has / will", "had / would", "have / would", "had / will"],
+                correct: "had / would",
+                explanation: "✅ Correct! If + past simple (had), would + infinitive.",
+                errorExplanation: "❌ Second conditional: past simple in if-clause, would in main clause."
+            },
+            {
+                id: 7,
+                type: 'listening',
+                audioText: "Supposing you could have any superpower, which would you choose? If I could fly, I would visit every country in the world. If I were invisible, I would go to concerts for free. But actually, if I had to choose, I would pick the ability to speak every language fluently.",
+                question: "Which superpower would the speaker actually choose?",
+                options: ["Flying", "Invisibility", "Speaking every language", "Free concerts"],
+                correct: "Speaking every language",
+                explanation: "✅ Correct! 'If I had to choose, I would pick the ability to speak every language'.",
+                errorExplanation: "❌ The speaker uses 'if I had to choose' to indicate their actual preference."
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: "What ______ (you/do) if you ______ (lose) your job tomorrow? ______ (you/look) for another one immediately?",
+                correct: ["would you do lost Would you look"],
+                explanation: "✅ Correct! Second conditional in statement and question form."
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: "If I knew the answer, I ______ tell you.",
+                options: ["will", "would", "can", "shall"],
+                correct: "would",
+                explanation: "✅ Correct! Second conditional: would + verb.",
+                errorExplanation: "❌ After 'If I knew' (past simple), use 'would' in the result clause."
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: "If we ______ (not/live) in the city, we ______ (have) a bigger garden. Our dog ______ (be) much happier!",
+                correct: ["didn't live would have would be", "did not live would have would be"],
+                explanation: "✅ Correct! Negative past in if-clause, would in result clauses."
+
+            },
+
+            // EXERCISES 11-20: Modals of Obligation (must/have to/should)
+            {
+                id: 11,
+                type: 'choice',
+                question: "Which sentence expresses an external obligation (rule from outside)?",
+                options: ["I must study harder.", "I have to wear a uniform at work.", "I must see a doctor.", "I really must call my mother."],
+                correct: "I have to wear a uniform at work.",
+                explanation: "✅ Correct! 'Have to' indicates external compulsion (work rules).",
+                errorExplanation: "❌ 'Have to' = external obligation; 'must' = internal obligation."
+            },
+            {
+                id: 12,
+                type: 'listening',
+                audioText: "At my school, students mustn't use mobile phones during lessons. It's strictly forbidden. However, we don't have to wear uniforms, which is nice. We should arrive on time, but we mustn't be late for examinations. That's absolutely prohibited.",
+                question: "What is compulsory at the speaker's school?",
+                options: ["Wearing uniforms", "Arriving on time", "Using mobile phones", "Being late for exams"],
+                correct: "Arriving on time",
+                explanation: "✅ Correct! 'We should arrive on time' implies this is expected/necessary.",
+                errorExplanation: "❌ The speaker indicates they 'should arrive on time' and 'mustn't be late'."
+            },
+            {
+                id: 13,
+                type: 'fill',
+                question: "You ______ (must/have to) be 18 to vote in elections — it's the law. You ______ (must/have to) drive on the left in the UK.",
+                correct: ["have to have to"],
+                explanation: "✅ Correct! External legal obligations use 'have to'."
+            },
+            {
+                id: 14,
+                type: 'choice',
+                question: "You ______ smoke in hospitals. It's illegal.",
+                options: ["mustn't", "don't have to", "shouldn't", "needn't"],
+                correct: "mustn't",
+                explanation: "✅ Correct! 'Mustn't' = strong prohibition (illegal).",
+                errorExplanation: "❌ 'Mustn't' indicates prohibition; 'don't have to' indicates no obligation."
+            },
+            {
+                id: 15,
+                type: 'listening',
+                audioText: "I'm going to the doctor tomorrow. I don't have to pay because healthcare is free in my country. But I must remember to bring my ID card. I should also bring my medical history, but I don't have to — it's optional.",
+                question: "What is optional for the doctor's appointment?",
+                options: ["Bringing ID", "Paying", "Bringing medical history", "Going to the doctor"],
+                correct: "Bringing medical history",
+                explanation: "✅ Correct! 'I should also bring my medical history, but I don't have to' = optional.",
+                errorExplanation: "❌ 'Don't have to' means it's not necessary — optional."
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: "You ______ (mustn't/don't have to) forget your passport — it's essential! But you ______ (mustn't/don't have to) bring a suitcase; a backpack is fine.",
+                correct: ["mustn't don't have to"],
+                explanation: "✅ Correct! Mustn't = prohibition/strong necessity; Don't have to = no obligation."
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: "Which gives advice rather than obligation?",
+                options: ["You must see a doctor.", "You have to see a doctor.", "You should see a doctor.", "You mustn't see a doctor."],
+                correct: "You should see a doctor.",
+                explanation: "✅ Correct! 'Should' = advice/recommendation (weaker than must/have to).",
+                errorExplanation: "❌ 'Should' indicates advice; 'must/have to' indicate stronger obligation."
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: "I ______ (should/shouldn't) eat so much junk food. It's bad for my health. I really ______ (must) start eating better.",
+                correct: ["shouldn't must"],
+                explanation: "✅ Correct! Shouldn't = negative advice; Must = strong personal necessity."
+            },
+            {
+                id: 19,
+                type: 'listening',
+                audioText: "When you visit Japan, you must take off your shoes before entering someone's house. It's essential. You don't have to bring a gift, but you should bring something small like sweets. You mustn't be late — punctuality is very important in Japanese culture.",
+                question: "What is recommended but not compulsory in Japan?",
+                options: ["Taking off shoes", "Being punctual", "Bringing a gift", "Not being late"],
+                correct: "Bringing a gift",
+                explanation: "✅ Correct! 'You don't have to bring a gift, but you should' = recommended, optional.",
+                errorExplanation: "❌ 'Don't have to but should' indicates recommendation without obligation."
+            },
+            {
+                id: 20,
+                type: 'choice',
+                question: "Complete: You ______ be an expert to use this software. It's very simple.",
+                options: ["must", "have to", "don't have to", "mustn't"],
+                correct: "don't have to",
+                explanation: "✅ Correct! 'Don't have to' = no necessity (it's simple, so expertise isn't needed).",
+                errorExplanation: "❌ 'Don't have to' means it's not necessary — appropriate for simple things."
+
+            },
+
+            // EXERCISES 21-30: Present Perfect with for/since
+            {
+                id: 21,
+                type: 'choice',
+                question: "Which time expression completes the sentence: 'I have lived here ______ 2015'?",
+                options: ["for", "since", "during", "from"],
+                correct: "since",
+                explanation: "✅ Correct! 'Since' + specific starting point (2015).",
+                errorExplanation: "❌ 'Since' is used with specific points in time (2015, Monday, I was young)."
+            },
+            {
+                id: 22,
+                type: 'listening',
+                audioText: "My grandmother is remarkable. She has lived in the same village for eighty years — her entire life! She has worked as a teacher since she was twenty-two years old. She has known my grandfather for sixty years. They have been married since 1964.",
+                question: "How long has the grandmother worked as a teacher?",
+                options: ["Since she was twenty-two", "For eighty years", "For sixty years", "Since 1964"],
+                correct: "Since she was twenty-two",
+                explanation: "✅ Correct! 'She has worked as a teacher since she was twenty-two'.",
+                errorExplanation: "❌ The specific starting point for her teaching career is 'since she was twenty-two'."
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: "I have studied English ______ (for/since) five years. I have known my best friend ______ (for/since) we were children.",
+                correct: ["for since"],
+                explanation: "✅ Correct! For + duration; Since + starting point."
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: "She has been ill ______ last Monday.",
+                options: ["for", "since", "during", "in"],
+                correct: "since",
+                explanation: "✅ Correct! 'Since' + specific time point (last Monday).",
+                errorExplanation: "❌ 'Last Monday' is a specific point — requires 'since'."
+            },
+            {
+                id: 25,
+                type: 'listening',
+                audioText: "I'm worried about my brother. He has been unemployed for six months now. He has applied for hundreds of jobs since he lost his previous position. He has had several interviews, but he hasn't found anything yet. He has been feeling depressed since the new year began.",
+                question: "When did the brother's unemployment begin?",
+                options: ["Six months ago", "Last year", "Since the new year", "Since his depression"],
+                correct: "Six months ago",
+                explanation: "✅ Correct! 'For six months' indicates duration from six months ago until now.",
+                errorExplanation: "❌ 'For six months' means the period started six months ago."
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: "We have been waiting ______ (for/since) two hours! I have been standing here ______ (for/since) 9 o'clock this morning.",
+                correct: ["for since"],
+                explanation: "✅ Correct! For + duration (two hours); Since + starting point (9 o'clock)."
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: "How long ______ English?",
+                options: ["do you learn", "are you learning", "have you been learning", "did you learn"],
+                correct: "have you been learning",
+                explanation: "✅ Correct! Present perfect continuous for duration from past to now.",
+                errorExplanation: "❌ 'How long' with duration requires present perfect (continuous)."
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: "The company has existed ______ (for/since) over a century. It has been operating ______ (for/since) 1920.",
+                correct: ["for since"],
+                explanation: "✅ Correct! For + duration (over a century); Since + year (1920)."
+            },
+            {
+                id: 29,
+                type: 'listening',
+                audioText: "This museum is fascinating. It has been open to the public for fifty years. The main exhibition has changed several times since it first opened. I have visited it three times since I moved to this city, which was two years ago.",
+                question: "How long has the museum been open?",
+                options: ["Since 1970s", "For fifty years", "Since the exhibition changed", "For two years"],
+                correct: "For fifty years",
+                explanation: "✅ Correct! 'It has been open to the public for fifty years' (duration).",
+                errorExplanation: "❌ The explicit duration stated is 'for fifty years'."
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: "I haven't seen my cousin ______ (for/since) ages! We haven't spoken ______ (for/since) last Christmas.",
+                correct: ["for since"],
+                explanation: "✅ Correct! For + vague duration (ages); Since + specific time (last Christmas)."
+
+            },
+
+            // EXERCISES 31-40: Past Speculation (might/may/could + have + pp)
+            {
+                id: 31,
+                type: 'choice',
+                question: "Which structure is used for speculating about past events?",
+                options: ["might go", "might have gone", "might went", "might going"],
+                correct: "might have gone",
+                explanation: "✅ Correct! Might + have + past participle for past speculation.",
+                errorExplanation: "❌ Past speculation: modal + have + past participle."
+            },
+            {
+                id: 32,
+                type: 'listening',
+                audioText: "I can't find my wallet anywhere. I might have dropped it at the restaurant last night, or I may have left it in the taxi. I could have even put it in a different bag. I just don't remember — it's very frustrating!",
+                question: "Where does the speaker think the wallet might be?",
+                options: ["Definitely at the restaurant", "Definitely in the taxi", "Possibly in various places", "Definitely in a different bag"],
+                correct: "Possibly in various places",
+                explanation: "✅ Correct! The speaker uses might/may/could to speculate about various possibilities.",
+                errorExplanation: "❌ The speaker lists multiple possibilities using past modals of speculation."
+            },
+            {
+                id: 33,
+                type: 'fill',
+                question: "She's late. She ______ (might/may) ______ (miss) the bus, or she ______ (could) ______ (get) stuck in traffic.",
+                correct: ["might have missed could have gotten", "may have missed could have got"],
+                explanation: "✅ Correct! Modal + have + past participle for past speculation."
+            },
+            {
+                id: 34,
+                type: 'choice',
+                question: "A: I can't find my keys. B: You ______ them at work.",
+                options: ["might left", "might have left", "might leave", "might had left"],
+                correct: "might have left",
+                explanation: "✅ Correct! Might + have + past participle (left).",
+                errorExplanation: "❌ Past speculation: might + have + past participle."
+            },
+            {
+                id: 35,
+                type: 'fill',
+                question: "The window is broken. Someone ______ (must/might) ______ (throw) a stone, or it ______ (could) ______ (be) an accident.",
+                correct: ["might have thrown could have been"],
+                explanation: "✅ Correct! Speculating about past causes: might/could + have + pp."
+            },
+            {
+                id: 36,
+                type: 'listening',
+                audioText: "The project failed completely. The team must have made some serious errors during planning. They might have underestimated the costs, or they may have overlooked important risks. They should have been more careful.",
+                question: "What is certain about the project failure?",
+                options: ["They underestimated costs", "They overlooked risks", "They made serious errors", "They were careful"],
+                correct: "They made serious errors",
+                explanation: "✅ Correct! 'Must have made' indicates strong certainty about the past.",
+                errorExplanation: "❌ 'Must have made' = strong deduction/certainty about past events."
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: "He ______ studied harder. He failed the exam.",
+                options: ["should have", "should has", "should had", "should have been"],
+                correct: "should have",
+                explanation: "✅ Correct! Should have + past participle = regret about past action.",
+                errorExplanation: "❌ 'Should have' + past participle for past criticism/regret."
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: "I can't believe I ______ (should) ______ (listen) to your advice! I ______ (shouldn't) ______ (ignore) you.",
+                correct: ["should have listened shouldn't have ignored"],
+                explanation: "✅ Correct! Should have + pp = regret; Shouldn't have + pp = regret about negative action."
+            },
+            {
+                id: 39,
+                type: 'listening',
+                audioText: "The accident was terrible. The driver can't have seen the red light — that's the only explanation. He might have been distracted by his phone. He could have fallen asleep. Whatever happened, he must have been completely unaware of the traffic signals.",
+                question: "What is the speaker certain about?",
+                options: ["The driver was on his phone", "The driver fell asleep", "The driver didn't see the red light", "The driver was aware of signals"],
+                correct: "The driver didn't see the red light",
+                explanation: "✅ Correct! 'Can't have seen' + 'must have been unaware' = strong negative certainty.",
+                errorExplanation: "❌ 'Can't have seen' indicates strong certainty that something didn't happen."
+            },
+            {
+                id: 40,
+                type: 'choice',
+                question: "You ______ told me earlier! Now it's too late.",
+                options: ["should", "should have", "should had", "should has"],
+                correct: "should have",
+                explanation: "✅ Correct! Should have + past participle = criticism of past omission."
+
+            },
+
+            // EXERCISES 41-50: Past Continuous vs. Past Simple & Mixed Practice
+            {
+                id: 41,
+                type: 'choice',
+                question: "Which sentence correctly uses past continuous for a background action?",
+                options: ["I watched TV when the phone rang.", "I was watching TV when the phone rang.", "I am watching TV when the phone rang.", "I were watching TV when the phone rang."],
+                correct: "I was watching TV when the phone rang.",
+                explanation: "✅ Correct! Past continuous (was watching) for background, past simple (rang) for interruption.",
+                errorExplanation: "❌ Past continuous for ongoing action interrupted by past simple event."
+            },
+            {
+                id: 42,
+                type: 'listening',
+                audioText: "Yesterday was terrifying. I was walking home alone at night when I heard footsteps behind me. I was getting very nervous, so I started walking faster. Suddenly, a cat ran across the street in front of me. It was just a cat, but I was shaking for hours afterwards!",
+                question: "What was the speaker doing when they heard footsteps?",
+                options: ["Running home", "Walking home", "Looking for a cat", "Shaking nervously"],
+                correct: "Walking home",
+                explanation: "✅ Correct! 'I was walking home... when I heard footsteps' (background + interruption).",
+                errorExplanation: "❌ The past continuous 'was walking' describes the ongoing background action."
+            },
+            {
+                id: 43,
+                type: 'fill',
+                question: "While I ______ (drive) to work this morning, I ______ (see) an accident. The police ______ (arrive) shortly afterwards.",
+                correct: ["was driving saw arrived"],
+                explanation: "✅ Correct! While + past continuous, past simple for interruption and subsequent events."
+            },
+            {
+                id: 44,
+                type: 'choice',
+                question: "They ______ dinner when the earthquake happened.",
+                options: ["had", "were having", "are having", "have"],
+                correct: "were having",
+                explanation: "✅ Correct! Past continuous for ongoing action interrupted by past simple event.",
+                errorExplanation: "❌ 'When' + past simple event interrupts past continuous background action."
+            },
+            {
+                id: 45,
+                type: 'fill',
+                question: "If I ______ (know) it was your birthday yesterday, I ______ (buy) you a present. I ______ (should) ______ (remember)!",
+                correct: ["had known would have bought should have remembered"],
+                explanation: "✅ Correct! Third conditional (advanced): If + past perfect, would have + pp. Plus should have."
+            },
+            {
+                id: 46,
+                type: 'listening',
+                audioText: "I'm so annoyed! I was waiting in the queue for twenty minutes when someone pushed in front of me. I was about to complain when the cashier called 'Next!' and served the other person. If I had been quicker, I would have said something. I should have been more assertive.",
+                question: "What does the speaker regret?",
+                options: ["Waiting twenty minutes", "The cashier's action", "Not complaining quickly enough", "The queue being long"],
+                correct: "Not complaining quickly enough",
+                explanation: "✅ Correct! 'If I had been quicker...' + 'I should have been more assertive' = regret.",
+                errorExplanation: "❌ The speaker uses third conditional and should have to express regret."
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: "She ______ in London for five years before she moved to Paris.",
+                options: ["lives", "was living", "has lived", "had lived"],
+                correct: "had lived",
+                explanation: "✅ Correct! Past perfect for action completed before another past action.",
+                errorExplanation: "❌ 'Had lived' (past perfect) = action completed before 'moved' (past simple)."
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: "You ______ (must) ______ (be) exhausted! You ______ (should) ______ (take) a break. If you ______ (not/rest), you ______ (not/be) able to finish.",
+                correct: ["must have been should have taken don't rest won't be"],
+                explanation: "✅ Correct! Mixed modals: must have (deduction), should have (regret), first conditional (warning)."
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: "I can't find my glasses. I ______ them on the desk, but they're not there.",
+                options: ["could put", "could have put", "could putting", "could had put"],
+                correct: "could have put",
+                explanation: "✅ Correct! Could have + past participle for past possibility.",
+                errorExplanation: "❌ 'Could have put' = possible past action (but uncertain)."
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: "Complete this complex narrative: If I ______ (not/lose) my job last year, I ______ (not/start) my own business. I ______ (might/stay) in that boring office ______ (for/since) another decade! Now I have worked for myself ______ (for/since) eighteen months, and I ______ (never/be) happier. I ______ (should) ______ (make) this change years ago!",
+                correct: ["hadn't lost wouldn't have started might have stayed for for have never been should have made"],
+                explanation: "✅ Distinguished performance! You have successfully completed all 50 advanced exercises, demonstrating mastery of hypothetical conditionals, modal obligations, temporal duration, and retrospective speculation at CEFR B1 level."
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+        let speechSynthesis = window.speechSynthesis;
+        let currentUtterance = null;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function speakText(text) {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.85;
+            utterance.pitch = 1;
+            
+            speechSynthesis.speak(utterance);
+            currentUtterance = utterance;
+        }
+
+        function stopSpeaking() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let typeBadge = '';
+            if (ex.type === 'listening') typeBadge = '🎧 Listening Comprehension';
+            else if (ex.type === 'choice') typeBadge = '📝 Multiple Choice';
+            else if (ex.type === 'fill') typeBadge = '✏️ Constructed Response';
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.5s ease;">
+                    <div class="card-header">Exercise ${ex.id} — ${typeBadge}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Question ${currentExercise + 1} of ${exercises.length}</div>
+            `;
+
+            if (ex.type === 'listening') {
+                html += `
+                    <div class="listening-box">
+                        <div class="audio-controls">
+                            <button class="btn-audio" onclick="speakText('${ex.audioText.replace(/'/g, "\\'")}')" id="playBtn">
+                                ▶️ Play Audio
+                            </button>
+                            <button class="btn-secondary" onclick="document.getElementById('transcript').classList.toggle('show')">
+                                👁️ Reveal Transcript
+                            </button>
+                        </div>
+                        <div class="transcript-box" id="transcript">
+                            "${ex.audioText}"
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="question-box">
+                            <div class="question-type-badge">${typeBadge}</div>
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice' || ex.type === 'listening') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt.replace(/'/g, "\\'")}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Enter your response..." onkeypress="if(event.key==='Enter') checkFill()">
+                        <div class="hint-text">Press Enter or click Verify to submit your response</div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary" onclick="checkFill()" style="background: var(--academic-crimson);">✓ Verify Response</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Proceed to Next Question →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct response:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Incorrect response.<br><strong>Correct construction:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            stopSpeaking();
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Distinguished Performance! You demonstrate exceptional command of complex grammatical structures including hypothetical conditionals, modal obligations, and retrospective speculation. You are thoroughly prepared for the GESE Grade 6 examination at CEFR B1 level.';
+            } else if (totalScore >= 70) {
+                message = '👍 Commendable Achievement! You exhibit solid understanding of Grade 6 grammatical concepts. Review the distinction between second conditionals and past modals, and the nuanced differences between obligation modals (must/have to/should) to achieve complete mastery.';
+            } else if (totalScore >= 50) {
+                message = '💪 Satisfactory Progress. Continue to develop your understanding of: 1) Second conditional formation (If + past, would + verb), 2) Past modal speculation (might have + pp), 3) The semantic distinctions between obligation modals, and 4) Temporal markers for + since with present perfect.';
+            } else {
+                message = '📚 Further Study Required. Focus your attention on: 1) The formation and use of second conditionals for hypothetical scenarios, 2) Modal verbs of obligation and their semantic nuances, 3) Past modals for speculation and regret, and 4) The contrast between for and since in present perfect contexts.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        // Shuffle exercises on initial load
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+
+        // Clean up speech synthesis when leaving page
+        window.addEventListener('beforeunload', function() {
+            stopSpeaking();
+        });
+    </script>
+</body>
+</html>

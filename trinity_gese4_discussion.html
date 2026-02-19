@@ -1,0 +1,1580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 4 - Exam Preparation (50 Exercises)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #64748b;
+            --accent: #dc2626;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --border: #e2e8f0;
+            --success: #166534;
+            --success-bg: #dcfce7;
+            --error: #991b1b;
+            --error-bg: #fee2e2;
+            --trinity-red: #e31837;
+            --trinity-blue: #003366;
+            --parchment: #fafaf9;
+            --grade4-purple: #7c3aed;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--grade4-purple) 0%, var(--trinity-blue) 100%);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--trinity-red);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--grade4-purple);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--grade4-purple);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            font-weight: 500;
+            border-radius: 0.375rem;
+        }
+
+        .nav-tab:hover {
+            color: var(--grade4-purple);
+            background: #f5f3ff;
+        }
+
+        .nav-tab.active {
+            color: var(--grade4-purple);
+            border-bottom-color: var(--grade4-purple);
+            background: #ede9fe;
+            font-weight: 600;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(to right, #f5f3ff, #ffffff);
+            padding: 1.25rem 1.5rem;
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+            color: var(--grade4-purple);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e0e7ff;
+            border-left: 4px solid var(--grade4-purple);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .topic-card {
+            background: #f8fafc;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .topic-card:hover {
+            border-color: var(--grade4-purple);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(124, 58, 237, 0.1);
+        }
+
+        .topic-title {
+            font-weight: 600;
+            color: var(--grade4-purple);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grammar-box {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .grammar-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .score-label {
+            font-weight: 600;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .score-value {
+            font-size: 1.75rem;
+            color: var(--grade4-purple);
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 9999px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--grade4-purple), #8b5cf6);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 9999px;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--grade4-purple);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            position: relative;
+        }
+
+        .question-type-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--grade4-purple);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--dark);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .listening-box {
+            background: #f5f3ff;
+            border: 2px solid #8b5cf6;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-audio {
+            background: #7c3aed;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.2);
+        }
+
+        .btn-audio:hover {
+            background: #6d28d9;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 8px -1px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-audio:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .transcript-box {
+            background: white;
+            border: 1px solid #ddd6fe;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #5b21b6;
+            display: none;
+        }
+
+        .transcript-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--grade4-purple);
+            background: #f5f3ff;
+            transform: translateX(4px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1.25rem;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            margin-bottom: 1rem;
+            border: 2px solid;
+            border-radius: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--grade4-purple);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            box-shadow: 0 4px 6px -1px rgba(124, 58, 237, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #6d28d9;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 8px -1px rgba(124, 58, 237, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--grade4-purple);
+            color: var(--grade4-purple);
+            background: #f5f3ff;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 0.75rem 1rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin: 0 0.25rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--grade4-purple);
+            box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.1);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--grade4-purple) 0%, #4c1d95 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            margin: 1.5rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .final-message {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .exercise-counter {
+            background: var(--grade4-purple);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .vocab-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .vocab-item {
+            background: white;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .vocab-icon {
+            font-size: 1.25rem;
+        }
+
+        .error-correction-box {
+            background: #fef2f2;
+            border: 2px dashed #ef4444;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            text-align: center;
+        }
+
+        .error-word {
+            color: #dc2626;
+            text-decoration: underline wavy;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { flex: 1 1 calc(50% - 0.5rem); text-align: center; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+            .topic-grid { grid-template-columns: 1fr; }
+        }
+
+        .hint-text {
+            font-size: 0.875rem;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .timeline-box {
+            background: #f5f3ff;
+            border-left: 4px solid var(--grade4-purple);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity College London</h1>
+            <p>Graded Examinations in Spoken English (GESE) - Grade 4</p>
+            <span class="badge">CEFR A2.2 Level</span>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">GESE Exams</a>
+            <span>›</span>
+            <strong>Grade 4 Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🎓 GESE Grade 4 Exam Preparation</h1>
+            <p class="page-subtitle">50 Interactive Exercises covering: Past Events, Future Plans (going to), Past Continuous vs. Simple, School Subjects & Directions</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">📋 Syllabus</button>
+            <button class="nav-tab" onclick="showSection('grammar', this)">Grammar</button>
+            <button class="nav-tab" onclick="showSection('vocabulary', this)">Vocabulary</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 50 Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">GESE Grade 4 Exam Overview</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Exam Format:</strong> 10-minute conversation with an examiner focusing on past events, future intentions, and describing past actions in progress.
+                    </div>
+                    
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">⏮️ Past Events</div>
+                            <p>Describe completed past actions using regular and irregular verbs in the past simple tense.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🔮 Future Plans</div>
+                            <p>Talk about future intentions using <em>going to</em> for plans and predictions.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">⏳ Past Actions</div>
+                            <p>Contrast past continuous (interrupted actions) with past simple using <em>when/while</em>.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🏫 School Life</div>
+                            <p>Discuss school subjects, teachers, and educational experiences in detail.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🧭 Directions & Transport</div>
+            <p>Give detailed directions using various transport modes and prepositions of movement.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🎨 Interests & Hobbies</div>
+                            <p>Express likes, dislikes, and preferences with reasons and examples.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Communicative Skills Required</div>
+                <div class="card-body">
+                    <ul style="margin-left: 1.5rem; line-height: 2;">
+                        <li>Talk about past events and experiences using past simple</li>
+                        <li>Discuss future plans and intentions using <em>going to</em></li>
+                        <li>Describe actions in progress in the past (past continuous)</li>
+                        <li>Compare past simple and past continuous using <em>when/while</em></li>
+                        <li>Give detailed directions and describe locations</li>
+                        <li>Express likes, dislikes, and preferences with reasons</li>
+                        <li>Ask questions about past and future events</li>
+                        <li>Provide detailed personal information and descriptions</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRAMMAR SECTION -->
+        <section id="grammar" class="section">
+            <div class="card">
+                <div class="card-header">Key Grammar Points</div>
+                <div class="card-body">
+                    <div class="grammar-box">
+                        <div class="grammar-title">⏮️ Past Simple (Completed Actions)</div>
+                        <p><strong>Regular:</strong> verb + ed (played, watched, visited)</p>
+                        <p><strong>Irregular:</strong> go → went, eat → ate, see → saw, do → did</p>
+                        <p><em>I visited my grandmother yesterday. / She went to Paris last summer.</em></p>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">🔮 Going to (Future Plans)</div>
+                        <p><strong>Form:</strong> am/is/are + going to + verb</p>
+                        <p><em>I'm going to study medicine. / Are you going to come to the party?</em></p>
+                        <p><strong>Use:</strong> Plans, intentions, predictions based on evidence</p>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">⏳ Past Continuous vs. Past Simple</div>
+                        <p><strong>Past Continuous:</strong> was/were + verb-ing (longer background action)</p>
+                        <p><strong>Past Simple:</strong> verb-ed/irregular (shorter interrupting action)</p>
+                        <p><em>I was watching TV <strong>when</strong> the phone rang.</em></p>
+                        <p><em>While I was walking to school, I saw a cat.</em></p>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">🧭 Prepositions of Movement</div>
+                        <p><strong>Movement:</strong> across, along, past, through, up, down, into, out of</p>
+                        <p><strong>Transport:</strong> by bus, by train, on foot, by car, by bike</p>
+                        <p><em>Walk past the bank, go across the bridge, drive along the motorway.</em></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VOCABULARY SECTION -->
+        <section id="vocabulary" class="section">
+            <div class="card">
+                <div class="card-header">Essential Vocabulary by Topic</div>
+                <div class="card-body">
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: var(--grade4-purple); margin-bottom: 0.75rem;">🚌 Transport & Travel</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">🚶</span> on foot</div>
+                            <div class="vocab-item"><span class="vocab-icon">🚌</span> by bus</div>
+                            <div class="vocab-item"><span class="vocab-icon">🚂</span> by train</div>
+                            <div class="vocab-item"><span class="vocab-icon">🚗</span> by car</div>
+                            <div class="vocab-item"><span class="vocab-icon">🚲</span> by bike</div>
+                            <div class="vocab-item"><span class="vocab-icon">🚇</span> by underground/subway</div>
+                            <div class="vocab-item"><span class="vocab-icon">🛵</span> by scooter</div>
+                            <div class="vocab-item"><span class="vocab-icon">✈️</span> by plane</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: var(--grade4-purple); margin-bottom: 0.75rem;">🎯 Irregular Verbs</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> go → went → gone</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> eat → ate → eaten</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> see → saw → seen</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> do → did → done</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> come → came → come</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> take → took → taken</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> give → gave → given</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> find → found → found</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: var(--grade4-purple); margin-bottom: 0.75rem;">🧭 Direction Verbs</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">➡️</span> turn left/right</div>
+                            <div class="vocab-item"><span class="vocab-icon">⬆️</span> go straight on</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> go round the roundabout</div>
+                            <div class="vocab-item"><span class="vocab-icon">🚦</span> at the traffic lights</div>
+                            <div class="vocab-item"><span class="vocab-icon">🌉</span> cross the bridge</div>
+                            <div class="vocab-item"><span class="vocab-icon">🏛️</span> walk past the museum</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="color: var(--grade4-purple); margin-bottom: 0.75rem;">🎓 School & Education</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">📊</span> pass an exam</div>
+                            <div class="vocab-item"><span class="vocab-icon">❌</span> fail a test</div>
+                            <div class="vocab-item"><span class="vocab-icon">✍️</span> take notes</div>
+                            <div class="vocab-item"><span class="vocab-icon">📝</span> do homework</div>
+                            <div class="vocab-item"><span class="vocab-icon">📚</span> revise for exams</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎒</span> attend classes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Exercises loaded dynamically -->
+                </div>
+
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Congratulations! Grade 4 Practice Complete!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn-primary" onclick="restartExercises()" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                            🔄 Practice Again
+                        </button>
+                        <button class="btn-secondary" onclick="showSection('overview', document.querySelector('.nav-tab'))" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                            📋 Review Syllabus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="font-weight: 600; color: var(--grade4-purple); margin-bottom: 0.5rem;">Trinity College London GESE Grade 4 Preparation</p>
+            <p style="font-size: 0.9rem;">Based on official Trinity GESE Grade 4 Syllabus (CEFR A2.2)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Trinity GESE Grade 4 Exercise Database (50 exercises)
+        const exercises = [
+            // EXERCISES 1-10: Past Simple (Regular & Irregular Verbs)
+            {
+                id: 1,
+                type: 'listening',
+                audioText: "Last weekend was amazing! On Saturday, I visited my grandparents in the countryside. We walked in the garden and played board games. On Sunday, I watched a film with my friends. We ate popcorn and laughed a lot!",
+                question: "What did the speaker do on Saturday?",
+                options: ["Watched a film", "Visited grandparents", "Played football", "Went shopping"],
+                correct: "Visited grandparents",
+                explanation: "✅ Correct! The speaker visited grandparents on Saturday.",
+                errorExplanation: "❌ Listen again. The speaker says 'On Saturday, I visited my grandparents'."
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: "Yesterday I ______ (go) to the cinema and I ______ (see) a great film.",
+                correct: ["went saw"],
+                explanation: "✅ Correct! Go → went, See → saw (irregular verbs)."
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: "Which sentence uses the past simple correctly?",
+                options: ["I goed to school yesterday.", "I went to school yesterday.", "I going to school yesterday.", "I gone to school yesterday."],
+                correct: "I went to school yesterday.",
+                explanation: "✅ Correct! Go → went (irregular past simple).",
+                errorExplanation: "❌ 'Go' is irregular: go → went → gone."
+            },
+            {
+                id: 4,
+                type: 'listening',
+                audioText: "Last summer, my family and I travelled to Italy. We flew to Rome and stayed in a beautiful hotel. We visited the Colosseum and ate lots of pizza. I took hundreds of photos!",
+                question: "How did they travel to Italy?",
+                options: ["By train", "By car", "By plane", "By bus"],
+                correct: "By plane",
+                explanation: "✅ Correct! They flew to Rome (travelled by plane).",
+                errorExplanation: "❌ The speaker says 'We flew to Rome' which means by plane."
+            },
+            {
+                id: 5,
+                type: 'fill',
+                question: "She ______ (eat) breakfast at 8 o'clock, then she ______ (leave) for school.",
+                correct: ["ate left"],
+                explanation: "✅ Correct! Eat → ate, Leave → left."
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: "Complete: They ______ football in the park yesterday afternoon.",
+                options: ["played", "play", "playing", "plays"],
+                correct: "played",
+                explanation: "✅ Correct! Regular verb: play → played.",
+                errorExplanation: "❌ Yesterday = past simple. Regular verbs add -ed."
+            },
+            {
+                id: 7,
+                type: 'listening',
+                audioText: "I had a terrible morning! I woke up late because my alarm didn't ring. I ran to the bus stop but I missed the bus. I arrived at school ten minutes late. The teacher was angry!",
+                question: "Why was the teacher angry?",
+                options: ["The student missed the bus", "The student was late", "The alarm didn't ring", "The student ran"],
+                correct: "The student was late",
+                explanation: "✅ Correct! The teacher was angry because the student arrived late.",
+                errorExplanation: "❌ The audio says 'I arrived at school ten minutes late. The teacher was angry!'"
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: "We ______ (not/go) to the party because we ______ (be) tired.",
+                correct: ["didn't go were"],
+                explanation: "✅ Correct! Negative past: didn't + verb. Be → was/were."
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: "Make the question: ______ to the concert last night?",
+                options: ["Did you went", "Did you go", "Went you", "Do you go"],
+                correct: "Did you go",
+                explanation: "✅ Correct! Did + subject + verb (infinitive).",
+                errorExplanation: "❌ Past simple questions: Did + subject + base verb (go, not went)."
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: "A: ______ (you/do) your homework? B: Yes, I ______ (finish) it at 6 o'clock.",
+                correct: ["Did you do finished"],
+                explanation: "✅ Correct! Question: Did you do? Answer: finished (past simple)."
+
+            },
+
+            // EXERCISES 11-20: Going to (Future Plans)
+            {
+                id: 11,
+                type: 'choice',
+                question: "Which sentence uses 'going to' correctly for future plans?",
+                options: ["I going to visit Paris.", "I am going to visit Paris.", "I go to visit Paris tomorrow.", "I will going to visit Paris."],
+                correct: "I am going to visit Paris.",
+                explanation: "✅ Correct! am/is/are + going to + verb.",
+                errorExplanation: "❌ Going to future: Subject + am/is/are + going to + verb."
+            },
+            {
+                id: 12,
+                type: 'listening',
+                audioText: "Next weekend is going to be exciting! On Saturday, I'm going to meet my best friend at the shopping centre. We're going to buy some new clothes. On Sunday, my family is going to have a picnic in the park if the weather is nice.",
+                question: "What is the speaker going to do on Saturday?",
+                options: ["Have a picnic", "Buy new clothes", "Meet a friend", "Go to the park"],
+                correct: "Meet a friend",
+                explanation: "✅ Correct! The speaker is going to meet their best friend.",
+                errorExplanation: "❌ The audio says 'On Saturday, I'm going to meet my best friend'."
+            },
+            {
+                id: 13,
+                type: 'fill',
+                question: "Look at those black clouds! It ______ (rain) soon.",
+                correct: ["is going to rain", "'s going to rain"],
+                explanation: "✅ Correct! Going to for predictions based on evidence (black clouds)."
+            },
+            {
+                id: 14,
+                type: 'choice',
+                question: "What ______ this evening?",
+                options: ["are you going to do", "you are going to do", "do you going to do", "are you going do"],
+                correct: "are you going to do",
+                explanation: "✅ Correct! Question: Are + subject + going to + verb?",
+                errorExplanation: "❌ Question form: Are you going to...?"
+            },
+            {
+                id: 15,
+                type: 'listening',
+                audioText: "I've decided! Next year, I'm going to study harder at school. I'm going to do my homework every day and I'm going to revise for all my exams. I'm not going to fail any tests!",
+                question: "What is the speaker NOT going to do?",
+                options: ["Study harder", "Do homework every day", "Fail any tests", "Revise for exams"],
+                correct: "Fail any tests",
+                explanation: "✅ Correct! The speaker says 'I'm not going to fail any tests'.",
+                errorExplanation: "❌ The speaker says 'I'm not going to fail any tests' (negative intention)."
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: "We ______ (not/going to/stay) at home tomorrow. We ______ (going to/visit) our cousins.",
+                correct: ["aren't going to stay are going to visit", "'re not going to stay 're going to visit"],
+                explanation: "✅ Correct! Negative: aren't going to. Positive: are going to."
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: "Choose the correct form:",
+                options: ["She's going to plays tennis.", "She's going to play tennis.", "She going to play tennis.", "She's going to playing tennis."],
+                correct: "She's going to play tennis.",
+                explanation: "✅ Correct! She's going to + verb (infinitive).",
+                errorExplanation: "❌ After 'going to', use the base form of the verb (play)."
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: "______ (you/going to/come) to my birthday party next week?",
+                correct: ["Are you going to come", "Are you gonna come"],
+                explanation: "✅ Correct! Are you going to + verb?"
+            },
+            {
+                id: 19,
+                type: 'listening',
+                audioText: "My brother is going to be a doctor when he grows up. He's going to study medicine at university. He's very clever and he loves helping people. My parents are going to be very proud of him!",
+                question: "What is the brother going to study?",
+                options: ["Science", "Medicine", "Law", "Engineering"],
+                correct: "Medicine",
+                explanation: "✅ Correct! He's going to study medicine.",
+                errorExplanation: "❌ The audio says 'He's going to study medicine'."
+            },
+            {
+                id: 20,
+                type: 'choice',
+                question: "I'm tired. ______ to bed early tonight.",
+                options: ["I going to go", "I'm go to go", "I'm going to go", "I go to go"],
+                correct: "I'm going to go",
+                explanation: "✅ Correct! I'm going to + verb.",
+                errorExplanation: "❌ Going to future needs am/is/are before going."
+
+            },
+
+            // EXERCISES 21-30: Past Continuous vs. Past Simple
+            {
+                id: 21,
+                type: 'choice',
+                question: "Which sentence correctly uses past continuous?",
+                options: ["I was play football at 5pm.", "I playing football at 5pm.", "I was playing football at 5pm.", "I were playing football at 5pm."],
+                correct: "I was playing football at 5pm.",
+                explanation: "✅ Correct! I/he/she/it + was + verb-ing.",
+                errorExplanation: "❌ Past continuous: was/were + verb-ing."
+            },
+            {
+                id: 22,
+                type: 'listening',
+                audioText: "Yesterday afternoon, I was doing my homework in my bedroom when suddenly I heard a loud noise outside. I looked out the window and I saw two cats fighting in the garden! They were making a terrible noise.",
+                question: "What was the speaker doing when they heard the noise?",
+                options: ["Looking out the window", "Doing homework", "Watching cats", "Sleeping"],
+                correct: "Doing homework",
+                explanation: "✅ Correct! The speaker was doing homework when the noise interrupted.",
+                errorExplanation: "❌ The audio says 'I was doing my homework... when suddenly I heard'."
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: "While I ______ (walk) to school, I ______ (see) an accident.",
+                correct: ["was walking saw"],
+                explanation: "✅ Correct! While + past continuous (longer), past simple (shorter interrupting)."
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: "We ______ TV when the lights went out.",
+                options: ["watched", "were watching", "was watching", "watching"],
+                correct: "were watching",
+                explanation: "✅ Correct! We + were + watching (background action).",
+                errorExplanation: "❌ 'When' + past simple interrupting a past continuous action."
+            },
+            {
+                id: 25,
+                type: 'fill',
+                question: "She ______ (not/look) at me when I ______ (speak) to her.",
+                correct: ["wasn't looking spoke", "was not looking spoke"],
+                explanation: "✅ Correct! Negative past continuous: wasn't looking. Past simple: spoke."
+            },
+            {
+                id: 26,
+                type: 'listening',
+                audioText: "It was a beautiful day. The sun was shining and the birds were singing. My family was having a picnic in the park when it suddenly started to rain. We all ran to the car!",
+                question: "What was the family doing when it started to rain?",
+                options: ["Running to the car", "Having a picnic", "Singing", "Shining"],
+                correct: "Having a picnic",
+                explanation: "✅ Correct! They were having a picnic when the rain started.",
+                errorExplanation: "❌ The audio says 'My family was having a picnic... when it suddenly started to rain'."
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: "While they ______ football, it began to snow.",
+                options: ["played", "were playing", "was playing", "playing"],
+                correct: "were playing",
+                explanation: "✅ Correct! While + past continuous (background action).",
+                errorExplanation: "❌ 'While' is used with past continuous for longer background actions."
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: "What ______ (you/do) at 8 o'clock last night? I ______ (try) to call you.",
+                correct: ["were you doing tried", "were you doing was trying"],
+                explanation: "✅ Correct! Past continuous question: Were you doing? Past simple: tried."
+            },
+            {
+                id: 29,
+                type: 'choice',
+                question: "I ______ my phone when it rang.",
+                options: ["wasn't using", "wasn't use", "not was using", "didn't using"],
+                correct: "wasn't using",
+                explanation: "✅ Correct! Negative past continuous: wasn't + verb-ing.",
+                errorExplanation: "❌ Negative: wasn't/weren't + verb-ing."
+            },
+            {
+                id: 30,
+                type: 'listening',
+                audioText: "Last night was scary! I was sleeping peacefully when I heard a strange noise downstairs. I was lying in bed, feeling frightened, when I heard it again. It was just the cat knocking something over!",
+                question: "How did the speaker feel?",
+                options: ["Peaceful", "Frightened", "Angry", "Excited"],
+                correct: "Frightened",
+                explanation: "✅ Correct! The speaker was feeling frightened.",
+                errorExplanation: "❌ The audio says 'I was lying in bed, feeling frightened'."
+
+            },
+
+            // EXERCISES 31-40: School Subjects & Education
+            {
+                id: 31,
+                type: 'choice',
+                question: "Which subject deals with numbers and calculations?",
+                options: ["Geography", "History", "Mathematics", "Biology"],
+                correct: "Mathematics",
+                explanation: "✅ Correct! Mathematics (Maths) involves numbers and calculations.",
+                errorExplanation: "❌ Mathematics is the subject with numbers and calculations."
+            },
+            {
+                id: 32,
+                type: 'listening',
+                audioText: "At my school, we have to study many subjects. My favourite is Science because I love doing experiments in the laboratory. I also enjoy Art classes where we paint and draw. But I really dislike History - there are too many dates to remember!",
+                question: "Why does the speaker dislike History?",
+                options: ["Too many experiments", "Too many dates", "Too much painting", "Too difficult"],
+                correct: "Too many dates",
+                explanation: "✅ Correct! The speaker says 'too many dates to remember'.",
+                errorExplanation: "❌ The speaker says 'too many dates to remember' about History."
+            },
+            {
+                id: 33,
+                type: 'fill',
+                question: "I need to ______ (revise) for my exams because I want to ______ (pass) them.",
+                correct: ["revise pass"],
+                explanation: "✅ Correct! Revise = study for exams. Pass = succeed in exams."
+            },
+            {
+                id: 34,
+                type: 'choice',
+                question: "Where do students conduct science experiments?",
+                options: ["Library", "Canteen", "Laboratory", "Playground"],
+                correct: "Laboratory",
+                explanation: "✅ Correct! Science experiments are done in a laboratory (lab).",
+                errorExplanation: "❌ Laboratory (lab) is where science experiments happen."
+            },
+            {
+                id: 35,
+                type: 'fill',
+                question: "My favourite subject is ______ because I love reading books and writing stories.",
+                correct: ["English", "Literature", "Language Arts"],
+                explanation: "✅ Correct! English involves reading and writing."
+            },
+            {
+                id: 36,
+                type: 'listening',
+                audioText: "Next week is exam week at school. On Monday, I'm taking my Maths exam. On Wednesday, I have Science and English. On Friday, it's the History test. I'm nervous but I've studied hard!",
+                question: "When is the History test?",
+                options: ["Monday", "Wednesday", "Friday", "Next week"],
+                correct: "Friday",
+                explanation: "✅ Correct! The History test is on Friday.",
+                errorExplanation: "❌ The audio says 'On Friday, it's the History test'."
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: "If you don't study, you might ______ the exam.",
+                options: ["win", "pass", "fail", "take"],
+                correct: "fail",
+                explanation: "✅ Correct! Fail = not succeed in the exam.",
+                errorExplanation: "❌ Without studying, you might fail (not pass)."
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: "In ______ (Geography/History), we learn about mountains, rivers, and countries.",
+                correct: ["Geography", "geography"],
+                explanation: "✅ Correct! Geography studies the Earth and its features."
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: "Which word means 'to go to classes regularly'?",
+                options: ["Miss", "Skip", "Attend", "Avoid"],
+                correct: "Attend",
+                explanation: "✅ Correct! Attend = go to classes regularly.",
+                errorExplanation: "❌ Attend means to go to/be present at classes."
+            },
+            {
+                id: 40,
+                type: 'listening',
+                audioText: "My school is quite strict about homework. We get homework every day from different teachers. If we don't do it, we get detention after school. Last week, I forgot to hand in my Science homework and I had to stay for an hour!",
+                question: "What happened to the speaker last week?",
+                options: ["Got detention", "Failed an exam", "Missed school", "Forgot to attend"],
+                correct: "Got detention",
+                explanation: "✅ Correct! The speaker got detention for not handing in homework.",
+                errorExplanation: "❌ The audio says 'I had to stay for an hour' (detention)."
+
+            },
+
+            // EXERCISES 41-50: Directions, Transport & Mixed Practice
+            {
+                id: 41,
+                type: 'choice',
+                question: "How do you get to school if you walk?",
+                options: ["By bus", "By car", "On foot", "By bike"],
+                correct: "On foot",
+                explanation: "✅ Correct! Walking = on foot.",
+                errorExplanation: "❌ 'On foot' is the correct phrase for walking."
+            },
+            {
+                id: 42,
+                type: 'listening',
+                audioText: "To get to the train station from here, go straight along this road until you see a big roundabout. Go round the roundabout and take the second exit. Then walk past the supermarket and you'll see the station on your left, opposite the library.",
+                question: "What do you pass after the roundabout?",
+                options: ["The library", "The supermarket", "The station", "The exit"],
+                correct: "The supermarket",
+                explanation: "✅ Correct! Walk past the supermarket after the roundabout.",
+                errorExplanation: "❌ The directions say 'walk past the supermarket' after the roundabout."
+            },
+            {
+                id: 43,
+                type: 'fill',
+                question: "To reach the city centre, drive ______ the bridge and then turn left ______ the traffic lights.",
+                correct: ["across at", "over at", "across, at"],
+                explanation: "✅ Correct! Drive across/over the bridge, at the traffic lights."
+            },
+            {
+                id: 44,
+                type: 'choice',
+                question: "Which preposition is correct? 'The bank is ______ the cinema and the restaurant.'",
+                options: ["between", "next", "opposite", "along"],
+                correct: "between",
+                explanation: "✅ Correct! Between = in the middle of two things.",
+                errorExplanation: "❌ 'Between' is used with two things (and)."
+            },
+            {
+                id: 45,
+                type: 'fill',
+                question: "I usually go to work ______ bus, but yesterday I went ______ foot because the buses weren't running.",
+                correct: ["by on", "by, on"],
+                explanation: "✅ Correct! By bus, on foot (fixed expressions)."
+            },
+            {
+                id: 46,
+                type: 'listening',
+                audioText: "Last summer, my friends and I went on a trip to the mountains. We travelled by coach because it's cheaper than the train. The journey took five hours but we had a great time playing games and listening to music.",
+                question: "How did they travel?",
+                options: ["By train", "By coach", "By car", "By plane"],
+                correct: "By coach",
+                explanation: "✅ Correct! They travelled by coach (long-distance bus).",
+                errorExplanation: "❌ The audio says 'We travelled by coach'."
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: "Complete: Walk ______ this street ______ you reach the church.",
+                options: ["along / until", "across / while", "past / when", "straight / during"],
+                correct: "along / until",
+                explanation: "✅ Correct! Walk along (movement) until (time conjunction).",
+                errorExplanation: "❌ Walk along the street until you reach..."
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: "While I ______ (wait) for the bus, I ______ (realise) I had forgotten my wallet.",
+                correct: ["was waiting realised", "was waiting, realised"],
+                explanation: "✅ Correct! While + past continuous, past simple interrupting."
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: "Choose the correct sentence:",
+                options: ["I'm going to the doctor yesterday.", "I went to the doctor yesterday.", "I go to the doctor yesterday.", "I'm going to went to the doctor."],
+                correct: "I went to the doctor yesterday.",
+                explanation: "✅ Correct! Yesterday = past simple (went).",
+                errorExplanation: "❌ Yesterday requires past simple, not going to future."
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: "Complete the story: Yesterday I ______ (wake) up late. While I ______ (have) breakfast, my phone ______ (ring). It ______ (be) my friend. We ______ (decide) to meet at the cinema. We ______ (go) by bus. The film ______ (be) amazing!",
+                correct: ["woke was having rang was decided went was"],
+                explanation: "✅ Excellent! You've completed all 50 Grade 4 exercises! Well done!"
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+        let speechSynthesis = window.speechSynthesis;
+        let currentUtterance = null;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function speakText(text) {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            
+            speechSynthesis.speak(utterance);
+            currentUtterance = utterance;
+        }
+
+        function stopSpeaking() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let typeBadge = '';
+            if (ex.type === 'listening') typeBadge = '🎧 Listening';
+            else if (ex.type === 'choice') typeBadge = '📝 Multiple Choice';
+            else if (ex.type === 'fill') typeBadge = '✏️ Fill in the Blank';
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Exercise ${ex.id} - ${typeBadge}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Question ${currentExercise + 1} of ${exercises.length}</div>
+            `;
+
+            if (ex.type === 'listening') {
+                html += `
+                    <div class="listening-box">
+                        <div class="audio-controls">
+                            <button class="btn-audio" onclick="speakText('${ex.audioText.replace(/'/g, "\\'")}')" id="playBtn">
+                                ▶️ Play Audio
+                            </button>
+                            <button class="btn-secondary" onclick="document.getElementById('transcript').classList.toggle('show')">
+                                👁️ Show Transcript
+                            </button>
+                        </div>
+                        <div class="transcript-box" id="transcript">
+                            "${ex.audioText}"
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="question-box">
+                            <div class="question-type-badge">${typeBadge}</div>
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice' || ex.type === 'listening') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt.replace(/'/g, "\\'")}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                        <div class="hint-text">Press Enter or click Verify when ready</div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary" onclick="checkFill()" style="background: var(--grade4-purple);">✓ Verify Answer</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Next Question →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fdf4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fef2f2';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            stopSpeaking();
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Outstanding! You are excellently prepared for the GESE Grade 4 exam! Your mastery of past tenses and future forms is excellent!';
+            } else if (totalScore >= 70) {
+                message = '👍 Great job! You have a solid understanding of Grade 4 grammar. Review past continuous vs. simple to perfect your skills.';
+            } else if (totalScore >= 50) {
+                message = '💪 Good effort! Focus on practicing irregular verbs, going to future, and the difference between past continuous and past simple.';
+            } else {
+                message = '📚 Keep studying! Concentrate on: 1) Past simple regular/irregular verbs, 2) Going to for future, 3) Was/were + verb-ing for past continuous.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        // Shuffle exercises on initial load
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+
+        // Clean up speech synthesis when leaving page
+        window.addEventListener('beforeunload', function() {
+            stopSpeaking();
+        });
+    </script>
+</body>
+</html>

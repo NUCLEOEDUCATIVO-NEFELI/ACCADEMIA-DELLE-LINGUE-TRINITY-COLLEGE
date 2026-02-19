@@ -1,0 +1,1070 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE Foundation Writing - Complete Preparation Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2e7d32;
+            --secondary: #455a64;
+            --accent: #f57c00;
+            --light: #e8f5e9;
+            --dark: #263238;
+            --border: #c8e6c9;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #c62828;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --a2-color: #1565c0;
+            --warning: #ef6c00;
+            --task3: #e3f2fd;
+            --task4: #fff3e0;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3e0;
+            border: 1px solid #ffcc80;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #e3f2fd;
+            border-left: 4px solid var(--a2-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .task-box {
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 5px solid;
+        }
+
+        .task3-box {
+            background: var(--task3);
+            border-color: #1565c0;
+        }
+
+        .task4-box {
+            background: var(--task4);
+            border-color: #ef6c00;
+        }
+
+        .task-title {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .model-answer {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: Georgia, serif;
+            line-height: 1.8;
+        }
+
+        .word-count {
+            display: inline-block;
+            background: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-weight: bold;
+            margin-left: 0.5rem;
+            border: 2px solid;
+        }
+
+        .task3-box .word-count {
+            border-color: #1565c0;
+            color: #1565c0;
+        }
+
+        .task4-box .word-count {
+            border-color: #ef6c00;
+            color: #ef6c00;
+        }
+
+        .planning-box {
+            background: #f5f5f5;
+            border: 2px dashed #ccc;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: monospace;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .checklist li::before {
+            content: "☐";
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .highlight {
+            background: #fff59d;
+            padding: 0 0.25rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE Foundation Writing</h1>
+            <p>Complete Guide to Task 3 & Task 4 (A2 Level)</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE Foundation Writing Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE Foundation Writing Guide</h1>
+            <p class="page-subtitle">Master Task 3 (Reading into Writing) and Task 4 (Extended Writing)</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('task3', this)">Task 3: Reading into Writing</button>
+            <button class="nav-tab" onclick="showSection('task4', this)">Task 4: Extended Writing</button>
+            <button class="nav-tab" onclick="showSection('texttypes', this)">Text Types</button>
+            <button class="nav-tab" onclick="showSection('strategies', this)">Strategies</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">ISE Foundation Writing Exam Overview</div>
+                <div class="card-body">
+                    <p>The <strong>Writing section</strong> of ISE Foundation consists of two tasks completed in approximately <strong>70 minutes</strong> (30 minutes for Task 3, 40 minutes for Task 4). These tasks test your ability to write clear, well-organised texts at A2 level.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Key Facts:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Total time:</strong> 70 minutes for both tasks</li>
+                            <li><strong>Total word count:</strong> 140-200 words (70-100 per task)</li>
+                            <li><strong>Text types:</strong> Essay, article, email, letter, review</li>
+                            <li><strong>Subject areas:</strong> Holidays, shopping, school/work, hobbies, food, weekend activities, jobs, places, home life, weather, free time, dates, natural world</li>
+                        </ul>
+                    </div>
+
+                    <div class="task-box task3-box">
+                        <div class="task-title">Task 3: Reading into Writing <span class="word-count">70-100 words</span></div>
+                        <p><strong>Time advised:</strong> 30 minutes</p>
+                        <p><strong>Source material:</strong> Use information from Task 2 (Multi-text Reading)</p>
+                        <p><strong>Must include:</strong> 3 content points from the question</p>
+                        <p><strong>Key skill:</strong> Paraphrasing (using your own words, not copying)</p>
+                    </div>
+
+                    <div class="task-box task4-box">
+                        <div class="task-title">Task 4: Extended Writing <span class="word-count">70-100 words</span></div>
+                        <p><strong>Time advised:</strong> 40 minutes</p>
+                        <p><strong>Source material:</strong> Use your own ideas and experience</p>
+                        <p><strong>Must include:</strong> 2 content points from the question</p>
+                        <p><strong>Key skill:</strong> Organising your own ideas coherently</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Assessment Criteria</div>
+                <div class="card-body">
+                    <p>Both tasks are assessed on the same criteria:</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>What the Examiner Looks For</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Task Fulfilment</td>
+                                <td>Did you include all required content points? Is the word count correct?</td>
+                            </tr>
+                            <tr>
+                                <td>Text Organisation</td>
+                                <td>Clear paragraphs, logical order, appropriate opening and closing</td>
+                            </tr>
+                            <tr>
+                                <td>Language Control</td>
+                                <td>Grammar accuracy, vocabulary range, spelling, punctuation</td>
+                            </tr>
+                            <tr>
+                                <td>Register & Format</td>
+                                <td>Appropriate style (formal/informal) and text type features</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Important:</strong> You must write between 70-100 words. If you write fewer than 70 or more than 100 words, you will lose marks!
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 3 SECTION -->
+        <section id="task3" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: #1565c0;">Task 3: Reading into Writing (30 minutes)</div>
+                <div class="card-body">
+                    <div class="task3-box" style="margin-bottom: 1.5rem;">
+                        <p><strong>Word count:</strong> 70-100 words</p>
+                        <p><strong>Source:</strong> Information from Task 2 texts (3-4 short texts)</p>
+                        <p><strong>Content points:</strong> 3 bullet points to include</p>
+                        <p><strong>Key skill:</strong> Paraphrasing (don't copy from texts!)</p>
+                    </div>
+
+                    <h4>Step-by-Step Approach</h4>
+                    
+                    <div class="planning-box">
+                        <strong>Step 1: Analyze the Question (2 minutes)</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>What text type? (essay, article, email, review)</li>
+                            <li>Who is the reader?</li>
+                            <li>What are the 3 content points?</li>
+                        </ul>
+                    </div>
+
+                    <div class="planning-box">
+                        <strong>Step 2: Select Information from Texts (5 minutes)</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Go back to Task 2 texts</li>
+                            <li>Find information for each content point</li>
+                            <li>Make notes (don't copy full sentences)</li>
+                        </ul>
+                    </div>
+
+                    <div class="planning-box">
+                        <strong>Step 3: Plan Your Text (3 minutes)</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Introduction: 1 sentence to introduce topic</li>
+                            <li>Body: 2-3 sentences covering the 3 content points</li>
+                            <li>Conclusion: 1 sentence (opinion or summary)</li>
+                        </ul>
+                    </div>
+
+                    <div class="planning-box">
+                        <strong>Step 4: Write (15 minutes)</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Use your own words - paraphrase!</li>
+                            <li>Include all 3 content points</li>
+                            <li>Use simple connectors: and, but, because, so</li>
+                        </ul>
+                    </div>
+
+                    <div class="planning-box">
+                        <strong>Step 5: Check (5 minutes)</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Word count (70-100 words)</li>
+                            <li>All content points included?</li>
+                            <li>Spelling and grammar</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Task 3 Sample with Model Answer</div>
+                <div class="card-body">
+                    <div class="rule-box">
+                        <strong>Task 2 Texts Summary:</strong><br>
+                        <strong>Text A:</strong> Maria went to Spain with family, stayed in beach hotel, sunny weather, went swimming, expensive but worth it<br>
+                        <strong>Text B:</strong> Tom went hiking in Scotland with friend, stayed in hostels, rainy weather, walked in mountains, cheap, felt fit<br>
+                        <strong>Text C:</strong> Johnson family went to Paris, stayed in city centre apartment, crowded, visited Eiffel Tower and museums, travelled by Eurostar
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Task 3 Question:</strong><br>
+                        Write an article (70-100 words) for your school magazine about holidays. Use the information you read in Task 2 to:
+                        <ul style="margin-left: 1.5rem;">
+                            <li>describe different types of holidays people had</li>
+                            <li>say what the weather was like</li>
+                            <li>say how people travelled</li>
+                        </ul>
+                    </div>
+
+                    <div class="model-answer">
+                        <strong>Model Answer (85 words):</strong><br><br>
+                        Different Types of Holidays<br><br>
+                        People enjoy different types of holidays. Maria went to Spain with her family and stayed in a hotel by the beach. The weather was hot and sunny every day. She travelled there by plane. Tom preferred hiking in Scotland with his friend. The weather wasn't good and it rained a lot. He went by train. The Johnson family visited Paris and stayed in an apartment. They travelled by Eurostar. In my opinion, beach holidays are the best because I love swimming in the sea.
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Analysis:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Content point 1:</strong> Different holidays (beach, hiking, city) ✓</li>
+                            <li><strong>Content point 2:</strong> Weather (sunny, rainy) ✓</li>
+                            <li><strong>Content point 3:</strong> Transport (plane, train, Eurostar) ✓</li>
+                            <li><strong>Paraphrasing:</strong> "hot and sunny" instead of "fantastic - sunny and hot", "wasn't good" instead of "wasn't great"</li>
+                            <li><strong>Own words:</strong> No copied sentences from texts</li>
+                            <li><strong>Word count:</strong> 85 words (within 70-100 range)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Common Mistakes in Task 3</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Mistake</th>
+                                <th>Why It's Wrong</th>
+                                <th>How to Avoid</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Copying from texts</td>
+                                <td>Shows no paraphrasing skill</td>
+                                <td>Change vocabulary and sentence structure</td>
+                            </tr>
+                            <tr>
+                                <td>Missing content points</td>
+                                <td>Loses marks for task fulfilment</td>
+                                <td>Check off each bullet point as you write</td>
+                            </tr>
+                            <tr>
+                                <td>Adding own ideas</td>
+                                <td>Must only use information from texts</td>
+                                <td>Stick to facts from Task 2</td>
+                            </tr>
+                            <tr>
+                                <td>Wrong word count</td>
+                                <td>Penalised if under 70 or over 100</td>
+                                <td>Count words and adjust</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- TASK 4 SECTION -->
+        <section id="task4" class="section">
+            <div class="card">
+                <div class="card-header" style="border-left-color: #ef6c00;">Task 4: Extended Writing (40 minutes)</div>
+                <div class="card-body">
+                    <div class="task4-box" style="margin-bottom: 1.5rem;">
+                        <p><strong>Word count:</strong> 70-100 words</p>
+                        <p><strong>Source:</strong> Your own ideas and experience</p>
+                        <p><strong>Content points:</strong> 2 bullet points to include</p>
+                        <p><strong>Key skill:</strong> Organising your own ideas clearly</p>
+                    </div>
+
+                    <h4>Step-by-Step Approach</h4>
+                    
+                    <div class="planning-box">
+                        <strong>Step 1: Analyze the Question (5 minutes)</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>What text type? (email, letter, article, essay, review)</li>
+                            <li>Who are you writing to?</li>
+                            <li>What are the 2 content points?</li>
+                            <li>Formal or informal register?</li>
+                        </ul>
+                    </div>
+
+                    <div class="planning-box">
+                        <strong>Step 2: Brainstorm Ideas (5 minutes)</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Think of vocabulary related to the topic</li>
+                            <li>Decide on specific examples to include</li>
+                            <li>Plan your opinion (if asked)</li>
+                        </ul>
+                    </div>
+
+                    <div class="planning-box">
+                        <strong>Step 3: Plan Your Text (5 minutes)</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Opening: Greeting + purpose (for emails/letters) or title + introduction</li>
+                            <li>Middle: Cover both content points with examples</li>
+                            <li>Closing: Appropriate ending for text type</li>
+                        </ul>
+                    </div>
+
+                    <div class="planning-box">
+                        <strong>Step 4: Write (20 minutes)</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Write clearly and simply</li>
+                            <li>Use connectors: and, but, because, so, then</li>
+                            <li>Include specific details (names, places, times)</li>
+                        </ul>
+                    </div>
+
+                    <div class="planning-box">
+                        <strong>Step 5: Check (5 minutes)</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Word count (70-100 words)</li>
+                            <li>Both content points included?</li>
+                            <li>Appropriate opening and closing?</li>
+                            <li>Spelling and grammar checked?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Task 4 Sample Questions with Model Answers</div>
+                <div class="card-body">
+                    
+                    <h4 style="color: var(--primary);">Sample 1: Informal Email to a Friend</h4>
+                    <div class="instruction-box">
+                        <strong>Task:</strong> A friend from another country wants to know about your home. Write an email (70-100 words) to your friend. You should:
+                        <ul style="margin-left: 1.5rem;">
+                            <li>describe your home and</li>
+                            <li>say what you like doing there.</li>
+                        </ul>
+                    </div>
+
+                    <div class="model-answer">
+                        <strong>Model Answer (78 words):</strong><br><br>
+                        Hi Sam,<br><br>
+                        Thanks for your email. I'm writing to tell you about my home. I live in a flat with my parents and my sister. It's not very big but it's comfortable. We have two bedrooms, a living room and a small kitchen.<br><br>
+                        I really like spending time in my bedroom because it's my own space. I listen to music and chat with friends online there. At the weekend, we watch films together in the living room.<br><br>
+                        Write soon!<br>
+                        Maria
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Why this is good:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Appropriate email format (greeting, message, closing)</li>
+                            <li>Content point 1: Describes home (flat, rooms) ✓</li>
+                            <li>Content point 2: Says what she likes doing (bedroom activities, watching films) ✓</li>
+                            <li>Informal register (Hi, Thanks, Write soon)</li>
+                            <li>Word count: 78 words ✓</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="color: var(--primary); margin-top: 1.5rem;">Sample 2: Article for Magazine</h4>
+                    <div class="instruction-box">
+                        <strong>Task:</strong> Your town has a magazine with information about places people can visit. Write an article (70-100 words) for the magazine about a park in your town. You should:
+                        <ul style="margin-left: 1.5rem;">
+                            <li>describe the park and</li>
+                            <li>say what you can do there and who goes there.</li>
+                        </ul>
+                    </div>
+
+                    <div class="model-answer">
+                        <strong>Model Answer (82 words):</strong><br><br>
+                        Riverside Park: A Great Place to Visit<br><br>
+                        Riverside Park is the most beautiful place in our town. It is next to the river and has lots of green grass and tall trees. There are colourful flowers everywhere in spring and summer.<br><br>
+                        You can do many activities there. There is a playground for children and a skate park for teenagers. People can walk their dogs or have picnics on the grass. Families, students and old people all enjoy this park. It is the perfect place to relax and have fun.
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Why this is good:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Title included (article format)</li>
+                            <li>Content point 1: Describes park (location, appearance) ✓</li>
+                            <li>Content point 2: Activities and who goes there ✓</li>
+                            <li>Descriptive vocabulary (beautiful, colourful, perfect)</li>
+                            <li>Word count: 82 words ✓</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="color: var(--primary); margin-top: 1.5rem;">Sample 3: Review</h4>
+                    <div class="instruction-box">
+                        <strong>Task:</strong> Last week you went on holiday and stayed in a hotel. Write a review (70-100 words) of the hotel for a holiday website. You should:
+                        <ul style="margin-left: 1.5rem;">
+                            <li>describe the hotel and</li>
+                            <li>say what is good and bad about the hotel.</li>
+                        </ul>
+                    </div>
+
+                    <div class="model-answer">
+                        <strong>Model Answer (88 words):</strong><br><br>
+                        Hotel Review: The Seaview Hotel<br><br>
+                        I stayed at The Seaview Hotel last week with my family. It is a large hotel next to the beach with a swimming pool and two restaurants. Our room was clean and comfortable with a beautiful view of the sea.<br><br>
+                        The best thing about this hotel is the friendly staff. They were always helpful and smiling. The breakfast was also fantastic with lots of fresh fruit. However, the Wi-Fi was very slow and the hotel was quite expensive.<br><br>
+                        I recommend this hotel for families who want a relaxing beach holiday.
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Why this is good:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Title included (review format)</li>
+                            <li>Content point 1: Describes hotel (location, facilities, room) ✓</li>
+                            <li>Content point 2: Good points (staff, breakfast) and bad points (Wi-Fi, price) ✓</li>
+                            <li>Recommendation at the end</li>
+                            <li>Word count: 88 words ✓</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TEXT TYPES SECTION -->
+        <section id="texttypes" class="section">
+            <div class="card">
+                <div class="card-header">Text Types for ISE Foundation Writing</div>
+                <div class="card-body">
+                    
+                    <h4 style="color: var(--primary);">1. Email (Informal)</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Greeting</td>
+                                <td>Hi [name], / Hello [name],</td>
+                            </tr>
+                            <tr>
+                                <td>Opening</td>
+                                <td>Thanks for your email. / How are you? / I'm writing to...</td>
+                            </tr>
+                            <tr>
+                                <td>Closing</td>
+                                <td>Write soon. / See you soon. / Bye for now.</td>
+                            </tr>
+                            <tr>
+                                <td>Sign-off</td>
+                                <td>Best wishes, / Love, / From,</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 style="color: var(--primary); margin-top: 1.5rem;">2. Letter (Formal)</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Greeting</td>
+                                <td>Dear Mr/Ms [surname], / Dear Sir/Madam,</td>
+                            </tr>
+                            <tr>
+                                <td>Opening</td>
+                                <td>I am writing to... / I would like to...</td>
+                            </tr>
+                            <tr>
+                                <td>Closing</td>
+                                <td>I look forward to hearing from you.</td>
+                            </tr>
+                            <tr>
+                                <td>Sign-off</td>
+                                <td>Yours sincerely, / Yours faithfully,</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 style="color: var(--primary); margin-top: 1.5rem;">3. Article (Magazine or Online)</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Title</td>
+                                <td>Catchy and interesting: "My Favourite Place" / "The Best Cafe in Town"</td>
+                            </tr>
+                            <tr>
+                                <td>Introduction</td>
+                                <td>General statement about the topic</td>
+                            </tr>
+                            <tr>
+                                <td>Body</td>
+                                <td>Information, description, examples</td>
+                            </tr>
+                            <tr>
+                                <td>Conclusion</td>
+                                <td>Opinion or recommendation</td>
+                            </tr>
+                            <tr>
+                                <td>Language</td>
+                                <td>Engaging, descriptive adjectives</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 style="color: var(--primary); margin-top: 1.5rem;">4. Review</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Title</td>
+                                <td>Name of place/film/book: "Restaurant Review: Pizza Palace"</td>
+                            </tr>
+                            <tr>
+                                <td>Introduction</td>
+                                <td>When you went/saw it, with who</td>
+                            </tr>
+                            <tr>
+                                <td>Description</td>
+                                <td>What it was like (location, appearance, atmosphere)</td>
+                            </tr>
+                            <tr>
+                                <td>Evaluation</td>
+                                <td>Good points and bad points</td>
+                            </tr>
+                            <tr>
+                                <td>Recommendation</td>
+                                <td>I recommend... / I suggest... / Perfect for...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h4 style="color: var(--primary); margin-top: 1.5rem;">5. Essay (Descriptive)</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Feature</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Introduction</td>
+                                <td>Introduce the topic</td>
+                            </tr>
+                            <tr>
+                                <td>Body paragraphs</td>
+                                <td>Description with details and examples</td>
+                            </tr>
+                            <tr>
+                                <td>Conclusion</td>
+                                <td>Personal opinion or summary</td>
+                            </tr>
+                            <tr>
+                                <td>Language</td>
+                                <td>Adjectives and adverbs for description</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Formal vs Informal Language</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Informal (Emails to friends)</th>
+                                <th>Formal (Letters to officials)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Hi / Hello</td>
+                                <td>Dear Mr/Ms...</td>
+                            </tr>
+                            <tr>
+                                <td>Thanks</td>
+                                <td>Thank you</td>
+                            </tr>
+                            <tr>
+                                <td>I'm / You're / It's</td>
+                                <td>I am / You are / It is</td>
+                            </tr>
+                            <tr>
+                                <td>Great / Awesome / Fantastic</td>
+                                <td>Very good / Excellent</td>
+                            </tr>
+                            <tr>
+                                <td>Bye / See you</td>
+                                <td>Yours sincerely / faithfully</td>
+                            </tr>
+                            <tr>
+                                <td>Can you...?</td>
+                                <td>Could you...? / I would like...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- STRATEGIES SECTION -->
+        <section id="strategies" class="section">
+            <div class="card">
+                <div class="card-header">Writing Strategies for ISE Foundation</div>
+                <div class="card-body">
+                    
+                    <h4>Grammar at A2 Level</h4>
+                    <div class="instruction-box">
+                        <strong>You should demonstrate:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Present Simple:</strong> I live, She works, Do you like?</li>
+                            <li><strong>Present Continuous:</strong> I am writing, She is studying</li>
+                            <li><strong>Past Simple:</strong> I visited, She went, Did you see?</li>
+                            <li><strong>Future with going to:</strong> I'm going to visit</li>
+                            <li><strong>Can / Can't:</strong> I can swim, She can't come</li>
+                            <li><strong>Comparatives:</strong> bigger, more expensive</li>
+                            <li><strong>Connectors:</strong> and, but, because, so, then</li>
+                        </ul>
+                    </div>
+
+                    <h4 style="margin-top: 1.5rem;">Useful Phrases for Writing</h4>
+                    
+                    <div class="example-box">
+                        <strong>Opening phrases:</strong><br>
+                        • I'm writing to tell you about...<br>
+                        • Thanks for your email.<br>
+                        • I would like to tell you about...<br>
+                        • This article is about...
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Adding information:</strong><br>
+                        • and<br>
+                        • also<br>
+                        • as well<br>
+                        • too (at the end of sentence)
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Contrasting:</strong><br>
+                        • but<br>
+                        • however<br>
+                        • although
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Giving reasons:</strong><br>
+                        • because<br>
+                        • so<br>
+                        • that's why
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Closing phrases:</strong><br>
+                        • I hope to hear from you soon.<br>
+                        • Write soon.<br>
+                        • I recommend this place because...<br>
+                        • In my opinion,...
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Final Checklist Before Submitting</div>
+                <div class="card-body">
+                    <ul class="checklist">
+                        <li>Word count is between 70-100 words</li>
+                        <li>All content points from the question are included</li>
+                        <li>Appropriate opening and closing for text type</li>
+                        <li>Correct register (formal or informal)</li>
+                        <li>Paragraphs are clear and logical</li>
+                        <li>Used connectors (and, but, because)</li>
+                        <li>Checked spelling of common words</li>
+                        <li>Checked punctuation (full stops, commas, capital letters)</li>
+                        <li>Checked verb tenses (past for past events, present for routines)</li>
+                        <li>Handwriting is clear and easy to read (or typed neatly)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Time Management in the Exam</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Activity</th>
+                                <th>Task 3 (30 mins)</th>
+                                <th>Task 4 (40 mins)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Analyze question</td>
+                                <td>2 minutes</td>
+                                <td>5 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Plan / Brainstorm</td>
+                                <td>8 minutes (select from texts)</td>
+                                <td>10 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Write</td>
+                                <td>15 minutes</td>
+                                <td>20 minutes</td>
+                            </tr>
+                            <tr>
+                                <td>Check</td>
+                                <td>5 minutes</td>
+                                <td>5 minutes</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box" style="margin-top: 1rem;">
+                        <strong>Important:</strong> Always leave time to check your work! Many mistakes can be caught and corrected in the final 5 minutes.
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity ISE Foundation Writing Preparation</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+    </script>
+</body>
+</html>

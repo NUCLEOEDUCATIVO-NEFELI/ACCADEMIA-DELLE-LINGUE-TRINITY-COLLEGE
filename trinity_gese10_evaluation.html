@@ -1,0 +1,1521 @@
+
+html_content = '''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity College London - Grade 10 (C1.1) - 50 Exercises</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #003366;
+            --secondary: #6c757d;
+            --accent: #8b0000;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --border: #dee2e6;
+            --success: #155724;
+            --success-bg: #d4edda;
+            --error: #721c24;
+            --error-bg: #f8d7da;
+            --parchment: #faf8f3;
+            --c1-color: #8b4513;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-style: italic;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--primary);
+            font-weight: normal;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-style: italic;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+        }
+
+        .nav-tab {
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .nav-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .nav-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #e7f3ff;
+            border-left: 4px solid var(--primary);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .rule-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0;
+        }
+
+        .grammar-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .grammar-table th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        .grammar-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .grammar-table tr:hover {
+            background: #f8f9fa;
+        }
+
+        .example-box {
+            background: #f0f8ff;
+            border-left: 4px solid #4169e1;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: var(--light);
+            border: 1px solid var(--border);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .score-label {
+            font-weight: bold;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.85rem;
+        }
+
+        .score-value {
+            font-size: 1.5rem;
+            color: var(--primary);
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: var(--light);
+            border: 1px solid var(--border);
+            margin: 1rem 0;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--c1-color);
+            width: 0%;
+            transition: width 0.5s;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--primary);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            line-height: 1.8;
+        }
+
+        .blank {
+            display: inline-block;
+            min-width: 150px;
+            border-bottom: 2px solid var(--accent);
+            color: var(--accent);
+            font-weight: bold;
+            margin: 0 0.3rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--c1-color);
+            background: var(--light);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1rem;
+            text-align: center;
+            font-weight: bold;
+            display: none;
+            margin-bottom: 1rem;
+            border: 1px solid;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.75rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #002147;
+        }
+
+        .btn-check {
+            background: var(--c1-color);
+            color: white;
+        }
+
+        .btn-check:hover {
+            background: #6b350e;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 220px;
+            padding: 10px 15px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            margin: 0 5px;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--c1-color);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--primary) 0%, #0f2027 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: bold;
+            color: #d4a574;
+            margin: 20px 0;
+        }
+
+        .final-message {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+        }
+
+        .exercise-counter {
+            background: var(--c1-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 180px; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity College London - Grade 10 (C1.1)</h1>
+            <p>Advanced Language: Mixed Conditionals, Inversion, Cleft Sentences & Subjunctive</p>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity GESE</a>
+            <span>›</span>
+            <strong>Grade 10 (C1.1) - 50 Exercises</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🎓 Grade 10 Advanced Grammar</h1>
+            <p class="page-subtitle">Mixed Conditionals, Inversion, Emphatic Structures, Subjunctive & Complex Reporting</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('theory', this)">📚 Theory</button>
+            <button class="nav-tab" onclick="showSection('mixed', this)">Mixed Conditionals</button>
+            <button class="nav-tab" onclick="showSection('inversion', this)">Inversion</button>
+            <button class="nav-tab" onclick="showSection('emphasis', this)">Emphasis</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 Exercises (50)</button>
+        </nav>
+
+        <!-- THEORY SECTION -->
+        <section id="theory" class="section active">
+            <div class="card">
+                <div class="card-header">Grade 10 Overview (C1.1 Level)</div>
+                <div class="card-body">
+                    <p>Grade 10 of the Trinity College London GESE exam corresponds to level C1.1 (advanced) of the CEFR. At this level, candidates demonstrate sophisticated mastery of complex grammatical structures and nuanced language use.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Key Features of Grade 10:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Duration:</strong> 25 minutes (fully candidate-led discussion)</li>
+                            <li><strong>Mixed Conditionals:</strong> Combining past and present hypothetical situations</li>
+                            <li><strong>Inversion:</strong> After negative adverbials for emphasis and formality</li>
+                            <li><strong>Emphatic Structures:</strong> Cleft sentences and fronting</li>
+                            <li><strong>Subjunctive:</strong> Formal contexts and hypothetical subjunctive</li>
+                            <li><strong>Advanced Reporting:</strong> Complex reporting verbs and structures</li>
+                        </ul>
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>⚠️ Exam Tip:</strong> At Grade 10, you lead the entire interaction. You must demonstrate spontaneous use of these advanced structures while maintaining fluency and coherence in extended discourse.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Mixed Conditionals</div>
+                <div class="card-body">
+                    <p>Mixed conditionals combine different time references in the if-clause and main clause. They express complex hypothetical relationships between past and present.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Type 1: Past → Present</strong><br>
+                        If + past perfect → would + infinitive<br>
+                        (Past condition, present result)
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Examples:</strong><br>
+                        • If I <strong>had taken</strong> that job, I <strong>would be</strong> rich now.<br>
+                        • If she <strong>hadn't missed</strong> the train, she <strong>would be</strong> at the meeting.<br>
+                        • I <strong>wouldn't be</strong> tired if I <strong>had gone</strong> to bed early.
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Type 2: Present → Past</strong><br>
+                        If + past simple → would have + past participle<br>
+                        (Present condition, past result)
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Examples:</strong><br>
+                        • If I <strong>spoke</strong> better French, I <strong>would have applied</strong> for that job.<br>
+                        • If he <strong>weren't</strong> so lazy, he <strong>would have finished</strong> the project.<br>
+                        • She <strong>would have passed</strong> if she <strong>were</strong> more confident.
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Inversion after Negative Adverbials</div>
+                <div class="card-body">
+                    <p>Inversion is used for emphasis and formality, placing the auxiliary verb before the subject after certain negative or restrictive adverbials.</p>
+                    
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Adverbial</th>
+                                <th>Normal Word Order</th>
+                                <th>Inverted Form</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Never</td>
+                                <td>I <strong>have never</strong> seen such beauty.</td>
+                                <td><strong>Never have I</strong> seen such beauty.</td>
+                            </tr>
+                            <tr>
+                                <td>Rarely</td>
+                                <td>She <strong>rarely</strong> arrives late.</td>
+                                <td><strong>Rarely does she</strong> arrive late.</td>
+                            </tr>
+                            <tr>
+                                <td>Hardly...when</td>
+                                <td>I <strong>had hardly</strong> arrived when...</td>
+                                <td><strong>Hardly had I</strong> arrived when...</td>
+                            </tr>
+                            <tr>
+                                <td>No sooner...than</td>
+                                <td>He <strong>had no sooner</strong> finished than...</td>
+                                <td><strong>No sooner had he</strong> finished than...</td>
+                            </tr>
+                            <tr>
+                                <td>Not only</td>
+                                <td>She <strong>not only</strong> sings but also dances.</td>
+                                <td><strong>Not only does she</strong> sing, but she also dances.</td>
+                            </tr>
+                            <tr>
+                                <td>Under no circumstances</td>
+                                <td>You <strong>must not</strong> open this door.</td>
+                                <td><strong>Under no circumstances must you</strong> open this door.</td>
+                            </tr>
+                            <tr>
+                                <td>Little</td>
+                                <td>They <strong>knew little</strong> about the danger.</td>
+                                <td><strong>Little did they know</strong> about the danger.</td>
+                            </tr>
+                            <tr>
+                                <td>Only then/later</td>
+                                <td>I <strong>understood only then</strong>.</td>
+                                <td><strong>Only then did I</strong> understand.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Conditional Inversion (Formal):</strong><br>
+                        • If I <strong>had known</strong> → <strong>Had I known</strong><br>
+                        • If you <strong>should need</strong> → <strong>Should you need</strong><br>
+                        • If I <strong>were you</strong> → <strong>Were I you</strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Emphatic Structures</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Cleft Sentences (It-clefts):</strong><br>
+                        Structure: <strong>It is/was + emphasized element + that/who + rest of sentence</strong>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Examples:</strong><br>
+                        • <strong>John bought a car yesterday.</strong><br>
+                        &nbsp;&nbsp;→ <strong>It was John</strong> who bought a car yesterday. (emphasizing subject)<br>
+                        &nbsp;&nbsp;→ <strong>It was a car</strong> that John bought yesterday. (emphasizing object)<br>
+                        &nbsp;&nbsp;→ <strong>It was yesterday</strong> that John bought a car. (emphasizing time)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Wh-clefts (Pseudo-clefts):</strong><br>
+                        Structure: <strong>What-clause + be + emphasized element</strong>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Examples:</strong><br>
+                        • <strong>What I need</strong> is a long holiday.<br>
+                        • <strong>What annoys me</strong> is his attitude.<br>
+                        • <strong>What happened</strong> was that we missed the train.
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Fronting (Moving elements to the beginning):</strong>
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Examples:</strong><br>
+                        • <strong>This book</strong> I really enjoyed. (object fronting)<br>
+                        • <strong>Really beautiful</strong> it was. (complement fronting)<br>
+                        • <strong>The winner</strong> she became. (subject complement fronting)
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Subjunctive Mood</div>
+                <div class="card-body">
+                    <p>The subjunctive is used in formal English to express hypothetical situations, recommendations, demands, and importance.</p>
+                    
+                    <div class="instruction-box">
+                        <strong>Formulaic Subjunctive (Fixed expressions):</strong><br>
+                        • God <strong>save</strong> the Queen<br>
+                        • Long <strong>live</strong> the king<br>
+                        • Come <strong>what</strong> may<br>
+                        • Suffice it to <strong>say</strong>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Mandative Subjunctive (After certain verbs/adjectives):</strong><br>
+                        Structure: <strong>subject + base form of verb</strong> (no -s in third person)
+                    </div>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Trigger Words</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>demand, require, insist, suggest, recommend</td>
+                                <td>He <strong>insists that she leave</strong> immediately.</td>
+                            </tr>
+                            <tr>
+                                <td>important, necessary, essential, vital</td>
+                                <td>It is <strong>essential that he be</strong> informed.</td>
+                            </tr>
+                            <tr>
+                                <td>propose, move (formal suggestion)</td>
+                                <td>I <strong>move that the meeting be</strong> adjourned.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="rule-box">
+                        <strong>Alternative with "should":</strong><br>
+                        In British English, "should + infinitive" is often used instead of the subjunctive:<br>
+                        • It is important that he <strong>should be</strong> informed. (UK)<br>
+                        • It is important that he <strong>be</strong> informed. (US/formal)
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Hypothetical Subjunctive (Unreal present/future):</strong><br>
+                        • If I <strong>were</strong> you... (instead of "was")<br>
+                        • I wish he <strong>were</strong> here.<br>
+                        • Suppose she <strong>be</strong> right... (very formal)
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Advanced Reporting Structures</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Reporting Verbs with Complex Patterns:</strong>
+                    </div>
+
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Pattern</th>
+                                <th>Verbs</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>verb + that + should + inf</td>
+                                <td>propose, suggest, recommend</td>
+                                <td>He <strong>proposed that we should meet</strong> later.</td>
+                            </tr>
+                            <tr>
+                                <td>verb + object + to-inf</td>
+                                <td>urge, persuade, convince, encourage</td>
+                                <td>She <strong>urged him to reconsider</strong>.</td>
+                            </tr>
+                            <tr>
+                                <td>verb + gerund/-ing</td>
+                                <td>admit, deny, confess to</td>
+                                <td>He <strong>admitted taking</strong> the money.</td>
+                            </tr>
+                            <tr>
+                                <td>verb + preposition + gerund</td>
+                                <td>insist on, object to, confess to</td>
+                                <td>They <strong>insisted on paying</strong> for dinner.</td>
+                            </tr>
+                            <tr>
+                                <td>verb + (that) + past subjunctive</td>
+                                <td>demand, require, insist</td>
+                                <td>He <strong>demanded that she apologize</strong>.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="example-box">
+                        <strong>Passive Reporting with "To":</strong><br>
+                        • <strong>It is said that</strong> he is rich. / He <strong>is said to be</strong> rich.<br>
+                        • <strong>It was believed that</strong> she had left. / She <strong>was believed to have left</strong>.<br>
+                        • <strong>It is expected that</strong> they will win. / They <strong>are expected to win</strong>.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MIXED CONDITIONALS SECTION -->
+        <section id="mixed" class="section">
+            <div class="card">
+                <div class="card-header">Mixed Conditionals in Detail</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Past Action → Present Result:</strong><br>
+                        Used when a past event affects the present situation.
+                    </div>
+
+                    <div class="example-box">
+                        • If I <strong>had accepted</strong> that promotion, I <strong>would be</strong> working in London now.<br>
+                        • She <strong>would be</strong> healthier if she <strong>had stopped</strong> smoking years ago.<br>
+                        • If they <strong>had invested</strong> in Apple, they <strong>would be</strong> millionaires today.
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Present State → Past Result:</strong><br>
+                        Used when a present characteristic caused a past result.
+                    </div>
+
+                    <div class="example-box">
+                        • If I <strong>were</strong> more ambitious, I <strong>would have applied</strong> for the manager position.<br>
+                        • He <strong>would have succeeded</strong> if he <strong>weren't</strong> so afraid of failure.<br>
+                        • If she <strong>spoke</strong> better English, she <strong>would have got</strong> the job.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Key Distinction:</strong><br>
+                        • Third conditional: If + past perfect → would have + pp (past → past)<br>
+                        • Mixed conditional 1: If + past perfect → would + infinitive (past → present)<br>
+                        • Mixed conditional 2: If + past simple → would have + pp (present → past)
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- INVERSION SECTION -->
+        <section id="inversion" class="section">
+            <div class="card">
+                <div class="card-header">Advanced Inversion Patterns</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Inversion in Conditionals (Formal):</strong>
+                    </div>
+
+                    <div class="example-box">
+                        • <strong>Were I you</strong>, I would accept the offer. (= If I were you)<br>
+                        • <strong>Had they arrived</strong> earlier, they would have seen her. (= If they had arrived)<br>
+                        • <strong>Should you change</strong> your mind, let me know. (= If you should change)<br>
+                        • <strong>Were it not for</strong> his help, we would have failed. (= If it weren't for)
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Inversion after "So...that" and "Such...that":</strong>
+                    </div>
+
+                    <div class="example-box">
+                        • <strong>So beautiful was the sunset</strong> that we stayed for hours.<br>
+                        • <strong>Such was his anger</strong> that he couldn't speak.<br>
+                        • <strong>So fast did he run</strong> that he broke the record.
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>Negative Adverbials Triggering Inversion:</strong><br>
+                        • barely, scarcely, seldom, never, nowhere<br>
+                        • not until, not since, not only...but also<br>
+                        • at no time, in no way, on no account
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EMPHASIS SECTION -->
+        <section id="emphasis" class="section">
+            <div class="card">
+                <div class="card-header">Emphatic and Cleft Structures</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Reversed Clefts (Reversed Wh-clefts):</strong><br>
+                        Structure: <strong>Emphasized element + be + what-clause</strong>
+                    </div>
+
+                    <div class="example-box">
+                        • A long holiday <strong>is what I need</strong>.<br>
+                        • His attitude <strong>is what annoys me</strong>.<br>
+                        • Money <strong>isn't what matters most</strong>.
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Adding Emphasis with "Do/Does/Did":</strong>
+                    </div>
+
+                    <div class="example-box">
+                        • I <strong>do like</strong> your new haircut!<br>
+                        • She <strong>did finish</strong> the work on time.<br>
+                        • They <strong>does try</strong> hard, doesn't he? (informal)
+                    </div>
+
+                    <div class="rule-box">
+                        <strong>All-clefts:</strong><br>
+                        • <strong>All I want</strong> is peace and quiet.<br>
+                        • <strong>All she did</strong> was complain.<br>
+                        • <strong>All we need</strong> is love.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Exercises loaded dynamically -->
+                </div>
+
+                <!-- FINAL SCORE SECTION -->
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Congratulations! You've completed all 50 exercises!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <button class="btn-primary" onclick="restartExercises()" style="margin-top: 20px; font-size: 1.1rem; padding: 1rem 3rem;">
+                        🔄 Try All Exercises Again
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London GESE - Grade 10 (C1.1) Preparation</p>
+        </div>
+    </footer>
+
+    <script>
+        // Database of 50 exercises for Grade 10 (C1.1)
+        const exercises = [
+            // EXERCISES 1-12: Mixed Conditionals
+            {
+                id: 1,
+                type: 'choice',
+                question: 'If I had studied medicine, I ______ a doctor now.',
+                options: ['would be', 'would have been', 'am', 'was'],
+                correct: 'would be',
+                explanation: '✅ Correct! Mixed conditional: Past perfect (had studied) → would + infinitive (would be). Past condition, present result.',
+                errorExplanation: '❌ Mixed conditional (past → present) uses would + infinitive: would be'
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: 'If she hadn\'t broken her leg, she ______ (dance) at the party tonight.',
+                correct: ['would be dancing', 'would dance'],
+                explanation: '✅ Correct! Mixed conditional: would be dancing (present continuous for arranged future).'
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: 'If I were more confident, I ______ for that promotion last year.',
+                options: ['would have applied', 'would apply', 'had applied', 'have applied'],
+                correct: 'would have applied',
+                explanation: '✅ Correct! Mixed conditional: Past simple (were) → would have + pp. Present condition, past result.',
+                errorExplanation: '❌ Mixed conditional (present → past) uses would have + past participle'
+            },
+            {
+                id: 4,
+                type: 'fill',
+                question: 'They ______ (be) millionaires now if they had invested in Apple.',
+                correct: ['would be'],
+                explanation: '✅ Correct! Mixed conditional: Past perfect → would be (present result).'
+            },
+            {
+                id: 5,
+                type: 'choice',
+                question: 'If he weren\'t so lazy, he ______ the project on time.',
+                options: ['would have finished', 'would finish', 'had finished', 'finishes'],
+                correct: 'would have finished',
+                explanation: '✅ Correct! Present condition (weren\'t) → past result (would have finished).',
+                errorExplanation: '❌ Use would have finished for present condition → past result'
+            },
+            {
+                id: 6,
+                type: 'fill',
+                question: 'If I had taken that job in Paris, I ______ (speak) French fluently now.',
+                correct: ['would speak', 'would be speaking'],
+                explanation: '✅ Correct! Past condition → present result: would speak.'
+            },
+            {
+                id: 7,
+                type: 'choice',
+                question: 'She would be happier now if she ______ married him.',
+                options: ['hadn\'t married', 'didn\'t marry', 'wouldn\'t have married', 'hasn\'t married'],
+                correct: 'hadn\'t married',
+                explanation: '✅ Correct! Present result (would be) requires past perfect in the if-clause.',
+                errorExplanation: '❌ Mixed conditional with present result uses past perfect: hadn\'t married'
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: 'If we ______ (leave) earlier, we wouldn\'t be stuck in traffic now.',
+                correct: ['had left'],
+                explanation: '✅ Correct! Past perfect for past condition leading to present result.'
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: 'If I spoke better German, I ______ that translation job.',
+                options: ['would have got', 'would get', 'had got', 'got'],
+                correct: 'would have got',
+                explanation: '✅ Correct! Present ability (spoke) → past missed opportunity (would have got).',
+                errorExplanation: '❌ Present condition → past result uses would have + pp'
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: 'He ______ (not be) so tired if he had gone to bed earlier.',
+                correct: ['wouldn\'t be', 'would not be'],
+                explanation: '✅ Correct! Past condition → present negative result: wouldn\'t be.'
+            },
+            {
+                id: 11,
+                type: 'choice',
+                question: 'If she were more organized, she ______ those important documents.',
+                options: ['wouldn\'t have lost', 'wouldn\'t lose', 'hadn\'t lost', 'didn\'t lose'],
+                correct: 'wouldn\'t have lost',
+                explanation: '✅ Correct! Present characteristic → past result: wouldn\'t have lost.',
+                errorExplanation: '❌ Present condition → past negative result: wouldn\'t have lost'
+            },
+            {
+                id: 12,
+                type: 'fill',
+                question: 'If they had listened to my advice, they ______ (not be) in trouble now.',
+                correct: ['wouldn\'t be', 'would not be'],
+                explanation: '✅ Correct! Past condition → present negative result.'
+            },
+
+            // EXERCISES 13-28: Inversion
+            {
+                id: 13,
+                type: 'choice',
+                question: '__________ had I arrived when the phone rang.',
+                options: ['Hardly', 'Not', 'Only', 'Rarely'],
+                correct: 'Hardly',
+                explanation: '✅ Correct! "Hardly...when" triggers inversion: Hardly had I arrived...',
+                errorExplanation: '❌ "Hardly...when" is the correct correlative conjunction for this inversion'
+            },
+            {
+                id: 14,
+                type: 'fill',
+                question: 'Never __________ I seen such a beautiful sunset.',
+                correct: ['have', 'Have'],
+                explanation: '✅ Correct! After negative adverb "Never", use inversion: Never have I seen.'
+            },
+            {
+                id: 15,
+                type: 'choice',
+                question: 'Rarely __________ she arrive late for work.',
+                options: ['does', 'do', 'did', 'is'],
+                correct: 'does',
+                explanation: '✅ Correct! "Rarely" triggers inversion with auxiliary before subject.',
+                errorExplanation: '❌ With "Rarely" use auxiliary + subject: does she'
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: 'Not only __________ he finish the project, but he also exceeded expectations.',
+                correct: ['did'],
+                explanation: '✅ Correct! "Not only" triggers inversion with past simple auxiliary.'
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: '__________ sooner had he finished than it started to rain.',
+                options: ['No', 'Not', 'Hardly', 'Scarcely'],
+                correct: 'No',
+                explanation: '✅ Correct! "No sooner...than" is the fixed expression triggering inversion.',
+                errorExplanation: '❌ "No sooner...than" is the correct expression'
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: 'Under no circumstances __________ you open this door.',
+                correct: ['must', 'should', 'can', 'will'],
+                explanation: '✅ Correct! "Under no circumstances" triggers inversion with modal.'
+            },
+            {
+                id: 19,
+                type: 'choice',
+                question: '__________ I known about the meeting, I would have attended.',
+                options: ['Had', 'Have', 'If', 'Did'],
+                correct: 'Had',
+                explanation: '✅ Correct! Inverted conditional: Had I known = If I had known.',
+                errorExplanation: '❌ Inverted third conditional uses Had + subject: Had I known'
+            },
+            {
+                id: 20,
+                type: 'fill',
+                question: 'Little __________ they know what was waiting for them.',
+                correct: ['did'],
+                explanation: '✅ Correct! "Little" as negative adverb triggers inversion: Little did they know.'
+            },
+            {
+                id: 21,
+                type: 'choice',
+                question: 'Only then __________ I realize my mistake.',
+                options: ['did', 'do', 'have', 'had'],
+                correct: 'did',
+                explanation: '✅ Correct! "Only then" triggers inversion with past simple.',
+                errorExplanation: '❌ "Only then" requires auxiliary before subject: did I'
+            },
+            {
+                id: 22,
+                type: 'fill',
+                question: 'Should you __________ any problems, please contact me immediately.',
+                correct: ['have', 'encounter', 'find', 'experience'],
+                explanation: '✅ Correct! Inverted conditional with "should": Should you have...'
+            },
+            {
+                id: 23,
+                type: 'choice',
+                question: '__________ beautiful was the scenery that we stayed for hours.',
+                options: ['So', 'Such', 'Very', 'Too'],
+                correct: 'So',
+                explanation: '✅ Correct! "So + adjective" triggers inversion: So beautiful was...',
+                errorExplanation: '❌ "So" + adjective triggers inversion (So beautiful was...)'
+            },
+            {
+                id: 24,
+                type: 'fill',
+                question: 'Were I you, I __________ (accept) the offer immediately.',
+                correct: ['would accept', 'would have accepted'],
+                explanation: '✅ Correct! Inverted second conditional: Were I you, I would accept.'
+            },
+            {
+                id: 25,
+                type: 'choice',
+                question: 'Not until yesterday __________ the truth.',
+                options: ['did I learn', 'I learned', 'have I learned', 'I have learned'],
+                correct: 'did I learn',
+                explanation: '✅ Correct! "Not until" triggers inversion with past simple.',
+                errorExplanation: '❌ "Not until" requires inversion: did I learn'
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: 'Seldom __________ such dedication been shown by a young athlete.',
+                correct: ['has'],
+                explanation: '✅ Correct! "Seldom" triggers inversion with present perfect.'
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: '__________ were the accusations that he resigned immediately.',
+                options: ['Such', 'So', 'Very', 'Too'],
+                correct: 'Such',
+                explanation: '✅ Correct! "Such + be + noun phrase" triggers inversion.',
+                errorExplanation: '❌ "Such were the accusations" is the correct inversion pattern'
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: 'Had they __________ (arrive) on time, they would have seen the beginning.',
+                correct: ['arrived'],
+                explanation: '✅ Correct! Inverted third conditional: Had they arrived...'
+            },
+
+            // EXERCISES 29-40: Emphatic Structures (Cleft sentences, fronting)
+            {
+                id: 29,
+                type: 'choice',
+                question: 'It was John who __________ the window.',
+                options: ['broke', 'break', 'breaking', 'broken'],
+                correct: 'broke',
+                explanation: '✅ Correct! It-cleft requires normal verb form after "who".',
+                errorExplanation: '❌ Use past simple after who in cleft sentence: broke'
+            },
+            {
+                id: 30,
+                type: 'fill',
+                question: '__________ I need is a long holiday.',
+                correct: ['What'],
+                explanation: '✅ Correct! Wh-cleft: What I need is...'
+            },
+            {
+                id: 31,
+                type: 'choice',
+                question: 'It was __________ that John bought yesterday.',
+                options: ['a car', 'a car which', 'a car that', 'car'],
+                correct: 'a car',
+                explanation: '✅ Correct! It-cleft emphasizing object: It was a car that...',
+                errorExplanation: '❌ Emphasizing object: It was a car that John bought'
+            },
+            {
+                id: 32,
+                type: 'fill',
+                question: '__________ annoys me is his constant complaining.',
+                correct: ['What'],
+                explanation: '✅ Correct! Wh-cleft: What annoys me is...'
+            },
+            {
+                id: 33,
+                type: 'choice',
+                question: 'It __________ yesterday that we met for the first time.',
+                options: ['was', 'is', 'were', 'had been'],
+                correct: 'was',
+                explanation: '✅ Correct! It-cleft with time reference: It was yesterday that...',
+                errorExplanation: '❌ Past time reference requires "was"'
+            },
+            {
+                id: 34,
+                type: 'fill',
+                question: 'A long holiday __________ what I need.',
+                correct: ['is'],
+                explanation: '✅ Correct! Reversed wh-cleft: A long holiday is what I need.'
+            },
+            {
+                id: 35,
+                type: 'choice',
+                question: '__________ she did was complain about everything.',
+                options: ['All', 'What', 'It', 'That'],
+                correct: 'All',
+                explanation: '✅ Correct! All-cleft: All she did was complain...',
+                errorExplanation: '❌ "All she did was..." is the correct emphatic structure'
+            },
+            {
+                id: 36,
+                type: 'fill',
+                question: 'This book __________ I really enjoyed reading.',
+                correct: ['is', 'was'],
+                explanation: '✅ Correct! Fronting for emphasis: This book is what I really enjoyed.'
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: 'It was __________ who helped me with the project.',
+                options: ['my colleagues', 'my colleagues that', 'my colleagues which', 'my colleagues whom'],
+                correct: 'my colleagues',
+                explanation: '✅ Correct! It-cleft emphasizing subject: It was my colleagues who...',
+                errorExplanation: '❌ Subject cleft: It was my colleagues who...'
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: 'Money __________ what matters most in life.',
+                correct: ['isn\'t', 'is not'],
+                explanation: '✅ Correct! Reversed wh-cleft negative: Money isn\'t what matters most.'
+            },
+            {
+                id: 39,
+                type: 'choice',
+                question: '__________ want is to be happy.',
+                options: ['All I', 'What I', 'It I', 'That I'],
+                correct: 'All I',
+                explanation: '✅ Correct! All-cleft: All I want is...',
+                errorExplanation: '❌ "All I want is..." is the fixed expression'
+            },
+            {
+                id: 40,
+                type: 'fill',
+                question: 'It __________ in London that we met, not Paris.',
+                correct: ['was'],
+                explanation: '✅ Correct! It-cleft emphasizing place: It was in London that...'
+            },
+
+            // EXERCISES 41-50: Subjunctive and Advanced Reporting
+            {
+                id: 41,
+                type: 'choice',
+                question: 'It is essential that he __________ informed immediately.',
+                options: ['be', 'is', 'was', 'will be'],
+                correct: 'be',
+                explanation: '✅ Correct! Mandative subjunctive: base form without -s.',
+                errorExplanation: '❌ Subjunctive uses base form: be (not is)'
+            },
+            {
+                id: 42,
+                type: 'fill',
+                question: 'I suggest that she __________ (apply) for the position.',
+                correct: ['apply', 'should apply'],
+                explanation: '✅ Correct! Subjunctive after suggest: apply (base form) or should apply.'
+            },
+            {
+                id: 43,
+                type: 'choice',
+                question: 'He insisted that she __________ the document before signing.',
+                options: ['read', 'reads', 'reading', 'to read'],
+                correct: 'read',
+                explanation: '✅ Correct! Subjunctive after insist: base form read (pronounced /red/).',
+                errorExplanation: '❌ Subjunctive uses base form: read (same spelling as present)'
+            },
+            {
+                id: 44,
+                type: 'fill',
+                question: 'It is vital that the medicine __________ (keep) in a cool place.',
+                correct: ['be kept', 'should be kept'],
+                explanation: '✅ Correct! Passive subjunctive: be kept or should be kept.'
+            },
+            {
+                id: 45,
+                type: 'choice',
+                question: 'They demanded that he __________ his resignation.',
+                options: ['hand in', 'hands in', 'handed in', 'handing in'],
+                correct: 'hand in',
+                explanation: '✅ Correct! Subjunctive after demand: base form hand in.',
+                errorExplanation: '❌ Subjunctive uses base form without -s: hand in'
+            },
+            {
+                id: 46,
+                type: 'fill',
+                question: 'He is said __________ (be) the best surgeon in the country.',
+                correct: ['to be'],
+                explanation: '✅ Correct! Passive reporting: He is said to be...'
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: 'She admitted __________ the money from the safe.',
+                options: ['taking', 'to take', 'take', 'took'],
+                correct: 'taking',
+                explanation: '✅ Correct! Admit + gerund: admitted taking.',
+                errorExplanation: '❌ Admit is followed by gerund: taking'
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: 'They urged him __________ (reconsider) his decision.',
+                correct: ['to reconsider'],
+                explanation: '✅ Correct! Urge + object + to-infinitive.'
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: 'He was believed __________ left the country years ago.',
+                options: ['to have', 'to had', 'having', 'have'],
+                correct: 'to have',
+                explanation: '✅ Correct! Passive reporting with perfect infinitive: to have left.',
+                errorExplanation: '❌ Passive reporting past: to have + past participle'
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: 'I propose that the meeting __________ (adjourn) until next week.',
+                correct: ['be adjourned', 'should be adjourned'],
+                explanation: '✅ Correct! Subjunctive passive after propose: be adjourned. Congratulations!'
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Exercise ${ex.id}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Exercise ${currentExercise + 1} of ${exercises.length}</div>
+                        <div class="question-box">
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...new Set(ex.options)].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary btn-check" onclick="checkFill()">Check</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Next →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fff4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fff5f5';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Outstanding! You have mastered C1.1 level grammar! Ready for Grade 10!';
+            } else if (totalScore >= 70) {
+                message = '👍 Excellent work! You show strong command of advanced structures. Review your errors.';
+            } else if (totalScore >= 50) {
+                message = '💪 Good effort! Continue practicing mixed conditionals, inversion, and subjunctive.';
+            } else {
+                message = '📚 Keep studying! Focus on the theory sections and pay attention to formal structures.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+    </script>
+</body>
+</html>'''
