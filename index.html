@@ -16,7 +16,7 @@
             --level-b2: #dc2626; --level-c1: #6b21a8; --level-c2: #0f172a;
         }
         body { font-family: 'Georgia', 'Times New Roman', serif; background: var(--bg-primary); color: var(--text-primary); line-height: 1.6; }
-        
+
         /* Login Section */
         .login-section { min-height: 100vh; display: none; align-items: center; justify-content: center; background: var(--bg-primary); padding: 20px 10px; position: fixed; top: 0; left: 0; width: 100%; z-index: 1000; }
         .login-section.active { display: flex; }
@@ -110,31 +110,27 @@
     <div class="login-container">
         <div class="login-header">
             <h1>Accademia delle Lingue</h1>
-            <p>Nucleo educativo per la formazione europea al lavoro internazionale<br>sede di esame accreditata numero 68499</p>
+            <p>Piattaforma Trinity College London</p>
         </div>
         <div class="login-body">
             <div id="alertBox" class="alert alert-error"></div>
             <form id="loginForm">
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" id="email" class="form-input" placeholder="studente@accademia.it" required autocomplete="email">
+                    <input type="email" id="email" class="form-input" placeholder="nome@email.it" required autocomplete="email">
                 </div>
                 <div class="form-group">
                     <label class="form-label">Password</label>
-                    <div style="position: relative;">
-                        <input type="password" id="password" class="form-input" placeholder="••••••" required autocomplete="current-password" style="padding-right: 40px;">
-                        <button type="button" onclick="togglePassword()" style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 4px;">👁️</button>
-                    </div>
+                    <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password">
                 </div>
                 <button type="submit" class="btn">Accedi</button>
             </form>
             <div class="signup-link">
                 <p>Non hai un account?<br><a href="login.html">Richiedi accesso →</a></p>
             </div>
-            
         </div>
         <div class="login-footer">
-            <p>© 2024 Nucleo Educativo - Sede di Esame Accreditata n. 68499</p>
+            <p>© 2024 Accademia delle Lingue</p>
         </div>
     </div>
 </div>
@@ -178,34 +174,191 @@
             <div class="nav-item" onclick="loadModule('trinity_gese3_language.html', 'GESE Grade 3')" id="nav-gese3">
                 <span>🗣️</span><span>GESE Grade 3</span><span class="nav-level level-a2">A2.1</span>
             </div>
+
+            <div class="menu-category">GESE Grades 4-6 (A2.2 - B1.2)</div>
             <div class="nav-item" onclick="loadModule('trinity_gese4_language.html', 'GESE Grade 4')" id="nav-gese4">
                 <span>🗣️</span><span>GESE Grade 4</span><span class="nav-level level-a2">A2.2</span>
             </div>
             <div class="nav-item" onclick="loadModule('trinity_gese5_language.html', 'GESE Grade 5')" id="nav-gese5">
-                <span>🗣️</span><span>GESE Grade 5</span><span class="nav-level level-b1">b1.1</span>
+                <span>🗣️</span><span>GESE Grade 5</span><span class="nav-level level-b1">B1.1</span>
             </div>
             <div class="nav-item" onclick="loadModule('trinity_gese6_language.html', 'GESE Grade 6')" id="nav-gese6">
-                <span>🗣️</span><span>GESE Grade 6</span><span class="nav-level level-b1">b1.2</span>
+                <span>🗣️</span><span>GESE Grade 6</span><span class="nav-level level-b1">B1.2</span>
             </div>
+
+            <div class="menu-category">GESE Grades 7-9 (B2.1 - B2.3)</div>
             <div class="nav-item" onclick="loadModule('trinity_gese7_language.html', 'GESE Grade 7')" id="nav-gese7">
-                <span>🗣️</span><span>GESE Grade 7</span><span class="nav-level level-b2">b2.1</span>
+                <span>🗣️</span><span>GESE Grade 7</span><span class="nav-level level-b2">B2.1</span>
             </div>
             <div class="nav-item" onclick="loadModule('trinity_gese8_language.html', 'GESE Grade 8')" id="nav-gese8">
-                <span>🗣️</span><span>GESE Grade 8</span><span class="nav-level level-b2">b2.2</span>
+                <span>🗣️</span><span>GESE Grade 8</span><span class="nav-level level-b2">B2.2</span>
             </div>
             <div class="nav-item" onclick="loadModule('trinity_gese9_language.html', 'GESE Grade 9')" id="nav-gese9">
-                <span>🗣️</span><span>GESE Grade 9</span><span class="nav-level level-b2">b2.3</span>
+                <span>🗣️</span><span>GESE Grade 9</span><span class="nav-level level-b2">B2.3</span>
             </div>
+
+            <div class="menu-category">GESE Grades 10-12 (C1 - C2)</div>
             <div class="nav-item" onclick="loadModule('trinity_gese10_language.html', 'GESE Grade 10')" id="nav-gese10">
-                <span>🗣️</span><span>GESE Grade 10</span><span class="nav-level level-c1">c1.1</span>
+                <span>🗣️</span><span>GESE Grade 10</span><span class="nav-level level-c1">C1.1</span>
             </div>
             <div class="nav-item" onclick="loadModule('trinity_gese11_language.html', 'GESE Grade 11')" id="nav-gese11">
-                <span>🗣️</span><span>GESE Grade 11</span><span class="nav-level level-c1">c1.2</span>
+                <span>🗣️</span><span>GESE Grade 11</span><span class="nav-level level-c1">C1.2</span>
             </div>
             <div class="nav-item" onclick="loadModule('trinity_gese12_language.html', 'GESE Grade 12')" id="nav-gese12">
-                <span>🗣️</span><span>GESE Grade 12</span><span class="nav-level level-b2">c2</span>
+                <span>🗣️</span><span>GESE Grade 12</span><span class="nav-level level-c2">C2</span>
             </div>
-   
+
+            <div class="menu-category">Simulazioni GESE</div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese1.html', 'Simulazione GESE 1')" id="nav-sim-gese1">
+                <span>📝</span><span>Simulazione GESE 1</span><span class="nav-level level-a1">A1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese2.html', 'Simulazione GESE 2')" id="nav-sim-gese2">
+                <span>📝</span><span>Simulazione GESE 2</span><span class="nav-level level-a1">A1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese3.html', 'Simulazione GESE 3')" id="nav-sim-gese3">
+                <span>📝</span><span>Simulazione GESE 3</span><span class="nav-level level-a2">A2.1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese4.html', 'Simulazione GESE 4')" id="nav-sim-gese4">
+                <span>📝</span><span>Simulazione GESE 4</span><span class="nav-level level-a2">A2.2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese5.html', 'Simulazione GESE 5')" id="nav-sim-gese5">
+                <span>📝</span><span>Simulazione GESE 5</span><span class="nav-level level-b1">B1.1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese6.html', 'Simulazione GESE 6')" id="nav-sim-gese6">
+                <span>📝</span><span>Simulazione GESE 6</span><span class="nav-level level-b1">B1.2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese7.html', 'Simulazione GESE 7')" id="nav-sim-gese7">
+                <span>📝</span><span>Simulazione GESE 7</span><span class="nav-level level-b2">B2.1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese8.html', 'Simulazione GESE 8')" id="nav-sim-gese8">
+                <span>📝</span><span>Simulazione GESE 8</span><span class="nav-level level-b2">B2.2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese9.html', 'Simulazione GESE 9')" id="nav-sim-gese9">
+                <span>📝</span><span>Simulazione GESE 9</span><span class="nav-level level-b2">B2.3</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese10.html', 'Simulazione GESE 10')" id="nav-sim-gese10">
+                <span>📝</span><span>Simulazione GESE 10</span><span class="nav-level level-c1">C1.1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese11.html', 'Simulazione GESE 11')" id="nav-sim-gese11">
+                <span>📝</span><span>Simulazione GESE 11</span><span class="nav-level level-c1">C1.2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_gese12.html', 'Simulazione GESE 12')" id="nav-sim-gese12">
+                <span>📝</span><span>Simulazione GESE 12</span><span class="nav-level level-c2">C2</span>
+            </div>
+
+            <div class="menu-category">ISE Foundation (A2 - B1)</div>
+            <div class="nav-item" onclick="loadModule('trinity_ise_foundation.html', 'ISE Foundation')" id="nav-ise-f">
+                <span>📚</span><span>ISE Foundation</span><span class="nav-level level-a2">A2-B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_ise_i.html', 'Simulazione ISE I')" id="nav-sim-ise1">
+                <span>📝</span><span>Simulazione ISE I</span><span class="nav-level level-a2">ISE I</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_ise_ii.html', 'Simulazione ISE II')" id="nav-sim-ise2">
+                <span>📝</span><span>Simulazione ISE II</span><span class="nav-level level-b1">ISE II</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_ise_iii.html', 'Simulazione ISE III')" id="nav-sim-ise3">
+                <span>📝</span><span>Simulazione ISE III</span><span class="nav-level level-b2">ISE III</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('simulazione_ise_iv.html', 'Simulazione ISE IV')" id="nav-sim-ise4">
+                <span>📝</span><span>Simulazione ISE IV</span><span class="nav-level level-c1">ISE IV</span>
+            </div>
+
+            <div class="menu-category">ISE Moduli (B1 - C2)</div>
+            <div class="nav-item" onclick="loadModule('trinity_ise0_interview.html', 'ISE 0 Interview')" id="nav-ise0-int">
+                <span>🎤</span><span>ISE 0 Interview</span><span class="nav-level level-a2">A2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise0_portfolio.html', 'ISE 0 Portfolio')" id="nav-ise0-port">
+                <span>📁</span><span>ISE 0 Portfolio</span><span class="nav-level level-a2">A2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise0_task.html', 'ISE 0 Task')" id="nav-ise0-task">
+                <span>✏️</span><span>ISE 0 Task</span><span class="nav-level level-a2">A2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise0_reading.html', 'ISE 0 Reading')" id="nav-ise0-read">
+                <span>📖</span><span>ISE 0 Reading</span><span class="nav-level level-a2">A2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise0_writing.html', 'ISE 0 Writing')" id="nav-ise0-write">
+                <span>✍️</span><span>ISE 0 Writing</span><span class="nav-level level-a2">A2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise1_interview.html', 'ISE I Interview')" id="nav-ise1-int">
+                <span>🎤</span><span>ISE I Interview</span><span class="nav-level level-b1">B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise1_portfolio.html', 'ISE I Portfolio')" id="nav-ise1-port">
+                <span>📁</span><span>ISE I Portfolio</span><span class="nav-level level-b1">B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise1_task.html', 'ISE I Task')" id="nav-ise1-task">
+                <span>✏️</span><span>ISE I Task</span><span class="nav-level level-b1">B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise1_reading.html', 'ISE I Reading')" id="nav-ise1-read">
+                <span>📖</span><span>ISE I Reading</span><span class="nav-level level-b1">B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise1_writing.html', 'ISE I Writing')" id="nav-ise1-write">
+                <span>✍️</span><span>ISE I Writing</span><span class="nav-level level-b1">B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise2_interview.html', 'ISE II Interview')" id="nav-ise2-int">
+                <span>🎤</span><span>ISE II Interview</span><span class="nav-level level-b2">B2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise2_portfolio.html', 'ISE II Portfolio')" id="nav-ise2-port">
+                <span>📁</span><span>ISE II Portfolio</span><span class="nav-level level-b2">B2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise2_task.html', 'ISE II Task')" id="nav-ise2-task">
+                <span>✏️</span><span>ISE II Task</span><span class="nav-level level-b2">B2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise2_reading.html', 'ISE II Reading')" id="nav-ise2-read">
+                <span>📖</span><span>ISE II Reading</span><span class="nav-level level-b2">B2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise2_writing.html', 'ISE II Writing')" id="nav-ise2-write">
+                <span>✍️</span><span>ISE II Writing</span><span class="nav-level level-b2">B2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise3_interview.html', 'ISE III Interview')" id="nav-ise3-int">
+                <span>🎤</span><span>ISE III Interview</span><span class="nav-level level-c1">C1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise3_portfolio.html', 'ISE III Portfolio')" id="nav-ise3-port">
+                <span>📁</span><span>ISE III Portfolio</span><span class="nav-level level-c1">C1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise3_task.html', 'ISE III Task')" id="nav-ise3-task">
+                <span>✏️</span><span>ISE III Task</span><span class="nav-level level-c1">C1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise3_reading.html', 'ISE III Reading')" id="nav-ise3-read">
+                <span>📖</span><span>ISE III Reading</span><span class="nav-level level-c1">C1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise3_writing.html', 'ISE III Writing')" id="nav-ise3-write">
+                <span>✍️</span><span>ISE III Writing</span><span class="nav-level level-c1">C1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise4_interview.html', 'ISE IV Interview')" id="nav-ise4-int">
+                <span>🎤</span><span>ISE IV Interview</span><span class="nav-level level-c2">C2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise4_portfolio.html', 'ISE IV Portfolio')" id="nav-ise4-port">
+                <span>📁</span><span>ISE IV Portfolio</span><span class="nav-level level-c2">C2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise4_reading_writing.html', 'ISE IV Reading & Writing')" id="nav-ise4-rw">
+                <span>📖</span><span>ISE IV Reading & Writing</span><span class="nav-level level-c2">C2</span>
+            </div>
+
+            <div class="menu-category">Skills Avanzate GESE</div>
+            <div class="nav-item" onclick="loadModule('trinity_gese5_argumentation.html', 'Argumentation G5')" id="nav-gese5-arg">
+                <span>💭</span><span>Argumentation G5</span><span class="nav-level level-b1">B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_gese6_reasoning.html', 'Reasoning G6')" id="nav-gese6-reas">
+                <span>🧠</span><span>Reasoning G6</span><span class="nav-level level-b1">B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_gese7_perspectives.html', 'Perspectives G7')" id="nav-gese7-persp">
+                <span>👁️</span><span>Perspectives G7</span><span class="nav-level level-b2">B2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_gese8_analysis.html', 'Analysis G8')" id="nav-gese8-anal">
+                <span>🔍</span><span>Analysis G8</span><span class="nav-level level-b2">B2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_gese9_synthesis.html', 'Synthesis G9')" id="nav-gese9-synth">
+                <span>🔗</span><span>Synthesis G9</span><span class="nav-level level-b2">B2</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_gese10_evaluation.html', 'Evaluation G10')" id="nav-gese10-eval">
+                <span>⚖️</span><span>Evaluation G10</span><span class="nav-level level-c1">C1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_gese11_research.html', 'Research G11')" id="nav-gese11-res">
+                <span>🔬</span><span>Research G11</span><span class="nav-level level-c1">C1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_gese12_mastery.html', 'Mastery G12')" id="nav-gese12-mast">
+                <span>🎓</span><span>Mastery G12</span><span class="nav-level level-c2">C2</span>
+            </div>
         </aside>
 
         <main class="content">
@@ -235,6 +388,16 @@
                         <div class="level-name" style="color: var(--level-a2);">Grades 4-6</div>
                         <div class="level-desc">Elementary Stage<br>A2.2 - B1.2</div>
                     </div>
+                    <div class="level-card" onclick="showLevel('gese-intermediate')">
+                        <div class="level-icon" style="color: var(--level-b2);">🌳</div>
+                        <div class="level-name" style="color: var(--level-b2);">Grades 7-9</div>
+                        <div class="level-desc">Intermediate Stage<br>B2.1 - B2.3</div>
+                    </div>
+                    <div class="level-card" onclick="showLevel('gese-advanced')">
+                        <div class="level-icon" style="color: var(--level-c1);">🏆</div>
+                        <div class="level-name" style="color: var(--level-c1);">Grades 10-12</div>
+                        <div class="level-desc">Advanced Stage<br>C1 - C2</div>
+                    </div>
                 </div>
 
                 <div id="dashboard-gese-initial" class="level-dashboard">
@@ -259,6 +422,135 @@
                                         <div class="game-title">GESE Grade 1: Introduction</div>
                                         <p class="game-desc">Basic introductions, giving personal information, numbers 1-20, colours.</p>
                                         <div class="exam-info">CEFR: A1 | Durata: 5 min</div>
+                                    </div>
+                                </a>
+                                <a href="#" onclick="loadModule('trinity_gese2_topics.html', 'GESE Grade 2'); return false;" class="game-card">
+                                    <span class="game-level-badge level-a1">Grade 2</span>
+                                    <div class="game-image bg-a1">💬</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 2: Topics</div>
+                                        <p class="game-desc">Talking about topics, asking questions, describing people and places.</p>
+                                        <div class="exam-info">CEFR: A1 | Durata: 6 min</div>
+                                    </div>
+                                </a>
+                                <a href="#" onclick="loadModule('trinity_gese3_language.html', 'GESE Grade 3'); return false;" class="game-card">
+                                    <span class="game-level-badge level-a2">Grade 3</span>
+                                    <div class="game-image bg-a2">🗣️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 3: Language</div>
+                                        <p class="game-desc">Past simple, future forms, giving reasons, expressing preferences.</p>
+                                        <div class="exam-info">CEFR: A2.1 | Durata: 7 min</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dashboard-gese-elementary" class="level-dashboard" style="display:none;">
+                    <div class="card">
+                        <div class="card-header" style="background: var(--level-a2); color: white;">GESE Elementary Stage - Grades 4-6</div>
+                        <div class="card-body">
+                            <div class="games-grid">
+                                <a href="#" onclick="loadModule('trinity_gese4_language.html', 'GESE Grade 4'); return false;" class="game-card">
+                                    <span class="game-level-badge level-a2">Grade 4</span>
+                                    <div class="game-image bg-a2">🗣️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 4</div>
+                                        <p class="game-desc">Extended discourse, narrative tenses, expressing opinions.</p>
+                                        <div class="exam-info">CEFR: A2.2 | Durata: 10 min</div>
+                                    </div>
+                                </a>
+                                <a href="#" onclick="loadModule('trinity_gese5_language.html', 'GESE Grade 5'); return false;" class="game-card">
+                                    <span class="game-level-badge level-b1">Grade 5</span>
+                                    <div class="game-image bg-b1">🗣️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 5</div>
+                                        <p class="game-desc">Conditional forms, modal verbs, argumentation skills.</p>
+                                        <div class="exam-info">CEFR: B1.1 | Durata: 10 min</div>
+                                    </div>
+                                </a>
+                                <a href="#" onclick="loadModule('trinity_gese6_language.html', 'GESE Grade 6'); return false;" class="game-card">
+                                    <span class="game-level-badge level-b1">Grade 6</span>
+                                    <div class="game-image bg-b1">🗣️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 6</div>
+                                        <p class="game-desc">Complex structures, reasoning, hypothetical situations.</p>
+                                        <div class="exam-info">CEFR: B1.2 | Durata: 10 min</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dashboard-gese-intermediate" class="level-dashboard" style="display:none;">
+                    <div class="card">
+                        <div class="card-header" style="background: var(--level-b2); color: white;">GESE Intermediate Stage - Grades 7-9</div>
+                        <div class="card-body">
+                            <div class="games-grid">
+                                <a href="#" onclick="loadModule('trinity_gese7_language.html', 'GESE Grade 7'); return false;" class="game-card">
+                                    <span class="game-level-badge level-b2">Grade 7</span>
+                                    <div class="game-image bg-b2">🗣️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 7</div>
+                                        <p class="game-desc">Multiple perspectives, speculation, abstract topics.</p>
+                                        <div class="exam-info">CEFR: B2.1 | Durata: 15 min</div>
+                                    </div>
+                                </a>
+                                <a href="#" onclick="loadModule('trinity_gese8_language.html', 'GESE Grade 8'); return false;" class="game-card">
+                                    <span class="game-level-badge level-b2">Grade 8</span>
+                                    <div class="game-image bg-b2">🗣️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 8</div>
+                                        <p class="game-desc">Critical analysis, inference, nuanced expression.</p>
+                                        <div class="exam-info">CEFR: B2.2 | Durata: 15 min</div>
+                                    </div>
+                                </a>
+                                <a href="#" onclick="loadModule('trinity_gese9_language.html', 'GESE Grade 9'); return false;" class="game-card">
+                                    <span class="game-level-badge level-b2">Grade 9</span>
+                                    <div class="game-image bg-b2">🗣️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 9</div>
+                                        <p class="game-desc">Synthesis of ideas, complex argumentation, fluency.</p>
+                                        <div class="exam-info">CEFR: B2.3 | Durata: 15 min</div>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="dashboard-gese-advanced" class="level-dashboard" style="display:none;">
+                    <div class="card">
+                        <div class="card-header" style="background: var(--level-c1); color: white;">GESE Advanced Stage - Grades 10-12</div>
+                        <div class="card-body">
+                            <div class="games-grid">
+                                <a href="#" onclick="loadModule('trinity_gese10_language.html', 'GESE Grade 10'); return false;" class="game-card">
+                                    <span class="game-level-badge level-c1">Grade 10</span>
+                                    <div class="game-image bg-c1">🗣️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 10</div>
+                                        <p class="game-desc">Evaluation, sophisticated vocabulary, cultural awareness.</p>
+                                        <div class="exam-info">CEFR: C1.1 | Durata: 25 min</div>
+                                    </div>
+                                </a>
+                                <a href="#" onclick="loadModule('trinity_gese11_language.html', 'GESE Grade 11'); return false;" class="game-card">
+                                    <span class="game-level-badge level-c1">Grade 11</span>
+                                    <div class="game-image bg-c1">🗣️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 11</div>
+                                        <p class="game-desc">Research presentation, critical evaluation, discourse management.</p>
+                                        <div class="exam-info">CEFR: C1.2 | Durata: 25 min</div>
+                                    </div>
+                                </a>
+                                <a href="#" onclick="loadModule('trinity_gese12_language.html', 'GESE Grade 12'); return false;" class="game-card">
+                                    <span class="game-level-badge level-c2">Grade 12</span>
+                                    <div class="game-image bg-c2">🗣️</div>
+                                    <div class="game-content">
+                                        <div class="game-title">GESE Grade 12</div>
+                                        <p class="game-desc">Mastery level, academic discourse, complex negotiation.</p>
+                                        <div class="exam-info">CEFR: C2 | Durata: 25 min</div>
                                     </div>
                                 </a>
                             </div>
@@ -316,7 +608,7 @@ let currentUser = null;
 // Inizializzazione
 document.addEventListener('DOMContentLoaded', function() {
     initDB();
-    
+
     // Check sessione
     const studentSession = sessionStorage.getItem('studentLoggedIn');
     if (studentSession === 'true') {
@@ -345,12 +637,12 @@ function saveDB() {
 // Login
 document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
-    
+
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
-    
+
     const user = db.users.find(u => u.email === email && u.password === password && u.role === 'student');
-    
+
     if (!user) {
         showAlert('Credenziali non valide');
         return;
@@ -358,7 +650,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
 
     // Verifica dispositivo (solo 1 consentito)
     const deviceId = getDeviceId();
-    
+
     if (user.firstLogin === true) {
         // Primo login - redirect a cambio password
         sessionStorage.setItem('studentLoggedIn', 'true');
@@ -367,7 +659,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
         window.location.href = 'cambio-password.html';
         return;
     }
-    
+
     // Verifica dispositivo registrato
     if (!user.devices || user.devices.length === 0 || user.devices[0].id !== deviceId) {
         showAlert('Dispositivo non autorizzato. Contatta l\'amministratore.');
@@ -378,7 +670,7 @@ document.getElementById('loginForm').addEventListener('submit', function(e) {
     currentUser = user;
     sessionStorage.setItem('studentLoggedIn', 'true');
     sessionStorage.setItem('studentEmail', email);
-    
+
     showDashboard();
 });
 
@@ -394,11 +686,11 @@ function getDeviceId() {
 function showDashboard() {
     document.getElementById('loginSection').classList.remove('active');
     document.getElementById('dashboard').style.display = 'flex';
-    
+
     const displayName = currentUser ? (currentUser.name || currentUser.email) : 'Studente';
     document.getElementById('welcomeName').textContent = displayName;
     document.getElementById('userNameDisplay').textContent = displayName;
-    
+
     // Determina livello da password (legacy) o default
     let level = 'A1';
     if (currentUser && currentUser.password) {
@@ -409,7 +701,7 @@ function showDashboard() {
         else if (currentUser.password.includes('A2')) level = 'A2';
     }
     document.getElementById('userClassDisplay').textContent = 'Livello ' + level + ' CEFR';
-    
+
     loadResults();
 }
 
@@ -420,10 +712,9 @@ function logout() {
     window.location.reload();
 }
 
-function showAlert(message, type = 'error') {
+function showAlert(message) {
     const alert = document.getElementById('alertBox');
     alert.textContent = message;
-    alert.className = 'alert alert-' + type;
     alert.style.display = 'block';
     setTimeout(() => alert.style.display = 'none', 5000);
 }
@@ -432,7 +723,7 @@ function showAlert(message, type = 'error') {
 function showSection(sectionId) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.getElementById(sectionId).classList.add('active');
-    
+
     document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
     const navItem = document.getElementById('nav-' + sectionId);
     if (navItem) navItem.classList.add('active');
@@ -448,7 +739,7 @@ function showExamType(type) {
     // Toggle tabs
     document.querySelectorAll('.exam-tab').forEach(t => t.classList.remove('active'));
     event.currentTarget.classList.add('active');
-    
+
     // Qui si potrebbero mostrare/nascondere i vari livelli
 }
 
@@ -457,7 +748,7 @@ function showLevel(level) {
     document.querySelectorAll('.level-dashboard').forEach(d => d.style.display = 'none');
     const target = document.getElementById('dashboard-' + level);
     if (target) target.style.display = 'block';
-    
+
     // Aggiorna active state
     document.querySelectorAll('.level-card').forEach(c => c.classList.remove('active'));
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
@@ -466,7 +757,7 @@ function showLevel(level) {
 function loadResults() {
     const tbody = document.getElementById('resultsTableBody');
     if (!tbody) return;
-    
+
     // Dati demo per esempio
     tbody.innerHTML = `
         <tr style="border-bottom: 1px solid var(--border);">
