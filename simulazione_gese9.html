@@ -588,6 +588,24 @@
             margin-bottom: 0.5rem;
         }
 
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            margin: 1rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -635,6 +653,10 @@
             <div class="card">
                 <div class="card-header">About GESE Grade 9 Exam</div>
                 <div class="card-body">
+                    <div class="video-container">
+                        <iframe src="https://www.youtube.com/embed/j_IwRiVfhKc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    </div>
+
                     <div class="info-box">
                         <strong>GESE Grade 9</strong> corresponds to <strong>CEFR B2.3</strong> (Upper-Intermediate). At this level, you must demonstrate 
                         the ability to communicate facts, ideas, opinions and attitudes about a chosen topic sustained across a series of extended turns. 
