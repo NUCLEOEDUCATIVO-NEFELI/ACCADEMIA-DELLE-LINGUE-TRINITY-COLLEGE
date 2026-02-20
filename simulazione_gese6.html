@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trinity GESE Grade 6  - Exam Simulation</title>
+    <title>Trinity GESE Grade 6 - Exam Simulation</title>
     <style>
         * {
             margin: 0;
@@ -574,6 +574,33 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Video container styles */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border: 2px solid var(--trinity-blue);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f0f8ff;
+            border-left: 4px solid var(--accent);
+        }
+
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -680,6 +707,41 @@
 
                     <div class="navigation">
                         <button class="btn-primary" onclick="startExam()">Start Exam Simulation →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EDUCATIONAL VIDEO ADDED HERE -->
+            <div class="card" style="margin-top: 2rem; border: 2px solid var(--trinity-blue);">
+                <div class="card-header" style="background: var(--trinity-blue); color: white; border-left: none;">
+                    <span>🎥 Video Example: Real GESE Grade 6 Exam</span>
+                    <span style="font-size: 0.8rem; font-weight: normal;">Watch before you start!</span>
+                </div>
+                <div class="card-body">
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/_SBswXe-MVM" 
+                            title="Trinity GESE Grade 6 Exam Example"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <strong>👀 Watch this real exam example to understand:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem; line-height: 1.8;">
+                            <li>How to present an <strong>abstract topic</strong> with sophisticated hedging language</li>
+                            <li>How to use <strong>emphasis structures</strong> (What concerns me is..., The reason why...)</li>
+                            <li>How to handle the <strong>Interactive Task</strong> with devil's advocate techniques</li>
+                            <li>How to use <strong>concessive clauses</strong> (Much as..., Despite the fact that...)</li>
+                            <li>How to employ <strong>inverted conditionals</strong> (Had I known..., Were I to...)</li>
+                            <li>How to manage <strong>complex negotiation</strong> and reach collaborative conclusions</li>
+                            <li>How to use <strong>discourse markers</strong> for sophisticated turn-taking</li>
+                            <li>How to <strong>reformulate and clarify</strong> complex abstract ideas</li>
+                            <li>How to express <strong>tentative opinions</strong> with nuance (I am inclined to believe...)</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-style: italic; color: var(--secondary);">
+                            💡 <strong>Tip:</strong> Notice how the candidate handles abstract concepts with ease, using sophisticated hedging and balancing multiple perspectives. The interactive task shows genuine two-way negotiation with complex proposals and counter-arguments!
+                        </p>
                     </div>
                 </div>
             </div>
@@ -1000,7 +1062,7 @@
                     "Face-to-face is always better",
                     "I prefer meeting people in person"
                 ],
-                correct: "Much as I appreciate the accessibility of digital communication, I question whether it can fully replicate physical presence. Having said that, I concede that that for some individuals, particularly those with mobility issues, online connections may be equally valid. The key factor is intentionality rather than medium",
+                correct: "Much as I appreciate the accessibility of digital communication, I question whether it can fully replicate physical presence. Having said that, I concede that for some individuals, particularly those with mobility issues, online connections may be equally valid. The key factor is intentionality rather than medium",
                 feedback: "Excellent concessive structures, balanced argument, and sophisticated evaluation!",
                 points: 25
             },

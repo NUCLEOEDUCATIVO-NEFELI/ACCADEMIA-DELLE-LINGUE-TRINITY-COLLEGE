@@ -24,7 +24,6 @@
             --border: #d4d4c8;
             --bg-card: #ffffff;
             --topic-green: #2e7d32;
-            --conversation-purple: #6a1b9a;
         }
 
         body {
@@ -183,13 +182,6 @@
             margin-bottom: 1.5rem;
         }
 
-        .conversation-box {
-            background: #f3e5f5;
-            border-left: 4px solid var(--conversation-purple);
-            padding: 1rem 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
         .examiner-section {
             background: #f8f9fa;
             border: 2px solid var(--trinity-blue);
@@ -332,14 +324,6 @@
             background: #1b5e20;
         }
 
-        .btn-conversation {
-            background: var(--conversation-purple);
-        }
-
-        .btn-conversation:hover {
-            background: #4a148c;
-        }
-
         .navigation {
             display: flex;
             justify-content: space-between;
@@ -425,7 +409,7 @@
 
         .vocab-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin: 1rem 0;
         }
@@ -530,42 +514,62 @@
             border-left: 3px solid var(--topic-green);
         }
 
-        .scenario-box {
-            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
-            border: 2px solid #ff9800;
-            padding: 1.5rem;
-            margin: 1rem 0;
+        .interactive-scene {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px solid var(--trinity-blue);
+            padding: 2rem;
+            min-height: 300px;
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+
+        .scene-element {
+            display: inline-block;
+            margin: 1rem;
+            padding: 1rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
             text-align: center;
         }
 
-        .scenario-title {
-            font-size: 1.2rem;
-            color: #e65100;
-            font-weight: bold;
-            margin-bottom: 0.5rem;
-        }
-
-        .interactive-choice {
-            background: white;
-            border: 2px solid var(--border);
-            padding: 1.5rem;
-            margin: 1rem;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: inline-block;
-            width: calc(50% - 2rem);
-            vertical-align: top;
-        }
-
-        .interactive-choice:hover {
+        .scene-element:hover {
+            transform: scale(1.05);
             border-color: var(--accent);
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
         }
 
-        .interactive-choice.selected {
+        .scene-element.selected {
             border-color: var(--success);
             background: #e8f5e9;
+        }
+
+        /* Video container styles */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border: 2px solid var(--trinity-blue);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f0f8ff;
+            border-left: 4px solid var(--accent);
         }
 
         @media (max-width: 768px) {
@@ -582,10 +586,6 @@
             .response-options {
                 grid-template-columns: 1fr;
             }
-            .interactive-choice {
-                width: 100%;
-                margin: 0.5rem 0;
-            }
         }
     </style>
 </head>
@@ -594,7 +594,7 @@
         <div class="header-container">
             <div>
                 <h1>Trinity GESE Grade 4 </h1>
-                <div class="exam-badge">CEFR A2.2/B1 • 10 Minutes</div>
+                <div class="exam-badge">CEFR A2.2 • 10 Minutes</div>
             </div>
             <div class="timer" id="timer">10:00</div>
         </div>
@@ -608,8 +608,8 @@
         <div class="nav-tabs">
             <button class="nav-tab active" onclick="showSection('intro', this)">📋 About Exam</button>
             <button class="nav-tab" onclick="showSection('topic', this)">📌 Topic</button>
-            <button class="nav-tab" onclick="showSection('phase1', this)">🎯 Topic Discussion</button>
-            <button class="nav-tab" onclick="showSection('phase2', this)">💬 Conversation</button>
+            <button class="nav-tab" onclick="showSection('phase1', this)">👋 Phase 1</button>
+            <button class="nav-tab" onclick="showSection('phase2', this)">🖼️ Phase 2</button>
             <button class="nav-tab" onclick="showSection('results', this)" id="results-tab" style="display:none">📊 Results</button>
         </div>
 
@@ -619,9 +619,9 @@
                 <div class="card-header">About GESE Grade 4 Exam</div>
                 <div class="card-body">
                     <div class="info-box">
-                        <strong>GESE Grade 4</strong> is a significant step up, introducing longer, more detailed discussions 
-                        and hypothetical situations. It corresponds to <strong>CEFR A2.2/B1 threshold</strong> level and takes 
-                        approximately <strong>10 minutes</strong>.
+                        <strong>GESE Grade 4</strong> continues the <strong>Topic task</strong> and introduces more complex 
+                        interaction. It corresponds to <strong>CEFR A2.2</strong> level and takes approximately 
+                        <strong>10 minutes</strong>.
                     </div>
 
                     <h3 style="color: var(--trinity-blue); margin: 1.5rem 0 1rem;">Exam Format (4 Parts)</h3>
@@ -630,51 +630,78 @@
                         <div class="phase-step active">1</div>
                         <div class="phase-step">2</div>
                         <div class="phase-step">3</div>
-                        <div class="phase-step">4</div>
                     </div>
-                    <div style="display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 2rem; flex-wrap: wrap;">
-                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Topic<br>Discussion<br><small>(2.5 min)</small></div>
-                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Conversation<br>Task<br><small>(2.5 min)</small></div>
-                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Picture<br>Discussion<br><small>(2.5 min)</small></div>
-                        <div class="phase-label" style="text-align: center; font-size: 0.75rem; flex: 1;">Listening<br>& Response<br><small>(2.5 min)</small></div>
+                    <div style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2rem; flex-wrap: wrap;">
+                        <div class="phase-label" style="text-align: center; font-size: 0.8rem;">Topic Discussion<br><small>(with Topic Form)</small></div>
+                        <div class="phase-label" style="text-align: center; font-size: 0.8rem;">Conversation<br><small>(School/Weekend)</small></div>
+                        <div class="phase-label" style="text-align: center; font-size: 0.8rem;">Picture Discussion<br><small>(Comparisons)</small></div>
                     </div>
 
                     <div class="topic-box">
-                        <strong>🎯 Key Features of Grade 4:</strong>
-                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>Longer, more detailed Topic discussion with follow-up questions</li>
-                            <li>Conversation task with unpredictable questions</li>
-                            <li>Picture comparison with speculation</li>
-                            <li>Listening task with detailed response required</li>
-                        </ul>
+                        <strong>🎯 The Topic Task (Grade 4):</strong>
+                        <p style="margin-top: 0.5rem;">Before the exam, you prepare a topic of your choice and complete a 
+                        <strong>Topic Form</strong> with 4 points. The examiner uses these points to discuss your topic with you.</p>
                     </div>
 
                     <div class="warning-box">
                         <strong>Language Functions at Grade 4:</strong>
                         <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>Describing past experiences in detail (Past continuous + simple)</li>
-                            <li>Talking about hypothetical situations (If + past simple, would)</li>
-                            <li>Expressing opinions and justifying them</li>
-                            <li>Speculating about future possibilities</li>
-                            <li>Describing processes and procedures</li>
-                            <li>Making suggestions and recommendations</li>
+                            <li>Describing people, places, and things using adjectives</li>
+                            <li>Making comparisons (bigger than, more interesting than)</li>
+                            <li>Talking about past events with dates/times</li>
+                            <li>Talking about future plans and intentions</li>
+                            <li>Expressing reasons and preferences (because)</li>
+                            <li>Giving directions and instructions</li>
                         </ul>
                     </div>
 
                     <div class="grammar-box">
                         <strong>Key Grammar for Grade 4:</strong>
                         <ul style="margin-left: 2rem; margin-top: 0.5rem;">
-                            <li>Past continuous vs Past simple (While I was walking, I saw...)</li>
-                            <li>Second conditional (If I won the lottery, I would...)</li>
-                            <li>Present perfect with ever/never (Have you ever...?)</li>
-                            <li>Modals of deduction (must, might, can't)</li>
-                            <li>Passive voice (simple forms)</li>
-                            <li>Reported speech (said that, told me)</li>
+                            <li>Comparative and superlative adjectives (bigger, the biggest)</li>
+                            <li>Adverbs of manner (quickly, carefully)</li>
+                            <li>Past simple with when (When I was 5...)</li>
+                            <li>Linking words (and, but, because, so)</li>
+                            <li>Would like for requests/offers</li>
+                            <li>Prepositions of place and movement</li>
                         </ul>
                     </div>
 
                     <div class="navigation">
                         <button class="btn-primary" onclick="startExam()">Start Exam Simulation →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EDUCATIONAL VIDEO ADDED HERE -->
+            <div class="card" style="margin-top: 2rem; border: 2px solid var(--trinity-blue);">
+                <div class="card-header" style="background: var(--trinity-blue); color: white; border-left: none;">
+                    <span>🎥 Video Example: Real GESE Grade 4 Exam</span>
+                    <span style="font-size: 0.8rem; font-weight: normal;">Watch before you start!</span>
+                </div>
+                <div class="card-body">
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/F740yTJF7VU" 
+                            title="Trinity GESE Grade 4 Exam Example"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <strong>👀 Watch this real exam example to understand:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem; line-height: 1.8;">
+                            <li>How to present your <strong>Topic Form</strong> with 4 prepared points</li>
+                            <li>How to answer questions about your topic with details and examples</li>
+                            <li>How to use <strong>comparative adjectives</strong> (bigger than, more interesting than)</li>
+                            <li>How to give <strong>reasons</strong> using "because"</li>
+                            <li>How to talk about <strong>past events</strong> with "when" (When I was 5...)</li>
+                            <li>How to make <strong>comparisons between two pictures</strong></li>
+                            <li>How to use <strong>linking words</strong> (and, but, so) to connect ideas</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-style: italic; color: var(--secondary);">
+                            💡 <strong>Tip:</strong> Notice how the candidate brings a prepared topic form and speaks confidently about their chosen subject. The examiner asks questions based on the 4 points on the form!
+                        </p>
                     </div>
                 </div>
             </div>
@@ -686,32 +713,32 @@
                 <div class="card-header" style="border-left-color: var(--topic-green);">The Topic Task - Preparation</div>
                 <div class="card-body">
                     <div class="topic-box">
-                        <strong>Your Topic:</strong> "An Unforgettable Journey I Took"
-                        <p style="margin-top: 0.5rem;">In Grade 4, your topic should allow for detailed discussion and personal opinions. 
-                        Choose something you can talk about at length with specific examples.</p>
+                        <strong>Your Topic:</strong> "My Favourite Sport - Football"
+                        <p style="margin-top: 0.5rem;">In the real exam, you choose your own topic. Here, we'll practice with 
+                        "My Favourite Sport" as an example.</p>
                     </div>
 
                     <div class="topic-form">
                         <h3 style="color: var(--topic-green); margin-bottom: 1rem;">📝 Topic Form</h3>
-                        <p style="margin-bottom: 1rem;">Complete these discussion points:</p>
+                        <p style="margin-bottom: 1rem;">Complete these 4 points about your topic:</p>
                         
                         <div class="topic-point">
-                            <strong>Point 1:</strong> Where and when I went, and who with
+                            <strong>Point 1:</strong> When and why I started playing football
                         </div>
                         <div class="topic-point">
-                            <strong>Point 2:</strong> How I travelled and where I stayed
+                            <strong>Point 2:</strong> My favourite football team and player
                         </div>
                         <div class="topic-point">
-                            <strong>Point 3:</strong> Something unexpected that happened during the trip
+                            <strong>Point 3:</strong> How often I play and where
                         </div>
                         <div class="topic-point">
-                            <strong>Point 4:</strong> Why this journey was memorable and if I would go back
+                            <strong>Point 4:</strong> A memorable match I watched or played
                         </div>
                     </div>
 
-                    <div class="conversation-box">
-                        <strong>💡 Grade 4 Tip:</strong> Be ready for follow-up questions! The examiner will ask for more details 
-                        like <em>"What would you do differently?"</em> or <em>"How did you feel when that happened?"</em>
+                    <div class="info-box">
+                        <strong>💡 Tip:</strong> The examiner will ask questions based on these 4 points. 
+                        Be ready to give detailed answers with reasons (using "because") and examples!
                     </div>
 
                     <div class="navigation">
@@ -721,38 +748,32 @@
             </div>
 
             <div class="card">
-                <div class="card-header">Advanced Language for Your Topic</div>
+                <div class="card-header">Useful Language for Your Topic</div>
                 <div class="card-body">
                     <div class="vocab-grid">
-                        <div class="vocab-item" onclick="speak('While I was travelling, I met')">
-                            <div class="vocab-icon">✈️</div>
-                            <div class="vocab-word">While I was...ing, I...</div>
-                            <div class="vocab-phonetic">Past continuous</div>
+                        <div class="vocab-item" onclick="speak('I started playing when I was eight')">
+                            <div class="vocab-icon">🏃</div>
+                            <div class="vocab-word">I started... when...</div>
                         </div>
-                        <div class="vocab-item" onclick="speak('If I could go back, I would stay longer')">
-                            <div class="vocab-icon">🤔</div>
-                            <div class="vocab-word">If I..., I would...</div>
-                            <div class="vocab-phonetic">2nd conditional</div>
+                        <div class="vocab-item" onclick="speak('I like it because it is exciting')">
+                            <div class="vocab-icon">❤️</div>
+                            <div class="vocab-word">I like it because...</div>
                         </div>
-                        <div class="vocab-item" onclick="speak('I have never seen anything like it')">
-                            <div class="vocab-icon">👁️</div>
-                            <div class="vocab-word">I have never...</div>
-                            <div class="vocab-phonetic">Present perfect</div>
+                        <div class="vocab-item" onclick="speak('It is more exciting than tennis')">
+                            <div class="vocab-icon">⚖️</div>
+                            <div class="vocab-word">more... than...</div>
                         </div>
-                        <div class="vocab-item" onclick="speak('It must have been the most beautiful place')">
+                        <div class="vocab-item" onclick="speak('I play twice a week')">
+                            <div class="vocab-icon">📅</div>
+                            <div class="vocab-word">I play... (frequency)</div>
+                        </div>
+                        <div class="vocab-item" onclick="speak('The best player is...')">
                             <div class="vocab-icon">🏆</div>
-                            <div class="vocab-word">It must have been...</div>
-                            <div class="vocab-phonetic">Modals of deduction</div>
+                            <div class="vocab-word">The best... is...</div>
                         </div>
-                        <div class="vocab-item" onclick="speak('I would definitely recommend visiting')">
-                            <div class="vocab-icon">👍</div>
-                            <div class="vocab-word">I would recommend...</div>
-                            <div class="vocab-phonetic">Giving advice</div>
-                        </div>
-                        <div class="vocab-item" onclick="speak('The best thing about it was')">
+                        <div class="vocab-item" onclick="speak('I would like to become a professional player')">
                             <div class="vocab-icon">⭐</div>
-                            <div class="vocab-word">The best thing was...</div>
-                            <div class="vocab-phonetic">Evaluating</div>
+                            <div class="vocab-word">I would like to...</div>
                         </div>
                     </div>
                 </div>
@@ -768,14 +789,14 @@
                 </div>
                 <div class="card-body">
                     <div class="topic-box">
-                        <strong>Your Topic:</strong> An Unforgettable Journey I Took
+                        <strong>Your Topic:</strong> My Favourite Sport - Football
                     </div>
 
                     <div class="examiner-section">
                         <div class="examiner-label">EXAMINER</div>
                         <div class="examiner-avatar">👨‍🏫</div>
                         <div class="examiner-text" id="phase1-examiner-text">
-                            Good morning! Please tell me about your unforgettable journey. Where exactly did you go, and what made it so memorable?
+                            Good morning! Please tell me about your topic. You said you started playing football when you were young. When exactly did you start and why?
                         </div>
                     </div>
 
@@ -795,90 +816,101 @@
             </div>
 
             <div class="card">
-                <div class="card-header">Grammar Help: Complex Past & Conditionals</div>
+                <div class="card-header">Grammar Help: Comparisons & Reasons</div>
                 <div class="card-body">
                     <div class="grammar-box">
-                        <strong>Past Continuous + Past Simple:</strong><br>
-                        <em>"While I was walking in the mountains, I saw an amazing sunset"</em><br>
-                        <em>"I was travelling by train when I met my old friend"</em>
+                        <strong>Comparative Adjectives:</strong><br>
+                        short → shorter | big → bigger | interesting → more interesting<br>
+                        <em>"Football is more exciting than basketball"</em>
                     </div>
                     <div class="grammar-box" style="background: #e8f5e9; border-color: var(--topic-green);">
-                        <strong>Second Conditional (Hypothetical):</strong><br>
-                        <em>"If I had more money, I would travel around the world"</em><br>
-                        <em>"If I could go back, I would stay for a month"</em>
+                        <strong>Giving Reasons with Because:</strong><br>
+                        <em>"I like football because it is exciting and I can play with my friends"</em>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- PHASE 2: CONVERSATION TASK -->
+        <!-- PHASE 2: CONVERSATION -->
         <section id="phase2" class="section">
             <div class="card">
                 <div class="card-header">
-                    <span>Part 2: Conversation Task</span>
-                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~2.5 minutes</span>
+                    <span>Part 2: Conversation & Picture Discussion</span>
+                    <span style="font-size: 0.85rem; font-weight: normal; color: var(--secondary);">~3.5 minutes</span>
                 </div>
                 <div class="card-body">
-                    <div class="conversation-box">
-                        <strong>Conversation Focus:</strong> Technology and Daily Life
-                    </div>
-
                     <div class="examiner-section">
                         <div class="examiner-label">EXAMINER</div>
                         <div class="examiner-avatar">👨‍🏫</div>
                         <div class="examiner-text" id="phase2-examiner-text">
-                            Let's talk about technology. How do you think mobile phones have changed the way we communicate?
+                            Now let's talk about your school. What subjects do you study? Which is your favourite?
                         </div>
                     </div>
 
                     <div class="candidate-section" id="phase2-candidate">
                         <div class="candidate-label">YOU (Candidate)</div>
                         <div class="response-options" id="phase2-options">
-                            <button class="response-btn" onclick="checkPhase2Answer(this, true)">I think mobile phones have completely changed communication because now we can contact anyone instantly, whereas before we had to wait</button>
-                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">I have a mobile phone</button>
-                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">Mobile phones are good</button>
-                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">I use my phone every day</button>
+                            <button class="response-btn" onclick="checkPhase2Answer(this, true)">I study Maths, English and Science. My favourite is Science because it is interesting</button>
+                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">I go to school every day</button>
+                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">My school is big</button>
+                            <button class="response-btn" onclick="checkPhase2Answer(this, false)">I like my teacher</button>
                         </div>
                     </div>
 
                     <div class="feedback" id="phase2-feedback"></div>
 
                     <div class="navigation" id="phase2-nav" style="display: none;">
-                        <button class="btn-primary btn-conversation" onclick="showScenarioTask()">Next: Scenario Task →</button>
+                        <button class="btn-primary" onclick="showPictureTask()">Next: Picture Task →</button>
                     </div>
                 </div>
             </div>
 
-            <!-- Scenario/Hypothetical Task -->
-            <div class="card" id="scenario-card" style="display: none;">
-                <div class="card-header">Hypothetical Situation</div>
+            <!-- Picture Discussion Sub-section -->
+            <div class="card" id="picture-card" style="display: none;">
+                <div class="card-header">Picture Discussion: Comparisons</div>
                 <div class="card-body">
-                    <div class="scenario-box">
-                        <div class="scenario-title">🎭 Scenario</div>
-                        <p>Imagine you won a free trip to any country in the world for two weeks.</p>
+                    <div class="info-box">
+                        The examiner will show you two pictures. You need to compare them using 
+                        <strong>comparative adjectives</strong>.
                     </div>
 
-                    <div class="examiner-section" id="scenario-examiner" style="display: block;">
+                    <div class="interactive-scene">
+                        <h3 style="text-align: center; margin-bottom: 1rem;">Compare these two holidays:</h3>
+                        <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+                            <div class="scene-element" onclick="selectScene(this, 'beach')">
+                                <div style="font-size: 3rem;">🏖️</div>
+                                <div><strong>Beach Holiday</strong></div>
+                                <div style="font-size: 0.9rem; color: var(--secondary);">Hot, relaxing, expensive</div>
+                            </div>
+                            <div class="scene-element" onclick="selectScene(this, 'mountain')">
+                                <div style="font-size: 3rem;">🏔️</div>
+                                <div><strong>Mountain Holiday</strong></div>
+                                <div style="font-size: 0.9rem; color: var(--secondary);">Cool, active, cheap</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="examiner-section" id="picture-examiner" style="display: none;">
                         <div class="examiner-label">EXAMINER</div>
                         <div class="examiner-avatar">👨‍🏫</div>
                         <div class="examiner-text">
-                            If you could go anywhere in the world, where would you choose and what would you do there?
+                            Tell me about these two holidays. Compare them.
                         </div>
                     </div>
 
-                    <div class="candidate-section" id="scenario-candidate">
-                        <div class="candidate-label">YOUR RESPONSE (Use: If I..., I would...)</div>
-                        <div class="response-options" id="scenario-options">
-                            <button class="response-btn" onclick="checkScenarioAnswer(this, true)">If I could go anywhere, I would choose Japan because I have always wanted to see Tokyo. I would visit ancient temples and try authentic sushi</button>
-                            <button class="response-btn" onclick="checkScenarioAnswer(this, false)">I want to go to Japan</button>
-                            <button class="response-btn" onclick="checkScenarioAnswer(this, false)">Japan is a nice country</button>
-                            <button class="response-btn" onclick="checkScenarioAnswer(this, false)">I will go to Tokyo</button>
+                    <div class="candidate-section" id="picture-candidate" style="display: none;">
+                        <div class="candidate-label">YOUR COMPARISON</div>
+                        <div class="response-options" id="picture-options">
+                            <button class="response-btn" onclick="checkPictureAnswer(this, true)">The beach holiday is hotter and more relaxing than the mountain holiday, but the mountain holiday is cheaper</button>
+                            <button class="response-btn" onclick="checkPictureAnswer(this, false)">I like the beach</button>
+                            <button class="response-btn" onclick="checkPictureAnswer(this, false)">There are two holidays</button>
+                            <button class="response-btn" onclick="checkPictureAnswer(this, false)">The beach is nice</button>
                         </div>
                     </div>
 
-                    <div class="feedback" id="scenario-feedback"></div>
+                    <div class="feedback" id="picture-feedback"></div>
 
-                    <div class="navigation" id="scenario-nav" style="display: none;">
+                    <div class="navigation" id="picture-nav" style="display: none;">
                         <button class="btn-primary" onclick="finishExam()">Finish Exam →</button>
                     </div>
                 </div>
@@ -918,67 +950,55 @@
         let phase1Question = 0;
         let score = 0;
 
-        // Phase 1 Questions - Detailed Topic Discussion
+        // Phase 1 Questions - Topic Discussion
         const phase1Questions = [
             {
-                examiner: "Good morning! Please tell me about your unforgettable journey. Where exactly did you go, and what made it so memorable?",
+                examiner: "Good morning! Please tell me about your topic. You said you started playing football when you were young. When exactly did you start and why?",
                 options: [
-                    "I went to Peru two years ago with my family. It was unforgettable because I saw Machu Picchu, which I had always dreamed of visiting",
-                    "I like travelling very much",
-                    "I went on holiday last year",
-                    "Peru is a nice country"
+                    "I started playing when I was eight because my father taught me and it looked fun",
+                    "I play football every day",
+                    "I like football",
+                    "My favourite team is Real Madrid"
                 ],
-                correct: "I went to Peru two years ago with my family. It was unforgettable because I saw Machu Picchu, which I had always dreamed of visiting",
-                feedback: "Excellent! You gave specific details (when, where, who with) and explained why it was special",
-                points: 20
+                correct: "I started playing when I was eight because my father taught me and it looked fun",
+                feedback: "Excellent! You answered when, and gave reasons using 'because'",
+                points: 15
             },
             {
-                examiner: "Tell me more about getting there. How did you travel, and was the journey comfortable?",
+                examiner: "Tell me about your favourite team. Why do you support them?",
                 options: [
-                    "We flew to Lima, which took about twelve hours. While we were flying, I watched three films! It was quite comfortable but I couldn't sleep well",
-                    "We went by plane",
-                    "The journey was long",
-                    "I like flying"
+                    "I support them because they are the best team and they play exciting football",
+                    "I watch them on TV",
+                    "They wear white shirts",
+                    "I go to the stadium"
                 ],
-                correct: "We flew to Lima, which took about twelve hours. While we were flying, I watched three films! It was quite comfortable but I couldn't sleep well",
-                feedback: "Great use of past continuous! You described the journey in detail with specific information",
-                points: 20
+                correct: "I support them because they are the best team and they play exciting football",
+                feedback: "Good! You gave opinions and reasons using 'because'",
+                points: 15
             },
             {
-                examiner: "Did anything unexpected happen during your trip? How did you deal with it?",
+                examiner: "How often do you play football? Where do you usually play?",
                 options: [
-                    "Actually, yes! While we were hiking in the mountains, it suddenly started snowing, which was unusual. We had to wait in a small café until it stopped, but it turned out to be a lovely experience",
-                    "Nothing happened",
-                    "It snowed",
-                    "We waited in a café"
+                    "I play twice a week with my friends at the sports centre near my house",
+                    "I like playing football",
+                    "I play very good",
+                    "My friends play football"
                 ],
-                correct: "Actually, yes! While we were hiking in the mountains, it suddenly started snowing, which was unusual. We had to wait in a small café until it stopped, but it turned out to be a lovely experience",
-                feedback: "Perfect! You used past continuous (while we were hiking) and explained the situation with detail",
-                points: 20
+                correct: "I play twice a week with my friends at the sports centre near my house",
+                feedback: "Perfect! You gave specific information about frequency and place",
+                points: 15
             },
             {
-                examiner: "If you could go back to Peru, what would you do differently?",
+                examiner: "Is football more popular than other sports in your country? Why do you think so?",
                 options: [
-                    "If I could go back, I would definitely stay longer, maybe three weeks instead of two. I would also visit the Amazon rainforest, which we didn't have time for",
-                    "I want to go back",
-                    "I would stay longer",
-                    "The Amazon is nice"
+                    "Yes, it is more popular than basketball because it is more exciting and everyone can play it",
+                    "Football is popular",
+                    "I like football more",
+                    "Many people watch football"
                 ],
-                correct: "If I could go back, I would definitely stay longer, maybe three weeks instead of two. I would also visit the Amazon rainforest, which we didn't have time for",
-                feedback: "Excellent second conditional! You gave specific details about what you would do differently",
-                points: 20
-            },
-            {
-                examiner: "Have you ever had a similar experience in another country? Would you recommend Peru to others?",
-                options: [
-                    "I have never seen anything quite like Machu Picchu before. I would absolutely recommend Peru, especially to people who love history and nature. It must be one of the most beautiful countries in the world",
-                    "Yes, I recommend it",
-                    "Peru is beautiful",
-                    "I have been to other countries"
-                ],
-                correct: "I have never seen anything quite like Machu Picchu before. I would absolutely recommend Peru, especially to people who love history and nature. It must be one of the most beautiful countries in the world",
-                feedback: "Excellent! You used present perfect (have never seen), would recommend, and modal of deduction (must be)",
-                points: 20
+                correct: "Yes, it is more popular than basketball because it is more exciting and everyone can play it",
+                feedback: "Excellent use of comparative (more popular than, more exciting) and reasons!",
+                points: 15
             }
         ];
 
@@ -1008,8 +1028,8 @@
         }
 
         function updateProgress() {
-            const totalQuestions = phase1Questions.length + 2; // +2 for conversation tasks
-            let answered = phase1Question + (currentPhase > 1 ? 2 : 0);
+            const totalQuestions = phase1Questions.length + 3; // +3 for other phases
+            let answered = phase1Question + (currentPhase > 1 ? 1 : 0) + (currentPhase > 2 ? 1 : 0);
             const percent = Math.min((answered / totalQuestions) * 100, 100);
             document.getElementById('progress').style.width = percent + '%';
         }
@@ -1094,36 +1114,44 @@
             const feedback = document.getElementById('phase2-feedback');
             feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
             feedback.innerHTML = isCorrect ? 
-                '✅ Excellent! You gave a detailed opinion with specific reasons and contrast (whereas).' : 
-                '❌ Try to give a detailed opinion with specific examples and reasons. Use linking words like "whereas" or "however".';
+                '✅ Good! You listed subjects and gave a preference with reasons.' : 
+                '❌ Try to list subjects and say which is your favourite with reasons (because...)';
             feedback.style.display = 'block';
 
-            if (isCorrect) score += 25;
+            if (isCorrect) score += 15;
             document.getElementById('phase2-nav').style.display = 'flex';
         }
 
-        function showScenarioTask() {
-            document.getElementById('scenario-card').style.display = 'block';
-            document.getElementById('scenario-card').scrollIntoView({ behavior: 'smooth' });
+        function showPictureTask() {
+            document.getElementById('picture-card').style.display = 'block';
+            document.getElementById('picture-card').scrollIntoView({ behavior: 'smooth' });
         }
 
-        function checkScenarioAnswer(btn, isCorrect) {
-            document.querySelectorAll('#scenario-options .response-btn').forEach(b => {
+        function selectScene(element, type) {
+            document.querySelectorAll('.scene-element').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            
+            document.getElementById('picture-examiner').style.display = 'block';
+            document.getElementById('picture-candidate').style.display = 'block';
+        }
+
+        function checkPictureAnswer(btn, isCorrect) {
+            document.querySelectorAll('#picture-options .response-btn').forEach(b => {
                 b.disabled = true;
                 if (b === btn) {
                     b.classList.add(isCorrect ? 'correct' : 'wrong');
                 }
             });
 
-            const feedback = document.getElementById('scenario-feedback');
+            const feedback = document.getElementById('picture-feedback');
             feedback.className = 'feedback show ' + (isCorrect ? 'correct' : 'info');
             feedback.innerHTML = isCorrect ? 
-                '✅ Perfect second conditional! You used "If I could..., I would..." with specific details and reasons.' : 
-                '❌ Remember to use the second conditional: "If I could..., I would..." (not "I will" or just "I want")';
+                '✅ Excellent comparisons! You used "hotter", "more relaxing" and "cheaper" correctly.' : 
+                '❌ Use comparative adjectives: hotter than, more relaxing than, cheaper than';
             feedback.style.display = 'block';
 
             if (isCorrect) score += 25;
-            document.getElementById('scenario-nav').style.display = 'flex';
+            document.getElementById('picture-nav').style.display = 'flex';
         }
 
         function finishExam() {
@@ -1131,7 +1159,7 @@
             document.getElementById('results-tab').style.display = 'block';
             showSection('results', document.getElementById('results-tab'));
 
-            const maxScore = 150;
+            const maxScore = 100;
             const percentage = Math.round((score / maxScore) * 100);
             
             document.getElementById('final-score').textContent = percentage + '%';
@@ -1142,32 +1170,31 @@
             if (percentage >= 80) {
                 badge.className = 'grade-badge grade-distinction';
                 badge.textContent = 'DISTINCTION 🏆';
-                message.textContent = 'Outstanding! You used complex grammatical structures with fluency and accuracy!';
+                message.textContent = 'Excellent! You used complex structures and comparisons very well!';
             } else if (percentage >= 60) {
                 badge.className = 'grade-badge grade-merit';
                 badge.textContent = 'MERIT 🥈';
-                message.textContent = 'Very good! You communicated effectively with good range of language.';
+                message.textContent = 'Very good! You communicated effectively with good use of comparatives.';
             } else if (percentage >= 40) {
                 badge.className = 'grade-badge grade-pass';
                 badge.textContent = 'PASS ✅';
-                message.textContent = 'Good effort! You showed ability to handle more complex interactions.';
+                message.textContent = 'Good effort! You showed ability to discuss your topic.';
             } else {
                 badge.style.background = '#6c757d';
                 badge.style.color = 'white';
                 badge.textContent = 'NOT PASSED';
-                message.textContent = 'Keep practicing! Focus on past continuous and second conditional structures.';
+                message.textContent = 'Keep practicing! Focus on using "because" for reasons and comparatives.';
             }
 
             const feedbackList = document.getElementById('feedback-list');
             feedbackList.innerHTML = `
-                <li>${score >= 20 ? '✅' : '⚠️'} Detailed topic presentation with specific examples</li>
-                <li>${score >= 40 ? '✅' : '⚠️'} Using <strong>past continuous</strong> (While I was...ing)</li>
-                <li>${score >= 60 ? '✅' : '⚠️'} <strong>Past simple</strong> vs <strong>past continuous</strong> contrast</li>
-                <li>${score >= 80 ? '✅' : '⚠️'} <strong>Second conditional</strong> (If I..., I would...)</li>
-                <li>${score >= 100 ? '✅' : '⚠️'} <strong>Present perfect</strong> with ever/never</li>
-                <li>${score >= 120 ? '✅' : '⚠️'} Modal verbs of deduction (<em>must be, can't be</em>)</li>
-                <li>${score >= 135 ? '✅' : '⚠️'} Giving recommendations with reasons</li>
-                <li>${score >= 145 ? '✅' : '⚠️'} Using linking words (<em>whereas, although, however</em>)</li>
+                <li>${score >= 15 ? '✅' : '⚠️'} Topic presentation with specific information</li>
+                <li>${score >= 30 ? '✅' : '⚠️'} Using <strong>because</strong> to give reasons</li>
+                <li>${score >= 45 ? '✅' : '⚠️'} Talking about past events with <strong>when</strong></li>
+                <li>${score >= 60 ? '✅' : '⚠️'} Using comparative adjectives (<em>more... than</em>)</li>
+                <li>${score >= 75 ? '✅' : '⚠️'} Superlative forms (<em>the best, the most</em>)</li>
+                <li>${score >= 85 ? '✅' : '⚠️'} Frequency expressions (<em>twice a week</em>)</li>
+                <li>${score >= 95 ? '✅' : '⚠️'} Fluent topic discussion with linking words</li>
             `;
         }
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trinity GESE Grade 5  - Exam Simulation</title>
+    <title>Trinity GESE Grade 5 - Exam Simulation</title>
     <style>
         * {
             margin: 0;
@@ -574,6 +574,33 @@
             margin-bottom: 0.5rem;
         }
 
+        /* Video container styles */
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border: 2px solid var(--trinity-blue);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .video-info {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: #f0f8ff;
+            border-left: 4px solid var(--accent);
+        }
+
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -680,6 +707,40 @@
 
                     <div class="navigation">
                         <button class="btn-primary" onclick="startExam()">Start Exam Simulation →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EDUCATIONAL VIDEO ADDED HERE -->
+            <div class="card" style="margin-top: 2rem; border: 2px solid var(--trinity-blue);">
+                <div class="card-header" style="background: var(--trinity-blue); color: white; border-left: none;">
+                    <span>🎥 Video Example: Real GESE Grade 5 Exam</span>
+                    <span style="font-size: 0.8rem; font-weight: normal;">Watch before you start!</span>
+                </div>
+                <div class="card-body">
+                    <div class="video-wrapper">
+                        <iframe 
+                            src="https://www.youtube.com/embed/aF5cL7B6cLQ" 
+                            title="Trinity GESE Grade 5 Exam Example"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+                    <div class="video-info">
+                        <strong>👀 Watch this real exam example to understand:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem; line-height: 1.8;">
+                            <li>How to present your <strong>Topic Form</strong> with detailed discussion points</li>
+                            <li>How to use <strong>third conditional</strong> (If I had..., I would have...) for past regrets</li>
+                            <li>How to handle the <strong>Interactive Task</strong> by asking questions and making suggestions</li>
+                            <li>How to use <strong>discourse markers</strong> (On the other hand, Having said that, Anyway)</li>
+                            <li>How to <strong>speculate</strong> about past events (must have been, can't have been)</li>
+                            <li>How to use <strong>Wish/If only</strong> + past perfect for regrets</li>
+                            <li>How to manage <strong>turn-taking</strong> and interrupt politely</li>
+                            <li>How to express and justify <strong>opinions</strong> with complex arguments</li>
+                        </ul>
+                        <p style="margin-top: 1rem; font-style: italic; color: var(--secondary);">
+                            💡 <strong>Tip:</strong> Notice how the candidate handles the Interactive Task - it's a genuine two-way conversation, not a monologue. The candidate asks questions, responds to the examiner's input, and negotiates to reach a conclusion together!
+                        </p>
                     </div>
                 </div>
             </div>
