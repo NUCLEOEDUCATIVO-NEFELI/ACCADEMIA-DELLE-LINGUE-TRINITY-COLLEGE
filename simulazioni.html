@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulazioni Esami - Trinity College London</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1e3a5f;
+            --primary-dark: #152a45;
+            --secondary: #8b0000;
+            --success: #276749;
+            --error: #c53030;
+            --bg-primary: #f5f5f0;
+            --bg-card: #ffffff;
+            --border: #d4d4c8;
+            --text-primary: #2c3e50;
+            --text-secondary: #5a6c7d;
+            --trinity-red: #dc2626;
+            --trinity-blue: #1e3a5f;
+            --level-a1: #276749;
+            --level-a2: #2563eb;
+            --level-b1: #c9a227;
+            --level-b2: #dc2626;
+            --level-c1: #6b21a8;
+            --level-c2: #0f172a;
+        }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--trinity-blue) 0%, #2c5282 100%);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .header h1 {
+            font-size: 2rem;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+        .header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+        .exam-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+        .exam-section {
+            background: var(--bg-card);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid var(--border);
+        }
+        .section-header {
+            padding: 16px 20px;
+            color: white;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .gese-header { background: linear-gradient(135deg, var(--trinity-red) 0%, #b91c1c 100%); }
+        .ise-f-header { background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%); }
+        .ise-1-header { background: linear-gradient(135deg, #c9a227 0%, #a88c1c 100%); color: #000; }
+        .ise-2-header { background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%); }
+        .ise-3-header { background: linear-gradient(135deg, #6b21a8 0%, #581c87 100%); }
+        .ise-4-header { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+
+        .section-body {
+            padding: 20px;
+        }
+        .exam-list {
+            list-style: none;
+        }
+        .exam-item {
+            margin-bottom: 8px;
+        }
+        .exam-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 16px;
+            background: var(--bg-primary);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: all 0.2s;
+            border: 1px solid transparent;
+        }
+        .exam-link:hover {
+            background: white;
+            border-color: var(--border);
+            transform: translateX(4px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        .exam-name {
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .exam-level {
+            font-size: 0.65rem;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .level-a1 { background: var(--level-a1); color: white; }
+        .level-a2 { background: var(--level-a2); color: white; }
+        .level-b1 { background: var(--level-b1); color: #000; }
+        .level-b2 { background: var(--level-b2); color: white; }
+        .level-c1 { background: var(--level-c1); color: white; }
+        .level-c2 { background: var(--level-c2); color: white; }
+
+        .arrow {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 10px 20px;
+            background: var(--trinity-blue);
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: background 0.2s;
+        }
+        .back-btn:hover {
+            background: var(--primary-dark);
+        }
+
+        .info-box {
+            background: #e0f2fe;
+            border-left: 4px solid #0284c7;
+            padding: 16px;
+            margin-bottom: 30px;
+            border-radius: 0 8px 8px 0;
+        }
+        .info-box strong {
+            color: #0369a1;
+        }
+
+        @media (max-width: 768px) {
+            .exam-grid {
+                grid-template-columns: 1fr;
+            }
+            .header h1 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← Torna alla Dashboard</a>
+
+        <div class="header">
+            <h1>🎯 Simulazioni Esami Trinity</h1>
+            <p>Accedi a tutte le simulazioni GESE e ISE per prepararti agli esami</p>
+        </div>
+
+        <div class="info-box">
+            <strong>💡 Come usare le simulazioni:</strong> Clicca sul link corrispondente al tuo livello per iniziare la simulazione. 
+            Ogni simulazione replica le condizioni dell'esame reale con timer e valutazione automatica.
+        </div>
+
+        <div class="exam-grid">
+            <!-- GESE Simulazioni -->
+            <div class="exam-section">
+                <div class="section-header gese-header">
+                    <span>🗣️</span>
+                    <span>GESE - Simulazioni</span>
+                </div>
+                <div class="section-body">
+                    <ul class="exam-list">
+                        <li class="exam-item">
+                            <a href="simulazione_gese1.html" class="exam-link">
+                                <span class="exam-name"><span>1️⃣</span> Simulazione GESE 1</span>
+                                <span class="exam-level level-a1">A1</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese2.html" class="exam-link">
+                                <span class="exam-name"><span>2️⃣</span> Simulazione GESE 2</span>
+                                <span class="exam-level level-a1">A1</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese3.html" class="exam-link">
+                                <span class="exam-name"><span>3️⃣</span> Simulazione GESE 3</span>
+                                <span class="exam-level level-a2">A2.1</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese4.html" class="exam-link">
+                                <span class="exam-name"><span>4️⃣</span> Simulazione GESE 4</span>
+                                <span class="exam-level level-a2">A2.2</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese5.html" class="exam-link">
+                                <span class="exam-name"><span>5️⃣</span> Simulazione GESE 5</span>
+                                <span class="exam-level level-b1">B1.1</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese6.html" class="exam-link">
+                                <span class="exam-name"><span>6️⃣</span> Simulazione GESE 6</span>
+                                <span class="exam-level level-b1">B1.2</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese7.html" class="exam-link">
+                                <span class="exam-name"><span>7️⃣</span> Simulazione GESE 7</span>
+                                <span class="exam-level level-b2">B2.1</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese8.html" class="exam-link">
+                                <span class="exam-name"><span>8️⃣</span> Simulazione GESE 8</span>
+                                <span class="exam-level level-b2">B2.2</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese9.html" class="exam-link">
+                                <span class="exam-name"><span>9️⃣</span> Simulazione GESE 9</span>
+                                <span class="exam-level level-b2">B2.3</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese10.html" class="exam-link">
+                                <span class="exam-name"><span>🔟</span> Simulazione GESE 10</span>
+                                <span class="exam-level level-c1">C1.1</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese11.html" class="exam-link">
+                                <span class="exam-name"><span>⏸️</span> Simulazione GESE 11</span>
+                                <span class="exam-level level-c1">C1.2</span>
+                            </a>
+                        </li>
+                        <li class="exam-item">
+                            <a href="simulazione_gese12.html" class="exam-link">
+                                <span class="exam-name"><span>🎓</span> Simulazione GESE 12</span>
+                                <span class="exam-level level-c2">C2</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ISE Foundation -->
+            <div class="exam-section">
+                <div class="section-header ise-f-header">
+                    <span>📚</span>
+                    <span>ISE Foundation</span>
+                </div>
+                <div class="section-body">
+                    <ul class="exam-list">
+                        <li class="exam-item">
+                            <a href="simulazione_ise_foundation.html" class="exam-link">
+                                <span class="exam-name"><span>📝</span> Simulazione ISE Foundation</span>
+                                <span class="exam-level level-a2">A2-B1</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ISE I -->
+            <div class="exam-section">
+                <div class="section-header ise-1-header">
+                    <span>📘</span>
+                    <span>ISE I (B1)</span>
+                </div>
+                <div class="section-body">
+                    <ul class="exam-list">
+                        <li class="exam-item">
+                            <a href="simulazione_ise_i.html" class="exam-link">
+                                <span class="exam-name"><span>📝</span> Simulazione ISE I Completa</span>
+                                <span class="exam-level level-b1">B1</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ISE II -->
+            <div class="exam-section">
+                <div class="section-header ise-2-header">
+                    <span>📕</span>
+                    <span>ISE II (B2)</span>
+                </div>
+                <div class="section-body">
+                    <ul class="exam-list">
+                        <li class="exam-item">
+                            <a href="simulazione_ise_ii.html" class="exam-link">
+                                <span class="exam-name"><span>📝</span> Simulazione ISE II Completa</span>
+                                <span class="exam-level level-b2">B2</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ISE III -->
+            <div class="exam-section">
+                <div class="section-header ise-3-header">
+                    <span>📗</span>
+                    <span>ISE III (C1)</span>
+                </div>
+                <div class="section-body">
+                    <ul class="exam-list">
+                        <li class="exam-item">
+                            <a href="simulazione_ise_iii.html" class="exam-link">
+                                <span class="exam-name"><span>📝</span> Simulazione ISE III Completa</span>
+                                <span class="exam-level level-c1">C1</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ISE IV -->
+            <div class="exam-section">
+                <div class="section-header ise-4-header">
+                    <span>📓</span>
+                    <span>ISE IV (C2)</span>
+                </div>
+                <div class="section-body">
+                    <ul class="exam-list">
+                        <li class="exam-item">
+                            <a href="simulazione_ise_iv.html" class="exam-link">
+                                <span class="exam-name"><span>📝</span> Simulazione ISE IV Completa</span>
+                                <span class="exam-level level-c2">C2</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div style="text-align: center; padding: 20px; color: var(--text-secondary); font-size: 0.85rem;">
+            <p>© 2024 Nucleo Educativo - Sede di Esame Accreditata n. 68499</p>
+            <p style="margin-top: 8px;">Trinity College London - GESE & ISE English Language Certification</p>
+        </div>
+    </div>
+</body>
+</html>
