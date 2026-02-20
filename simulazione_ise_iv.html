@@ -1,0 +1,1289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE IV (C2) - Full Exam Simulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a237e;
+            --secondary: #37474f;
+            --accent: #c62828;
+            --light: #e8eaf6;
+            --dark: #212121;
+            --border: #9fa8da;
+            --success: #2e7d32;
+            --success-bg: #c8e6c9;
+            --error: #b71c1c;
+            --error-bg: #ffcdd2;
+            --parchment: #fafafa;
+            --warning: #ef6c00;
+            --info: #01579b;
+            --gold: #ffd700;
+        }
+
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d1642 100%);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--accent);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            font-weight: normal;
+            letter-spacing: 0.5px;
+        }
+
+        .level-badge {
+            background: var(--gold);
+            color: var(--primary);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-left: 1rem;
+        }
+
+        .timer {
+            background: white;
+            color: var(--primary);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            font-family: monospace;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .exam-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .component-tabs {
+            display: flex;
+            background: white;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .component-tab {
+            padding: 1rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .component-tab:hover {
+            color: var(--primary);
+            background: var(--light);
+        }
+
+        .component-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--accent);
+            font-weight: bold;
+        }
+
+        .component-tab.completed {
+            color: var(--success);
+            border-bottom-color: var(--success);
+        }
+
+        .exam-component {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .exam-component.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: var(--light);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: bold;
+            color: var(--primary);
+            font-size: 1.1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instructions {
+            background: #fff3e0;
+            border-left: 4px solid var(--warning);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .level-info {
+            background: var(--light);
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            border-left: 4px solid var(--primary);
+        }
+
+        .reading-text {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            font-family: 'Georgia', serif;
+            line-height: 1.8;
+            max-height: 600px;
+            overflow-y: auto;
+            border-radius: 4px;
+            font-size: 0.95rem;
+        }
+
+        .paragraph {
+            margin-bottom: 1.2rem;
+            text-align: justify;
+        }
+
+        .question {
+            background: #f5f5f5;
+            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .question-number {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .options {
+            margin-left: 1rem;
+        }
+
+        .option {
+            display: block;
+            padding: 0.5rem;
+            margin: 0.25rem 0;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background 0.2s;
+        }
+
+        .option:hover {
+            background: var(--light);
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            font-family: inherit;
+            font-size: 0.95rem;
+            border-radius: 4px;
+        }
+
+        select {
+            padding: 0.4rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            margin-left: 0.5rem;
+        }
+
+        .writing-area {
+            width: 100%;
+            min-height: 350px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+            font-family: 'Georgia', serif;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: vertical;
+            border-radius: 4px;
+        }
+
+        .word-count {
+            text-align: right;
+            color: var(--secondary);
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
+        .word-count.warning {
+            color: var(--warning);
+            font-weight: bold;
+        }
+
+        .word-count.error {
+            color: var(--error);
+            font-weight: bold;
+        }
+
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn:hover {
+            background: #0d1642;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+        }
+
+        .btn-secondary:hover {
+            background: #263238;
+        }
+
+        .btn-success {
+            background: var(--success);
+        }
+
+        .btn-success:hover {
+            background: #1b5e20;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid var(--border);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: var(--success);
+            transition: width 0.3s;
+        }
+
+        .results {
+            background: white;
+            border: 2px solid var(--success);
+            padding: 2rem;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: var(--light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 1rem auto;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            border: 4px solid var(--primary);
+        }
+
+        .answer-key {
+            background: #f5f5f5;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            text-align: left;
+            border-left: 3px solid var(--primary);
+        }
+
+        .correct-answer {
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        .your-answer {
+            color: var(--primary);
+        }
+
+        .wrong-answer {
+            color: var(--error);
+            text-decoration: line-through;
+        }
+
+        .infographic {
+            background: white;
+            border: 2px solid #ddd;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            text-align: center;
+            border-radius: 4px;
+        }
+
+        .infographic-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-box {
+            background: var(--light);
+            padding: 1rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .genre-selector {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: #f9f9f9;
+            border-radius: 4px;
+        }
+
+        .timer-warning {
+            animation: pulse 1s infinite;
+            color: var(--error);
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .highlight-box {
+            background: #e8f5e9;
+            border-left: 4px solid var(--success);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+
+        .section-divider {
+            border-top: 2px dashed var(--border);
+            margin: 2rem 0;
+            padding-top: 1rem;
+        }
+
+        .portfolio-task {
+            background: #fff8e1;
+            border: 1px solid #ffcc80;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .task-header {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .word-limit {
+            display: inline-block;
+            background: var(--light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+
+        .interview-card {
+            background: #f3e5f5;
+            border: 1px solid #ce93d8;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 4px;
+        }
+
+        .interview-role {
+            font-weight: bold;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .timer-btn {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .timer-btn:hover {
+            background: var(--light);
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            .timer {
+                margin-top: 1rem;
+            }
+            .component-tabs {
+                flex-wrap: wrap;
+            }
+            .infographic-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <div>
+                <h1>Trinity ISE IV (C2) Exam Simulation <span class="level-badge">C2</span></h1>
+                <p style="opacity: 0.9; font-size: 0.9rem;">Portfolio | Controlled Written Exam | Interview | CEFR C2 Level</p>
+            </div>
+            <div class="timer-controls">
+                <button class="timer-btn" onclick="setTimer(180)">3h</button>
+                <button class="timer-btn" onclick="setTimer(120)">2h</button>
+                <button class="timer-btn" onclick="setTimer(25)">25m</button>
+                <div class="timer" id="timer">180:00</div>
+            </div>
+        </div>
+    </header>
+
+    <div class="exam-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress" style="width: 0%"></div>
+        </div>
+
+        <div class="component-tabs">
+            <button class="component-tab active" onclick="showComponent('intro', this)">Overview</button>
+            <button class="component-tab" onclick="showComponent('portfolio', this)">Component 1: Portfolio</button>
+            <button class="component-tab" onclick="showComponent('controlled', this)">Component 2: Written Exam</button>
+            <button class="component-tab" onclick="showComponent('interview', this)">Component 3: Interview</button>
+            <button class="component-tab" onclick="showComponent('results', this)" id="results-tab" style="display:none">Results</button>
+        </div>
+
+        <!-- INTRODUCTION -->
+        <section id="intro" class="exam-component active">
+            <div class="card">
+                <div class="card-header">
+                    <span>ISE IV (C2) Examination Overview</span>
+                </div>
+                <div class="card-body">
+                    <div class="level-info">
+                        <strong>Important:</strong> ISE IV has a different format from ISE I-III. It consists of three separate components taken at different times.
+                    </div>
+
+                    <div class="instructions">
+                        <strong>ISE IV Structure:</strong> Unlike ISE I-III, ISE IV is not taken in a single session. The three components are taken separately.
+                    </div>
+
+                    <div style="display: grid; gap: 1.5rem; margin: 2rem 0;">
+                        <div class="portfolio-task">
+                            <div class="task-header">Component 1: The Portfolio</div>
+                            <p><strong>Timing:</strong> Completed over 6-12 weeks before the Interview</p>
+                            <p><strong>Content:</strong> Three writing tasks (one from each section: Correspondence, Factual Writing, Critical/Analytical Writing)</p>
+                            <p><strong>Word limits:</strong> 300-350 words (Section 1), 220-250 words (Section 2), 250-300 words (Section 3)</p>
+                        </div>
+
+                        <div class="portfolio-task">
+                            <div class="task-header">Component 2: Controlled Written Exam</div>
+                            <p><strong>Timing:</strong> 3 hours</p>
+                            <p><strong>Content:</strong> Two Reading into Writing tasks + One Extended Writing task</p>
+                            <p><strong>Word limits:</strong> 250-300 words each (Tasks 1-2), 300-350 words (Task 3)</p>
+                        </div>
+
+                        <div class="portfolio-task">
+                            <div class="task-header">Component 3: The Interview</div>
+                            <p><strong>Timing:</strong> 25 minutes</p>
+                            <p><strong>Content:</strong> 5 tasks - Topic Presentation, Topic Discussion, Interactive Task, Listening Task, Conversation Task</p>
+                            <p><strong>Focus:</strong> Sophisticated argumentation, abstract concepts, managing discourse</p>
+                        </div>
+                    </div>
+
+                    <div class="highlight-box">
+                        <h4 style="color: var(--success);">C2 Level Requirements</h4>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Understand with ease virtually everything heard or read</li>
+                            <li>Summarize information from different spoken and written sources</li>
+                            <li>Reconstruct arguments and accounts in a coherent presentation</li>
+                            <li>Express oneself spontaneously, very fluently and precisely</li>
+                            <li>Differentiate finer shades of meaning even in complex situations</li>
+                        </ul>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn" onclick="showComponent('portfolio', document.querySelectorAll('.component-tab')[1])">Start with Portfolio →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPONENT 1: PORTFOLIO -->
+        <section id="portfolio" class="exam-component">
+            <div class="card">
+                <div class="card-header">
+                    <span>Component 1: The Portfolio (6-12 weeks preparation)</span>
+                    <span class="word-limit">3 tasks total</span>
+                </div>
+                <div class="card-body">
+                    <div class="level-info">
+                        <strong>Portfolio Tasks:</strong> Select one task from each section (15 total options: 5 per section). All three tasks must be completed before the Interview.
+                    </div>
+
+                    <div class="instructions">
+                        <strong>Instructions:</strong> Choose ONE task from each section below. Complete all three pieces over 6-12 weeks. These will be discussed during your Interview.
+                    </div>
+
+                    <!-- SECTION 1: CORRESPONDENCE -->
+                    <div class="section-divider">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Section 1: Correspondence (Choose ONE)</h3>
+                        
+                        <div class="portfolio-task">
+                            <div class="task-header">Task 1.1: Online Forum Discussion <span class="word-limit">300-350 words total</span></div>
+                            <p>Write an online forum discussion (3-4 participants) about the ethics of artificial intelligence in healthcare decision-making. Include varying perspectives and a synthesis of viewpoints.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary);">
+                                <strong>Genre features:</strong> Interactive discourse, turn-taking, informal to semi-formal register, consensus building
+                            </div>
+                        </div>
+
+                        <div class="portfolio-task">
+                            <div class="task-header">Task 1.2: Related Emails <span class="word-limit">150-180 words each</span></div>
+                            <p>Write two related emails negotiating a research collaboration between two universities. Email 1: Initial proposal. Email 2: Response addressing concerns and refining terms.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary);">
+                                <strong>Genre features:</strong> Formal register, diplomatic language, hedging, clarification, relationship management
+                            </div>
+                        </div>
+
+                        <div class="portfolio-task">
+                            <div class="task-header">Task 1.3: Formal Letter <span class="word-limit">180-220 words</span></div>
+                            <p>Write a formal letter to a government minister proposing evidence-based policy changes for urban sustainability. Include data interpretation and implementation recommendations.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary);">
+                                <strong>Genre features:</strong> Highly formal register, rhetorical sophistication, persuasive argumentation, evidence integration
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 2: FACTUAL WRITING -->
+                    <div class="section-divider">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Section 2: Factual Writing (Choose ONE)</h3>
+                        
+                        <div class="portfolio-task">
+                            <div class="task-header">Task 2.1: Report <span class="word-limit">220-250 words</span></div>
+                            <p>Write a report analyzing the impact of remote work on corporate culture, drawing on multiple data sources. Include methodology, findings, and recommendations.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary);">
+                                <strong>Genre features:</strong> Objective tone, systematic organization, data interpretation, impersonal constructions
+                            </div>
+                        </div>
+
+                        <div class="portfolio-task">
+                            <div class="task-header">Task 2.2: Review <span class="word-limit">220-250 words</span></div>
+                            <p>Write a critical review of a significant scientific publication or documentary film. Evaluate methodology, evidence, and contribution to the field.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary);">
+                                <strong>Genre features:</strong> Critical stance, evaluative language, balanced judgment, academic register
+                            </div>
+                        </div>
+
+                        <div class="portfolio-task">
+                            <div class="task-header">Task 2.3: Article <span class="word-limit">220-250 words</span></div>
+                            <p>Write an article for a professional journal on the future of renewable energy technologies. Synthesize current research and predict developments.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary);">
+                                <strong>Genre features:</strong> Expert voice, forward-looking perspective, technical terminology, engaging yet authoritative tone
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECTION 3: CRITICAL/ANALYTICAL WRITING -->
+                    <div class="section-divider">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Section 3: Critical/Analytical Writing (Choose ONE)</h3>
+                        
+                        <div class="portfolio-task">
+                            <div class="task-header">Task 3.1: Discursive Essay <span class="word-limit">250-300 words</span></div>
+                            <p>Write a discursive essay on whether universal basic income would solve or create societal problems. Examine multiple perspectives and reach a nuanced conclusion.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary);">
+                                <strong>Genre features:</strong> Objective examination, balanced argumentation, sophisticated hedging, synthesis of complex viewpoints
+                            </div>
+                        </div>
+
+                        <div class="portfolio-task">
+                            <div class="task-header">Task 3.2: Critical Analysis <span class="word-limit">250-300 words</span></div>
+                            <p>Write a critical analysis comparing two opposing theoretical approaches to climate change mitigation. Evaluate strengths, weaknesses, and potential synthesis.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary);">
+                                <strong>Genre features:</strong> Comparative structure, theoretical engagement, critical evaluation, academic sophistication
+                            </div>
+                        </div>
+
+                        <div class="portfolio-task">
+                            <div class="task-header">Task 3.3: Argumentative Essay <span class="word-limit">250-300 words</span></div>
+                            <p>Defend or challenge: "Digital privacy is fundamentally incompatible with national security in the 21st century." Acknowledge and refute counterarguments.</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem; color: var(--secondary);">
+                                <strong>Genre features:</strong> Rhetorical sophistication, concession and refutation, persuasive strategies, authoritative stance
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="showComponent('intro', document.querySelectorAll('.component-tab')[0])">← Back to Overview</button>
+                        <button class="btn" onclick="showComponent('controlled', document.querySelectorAll('.component-tab')[2])">Next: Written Exam →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPONENT 2: CONTROLLED WRITTEN EXAM -->
+        <section id="controlled" class="exam-component">
+            <div class="card">
+                <div class="card-header">
+                    <span>Component 2: Controlled Written Exam (3 hours)</span>
+                    <span style="font-size: 0.9rem; font-weight: normal;">3 tasks</span>
+                </div>
+                <div class="card-body">
+                    <div class="level-info">
+                        <strong>ISE IV (C2) Level:</strong> Complex synthesis of multiple sources | Sophisticated argumentation | Abstract conceptual analysis | 250-350 words per task
+                    </div>
+
+                    <!-- TASK 1: READING INTO WRITING -->
+                    <div class="section-divider">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Task 1: Reading into Writing (50 minutes)</h3>
+                        
+                        <div class="instructions">
+                            <strong>Instructions:</strong> Read the two texts and write an essay (250-300 words) synthesizing the information to answer the question. Use your own words.
+                        </div>
+
+                        <div class="reading-text">
+                            <h4 style="text-align: center; margin-bottom: 1rem;">The Epistemology of Artificial Intelligence</h4>
+                            
+                            <div class="paragraph">
+                                <strong>Text A — Philosophy of Mind Perspective</strong><br>
+                                The question of whether large language models can be said to "know" anything in a meaningful sense strikes at the heart of epistemological debates that have preoccupied philosophers for centuries. Traditional definitions of knowledge require justified true belief, yet the justification condition presupposes a knower capable of metacognitive reflection—an attribute conspicuously absent in statistical models. These systems process tokens without understanding referents; they manipulate symbols without grasping meaning. The Chinese Room argument, articulated by Searle, gains renewed relevance: syntax is not semantics, and pattern matching is not comprehension. Yet defenders of machine epistemology counter that human cognition itself may be a form of sophisticated statistical inference, rendering the distinction less categorical than it appears. The resolution may lie in recognizing that knowledge is not a binary property but a spectrum of capacities—representation, reasoning, and recursive self-improvement—each present in degrees across biological and artificial systems.
+                            </div>
+
+                            <div class="paragraph">
+                                <strong>Text B — Cognitive Science Perspective</strong><br>
+                                Contemporary cognitive science suggests that the boundary between human and machine knowledge is more permeable than traditional epistemology assumes. Embodied cognition theory posits that understanding emerges from sensorimotor interaction with the environment—a condition current AI lacks. However, the extended mind hypothesis proposes that cognitive processes routinely incorporate external tools, from notebooks to smartphones, blurring the skin-skull boundary of the knower. If cognition is already hybrid, the integration of AI systems into epistemic practices may represent continuity rather than rupture. Empirical studies demonstrate that human-AI collaborative reasoning often outperforms either alone, suggesting that knowledge production is increasingly distributed across biological and artificial substrates. The pertinent question may not be whether AI knows, but how human epistemic practices are being reconfigured by these technologies, and what normative frameworks should govern their integration into domains previously reserved for human judgment—from scientific discovery to judicial reasoning.
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Writing Task</div>
+                            <p>Write an essay (250-300 words) discussing whether artificial intelligence systems can be said to possess knowledge. Evaluate the arguments presented in both texts and develop your own position on the epistemological status of AI.</p>
+                        </div>
+
+                        <div class="genre-selector">
+                            <strong>C2 Level Requirements:</strong>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem; font-size: 0.9rem;">
+                                <li>Sophisticated synthesis of abstract philosophical and scientific perspectives</li>
+                                <li>Critical evaluation of competing epistemological frameworks</li>
+                                <li>Development of nuanced, non-binary position</li>
+                                <li>Use of metacognitive and epistemological terminology</li>
+                                <li>Complex sentence structures with embedded clauses</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #f9f9f9; padding: 1rem; margin-bottom: 1rem; border-radius: 4px;">
+                            <strong>Planning Space</strong> (No marks given)<br>
+                            <textarea class="writing-area" style="min-height: 100px; background: white;" placeholder="Make notes here..."></textarea>
+                        </div>
+
+                        <div>
+                            <strong>Your Essay (250-300 words)</strong>
+                            <textarea id="task1writing" class="writing-area" placeholder="Write your essay here..." oninput="countWords(this, 'count1', 250, 300)"></textarea>
+                            <div class="word-count" id="wordCount1">Word count: <span id="count1">0</span> / 250-300 words</div>
+                        </div>
+                    </div>
+
+                    <!-- TASK 2: READING INTO WRITING -->
+                    <div class="section-divider">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Task 2: Reading into Writing (50 minutes)</h3>
+                        
+                        <div class="instructions">
+                            <strong>Instructions:</strong> Read the two texts and write a report (250-300 words) evaluating the proposals and reaching a justified conclusion.
+                        </div>
+
+                        <div class="reading-text">
+                            <h4 style="text-align: center; margin-bottom: 1rem;">Global Governance in an Age of Crisis</h4>
+                            
+                            <div class="paragraph">
+                                <strong>Text A — Cosmopolitan Democracy</strong><br>
+                                The inadequacy of Westphalian sovereignty has become manifest in the face of transnational challenges that respect no borders—climate change, pandemic disease, financial contagion, and cyber warfare. The cosmopolitan democracy model, articulated by scholars such as Held and Archibugi, proposes multilayered governance in which authority is distributed across local, national, regional, and global institutions according to the principle of subsidiarity. Global institutions would be empowered to address genuinely global problems, but only with democratic accountability through cosmopolitan citizenship and transnational deliberative mechanisms. Critics contend that this model underestimates the persistence of national identity and the democratic deficit inherent in supranational bodies. However, proponents argue that the alternative—unilateralism and great power competition—has proven incapable of addressing collective action problems that demand coordinated responses. The European Union, despite its imperfections, offers a partial template for how sovereignty can be pooled without being surrendered entirely.
+                            </div>
+
+                            <div class="paragraph">
+                                <strong>Text B — Realist Critique</strong><br>
+                                The cosmopolitan vision, however noble, fundamentally misunderstands the nature of international politics. States remain the primary locus of identity, loyalty, and democratic legitimacy. The attempt to transcend sovereignty through global governance mechanisms risks creating unaccountable technocratic structures that lack the solidarity necessary for democratic deliberation. The European Union's democratic deficit—where unelected bureaucrats make decisions affecting millions—exemplifies this danger rather than offering a solution. Furthermore, the assumption that global problems require global solutions ignores the potential for competitive polycentrism, where diverse approaches generate innovation and resilience. Climate action may be more effectively pursued through climate clubs of willing states than through universal but unenforceable agreements. The pandemic demonstrated that nation-states retained both the capacity and legitimacy to take decisive action when international organizations floundered. Rather than aspiring to cosmopolitan governance, we should strengthen the capacity of states to cooperate through flexible, issue-specific arrangements that preserve democratic accountability.
+                            </div>
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Writing Task</div>
+                            <p>Write a report (250-300 words) evaluating the cosmopolitan democracy proposal and the realist critique. Assess which approach better addresses contemporary global challenges, providing reasoned justification for your evaluation.</p>
+                        </div>
+
+                        <div style="background: #f9f9f9; padding: 1rem; margin-bottom: 1rem; border-radius: 4px;">
+                            <strong>Planning Space</strong> (No marks given)<br>
+                            <textarea class="writing-area" style="min-height: 100px; background: white;" placeholder="Make notes here..."></textarea>
+                        </div>
+
+                        <div>
+                            <strong>Your Report (250-300 words)</strong>
+                            <textarea id="task2writing" class="writing-area" placeholder="Write your report here..." oninput="countWords(this, 'count2', 250, 300)"></textarea>
+                            <div class="word-count" id="wordCount2">Word count: <span id="count2">0</span> / 250-300 words</div>
+                        </div>
+                    </div>
+
+                    <!-- TASK 3: EXTENDED WRITING -->
+                    <div class="section-divider">
+                        <h3 style="color: var(--primary); margin-bottom: 1rem;">Task 3: Extended Writing (60 minutes)</h3>
+                        
+                        <div class="instructions">
+                            <strong>Instructions:</strong> Write an essay (300-350 words) on ONE of the following topics. No reading texts are provided—use your own ideas and knowledge.
+                        </div>
+
+                        <div class="question">
+                            <div class="question-number">Choose ONE Title</div>
+                            
+                            <div class="options" style="margin-top: 1rem;">
+                                <label class="option">
+                                    <input type="radio" name="task3choice" value="A" onchange="selectTask3('A')"> 
+                                    <strong>Option A:</strong> "The pursuit of artificial general intelligence represents humanity's greatest existential gamble." Discuss.
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="task3choice" value="B" onchange="selectTask3('B')"> 
+                                    <strong>Option B:</strong> To what extent has social media transformed the nature of political discourse for the better?
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="task3choice" value="C" onchange="selectTask3('C')"> 
+                                    <strong>Option C:</strong> "History is not a narrative of progress but a cycle of recurring patterns." Evaluate this claim with reference to specific historical examples.
+                                </label>
+                                <label class="option">
+                                    <input type="radio" name="task3choice" value="D" onchange="selectTask3('D')"> 
+                                    <strong>Option D:</strong> Write a proposal for an interdisciplinary research project investigating the relationship between urban biodiversity and mental health outcomes.
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="genre-selector">
+                            <strong>C2 Extended Writing Requirements:</strong>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem; font-size: 0.9rem;">
+                                <li>Independent sophisticated argumentation without source texts</li>
+                                <li>Engagement with abstract, philosophical, or systemic questions</li>
+                                <li>Recognition of complexity and avoidance of reductive positions</li>
+                                <li>Evidence of wide reading and intellectual maturity</li>
+                                <li>Rhetorical sophistication and precise lexical choices</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #f9f9f9; padding: 1rem; margin-bottom: 1rem; border-radius: 4px;">
+                            <strong>Planning Space</strong> (No marks given)<br>
+                            <textarea class="writing-area" style="min-height: 100px; background: white;" placeholder="Make notes here..."></textarea>
+                        </div>
+
+                        <div>
+                            <strong>Your Essay (300-350 words)</strong>
+                            <textarea id="task3writing" class="writing-area" placeholder="Write your essay here..." oninput="countWords(this, 'count3', 300, 350)"></textarea>
+                            <div class="word-count" id="wordCount3">Word count: <span id="count3">0</span> / 300-350 words</div>
+                        </div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="showComponent('portfolio', document.querySelectorAll('.component-tab')[1])">← Back to Portfolio</button>
+                        <button class="btn" onclick="showComponent('interview', document.querySelectorAll('.component-tab')[3])">Next: Interview →</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- COMPONENT 3: INTERVIEW -->
+        <section id="interview" class="exam-component">
+            <div class="card">
+                <div class="card-header">
+                    <span>Component 3: The Interview (25 minutes)</span>
+                    <span style="font-size: 0.9rem; font-weight: normal;">5 tasks</span>
+                </div>
+                <div class="card-body">
+                    <div class="level-info">
+                        <strong>ISE IV (C2) Interview:</strong> Sophisticated argumentation | Abstract conceptual discussion | Full discourse management | Metalinguistic awareness
+                    </div>
+
+                    <div class="instructions">
+                        <strong>Interview Structure:</strong> Five integrated tasks assessing speaking and listening. The candidate must demonstrate ability to manage abstract discussion with minimal examiner support.
+                    </div>
+
+                    <!-- TASK 1: TOPIC PRESENTATION -->
+                    <div class="interview-card">
+                        <div class="interview-role">Task 1: Formal Topic Presentation (up to 5 minutes)</div>
+                        <p><strong>Your Task:</strong> Present a complex topic with high linguistic formality. Present a clear argument with effective logical structure. Help the examiner notice and remember significant points. Conclude by inviting questions and comments.</p>
+                        
+                        <div style="background: white; padding: 1rem; margin-top: 1rem; border-radius: 4px;">
+                            <strong>Preparation Requirements:</strong>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Prepare a complex topic of your choice before the exam</li>
+                                <li>May bring brief notes or a mind map (not a script)</li>
+                                <li>Topic should allow for sophisticated, abstract discussion</li>
+                                <li>Must demonstrate high degree of linguistic formality</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: #fff8e1; padding: 1rem; margin-top: 1rem; border-radius: 4px;">
+                            <strong>Sample Topic Areas:</strong>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem; font-size: 0.9rem;">
+                                <li>The ethical implications of gene editing technologies</li>
+                                <li>Post-colonial perspectives on global economic systems</li>
+                                <li>The philosophy of consciousness and artificial intelligence</li>
+                                <li>Climate justice and intergenerational ethics</li>
+                                <li>The future of democratic institutions in the digital age</li>
+                                <li>Epistemological challenges in the post-truth era</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--secondary);">
+                            <strong>Language Focus:</strong> Formal register, sophisticated cohesive devices, rhetorical strategies, metadiscourse (signposting, emphasizing, summarizing)
+                        </div>
+                    </div>
+
+                    <!-- TASK 2: TOPIC DISCUSSION -->
+                    <div class="interview-card">
+                        <div class="interview-role">Task 2: Topic Discussion (up to 5 minutes)</div>
+                        <p><strong>Your Task:</strong> Initiate and maintain discussion of your presentation topic. Actively seek ways to engage the examiner in meaningful exchange. Take full responsibility for maintaining the discussion. Respond effectively to various conversational gambits and handle in-depth questioning.</p>
+                        
+                        <div style="background: white; padding: 1rem; margin-top: 1rem; border-radius: 4px;">
+                            <strong>Examiner Questions May Include:</strong>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>"You mentioned [X]—could you elaborate on how that interacts with [Y]?"</li>
+                                <li>"What would be the strongest counterargument to your position?"</li>
+                                <li>"How has your thinking on this evolved during your research?"</li>
+                                <li>"Can you apply this theoretical framework to a specific current event?"</li>
+                                <li>"How does your position account for [apparent contradiction]?"</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--secondary);">
+                            <strong>Language Focus:</strong> Hedging and qualification, reformulating for clarity, handling challenges diplomatically, expanding and developing ideas spontaneously
+                        </div>
+                    </div>
+
+                    <!-- TASK 3: INTERACTIVE TASK -->
+                    <div class="interview-card">
+                        <div class="interview-role">Task 3: Interactive Task (up to 5 minutes)</div>
+                        <p><strong>Scenario:</strong> The examiner presents a complex dilemma or opinion. You must control and sustain the discussion through questioning and comment.</p>
+                        
+                        <div style="background: #fff3e0; padding: 1rem; margin: 1rem 0; border-radius: 4px;">
+                            <strong>Sample Prompt:</strong><br>
+                            "A prestigious university is considering implementing an AI detection system to identify students using language models to complete assignments. The system would analyze writing style patterns and flag inconsistencies. However, there are concerns about false positives, privacy, and whether this fundamentally misunderstands how students should use AI tools."
+                        </div>
+
+                        <div style="background: white; padding: 1rem; border-radius: 4px;">
+                            <strong>Your Responsibilities:</strong>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Ask questions to explore the examiner's perspective</li>
+                                <li>Present and defend your own viewpoint</li>
+                                <li>Encourage the examiner's collaboration</li>
+                                <li>Direct the interaction toward a conclusion</li>
+                                <li>Do NOT wait for the examiner to lead</li>
+                            </ul>
+                        </div>
+
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--secondary);">
+                            <strong>Key Language Functions:</strong> Asserting and denying propositions, softening and downplaying claims, contradicting politely, implying without stating directly, affirming with qualification
+                        </div>
+                    </div>
+
+                    <!-- TASK 4: LISTENING TASK -->
+                    <div class="interview-card">
+                        <div class="interview-role">Task 4: Listening Task (up to 3 minutes)</div>
+                        <p><strong>Procedure:</strong> The examiner plays a recording twice. First listening: gist. Second listening: detail (you may take notes).</p>
+                        
+                        <div style="background: #f5f5f5; padding: 1rem; margin: 1rem 0; border-radius: 4px; font-style: italic;">
+                            <strong>Sample Recording Script:</strong><br><br>
+                            "The relationship between technology and human agency has undergone a fundamental reconceptualization. Where early internet theorists celebrated the democratizing potential of digital platforms, contemporary analysis increasingly focuses on what Shoshana Zuboff terms 'surveillance capitalism'—the extraction and commodification of behavioral data. This shift demands we reconsider traditional frameworks of consent and autonomy. However, technological determinism—the view that technology drives social change independently of human choice—remains problematic. Rather, we might conceptualize this as 'sociotechnical co-construction,' where technological affordances and social practices mutually constitute one another. The policy implications are significant: regulation targeting only technical systems without addressing underlying economic incentives may prove ineffective. Conversely, purely economic interventions may fail to account for how platform architectures shape behavior. What emerges is a need for 'holistic governance' that addresses code, commerce, and culture simultaneously."
+                        </div>
+
+                        <div style="background: white; padding: 1rem; border-radius: 4px;">
+                            <strong>Questions:</strong><br>
+                            <ol style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li><strong>Gist:</strong> In one or two sentences, what is the speaker's main argument?</li>
+                                <li><strong>Detail:</strong> Explain the speaker's critique of both technological determinism and isolated regulatory approaches.</li>
+                            </ol>
+                        </div>
+
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--secondary);">
+                            <strong>Skills:</strong> Processing academic register, identifying implicit critique, summarizing complex argumentation, inferring speaker stance
+                        </div>
+                    </div>
+
+                    <!-- TASK 5: CONVERSATION TASK -->
+                    <div class="interview-card">
+                        <div class="interview-role">Task 5: Conversation Task (up to 6 minutes)</div>
+                        
+                        <div style="background: white; padding: 1rem; margin-top: 1rem; border-radius: 4px;">
+                            <strong>Part A: Portfolio Discussion (3 minutes)</strong>
+                            <p style="margin-top: 0.5rem;">The examiner will discuss your Portfolio tasks with you. Be prepared to:</p>
+                            <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                                <li>Discuss fully and precisely the content of your Portfolio</li>
+                                <li>Discuss the process of writing (drafting, research, revision)</li>
+                                <li>Defend your rhetorical choices (structure, register, evidence)</li>
+                                <li>Reflect on challenges and how you addressed them</li>
+                            </ul>
+                        </div>
+
+                        <div style="background: white; padding: 1rem; margin-top: 1rem; border-radius: 4px;">
+                            <strong>Part B: Subject Area Discussion (3 minutes)</strong>
+                            <p style="margin-top: 0.5rem;">The examiner will select one subject area for extended discussion:</p>
+                            <div style="margin-top: 0.5rem; font-size: 0.9rem;">
+                                <span style="display: inline-block; background: var(--light); padding: 0.25rem 0.75rem; margin: 0.25rem; border-radius: 15px;">Ethics and philosophy</span>
+                                <span style="display: inline-block; background: var(--light); padding: 0.25rem 0.75rem; margin: 0.25rem; border-radius: 15px;">Science and technology</span>
+                                <span style="display: inline-block; background: var(--light); padding: 0.25rem 0.75rem; margin: 0.25rem; border-radius: 15px;">Economics and globalization</span>
+                                <span style="display: inline-block; background: var(--light); padding: 0.25rem 0.75rem; margin: 0.25rem; border-radius: 15px;">Politics and governance</span>
+                                <span style="display: inline-block; background: var(--light); padding: 0.25rem 0.75rem; margin: 0.25rem; border-radius: 15px;">Culture and society</span>
+                                <span style="display: inline-block; background: var(--light); padding: 0.25rem 0.75rem; margin: 0.25rem; border-radius: 15px;">Education and knowledge</span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1rem; font-size: 0.9rem; color: var(--secondary);">
+                            <strong>Sample Openers:</strong> "To what extent should scientific research be constrained by ethical considerations?" / "Is economic inequality an inevitable feature of capitalist systems?" / "How has the concept of 'truth' been affected by the digital information ecosystem?"
+                        </div>
+                    </div>
+
+                    <div class="navigation">
+                        <button class="btn btn-secondary" onclick="showComponent('controlled', document.querySelectorAll('.component-tab')[2])">← Back to Written Exam</button>
+                        <button class="btn btn-success" onclick="submitExam()">Complete Simulation</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RESULTS SECTION -->
+        <section id="results" class="exam-component">
+            <div class="results">
+                <h2 style="color: var(--primary); margin-bottom: 1rem;">ISE IV Simulation Completed!</h2>
+                <div class="score-circle" id="finalScore">C2</div>
+                <p style="font-size: 1.2rem; margin-bottom: 2rem;">Proficiency Level: Mastery</p>
+                
+                <div style="text-align: left; max-width: 700px; margin: 0 auto;">
+                    <div class="highlight-box">
+                        <h4 style="color: var(--success);">Assessment Summary</h4>
+                        <p style="margin-top: 0.5rem;">ISE IV is assessed through three separate components. Unlike lower levels, there is no single numerical score—each component receives a separate grade (Distinction, Merit, Pass, or Fail).</p>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 2rem 0 1rem;">Component 1: Portfolio Assessment</h3>
+                    <div class="answer-key">
+                        <p><strong>Correspondence Task (Section 1):</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Appropriate register for genre and audience</li>
+                            <li>Effective management of interaction (forum) or relationship (emails/letter)</li>
+                            <li>Coherent development of ideas across multiple turns or communications</li>
+                            <li>Sophisticated use of formulaic language and conventions</li>
+                        </ul>
+                    </div>
+
+                    <div class="answer-key">
+                        <p><strong>Factual Writing Task (Section 2):</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Objective, impersonal tone where appropriate</li>
+                            <li>Clear organization with effective signposting</li>
+                            <li>Critical evaluation and synthesis of information</li>
+                            <li>Precise, field-appropriate terminology</li>
+                        </ul>
+                    </div>
+
+                    <div class="answer-key">
+                        <p><strong>Critical/Analytical Writing Task (Section 3):</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Sophisticated argumentation with nuanced position</li>
+                            <li>Effective handling of abstract concepts</li>
+                            <li>Critical engagement with multiple perspectives</li>
+                            <li>Evidence of independent thinking and intellectual maturity</li>
+                        </ul>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 2rem 0 1rem;">Component 2: Controlled Written Exam</h3>
+                    <div class="answer-key">
+                        <p><strong>Tasks 1-2: Reading into Writing (250-300 words each)</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Sophisticated synthesis of complex source materials</li>
+                            <li>Critical evaluation of arguments and evidence</li>
+                            <li>Development of coherent, well-supported position</li>
+                            <li>Complete transformation of source material (no lifting)</li>
+                        </ul>
+                    </div>
+
+                    <div class="answer-key">
+                        <p><strong>Task 3: Extended Writing (300-350 words)</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Independent, sophisticated argumentation</li>
+                            <li>Engagement with abstract or philosophical questions</li>
+                            <li>Evidence of wide reading and intellectual breadth</li>
+                            <li>Rhetorical sophistication and precise lexical control</li>
+                        </ul>
+                    </div>
+
+                    <h3 style="color: var(--primary); margin: 2rem 0 1rem;">Component 3: Interview</h3>
+                    <div class="answer-key">
+                        <p><strong>Rating Criteria (all tasks):</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Communicative Effectiveness:</strong> Full task fulfillment with sophisticated turn-taking and natural repair strategies</li>
+                            <li><strong>Interactive Listening:</strong> Complete understanding, interpretation of implicit meaning, immediate relevant response</li>
+                            <li><strong>Language Control:</strong> Comprehensive mastery, precise formulation, idiomatic usage, complex structures</li>
+                            <li><strong>Delivery:</strong> Fully intelligible, effective stress/intonation, fluent with minimal hesitation</li>
+                        </ul>
+                    </div>
+
+                    <div class="answer-key">
+                        <p><strong>Specific Task Requirements:</strong></p>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Task 1 (Presentation):</strong> High formality, rhetorical sophistication, clear argument structure</li>
+                            <li><strong>Task 2 (Discussion):</strong> Spontaneous development, handling of abstract questions, maintaining discourse</li>
+                            <li><strong>Task 3 (Interactive):</strong> Full control of interaction, sophisticated questioning, managing disagreement</li>
+                            <li><strong>Task 4 (Listening):</strong> Processing complex academic register, inferring stance, summarizing nuance</li>
+                            <li><strong>Task 5 (Conversation):</strong> Metalinguistic awareness, defending rhetorical choices, abstract discussion</li>
+                        </ul>
+                    </div>
+
+                    <div style="background: #fff3e0; padding: 1rem; margin-top: 1rem; border-radius: 4px; border-left: 4px solid var(--warning);">
+                        <h4 style="color: var(--warning);">ISE IV Grade Descriptors</h4>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                            <strong>Distinction:</strong> Exceptional performance demonstrating mastery beyond minimum C2 requirements<br>
+                            <strong>Merit:</strong> Strong performance fully meeting C2 standards with some evidence of sophistication<br>
+                            <strong>Pass:</strong> Adequate performance meeting minimum C2 requirements<br>
+                            <strong>Fail:</strong> Performance below C2 standard
+                        </p>
+                    </div>
+
+                    <div style="background: var(--light); padding: 1rem; margin-top: 1rem; border-radius: 4px;">
+                        <h4 style="color: var(--primary);">C2 Language Features Expected</h4>
+                        <p style="margin-top: 0.5rem; font-size: 0.9rem;">
+                            <strong>Grammar:</strong> Mixed conditionals, passive voice, cleft sentences, participle clauses, subjunctive mood, inversion<br>
+                            <strong>Discourse:</strong> Notwithstanding, albeit, conversely, by the same token, inasmuch as, ergo, prima facie<br>
+                            <strong>Vocabulary:</strong> Idiomatic usage, collocations, connotation awareness, field-specific terminology, academic phrasing<br>
+                            <strong>Pragmatics:</strong> Sophisticated hedging, face-threatening act mitigation, implicature
+                        </p>
+                    </div>
+
+                    <div style="background: #e8f5e9; padding: 1rem; margin-top: 1rem; border-radius: 4px;">
+                        <h4 style="color: var(--success);">Key Differences from ISE III</h4>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem; font-size: 0.9rem;">
+                            <li>Longer word counts (250-350 vs 200-230 words)</li>
+                            <li>Three components taken separately, not single exam session</li>
+                            <li>Portfolio prepared over 6-12 weeks</li>
+                            <li>More abstract, philosophical topics</li>
+                            <li>Greater emphasis on independent thinking</li>
+                            <li>No "Task 1/2" reading comprehension—only reading-into-writing</li>
+                            <li>Interview includes formal presentation and portfolio discussion</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem;">
+                    <button class="btn" onclick="location.reload()">Start New Simulation</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Timer functionality
+        let timeRemaining = 10800; // 180 minutes (3 hours) default
+        let timerInterval;
+
+        function setTimer(minutes) {
+            clearInterval(timerInterval);
+            timeRemaining = minutes * 60;
+            updateTimerDisplay();
+            startTimer();
+        }
+
+        function updateTimerDisplay() {
+            const hours = Math.floor(timeRemaining / 3600);
+            const minutes = Math.floor((timeRemaining % 3600) / 60);
+            const seconds = timeRemaining % 60;
+            const timerElement = document.getElementById('timer');
+            
+            if (hours > 0) {
+                timerElement.textContent = `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            } else {
+                timerElement.textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+        }
+
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timeRemaining--;
+                updateTimerDisplay();
+                
+                const timerElement = document.getElementById('timer');
+                
+                // Warning colors
+                if (timeRemaining < 600) { // Less than 10 minutes
+                    timerElement.classList.add('timer-warning');
+                }
+                if (timeRemaining < 300) { // Less than 5 minutes
+                    timerElement.style.background = '#ffcdd2';
+                    timerElement.style.color = '#c62828';
+                }
+                
+                if (timeRemaining <= 0) {
+                    clearInterval(timerInterval);
+                    submitExam();
+                }
+            }, 1000);
+        }
+
+        // Navigation
+        function showComponent(componentId, btn) {
+            document.querySelectorAll('.exam-component').forEach(c => c.classList.remove('active'));
+            document.getElementById(componentId).classList.add('active');
+            
+            document.querySelectorAll('.component-tab').forEach(b => b.classList.remove('active'));
+            if (btn) btn.classList.add('active');
+            
+            updateProgress();
+        }
+
+        function updateProgress() {
+            let progress = 0;
+            
+            // Check written tasks
+            const task1 = document.getElementById('task1writing').value;
+            const task2 = document.getElementById('task2writing').value;
+            const task3 = document.getElementById('task3writing').value;
+            
+            if (task1 && task1.length > 100) progress += 25;
+            if (task2 && task2.length > 100) progress += 25;
+            if (task3 && task3.length > 100) progress += 25;
+            
+            // Interview preparation checked
+            progress += 25;
+            
+            document.getElementById('progress').style.width = progress + '%';
+        }
+
+        function countWords(textarea, counterId, min, max) {
+            const text = textarea.value.trim();
+            const words = text.split(/\s+/).filter(w => w.length > 0);
+            const count = words.length;
+            const counterElement = document.getElementById(counterId);
+            const wordCountDiv = document.getElementById('wordCount' + counterId.replace('count', ''));
+            
+            counterElement.textContent = count;
+            
+            wordCountDiv.classList.remove('warning', 'error');
+            if (count < min || count > max) {
+                if (count > max + 50 || count < min - 50) {
+                    wordCountDiv.classList.add('error');
+                } else {
+                    wordCountDiv.classList.add('warning');
+                }
+            }
+            
+            updateProgress();
+        }
+
+        function selectTask3(choice) {
+            // Track which option was selected
+            updateProgress();
+        }
+
+        function submitExam() {
+            clearInterval(timerInterval);
+            document.getElementById('results-tab').style.display = 'block';
+            showComponent('results', document.getElementById('results-tab'));
+            window.scrollTo(0, 0);
+        }
+
+        // Initialize
+        window.onload = function() {
+            updateTimerDisplay();
+            startTimer();
+        };
+    </script>
+</body>
+</html>
