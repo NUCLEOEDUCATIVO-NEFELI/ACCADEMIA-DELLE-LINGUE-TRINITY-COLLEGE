@@ -1,0 +1,1635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity GESE Grade 5 - Exam Preparation (50 Exercises)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #64748b;
+            --accent: #dc2626;
+            --light: #f8fafc;
+            --dark: #0f172a;
+            --border: #e2e8f0;
+            --success: #166534;
+            --success-bg: #dcfce7;
+            --error: #991b1b;
+            --error-bg: #fee2e2;
+            --trinity-red: #e31837;
+            --trinity-blue: #003366;
+            --parchment: #fafaf9;
+            --grade5-teal: #0d9488;
+            --grade5-dark: #115e59;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--parchment);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--grade5-dark) 0%, var(--grade5-teal) 100%);
+            color: white;
+            padding: 2rem 0;
+            border-bottom: 4px solid var(--trinity-red);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--trinity-red);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .breadcrumbs {
+            background: var(--light);
+            border-bottom: 1px solid var(--border);
+            padding: 0.75rem 2rem;
+            font-size: 0.9rem;
+        }
+
+        .breadcrumbs-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .breadcrumbs a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .breadcrumbs a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumbs span {
+            color: var(--secondary);
+            margin: 0 0.5rem;
+        }
+
+        .main-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid var(--grade5-teal);
+        }
+
+        .page-title {
+            font-size: 2rem;
+            color: var(--grade5-dark);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-subtitle {
+            color: var(--secondary);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        .nav-tabs {
+            display: flex;
+            border-bottom: 2px solid var(--border);
+            margin-bottom: 2rem;
+            background: white;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .nav-tab {
+            padding: 0.75rem 1.5rem;
+            background: none;
+            border: none;
+            border-bottom: 3px solid transparent;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 0.95rem;
+            color: var(--secondary);
+            transition: all 0.3s;
+            font-weight: 500;
+            border-radius: 0.375rem;
+        }
+
+        .nav-tab:hover {
+            color: var(--grade5-teal);
+            background: #f0fdfa;
+        }
+
+        .nav-tab.active {
+            color: var(--grade5-dark);
+            border-bottom-color: var(--grade5-teal);
+            background: #ccfbf1;
+            font-weight: 600;
+        }
+
+        .section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 0.75rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: linear-gradient(to right, #f0fdfa, #ffffff);
+            padding: 1.25rem 1.5rem;
+            border-bottom: 2px solid var(--border);
+            font-weight: 600;
+            color: var(--grade5-dark);
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-body {
+            padding: 1.5rem;
+        }
+
+        .instruction-box {
+            background: #ccfbf1;
+            border-left: 4px solid var(--grade5-teal);
+            padding: 1rem 1.5rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .topic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .topic-card {
+            background: #f8fafc;
+            border: 2px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s;
+        }
+
+        .topic-card:hover {
+            border-color: var(--grade5-teal);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(13, 148, 136, 0.1);
+        }
+
+        .topic-title {
+            font-weight: 600;
+            color: var(--grade5-dark);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .grammar-box {
+            background: #fef3c7;
+            border: 1px solid #fbbf24;
+            padding: 1.25rem;
+            margin: 1rem 0;
+            border-radius: 0.5rem;
+        }
+
+        .grammar-title {
+            font-weight: 600;
+            color: #92400e;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .game-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .score-panel {
+            background: white;
+            border: 2px solid var(--border);
+            padding: 1.25rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .score-label {
+            font-weight: 600;
+            color: var(--secondary);
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 0.05em;
+        }
+
+        .score-value {
+            font-size: 1.75rem;
+            color: var(--grade5-dark);
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: #e2e8f0;
+            border-radius: 9999px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--grade5-teal), #14b8a6);
+            width: 0%;
+            transition: width 0.5s ease;
+            border-radius: 9999px;
+        }
+
+        .question-box {
+            background: white;
+            border: 2px solid var(--grade5-teal);
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+            border-radius: 0.75rem;
+            position: relative;
+        }
+
+        .question-type-badge {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--grade5-teal);
+            color: white;
+            padding: 0.25rem 1rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .question-text {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+            color: var(--dark);
+            font-weight: 500;
+            margin-top: 0.5rem;
+        }
+
+        .listening-box {
+            background: #f0fdfa;
+            border: 2px solid #14b8a6;
+            border-radius: 0.75rem;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .audio-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-audio {
+            background: var(--grade5-teal);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(13, 148, 136, 0.2);
+        }
+
+        .btn-audio:hover {
+            background: #0f766e;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 8px -1px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn-audio:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .transcript-box {
+            background: white;
+            border: 1px solid #99f6e4;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #115e59;
+            display: none;
+        }
+
+        .transcript-box.show {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .option-btn {
+            padding: 1rem 1.5rem;
+            background: white;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-align: left;
+        }
+
+        .option-btn:hover:not(:disabled) {
+            border-color: var(--grade5-teal);
+            background: #f0fdfa;
+            transform: translateX(4px);
+        }
+
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-btn.correct {
+            background: var(--success-bg);
+            border-color: var(--success);
+            color: var(--success);
+        }
+
+        .option-btn.wrong {
+            background: var(--error-bg);
+            border-color: var(--error);
+            color: var(--error);
+        }
+
+        .feedback {
+            padding: 1.25rem;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+            margin-bottom: 1rem;
+            border: 2px solid;
+            border-radius: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .feedback.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .feedback.correct {
+            background: var(--success-bg);
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .feedback.wrong {
+            background: var(--error-bg);
+            color: var(--error);
+            border-color: var(--error);
+        }
+
+        .btn-primary {
+            background: var(--grade5-teal);
+            color: white;
+            border: none;
+            padding: 0.875rem 2rem;
+            font-family: inherit;
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            box-shadow: 0 4px 6px -1px rgba(13, 148, 136, 0.2);
+        }
+
+        .btn-primary:hover {
+            background: #0f766e;
+            transform: translateY(-1px);
+            box-shadow: 0 6px 8px -1px rgba(13, 148, 136, 0.3);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--secondary);
+            border: 2px solid var(--border);
+            padding: 0.75rem 1.5rem;
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--grade5-teal);
+            color: var(--grade5-teal);
+            background: #f0fdfa;
+        }
+
+        .fill-blank {
+            display: inline-block;
+            width: 240px;
+            padding: 0.75rem 1rem;
+            border: 2px solid #cbd5e1;
+            border-radius: 0.5rem;
+            margin: 0 0.25rem;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.2s;
+        }
+
+        .fill-blank:focus {
+            outline: none;
+            border-color: var(--grade5-teal);
+            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.1);
+        }
+
+        .final-score-section {
+            background: linear-gradient(135deg, var(--grade5-dark) 0%, var(--grade5-teal) 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 1rem;
+            text-align: center;
+            margin-top: 2rem;
+            display: none;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+
+        .final-score-section.show {
+            display: block;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .final-score-value {
+            font-size: 4rem;
+            font-weight: 800;
+            color: white;
+            margin: 1.5rem 0;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .final-message {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+
+        .exercise-counter {
+            background: var(--grade5-teal);
+            color: white;
+            padding: 0.5rem 1.25rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .text-center { text-align: center; }
+        .mt-2 { margin-top: 1rem; }
+        .mb-2 { margin-bottom: 1rem; }
+
+        .vocab-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .vocab-item {
+            background: white;
+            padding: 0.75rem;
+            border-radius: 0.375rem;
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .vocab-icon {
+            font-size: 1.25rem;
+        }
+
+        .timeline-box {
+            background: #f0fdfa;
+            border-left: 4px solid var(--grade5-teal);
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: white;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .comparison-table th {
+            background: var(--grade5-teal);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 0.875rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .comparison-table tr:hover {
+            background: #f0fdfa;
+        }
+
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { flex: 1 1 calc(50% - 0.5rem); text-align: center; }
+            .options-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.5rem; }
+            .page-title { font-size: 1.5rem; }
+            .final-score-value { font-size: 3rem; }
+            .fill-blank { width: 200px; }
+            .topic-grid { grid-template-columns: 1fr; }
+            .comparison-table { font-size: 0.9rem; }
+        }
+
+        .hint-text {
+            font-size: 0.875rem;
+            color: var(--secondary);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        .example-box {
+            background: #ecfdf5;
+            border: 1px solid #6ee7b7;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity College London</h1>
+            <p>Graded Examinations in Spoken English (GESE) - Grade 5</p>
+            <span class="badge">CEFR B1.1 Level</span>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">GESE Exams</a>
+            <span>›</span>
+            <strong>Grade 5 Preparation</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">🎓 GESE Grade 5 Exam Preparation</h1>
+            <p class="page-subtitle">50 Interactive Exercises covering: Present Perfect, Past Simple vs. Present Perfect, Future with "will", Conditionals with "if", and Modals "might/may/could"</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">📋 Syllabus</button>
+            <button class="nav-tab" onclick="showSection('grammar', this)">Grammar</button>
+            <button class="nav-tab" onclick="showSection('vocabulary', this)">Vocabulary</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">🎯 50 Exercises</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">GESE Grade 5 Exam Overview</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Exam Format:</strong> 10-minute conversation with an examiner focusing on linking past events to the present, discussing future possibilities, and expressing degrees of certainty.
+                    </div>
+                    
+                    <div class="topic-grid">
+                        <div class="topic-card">
+                            <div class="topic-title">🔗 Present Perfect</div>
+                            <p>Connect past actions to now using have/has + past participle with time markers like "ever", "never", "just", "already", "yet".</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">⏮️↔️️ Past Simple vs. Present Perfect</div>
+                            <p>Contrast finished past actions (yesterday, last week) with experiences connected to now (ever, never, just, already, yet).</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🔮 Future with "will"</div>
+                            <p>Make predictions, promises, offers, and spontaneous decisions using "will" + verb infinitive.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">❓ Conditionals with "if"</div>
+            <p>Discuss possible future situations and their consequences using "if" + present simple, "will" + verb.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🎲 Modals: might/may/could</div>
+                            <p>Express possibility, probability, and uncertainty in present and future contexts.</p>
+                        </div>
+                        <div class="topic-card">
+                            <div class="topic-title">🌍 Life Experiences</div>
+                            <p>Discuss past experiences, achievements, and life changes with appropriate time references.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Communicative Skills Required</div>
+                <div class="card-body">
+                    <ul style="margin-left: 1.5rem; line-height: 2;">
+                        <li>Discuss past actions with present relevance using present perfect</li>
+                        <li>Contrast past simple (finished time) with present perfect (unfinished time)</li>
+                        <li>Make predictions and discuss future possibilities with "will" and "might/may/could"</li>
+                        <li>Discuss consequences using first conditional (if + present, will + verb)</li>
+                        <li>Express degrees of certainty and possibility</li>
+                        <li>Ask about and describe life experiences and achievements</li>
+                        <li>Make spontaneous decisions and promises</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- GRAMMAR SECTION -->
+        <section id="grammar" class="section">
+            <div class="card">
+                <div class="card-header">Key Grammar Points</div>
+                <div class="card-body">
+                    <div class="grammar-box">
+                        <div class="grammar-title">🔗 Present Perfect (have/has + past participle)</div>
+                        <p><strong>Form:</strong> have/has + verb (past participle)</p>
+                        <p><strong>Time markers:</strong> ever, never, just, already, yet, recently, lately</p>
+                        <div class="example-box">
+                            <em>I have never been to Paris. / Have you ever eaten sushi? / She has just arrived. / They haven't finished yet.</em>
+                        </div>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">⏮️↔️️ Past Simple vs. Present Perfect</div>
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Past Simple (finished)</th>
+                                    <th>Present Perfect (connection to now)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>I saw that film <strong>last week</strong>.</td>
+                                    <td>I have seen that film <strong>before</strong>.</td>
+                                </tr>
+                                <tr>
+                                    <td>She went to London <strong>yesterday</strong>.</td>
+                                    <td>She has been to London <strong>three times</strong>.</td>
+                                </tr>
+                                <tr>
+                                    <td>They lived there <strong>in 2019</strong>.</td>
+                                    <td>They have lived there <strong>for two years</strong>.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">🔮 Future with "will"</div>
+                        <p><strong>Form:</strong> will + verb (infinitive without to)</p>
+                        <p><strong>Uses:</strong> Predictions, promises, offers, spontaneous decisions</p>
+                        <div class="example-box">
+                            <em>I think it will rain tomorrow. (prediction) / I'll help you with your homework. (offer) / I promise I'll call you. (promise) / I'll have a coffee, please. (spontaneous decision)</em>
+                        </div>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">❓ First Conditional (if + present, will + verb)</div>
+                        <p><strong>Form:</strong> If + present simple, will + verb</p>
+                        <p><strong>Use:</strong> Possible future situations and their consequences</p>
+                        <div class="example-box">
+                            <em>If it rains tomorrow, I will stay at home. / If you study hard, you will pass the exam. / I will be happy if you come to my party.</em>
+                        </div>
+                    </div>
+
+                    <div class="grammar-box">
+                        <div class="grammar-title">🎲 Modals: might/may/could (possibility)</div>
+                        <p><strong>might/may/could + verb</strong> = possibility/probability</p>
+                        <p><strong>might not/may not</strong> = negative possibility</p>
+                        <div class="example-box">
+                            <em>It might rain later. (50% chance) / She may come to the party. (possible) / We could go to the cinema. (suggestion/possibility) / He might not be at home. (negative possibility)</em>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VOCABULARY SECTION -->
+        <section id="vocabulary" class="section">
+            <div class="card">
+                <div class="card-header">Essential Vocabulary by Topic</div>
+                <div class="card-body">
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: var(--grade5-dark); margin-bottom: 0.75rem;">🌍 Travel & Experiences</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">✈️</span> have been to (visit)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🏠</span> have lived in</div>
+                            <div class="vocab-item"><span class="vocab-icon">🍽️</span> have tried (food)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎭</span> have seen (shows)</div>
+                            <div class="vocab-item"><span class="vocab-icon">📚</span> have read (books)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎬</span> have watched (films)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🏊</span> have done (activities)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎓</span> have studied</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: var(--grade5-dark); margin-bottom: 0.75rem;">⏰ Time Expressions</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">🔴</span> just (a moment ago)</div>
+                            <div class="vocab-item"><span class="vocab-icon">✅</span> already (before now)</div>
+                            <div class="vocab-item"><span class="vocab-icon">❓</span> yet (in questions/negatives)</div>
+                            <div class="vocab-item"><span class="vocab-icon">❌</span> never (not ever)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🤔</span> ever (at any time)</div>
+                            <div class="vocab-item"><span class="vocab-icon">📅</span> for (duration)</div>
+                            <div class="vocab-item"><span class="vocab-icon">📍</span> since (starting point)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🔄</span> recently/lately</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;">
+                        <h3 style="color: var(--grade5-dark); margin-bottom: 0.75rem;">🔮 Future Predictions</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">🌧️</span> rain/snow</div>
+                            <div class="vocab-item"><span class="vocab-icon">☀️</span> be sunny</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎉</span> have a good time</div>
+                            <div class="vocab-item"><span class="vocab-icon">🏆</span> win/lose</div>
+                            <div class="vocab-item"><span class="vocab-icon">📈</span> improve</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎓</span> pass/fail</div>
+                            <div class="vocab-item"><span class="vocab-icon">💼</span> get a job</div>
+                            <div class="vocab-item"><span class="vocab-icon">✈️</span> travel</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="color: var(--grade5-dark); margin-bottom: 0.75rem;">🎲 Possibility & Probability</h3>
+                        <div class="vocab-list">
+                            <div class="vocab-item"><span class="vocab-icon">🤷</span> might (50%)</div>
+                            <div class="vocab-item"><span class="vocab-icon">🤔</span> may (possible)</div>
+                            <div class="vocab-item"><span class="vocab-icon">💡</span> could (suggestion)</div>
+                            <div class="vocab-item"><span class="vocab-icon">❌</span> might not</div>
+                            <div class="vocab-item"><span class="vocab-icon">🚫</span> may not</div>
+                            <div class="vocab-item"><span class="vocab-icon">✅</span> definitely/probably</div>
+                            <div class="vocab-item"><span class="vocab-icon">❓</span> maybe/perhaps</div>
+                            <div class="vocab-item"><span class="vocab-icon">🎰</span> chance/possibility</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="game-container">
+                <div class="score-panel">
+                    <div>
+                        <div class="score-label">Exercise</div>
+                        <div class="score-value" id="exerciseCounter">1 / 50</div>
+                    </div>
+                    <div>
+                        <div class="score-label">Score</div>
+                        <div class="score-value" id="currentScore">0 / 100</div>
+                    </div>
+                </div>
+
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+
+                <div id="exerciseContainer">
+                    <!-- Exercises loaded dynamically -->
+                </div>
+
+                <div class="final-score-section" id="finalScoreSection">
+                    <h2>🎉 Congratulations! Grade 5 Practice Complete!</h2>
+                    <div class="final-score-value" id="finalScore">0/100</div>
+                    <p class="final-message" id="finalMessage"></p>
+                    <div style="margin-top: 2rem; display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                        <button class="btn-primary" onclick="restartExercises()" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                            🔄 Practice Again
+                        </button>
+                        <button class="btn-secondary" onclick="showSection('overview', document.querySelector('.nav-tab'))" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                            📋 Review Syllabus
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p style="font-weight: 600; color: var(--grade5-dark); margin-bottom: 0.5rem;">Trinity College London GESE Grade 5 Preparation</p>
+            <p style="font-size: 0.9rem;">Based on official Trinity GESE Grade 5 Syllabus (CEFR B1.1)</p>
+        </div>
+    </footer>
+
+    <script>
+        // Trinity GESE Grade 5 Exercise Database (50 exercises)
+        const exercises = [
+            // EXERCISES 1-10: Present Perfect (ever/never/just/already/yet)
+            {
+                id: 1,
+                type: 'listening',
+                audioText: "I've had an amazing life so far! I've travelled to fifteen different countries. I've never been to Australia, but I've always wanted to go. I've just returned from a trip to Japan last week. It was incredible!",
+                question: "How many countries has the speaker travelled to?",
+                options: ["Five", "Ten", "Fifteen", "Twenty"],
+                correct: "Fifteen",
+                explanation: "✅ Correct! The speaker says 'I've travelled to fifteen different countries'.",
+                errorExplanation: "❌ Listen again. The speaker mentions 'fifteen different countries'."
+            },
+            {
+                id: 2,
+                type: 'fill',
+                question: "A: Have you ______ (ever/never) been to Paris? B: No, I've ______ (ever/never) been there, but I'd love to go!",
+                correct: ["ever never"],
+                explanation: "✅ Correct! Questions use 'ever', negative answers use 'never'."
+            },
+            {
+                id: 3,
+                type: 'choice',
+                question: "Which sentence uses 'just' correctly?",
+                options: ["I just have finished my homework.", "I have finished just my homework.", "I have just finished my homework.", "Just I have finished my homework."],
+                correct: "I have just finished my homework.",
+                explanation: "✅ Correct! 'Just' goes between have/has and the past participle.",
+                errorExplanation: "❌ 'Just' position: have/has + just + past participle."
+            },
+            {
+                id: 4,
+                type: 'listening',
+                audioText: "Are you ready to go? I've already packed my suitcase and I've booked the taxi. It should arrive in five minutes. Have you checked the weather forecast yet?",
+                question: "What has the speaker already done?",
+                options: ["Checked the weather", "Booked the taxi", "Arrived at the airport", "Gone to bed"],
+                correct: "Booked the taxi",
+                explanation: "✅ Correct! The speaker says 'I've already packed... and I've booked the taxi'.",
+                errorExplanation: "❌ The speaker mentions packing and booking the taxi as completed actions."
+            },
+            {
+                id: 5,
+                type: 'fill',
+                question: "Have you finished your dinner ______ (yet/already)? No, I haven't finished ______ (yet/already).",
+                correct: ["yet yet"],
+                explanation: "✅ Correct! 'Yet' is used in questions and negatives about unfinished actions."
+            },
+            {
+                id: 6,
+                type: 'choice',
+                question: "Make the question: ______ to London?",
+                options: ["Have you ever been", "Did you ever been", "Are you ever been", "Do you ever been"],
+                correct: "Have you ever been",
+                explanation: "✅ Correct! Present perfect for life experiences: Have you ever + past participle?",
+                errorExplanation: "❌ Life experiences use present perfect: Have you ever been?"
+            },
+            {
+                id: 7,
+                type: 'listening',
+                audioText: "My grandmother has lived in the same house for fifty years. She has never moved to another city. She has seen so many changes in the neighbourhood during that time. It's amazing!",
+                question: "How long has the grandmother lived in the same house?",
+                options: ["For fifteen years", "For fifty years", "Since fifty years", "Since she was born"],
+                correct: "For fifty years",
+                explanation: "✅ Correct! 'For fifty years' indicates duration with present perfect.",
+                errorExplanation: "❌ The speaker says 'for fifty years' (duration)."
+            },
+            {
+                id: 8,
+                type: 'fill',
+                question: "I've ______ (know) my best friend ______ (since/for) we were five years old.",
+                correct: ["known since"],
+                explanation: "✅ Correct! Know → known (past participle). 'Since' + starting point."
+            },
+            {
+                id: 9,
+                type: 'choice',
+                question: "She has ______ to that restaurant three times this month.",
+                options: ["be", "been", "being", "go"],
+                correct: "been",
+                explanation: "✅ Correct! Has been (past participle of be).",
+                errorExplanation: "❌ Present perfect: has/have + past participle (been)."
+            },
+            {
+                id: 10,
+                type: 'fill',
+                question: "I've ______ (lose) my keys! Have you ______ (see) them anywhere?",
+                correct: ["lost seen"],
+                explanation: "✅ Correct! Lose → lost, See → seen (irregular past participles)."
+
+            },
+
+            // EXERCISES 11-20: Past Simple vs. Present Perfect
+            {
+                id: 11,
+                type: 'choice',
+                question: "Which sentence is correct?",
+                options: ["I saw that film yesterday.", "I have seen that film yesterday.", "I seen that film yesterday.", "I have saw that film yesterday."],
+                correct: "I saw that film yesterday.",
+                explanation: "✅ Correct! 'Yesterday' = finished time = past simple.",
+                errorExplanation: "❌ 'Yesterday' requires past simple (saw), not present perfect."
+            },
+            {
+                id: 12,
+                type: 'listening',
+                audioText: "I went to the cinema last night to see the new Marvel movie. It was fantastic! I've seen all the Marvel films, but this one was definitely the best. I bought popcorn and a drink, and I really enjoyed the evening.",
+                question: "When did the speaker go to the cinema?",
+                options: ["Today", "Last night", "This week", "Recently"],
+                correct: "Last night",
+                explanation: "✅ Correct! 'Last night' = finished time = past simple.",
+                errorExplanation: "❌ The speaker says 'last night' which requires past simple."
+            },
+            {
+                id: 13,
+                type: 'fill',
+                question: "I ______ (go) to Paris three years ago, but I ______ (never/be) to Rome.",
+                correct: ["went have never been", "went 've never been"],
+                explanation: "✅ Correct! 'Three years ago' = past simple. 'Never' = present perfect."
+            },
+            {
+                id: 14,
+                type: 'choice',
+                question: "Complete: She ______ in London since 2019.",
+                options: ["lived", "has lived", "did live", "is living"],
+                correct: "has lived",
+                explanation: "✅ Correct! 'Since 2019' = from then until now = present perfect.",
+                errorExplanation: "❌ 'Since' + starting point requires present perfect (has lived)."
+            },
+            {
+                id: 15,
+                type: 'listening',
+                audioText: "Did you hear about Sarah? She broke her leg last week while she was skiing in Switzerland. She's never been skiing before, so it was quite an adventure! She's in hospital now but she's getting better.",
+                question: "Had Sarah been skiing before this trip?",
+                options: ["Yes, many times", "No, never", "Yes, once", "The text doesn't say"],
+                correct: "No, never",
+                explanation: "✅ Correct! 'She's never been skiing before' = no previous experience.",
+                errorExplanation: "❌ The audio says 'She's never been skiing before'."
+            },
+            {
+                id: 16,
+                type: 'fill',
+                question: "A: When ______ (you/arrive)? B: I ______ (arrive) ten minutes ago.",
+                correct: ["did you arrive arrived", "did you arrive, arrived"],
+                explanation: "✅ Correct! 'When' + ago = past simple questions and answers."
+            },
+            {
+                id: 17,
+                type: 'choice',
+                question: "I've ______ my homework. Can I go out now?",
+                options: ["already done", "yet done", "done already", "done yet"],
+                correct: "already done",
+                explanation: "✅ Correct! Already goes between have and past participle.",
+                errorExplanation: "❌ Position: have + already + past participle."
+            },
+            {
+                id: 18,
+                type: 'fill',
+                question: "I ______ (not/see) him ______ (since/for) last Monday.",
+                correct: ["haven't seen since", "have not seen since"],
+                explanation: "✅ Correct! Present perfect negative + since + last/finished time point."
+            },
+            {
+                id: 19,
+                type: 'listening',
+                audioText: "My parents have had their car for about ten years. They bought it in 2013 when I was still a child. It was second-hand, but it's still working well. They've driven thousands of miles in it!",
+                question: "When did the parents buy the car?",
+                options: ["Recently", "Ten years ago", "In 2013", "When it was new"],
+                correct: "In 2013",
+                explanation: "✅ Correct! 'In 2013' = specific finished time = past simple.",
+                errorExplanation: "❌ The specific date 'in 2013' requires past simple (bought)."
+            },
+            {
+                id: 20,
+                type: 'choice',
+                question: "Have you finished that book ______?",
+                options: ["already", "just", "yet", "since"],
+                correct: "yet",
+                explanation: "✅ Correct! 'Yet' is used in questions about completion.",
+                errorExplanation: "❌ 'Yet' for questions, 'already' for positive statements."
+
+            },
+
+            // EXERCISES 21-30: Future with "will"
+            {
+                id: 21,
+                type: 'choice',
+                question: "Which sentence uses 'will' for a prediction?",
+                options: ["I will help you with that.", "I think it will rain tomorrow.", "I'll have a coffee, please.", "I promise I'll be there."],
+                correct: "I think it will rain tomorrow.",
+                explanation: "✅ Correct! 'Will' for prediction about the future.",
+                errorExplanation: "❌ 'Will' for predictions: I think/guess/believe it will..."
+            },
+            {
+                id: 22,
+                type: 'listening',
+                audioText: "Look at those dark clouds in the sky! I think it will rain soon. We should take an umbrella with us. I'll go and get one from the cupboard. I don't want us to get wet!",
+                question: "Why will the speaker get an umbrella?",
+                options: ["It's raining now", "They think it will rain", "They like umbrellas", "It's in the cupboard"],
+                correct: "They think it will rain",
+                explanation: "✅ Correct! Prediction: 'I think it will rain soon'.",
+                errorExplanation: "❌ The speaker predicts rain based on the dark clouds."
+            },
+            {
+                id: 23,
+                type: 'fill',
+                question: "Don't worry, I ______ (help) you with your homework. I promise!",
+                correct: ["will help", "'ll help"],
+                explanation: "✅ Correct! 'Will' for promises and offers."
+            },
+            {
+                id: 24,
+                type: 'choice',
+                question: "A: I'm thirsty. B: ______ get you a drink?",
+                options: ["Will I", "Do I", "Shall I", "I will"],
+                correct: "Shall I",
+                explanation: "✅ Correct! 'Shall I' is the polite offer form (British English).",
+                errorExplanation: "❌ 'Shall I' is the traditional form for offers with 'I'."
+            },
+            {
+                id: 25,
+                type: 'listening',
+                audioText: "I've decided! I'm tired of working in this office. Next year, I'll look for a new job. I'll update my CV this weekend and I'll start applying for positions. I think I'll be much happier in a different company.",
+                question: "What will the speaker do this weekend?",
+                options: ["Look for a job", "Update their CV", "Start a new job", "Leave the company"],
+                correct: "Update their CV",
+                explanation: "✅ Correct! 'I'll update my CV this weekend' = spontaneous decision.",
+                errorExplanation: "❌ The speaker says 'I'll update my CV this weekend'."
+            },
+            {
+                id: 26,
+                type: 'fill',
+                question: "A: I can't find my phone! B: I ______ (look) for it. Where did you last have it?",
+                correct: ["will look", "'ll look"],
+                explanation: "✅ Correct! 'Will' for spontaneous offers to help."
+            },
+            {
+                id: 27,
+                type: 'choice',
+                question: "Complete with the correct form: I ______ probably ______ late tomorrow.",
+                options: ["will / be", "am / be", "will / being", "am / being"],
+                correct: "will / be",
+                explanation: "✅ Correct! Will + be (infinitive without to).",
+                errorExplanation: "❌ Will + verb (infinitive without to): I will be..."
+            },
+            {
+                id: 28,
+                type: 'fill',
+                question: "If you need anything, I ______ (be) at home all evening. Just call me!",
+                correct: ["will be", "'ll be"],
+                explanation: "✅ Correct! 'Will' for future availability/promises."
+            },
+            {
+                id: 29,
+                type: 'listening',
+                audioText: "Oh no! I've forgotten my wallet at home. I'll have to go back and get it. I won't be able to buy lunch otherwise. Wait for me, I'll be back in ten minutes!",
+                question: "Why will the speaker go back home?",
+                options: ["To wait", "To get their wallet", "To buy lunch", "To be back in ten minutes"],
+                correct: "To get their wallet",
+                explanation: "✅ Correct! Spontaneous decision: 'I'll have to go back and get it'.",
+                errorExplanation: "❌ The speaker forgot their wallet and decides spontaneously to return."
+            },
+            {
+                id: 30,
+                type: 'choice',
+                question: "I promise I ______ forget your birthday again.",
+                options: ["will", "won't", "don't", "am not"],
+                correct: "won't",
+                explanation: "✅ Correct! Negative promise: won't = will not.",
+                errorExplanation: "❌ 'Won't' (will not) for negative promises."
+
+            },
+
+            // EXERCISES 31-40: Conditionals with "if"
+            {
+                id: 31,
+                type: 'choice',
+                question: "Which sentence is a correct first conditional?",
+                options: ["If it rains, I stay at home.", "If it rains, I will stay at home.", "If it will rain, I stay at home.", "If it rain, I will stay at home."],
+                correct: "If it rains, I will stay at home.",
+                explanation: "✅ Correct! If + present simple, will + verb.",
+                errorExplanation: "❌ First conditional: If + present, will + verb."
+            },
+            {
+                id: 32,
+                type: 'listening',
+                audioText: "I'm planning a picnic for Saturday. If the weather is nice, we'll go to the park and have a barbecue. If it rains, we'll stay at home and watch films instead. I hope the sun shines!",
+                question: "What will they do if it rains?",
+                options: ["Go to the park", "Have a barbecue", "Stay at home and watch films", "Cancel the picnic"],
+                correct: "Stay at home and watch films",
+                explanation: "✅ Correct! 'If it rains, we'll stay at home and watch films'.",
+                errorExplanation: "❌ The conditional states the alternative plan if it rains."
+            },
+            {
+                id: 33,
+                type: 'fill',
+                question: "If you ______ (study) hard, you ______ (pass) the exam.",
+                correct: ["study will pass"],
+                explanation: "✅ Correct! If + present simple, will + verb."
+            },
+            {
+                id: 34,
+                type: 'choice',
+                question: "If I ______ time tonight, I'll call you.",
+                options: ["have", "will have", "had", "am having"],
+                correct: "have",
+                explanation: "✅ Correct! 'If' clause uses present simple, not future.",
+                errorExplanation: "❌ After 'if', use present simple (have), not will have."
+            },
+            {
+                id: 35,
+                type: 'fill',
+                question: "I ______ (not/go) to the party if she ______ (not/invite) me.",
+                correct: ["won't go doesn't invite", "will not go does not invite"],
+                explanation: "✅ Correct! Negative forms: won't go + doesn't invite."
+            },
+            {
+                id: 36,
+                type: 'listening',
+                audioText: "My sister wants to buy a new car, but she needs to save money first. If she saves enough money this year, she'll buy the car next spring. If she doesn't save enough, she'll have to wait another year.",
+                question: "When will she buy the car if she saves enough?",
+                options: ["This year", "Next spring", "Next summer", "Another year"],
+                correct: "Next spring",
+                explanation: "✅ Correct! 'If she saves enough... she'll buy the car next spring'.",
+                errorExplanation: "❌ The conditional result is buying the car next spring."
+            },
+            {
+                id: 37,
+                type: 'choice',
+                question: "What ______ if you win the lottery?",
+                options: ["will you do", "you will do", "do you will", "you do"],
+                correct: "will you do",
+                explanation: "✅ Correct! Question form: What will you do if...?",
+                errorExplanation: "❌ Conditional question: What will + subject + do if...?"
+            },
+            {
+                id: 38,
+                type: 'fill',
+                question: "If I ______ (be) you, I ______ (apologise) to her. But I'm not you!",
+                correct: ["were would apologise", "were 'd apologise"],
+                explanation: "✅ Correct! This is actually second conditional (Grade 6), but 'If I were you' is a common expression."
+            },
+            {
+                id: 39,
+                type: 'listening',
+                audioText: "I'm worried about my interview tomorrow. If I get the job, I'll be so happy! I'll celebrate with my family and I'll buy you dinner. But if I don't get it, I'll be really disappointed. I'll just have to apply for other positions.",
+                question: "What will the speaker do if they get the job?",
+                options: ["Apply for other positions", "Celebrate and buy dinner", "Be disappointed", "Worry about the interview"],
+                correct: "Celebrate and buy dinner",
+                explanation: "✅ Correct! 'I'll celebrate with my family and I'll buy you dinner'.",
+                errorExplanation: "❌ The positive conditional result includes celebrating and buying dinner."
+            },
+            {
+                id: 40,
+                type: 'choice',
+                question: "If you ______ me, I'll help you.",
+                options: ["ask", "will ask", "asked", "asking"],
+                correct: "ask",
+                explanation: "✅ Correct! If + present simple (ask).",
+                errorExplanation: "❌ Conditional if-clause uses present simple."
+
+            },
+
+            // EXERCISES 41-50: Modals might/may/could
+            {
+                id: 41,
+                type: 'choice',
+                question: "Which modal expresses possibility (50% chance)?",
+                options: ["will", "might", "must", "can't"],
+                correct: "might",
+                explanation: "✅ Correct! Might = possibility, less certain than may.",
+                errorExplanation: "❌ Might indicates possibility but uncertainty (around 50%)."
+            },
+            {
+                id: 42,
+                type: 'listening',
+                audioText: "I'm not sure about the weekend weather. It might rain on Saturday, or it might be sunny. We could go to the beach if it's nice, or we may stay at home if the weather's bad. I really don't know yet!",
+                question: "What is the speaker sure about?",
+                options: ["It will rain", "They will go to the beach", "Nothing - they're uncertain", "They will stay at home"],
+                correct: "Nothing - they're uncertain",
+                explanation: "✅ Correct! The speaker uses might/may/could showing uncertainty.",
+                errorExplanation: "❌ The speaker uses multiple modals of possibility showing they are unsure."
+            },
+            {
+                id: 43,
+                type: 'fill',
+                question: "It ______ (might/may) be cold tonight, so take a jacket with you.",
+                correct: ["might", "may"],
+                explanation: "✅ Correct! Might or may both express possibility."
+            },
+            {
+                id: 44,
+                type: 'choice',
+                question: "We ______ go to the cinema tomorrow, but we're not sure yet.",
+                options: ["will", "might", "must", "have to"],
+                correct: "might",
+                explanation: "✅ Correct! Might = possible but not certain.",
+                errorExplanation: "❌ 'Not sure yet' indicates possibility (might), not certainty (will)."
+            },
+            {
+                id: 45,
+                type: 'fill',
+                question: "A: Where's John? B: He ______ (might) be in the library, or he ______ (could) be at home.",
+                correct: ["might could", "may could", "might may"],
+                explanation: "✅ Correct! Might/Could/May are all used for possibility."
+            },
+            {
+                id: 46,
+                type: 'listening',
+                audioText: "I can't find my glasses anywhere! I might have left them at work, or I could have put them in my bag. I may have even left them at the restaurant last night. I need to check all these places.",
+                question: "Where does the speaker think the glasses might be?",
+                options: ["Only at work", "Only in the bag", "Multiple possible places", "Definitely at the restaurant"],
+                correct: "Multiple possible places",
+                explanation: "✅ Correct! The speaker lists multiple possibilities using might/could/may.",
+                errorExplanation: "❌ The speaker suggests work, bag, or restaurant as possibilities."
+            },
+            {
+                id: 47,
+                type: 'choice',
+                question: "It ______ rain later, so take an umbrella.",
+                options: ["will definitely", "might", "must", "has to"],
+                correct: "might",
+                explanation: "✅ Correct! Might = possibility, not certainty.",
+                errorExplanation: "❌ 'Might' is appropriate for weather possibilities."
+            },
+            {
+                id: 48,
+                type: 'fill',
+                question: "I'm not sure, but I ______ (may/might) visit my grandparents this weekend.",
+                correct: ["may", "might"],
+                explanation: "✅ Correct! May or might for future possibility."
+            },
+            {
+                id: 49,
+                type: 'choice',
+                question: "______ I borrow your pen, please?",
+                options: ["Will", "Might", "Could", "Must"],
+                correct: "Could",
+                explanation: "✅ Correct! Could is polite for requests (also used for possibility).",
+                errorExplanation: "❌ 'Could I...?' is a polite request form."
+            },
+            {
+                id: 50,
+                type: 'fill',
+                question: "Complete the conversation: A: I can't find my keys! B: You ______ (might) have left them in the car. A: Yes, I ______ (may) have. I'll go and check!",
+                correct: ["might may", "may might"],
+                explanation: "✅ Excellent! You've completed all 50 Grade 5 exercises! Well done!"
+            }
+        ];
+
+        let currentExercise = 0;
+        let totalScore = 0;
+        let answered = false;
+        let speechSynthesis = window.speechSynthesis;
+        let currentUtterance = null;
+
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+
+            if(id === 'exercises' && currentExercise === 0) {
+                loadExercise();
+            }
+        }
+
+        function speakText(text) {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+            
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-GB';
+            utterance.rate = 0.9;
+            utterance.pitch = 1;
+            
+            speechSynthesis.speak(utterance);
+            currentUtterance = utterance;
+        }
+
+        function stopSpeaking() {
+            if (speechSynthesis.speaking) {
+                speechSynthesis.cancel();
+            }
+        }
+
+        function loadExercise() {
+            if (currentExercise >= exercises.length) {
+                showFinalScore();
+                return;
+            }
+
+            const ex = exercises[currentExercise];
+            const container = document.getElementById('exerciseContainer');
+            
+            document.getElementById('exerciseCounter').textContent = `${currentExercise + 1} / ${exercises.length}`;
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            document.getElementById('progressBar').style.width = `${(currentExercise / exercises.length) * 100}%`;
+            
+            answered = false;
+
+            let typeBadge = '';
+            if (ex.type === 'listening') typeBadge = '🎧 Listening';
+            else if (ex.type === 'choice') typeBadge = '📝 Multiple Choice';
+            else if (ex.type === 'fill') typeBadge = '✏️ Fill in the Blank';
+
+            let html = `
+                <div class="card" style="animation: fadeIn 0.4s ease;">
+                    <div class="card-header">Exercise ${ex.id} - ${typeBadge}</div>
+                    <div class="card-body">
+                        <div class="exercise-counter">Question ${currentExercise + 1} of ${exercises.length}</div>
+            `;
+
+            if (ex.type === 'listening') {
+                html += `
+                    <div class="listening-box">
+                        <div class="audio-controls">
+                            <button class="btn-audio" onclick="speakText('${ex.audioText.replace(/'/g, "\\'")}')" id="playBtn">
+                                ▶️ Play Audio
+                            </button>
+                            <button class="btn-secondary" onclick="document.getElementById('transcript').classList.toggle('show')">
+                                👁️ Show Transcript
+                            </button>
+                        </div>
+                        <div class="transcript-box" id="transcript">
+                            "${ex.audioText}"
+                        </div>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="question-box">
+                            <div class="question-type-badge">${typeBadge}</div>
+                            <div class="question-text">${ex.question}</div>
+                        </div>
+            `;
+
+            if (ex.type === 'choice' || ex.type === 'listening') {
+                html += `<div class="options-grid" id="optionsGrid">`;
+                const shuffledOptions = [...ex.options].sort(() => Math.random() - 0.5);
+                shuffledOptions.forEach(opt => {
+                    html += `<button class="option-btn" onclick="checkChoice('${opt.replace(/'/g, "\\'")}')" data-value="${opt}">${opt}</button>`;
+                });
+                html += `</div>`;
+            } else if (ex.type === 'fill') {
+                html += `
+                    <div style="text-align: center; margin-bottom: 1.5rem;">
+                        <input type="text" class="fill-blank" id="fillInput" placeholder="Type your answer..." onkeypress="if(event.key==='Enter') checkFill()">
+                        <div class="hint-text">Press Enter or click Verify when ready</div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn-primary" onclick="checkFill()" style="background: var(--grade5-teal);">✓ Verify Answer</button>
+                    </div>
+                `;
+            }
+
+            html += `
+                        <div class="feedback" id="feedback"></div>
+                        <div class="text-center" id="nextBtnContainer" style="display: none;">
+                            <button class="btn-primary" onclick="nextExercise()">Next Question →</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            
+            if (ex.type === 'fill') {
+                setTimeout(() => document.getElementById('fillInput').focus(), 100);
+            }
+        }
+
+        function checkChoice(selected) {
+            if (answered) return;
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const btns = document.querySelectorAll('#optionsGrid .option-btn');
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            btns.forEach(btn => {
+                btn.disabled = true;
+                if (btn.dataset.value === ex.correct) {
+                    btn.classList.add('correct');
+                } else if (btn.dataset.value === selected && selected !== ex.correct) {
+                    btn.classList.add('wrong');
+                }
+            });
+
+            feedback.classList.add('show');
+
+            if (selected === ex.correct) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `${ex.errorExplanation}<br><strong>Correct answer:</strong> ${ex.correct}`;
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function checkFill() {
+            if (answered) return;
+            
+            const input = document.getElementById('fillInput');
+            const value = input.value.trim().toLowerCase();
+            if (!value) return;
+
+            answered = true;
+
+            const ex = exercises[currentExercise];
+            const feedback = document.getElementById('feedback');
+            const nextContainer = document.getElementById('nextBtnContainer');
+
+            const isCorrect = ex.correct.some(ans => value === ans.toLowerCase());
+
+            feedback.classList.add('show');
+            input.disabled = true;
+
+            if (isCorrect) {
+                feedback.className = 'feedback show correct';
+                feedback.textContent = ex.explanation;
+                input.style.borderColor = 'var(--success)';
+                input.style.background = '#f0fdf4';
+                totalScore += 2;
+            } else {
+                feedback.className = 'feedback show wrong';
+                feedback.innerHTML = `❌ Incorrect.<br><strong>Correct answer:</strong> ${ex.correct[0]}`;
+                input.style.borderColor = 'var(--error)';
+                input.style.background = '#fef2f2';
+                input.value = ex.correct[0];
+            }
+
+            document.getElementById('currentScore').textContent = `${totalScore} / 100`;
+            nextContainer.style.display = 'block';
+        }
+
+        function nextExercise() {
+            currentExercise++;
+            stopSpeaking();
+            loadExercise();
+        }
+
+        function showFinalScore() {
+            document.getElementById('exerciseContainer').style.display = 'none';
+            document.getElementById('finalScoreSection').classList.add('show');
+            document.getElementById('finalScore').textContent = `${totalScore}/100`;
+            
+            let message = '';
+            if (totalScore >= 90) {
+                message = '🏆 Outstanding! You are excellently prepared for the GESE Grade 5 exam! Your mastery of present perfect, conditionals, and modals is excellent!';
+            } else if (totalScore >= 70) {
+                message = '👍 Great job! You have a solid understanding of Grade 5 grammar. Review the difference between past simple and present perfect to perfect your skills.';
+            } else if (totalScore >= 50) {
+                message = '💪 Good effort! Focus on practicing: 1) Present perfect with ever/never/just/already/yet, 2) First conditionals with if, 3) Modals of possibility (might/may/could).';
+            } else {
+                message = '📚 Keep studying! Concentrate on: 1) Have/has + past participle, 2) Will for future predictions and promises, 3) If + present, will + verb for conditionals.';
+            }
+            
+            document.getElementById('finalMessage').textContent = message;
+            document.getElementById('progressBar').style.width = '100%';
+        }
+
+        function restartExercises() {
+            currentExercise = 0;
+            totalScore = 0;
+            answered = false;
+            
+            exercises.sort(() => Math.random() - 0.5);
+            
+            document.getElementById('exerciseContainer').style.display = 'block';
+            document.getElementById('finalScoreSection').classList.remove('show');
+            document.getElementById('progressBar').style.width = '0%';
+            
+            loadExercise();
+        }
+
+        // Shuffle exercises on initial load
+        document.addEventListener('DOMContentLoaded', function() {
+            exercises.sort(() => Math.random() - 0.5);
+        });
+
+        // Clean up speech synthesis when leaving page
+        window.addEventListener('beforeunload', function() {
+            stopSpeaking();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trinity ISE IV (C2) - Complete Exam Guide</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary: #1a237e; --secondary: #37474f; --accent: #d84315;
+            --light: #e8eaf6; --dark: #212121; --border: #9fa8da;
+            --success: #1b5e20; --success-bg: #a5d6a7; --error: #b71c1c; --error-bg: #ef9a9a;
+            --parchment: #fafafa; --warning: #e65100; --info: #01579b; --gold: #ffd700;
+        }
+        body {
+            font-family: 'Georgia', 'Times New Roman', serif;
+            background-color: var(--parchment); color: var(--dark);
+            line-height: 1.6; min-height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, #0d1642 100%);
+            color: white; padding: 2.5rem 0; border-bottom: 4px solid var(--gold); position: relative;
+        }
+        .header::after { content: "🏆"; position: absolute; top: 1rem; right: 2rem; font-size: 3rem; opacity: 0.3; }
+        .header-container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; text-align: center; }
+        .header h1 { font-size: 2.6rem; font-weight: normal; letter-spacing: 0.5px; margin-bottom: 0.5rem; }
+        .header p { font-size: 1.4rem; opacity: 0.9; font-style: italic; }
+        .level-badge {
+            display: inline-block; background: var(--gold); color: var(--primary);
+            padding: 0.5rem 1.5rem; border-radius: 20px; font-weight: bold;
+            margin-top: 1rem; font-size: 1.1rem; box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .breadcrumbs { background: var(--light); border-bottom: 1px solid var(--border); padding: 0.75rem 2rem; font-size: 0.9rem; }
+        .breadcrumbs-container { max-width: 1200px; margin: 0 auto; }
+        .breadcrumbs a { color: var(--primary); text-decoration: none; }
+        .breadcrumbs a:hover { text-decoration: underline; }
+        .breadcrumbs span { color: var(--secondary); margin: 0 0.5rem; }
+        .main-container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
+        .page-header { margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 2px solid var(--primary); }
+        .page-title { font-size: 2rem; color: var(--primary); font-weight: normal; margin-bottom: 0.5rem; }
+        .page-subtitle { color: var(--secondary); font-size: 1.1rem; font-style: italic; }
+        .nav-tabs { display: flex; border-bottom: 2px solid var(--border); margin-bottom: 2rem; background: white; flex-wrap: wrap; }
+        .nav-tab { padding: 1rem 1.5rem; background: none; border: none; border-bottom: 3px solid transparent; cursor: pointer; font-family: inherit; font-size: 0.95rem; color: var(--secondary); transition: all 0.3s; position: relative; }
+        .nav-tab:hover { color: var(--primary); background: var(--light); }
+        .nav-tab.active { color: var(--primary); border-bottom-color: var(--gold); font-weight: bold; }
+        .section { display: none; animation: fadeIn 0.4s ease; }
+        .section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        .card { background: white; border: 1px solid var(--border); border-radius: 0; margin-bottom: 2rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .card-header { background: var(--light); padding: 1rem 1.5rem; border-bottom: 1px solid var(--border); font-weight: bold; color: var(--primary); font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.5px; border-left: 4px solid var(--gold); }
+        .card-body { padding: 1.5rem; }
+        .instruction-box { background: #e8eaf6; border-left: 4px solid var(--primary); padding: 1rem 1.5rem; margin-bottom: 1.5rem; font-size: 0.95rem; }
+        .warning-box { background: #fff3e0; border-left: 4px solid var(--warning); padding: 1rem 1.5rem; margin: 1rem 0; font-size: 0.95rem; }
+        .info-box { background: #e1f5fe; border-left: 4px solid var(--info); padding: 1rem 1.5rem; margin: 1rem 0; font-size: 0.95rem; }
+        .mastery-box { background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); border: 2px solid var(--gold); padding: 1rem; margin: 1rem 0; border-radius: 0; }
+        .grammar-table { width: 100%; border-collapse: collapse; margin: 20px 0; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .grammar-table th { background: var(--primary); color: white; padding: 15px; text-align: left; }
+        .grammar-table td { padding: 12px 15px; border-bottom: 1px solid #eee; }
+        .grammar-table tr:hover { background: #f8f9fa; }
+        .example-box { background: #f5f5f5; border-left: 4px solid var(--primary); padding: 1rem; margin: 1rem 0; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin: 2rem 0; border-radius: 8px; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 8px; }
+        .task-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin: 1.5rem 0; }
+        .task-card { background: white; border: 2px solid var(--border); padding: 1.5rem; text-align: center; transition: all 0.3s; }
+        .task-card:hover { border-color: var(--primary); transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .task-icon { font-size: 2.5rem; margin-bottom: 0.5rem; }
+        .task-title { font-weight: bold; color: var(--primary); margin-bottom: 0.5rem; font-size: 1.1rem; }
+        .timing-badge { display: inline-block; background: var(--accent); color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: bold; }
+        .word-count { display: inline-block; background: var(--primary); color: white; padding: 0.25rem 0.75rem; border-radius: 12px; font-size: 0.85rem; font-weight: bold; }
+        .subject-list { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin: 1rem 0; }
+        .subject-item { background: var(--light); padding: 0.75rem; border-left: 3px solid var(--gold); font-size: 0.9rem; }
+        .step-box { background: #f5f5f5; border-left: 3px solid var(--gold); padding: 1rem; margin: 1rem 0; }
+        .step-number { display: inline-block; background: var(--primary); color: white; width: 30px; height: 30px; border-radius: 50%; text-align: center; line-height: 30px; font-weight: bold; margin-right: 0.5rem; }
+        .checklist { list-style: none; margin-left: 0; }
+        .checklist li { padding: 0.5rem 0; padding-left: 1.5rem; position: relative; }
+        .checklist li:before { content: "☐"; position: absolute; left: 0; color: var(--primary); font-weight: bold; }
+        .exercise-box { background: #fff; border: 2px solid var(--primary); padding: 1.5rem; margin: 1.5rem 0; border-radius: 8px; }
+        .exercise-title { color: var(--primary); font-weight: bold; font-size: 1.2rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+        .quiz-option { display: block; padding: 0.75rem; margin: 0.5rem 0; background: #f5f5f5; border: 1px solid #ddd; cursor: pointer; transition: all 0.3s; }
+        .quiz-option:hover { background: var(--light); border-color: var(--primary); }
+        .quiz-option.correct { background: var(--success-bg); border-color: var(--success); }
+        .quiz-option.incorrect { background: var(--error-bg); border-color: var(--error); }
+        .text-center { text-align: center; }
+        @media (max-width: 768px) {
+            .nav-tabs { flex-wrap: wrap; }
+            .nav-tab { padding: 0.75rem 1rem; font-size: 0.9rem; flex: 1 1 33%; }
+            .task-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8rem; }
+            .page-title { font-size: 1.5rem; }
+            .subject-list { grid-template-columns: 1fr; }
+            .header::after { display: none; }
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <h1>Trinity ISE IV (C2)</h1>
+            <p>Integrated Skills in English - Mastery Level Guide</p>
+            <div class="level-badge">CEFR Level C2 - Mastery</div>
+        </div>
+    </header>
+
+    <nav class="breadcrumbs">
+        <div class="breadcrumbs-container">
+            <a href="#">Home</a>
+            <span>›</span>
+            <a href="#">Trinity ISE</a>
+            <span>›</span>
+            <strong>ISE IV (C2) Complete Task Guide</strong>
+        </div>
+    </nav>
+
+    <main class="main-container">
+        <div class="page-header">
+            <h1 class="page-title">ISE IV Complete Task Breakdown</h1>
+            <p class="page-subtitle">Reading, Writing, Speaking & Listening at C2 Mastery Level</p>
+        </div>
+
+        <nav class="nav-tabs">
+            <button class="nav-tab active" onclick="showSection('overview', this)">Overview</button>
+            <button class="nav-tab" onclick="showSection('reading', this)">Reading Tasks</button>
+            <button class="nav-tab" onclick="showSection('writing', this)">Writing Tasks</button>
+            <button class="nav-tab" onclick="showSection('speaking', this)">Speaking Tasks</button>
+            <button class="nav-tab" onclick="showSection('listening', this)">Listening Tasks</button>
+            <button class="nav-tab" onclick="showSection('exercises', this)">Practice Exercises</button>
+            <button class="nav-tab" onclick="showSection('video', this)">Sample Video</button>
+        </nav>
+
+        <!-- OVERVIEW SECTION -->
+        <section id="overview" class="section active">
+            <div class="card">
+                <div class="card-header">ISE IV Exam Overview (C2 - Mastery)</div>
+                <div class="card-body">
+                    <p>ISE IV is the pinnacle of the Trinity ISE suite, at CEFR C2 level (Mastery). This exam demonstrates you can understand with ease virtually everything heard or read, summarise information from different spoken and written sources, reconstruct arguments and accounts in a coherent presentation, and express yourself spontaneously, very fluently and precisely, differentiating finer shades of meaning even in more complex situations.</p>
+
+                    <div class="mastery-box">
+                        <strong>🎓 C2 Mastery Characteristics:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Precision:</strong> Can express subtle nuances and shades of meaning</li>
+                            <li><strong>Complexity:</strong> Handles highly abstract, technical, and academic content</li>
+                            <li><strong>Fluency:</strong> Speaks without hesitation or searching for expressions</li>
+                            <li><strong>Accuracy:</strong> Maintains consistent grammatical control even in complex structures</li>
+                            <li><strong>Sophistication:</strong> Uses idiomatic expressions and colloquialisms appropriately</li>
+                            <li><strong>Critical Analysis:</strong> Evaluates complex arguments and counter-arguments</li>
+                        </ul>
+                    </div>
+
+                    <div class="task-grid">
+                        <div class="task-card">
+                            <div class="task-icon">📖</div>
+                            <div class="task-title">Reading & Writing</div>
+                            <p>2 hours 30 minutes<br>4 tasks<br>250-300 words per writing task</p>
+                        </div>
+                        <div class="task-card">
+                            <div class="task-icon">🎤</div>
+                            <div class="task-title">Speaking & Listening</div>
+                            <p>25 minutes<br>4 tasks<br>One-to-one with examiner</p>
+                        </div>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>Key Differences from ISE III (C1):</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Longer, denser texts:</strong> 900+ words with complex argumentation</li>
+                            <li><strong>Extended writing:</strong> 250-300 words vs. 200-230 words</li>
+                            <li><strong>Academic presentation:</strong> 4-minute formal presentation with sophisticated argumentation</li>
+                            <li><strong>Abstract subject areas:</strong> Society and Living Standards, The Nature of Knowledge, etc.</li>
+                            <li><strong>C2 language functions:</strong> Persuading, advocating, hypothesising with nuance</li>
+                            <li><strong>Critical evaluation:</strong> Must demonstrate independent critical thinking</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Complete Exam Format</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Module</th>
+                                <th>Task</th>
+                                <th>Time</th>
+                                <th>Details</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td rowspan="4"><strong>Reading & Writing</strong></td>
+                                <td>Task 1: Long Reading</td>
+                                <td><span class="timing-badge">25 mins</span></td>
+                                <td>Read 1 complex text (900+ words), answer 15 questions</td>
+                            </tr>
+                            <tr>
+                                <td>Task 2: Multi-text Reading</td>
+                                <td><span class="timing-badge">25 mins</span></td>
+                                <td>Read 4 texts (900+ words total), answer 15 questions</td>
+                            </tr>
+                            <tr>
+                                <td>Task 3: Reading into Writing</td>
+                                <td><span class="timing-badge">50 mins</span></td>
+                                <td>Write 250-300 words using Task 2 information</td>
+                            </tr>
+                            <tr>
+                                <td>Task 4: Extended Writing</td>
+                                <td><span class="timing-badge">50 mins</span></td>
+                                <td>Write 250-300 words (academic essay, critical review, formal report)</td>
+                            </tr>
+                            <tr>
+                                <td rowspan="4"><strong>Speaking & Listening</strong></td>
+                                <td>Topic Task (Presentation + Discussion)</td>
+                                <td><span class="timing-badge">8 mins</span></td>
+                                <td>4-min formal academic presentation + 4-min critical discussion</td>
+                            </tr>
+                            <tr>
+                                <td>Collaborative Task</td>
+                                <td><span class="timing-badge">4 mins</span></td>
+                                <td>Lead complex interaction on abstract/scenario-based prompt</td>
+                            </tr>
+                            <tr>
+                                <td>Conversation Task</td>
+                                <td><span class="timing-badge">3 mins</span></td>
+                                <td>Sophisticated discussion of one subject area</td>
+                            </tr>
+                            <tr>
+                                <td>Independent Listening Task</td>
+                                <td><span class="timing-badge">8 mins</span></td>
+                                <td>Listen twice, demonstrate critical understanding, evaluate content</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Subject Areas for ISE IV</div>
+                <div class="card-body">
+                    <p>All tasks relate to these highly abstract subject areas requiring sophisticated critical thinking:</p>
+                    <div class="subject-list">
+                        <div class="subject-item"><strong>Society and Living Standards</strong></div>
+                        <div class="subject-item"><strong>The Nature of Knowledge</strong></div>
+                        <div class="subject-item"><strong>Communication and Media</strong></div>
+                        <div class="subject-item"><strong>Politics and Society</strong></div>
+                        <div class="subject-item"><strong>The Future of Work</strong></div>
+                        <div class="subject-item"><strong>Ethics in Science and Technology</strong></div>
+                        <div class="subject-item"><strong>Globalisation and Identity</strong></div>
+                        <div class="subject-item"><strong>Art and Aesthetics</strong></div>
+                        <div class="subject-item"><strong>Education and Development</strong></div>
+                        <div class="subject-item"><strong>Health and Wellbeing</strong></div>
+                        <div class="subject-item"><strong>Environmental Sustainability</strong></div>
+                        <div class="subject-item"><strong>Philosophy and Belief</strong></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- READING SECTION -->
+        <section id="reading" class="section">
+            <div class="card">
+                <div class="card-header">Task 1: Long Reading (25 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Read one highly complex text of approximately <strong>900+ words</strong> with sophisticated argumentation, multiple perspectives, and abstract concepts. Answer 15 questions testing C2-level reading skills.
+                    </div>
+
+                    <h4>Question Types Breakdown:</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Questions 1-5: Title Matching</strong>
+                        <p style="margin-top: 0.5rem;">Match the correct title to each of the 5 paragraphs. You have 6 titles to choose from (one is a distractor). Texts contain complex rhetorical structures and implicit arguments.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> Paragraph discusses epistemological approaches to knowledge construction. Correct title: "Deconstructing Truth: Postmodern Perspectives"
+                        </div>
+                        <p><strong>Skill tested:</strong> Understanding implicit argumentation, rhetorical purpose, and sophisticated discourse markers</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Questions 6-10: True Statements Selection</strong>
+                        <p style="margin-top: 0.5rem;">Choose 5 true statements from a list of 8. Three statements are false or not mentioned. Requires distinguishing between explicit claims, implied meanings, and inferences.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> "The author implies that positivist epistemology is fundamentally flawed" (True - requires inference from critical tone)
+                        </div>
+                        <p><strong>Skill tested:</strong> Critical evaluation, distinguishing fact from opinion, recognising authorial stance</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Questions 11-15: Sentence Completion</strong>
+                        <p style="margin-top: 0.5rem;">Complete sentences with <strong>exact words from the text</strong> (maximum 3 words per gap). Tests precise understanding of complex academic vocabulary and collocations.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> "The author contends that _______ discourse has obscured the _______ nature of knowledge production."<br>
+                            Answer: "hegemonic" / "provisional"
+                        </div>
+                        <p><strong>Skill tested:</strong> Academic vocabulary recognition, understanding of collocations, precise comprehension</p>
+                    </div>
+
+                    <div class="mastery-box">
+                        <strong>C2 Reading Strategies:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Deconstruct argumentation:</strong> Identify premises, evidence, warrants, and conclusions</li>
+                            <li><strong>Recognise rhetorical devices:</strong> Irony, understatement, hyperbole, rhetorical questions</li>
+                            <li><strong>Track authorial voice:</strong> Distinguish between author's views and reported views</li>
+                            <li><strong>Understand hedging:</strong> "It could be argued," "tends to suggest" indicate epistemic stance</li>
+                            <li><strong>Identify intertextuality:</strong> References to other works, traditions, or schools of thought</li>
+                            <li><strong>Evaluate evidence quality:</strong> Statistical vs. anecdotal, primary vs. secondary sources</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Task 2: Multi-text Reading (25 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Read <strong>4 complex texts</strong> (approximately 900+ words total) on a sophisticated theme. One text is an infographic with complex data representation. Answer 15 questions requiring synthesis and critical evaluation.
+                    </div>
+
+                    <h4>Question Types Breakdown:</h4>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Questions 16-20: Text Matching</strong>
+                        <p style="margin-top: 0.5rem;">Match descriptions to the correct text (A, B, C, or D). Tests understanding of rhetorical purpose, methodology, and theoretical stance.</p>
+                        <div class="example-box">
+                            <strong>Example:</strong> "Which text adopts a phenomenological approach to the research question?" → Requires knowledge of research methodologies
+                        </div>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Questions 21-25: True Statements Selection</strong>
+                        <p style="margin-top: 0.5rem;">Choose 5 true statements from 8 options based on information across all four texts. Requires synthesising conflicting viewpoints.</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Questions 26-30: Summary Notes Completion</strong>
+                        <p style="margin-top: 0.5rem;">Complete summary notes using exact words from the texts (maximum 3 words per gap). The notes synthesise complex theoretical positions and empirical evidence.</p>
+                        <div class="warning-box">
+                            <strong>Important:</strong> The information in these texts is used for Task 3 (Reading into Writing). You must synthesise academic perspectives, empirical data, and theoretical frameworks in your writing.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- WRITING SECTION -->
+        <section id="writing" class="section">
+            <div class="card">
+                <div class="card-header">Task 3: Reading into Writing (50 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Requirements:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Write <strong>250-300 words</strong> <span class="word-count">250-300 words</span></li>
+                            <li>Use information from <strong>all four texts in Task 2</strong></li>
+                            <li>Include <strong>three content points</strong> specified in the prompt</li>
+                            <li>Demonstrate <strong>critical synthesis</strong> - evaluate and compare sources, not just summarise</li>
+                            <li>Use your <strong>own words</strong> with sophisticated academic register</li>
+                            <li>Genre: Academic essay, critical article, formal report, or analytical review</li>
+                        </ul>
+                    </div>
+
+                    <h4>Sample Task Structure:</h4>
+                    <div class="example-box">
+                        <strong>Example Prompt:</strong><br>
+                        "Write an academic article (250-300 words) for a journal of political philosophy examining the relationship between individual autonomy and social responsibility. Use the information from texts A-D to:<br>
+                        » critically evaluate competing conceptions of liberty<br>
+                        » analyse the tension between negative and positive freedom<br>
+                        » propose a synthesis that reconciles individual rights with collective obligations"
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">1</span>
+                        <strong>Analyse the Prompt Critically</strong>
+                        <p>Identify the three bullet points and the required critical stance. Note the genre (academic article) and sophisticated register (formal, objective, analytical).</p>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">2</span>
+                        <strong>Select and Critically Evaluate Sources</strong>
+                        <p>Go back to Task 2 texts. Evaluate the theoretical positions and empirical evidence. Make analytical notes:</p>
+                        <ul style="margin-left: 2rem;">
+                            <li>Text A: Libertarian perspective (Isaiah Berlin) - strong on negative liberty</li>
+                            <li>Text B: Communitarian critique (Charles Taylor) - positive freedom essential</li>
+                            <li>Text C: Empirical study - Scandinavian model balances both effectively</li>
+                            <li>Text D: Critical synthesis (Amartya Sen) - capability approach reconciles tension</li>
+                        </ul>
+                    </div>
+
+                    <div class="step-box">
+                        <span class="step-number">3</span>
+                        <strong>Plan Your Argument Structure</strong>
+                        <ul style="margin-left: 2rem;">
+                            <li><strong>Introduction (40-50 words):</strong> Contextualise the debate, state thesis, outline analytical approach</li>
+                            <li><strong>Body Paragraph 1 (60-70 words):</strong> Evaluate competing conceptions with evidence from texts</li>
+                            <li><strong>Body Paragraph 2 (60-70 words):</strong> Analyse tension using theoretical frameworks</li>
+                            <li><strong>Body Paragraph 3 (50-60 words):</strong> Propose synthesis based on critical evaluation</li>
+                            <li><strong>Conclusion (40-50 words):</strong> Restate thesis, implications, future research directions</li>
+                        </ul>
+                    </div>
+
+                    <div class="mastery-box">
+                        <strong>Critical Success Factors:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>✓ Synthesise sources critically - compare, contrast, and evaluate theoretical positions</li>
+                            <li>✓ Include information from ALL four texts with explicit attribution</li>
+                            <li>✓ Address all three bullet points with sophisticated argumentation</li>
+                            <li>✓ Use C2 discourse markers: "Notwithstanding," "Be that as it may," "Conversely"</li>
+                            <li>✓ Maintain consistent academic register with nominalisation and passive constructions</li>
+                            <li>✓ Deploy C2 grammar: Inversion, subjunctive, mixed conditionals, cleft sentences</li>
+                            <li>✓ Demonstrate critical stance: evaluate evidence quality and theoretical coherence</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Task 4: Extended Writing (50 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Requirements:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Write <strong>250-300 words</strong> <span class="word-count">250-300 words</span></li>
+                            <li><strong>No reading texts provided</strong> - demonstrate independent critical thinking</li>
+                            <li>Include <strong>two content points</strong> specified in the prompt</li>
+                            <li>Genre: Academic essay, critical review, formal report, or discursive article</li>
+                        </ul>
+                    </div>
+
+                    <h4>C2 Genre Requirements:</h4>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">1. Academic Essay</h4>
+                        <p>Thesis-driven argument with literature engagement, methodological awareness, and theoretical sophistication.</p>
+                        <p><strong>Example:</strong> "Critically examine the proposition that artificial intelligence will fundamentally alter human consciousness. Evaluate competing theoretical perspectives and propose your own analytical framework."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">2. Critical Review</h4>
+                        <p>Evaluation of a book, policy, or cultural phenomenon with theoretical framework and evidence-based judgment.</p>
+                        <p><strong>Example:</strong> "Review recent developments in climate policy, evaluating the effectiveness of international agreements from a game-theoretic perspective."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">3. Formal Report</h4>
+                        <p>Analytical, evidence-based investigation with recommendations. Objective tone with sophisticated data interpretation.</p>
+                        <p><strong>Example:</strong> "Write a report analysing the socio-economic implications of the gig economy, drawing on relevant theoretical frameworks and empirical evidence."</p>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5; border-left: 3px solid var(--primary);">
+                        <h4 style="color: var(--primary);">4. Discursive Article</h4>
+                        <p>Sophisticated exploration of complex issues with rhetorical flair and analytical depth.</p>
+                        <p><strong>Example:</strong> "Write an article exploring the philosophical implications of quantum mechanics for our understanding of reality and free will."</p>
+                    </div>
+
+                    <div class="warning-box">
+                        <strong>C2 Language Requirements:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Complex syntactic structures:</strong> Embedded clauses, fronting, inversion ("Rarely has such a profound shift...")</li>
+                            <li><strong>Subjunctive mood:</strong> "Were this hypothesis to be confirmed..." / "It is essential that research be conducted..."</li>
+                            <li><strong>Sophisticated modality:</strong> Epistemic ("may well," "must necessarily") and deontic ("ought to," "is bound to")</li>
+                            <li><strong>Abstract nominalisation:</strong> "The commodification of knowledge" / "The instrumentalisation of education"</li>
+                            <li><strong>Academic collocations:</strong> "empirical evidence," "theoretical framework," "analytical approach"</li>
+                            <li><strong>Discourse markers:</strong> "Admittedly," "Conversely," "Be that as it may," "Notwithstanding"</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SPEAKING SECTION -->
+        <section id="speaking" class="section">
+            <div class="card">
+                <div class="card-header">Topic Task (8 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Deliver a <strong>formal academic presentation (4 minutes)</strong> with a handout on a sophisticated discursive topic. Followed by a <strong>critical discussion (4 minutes)</strong> where you defend your arguments, respond to challenges, and engage with examiner's perspectives.
+                    </div>
+
+                    <h4>Preparing Your Topic:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Choose a highly abstract, discursive topic requiring sophisticated argumentation</li>
+                        <li>Prepare a formal academic presentation with theoretical framework</li>
+                        <li>Create a handout with key arguments, evidence, and theoretical references</li>
+                        <li>Bring brief notes (not a full script) with key points and evidence</li>
+                        <li>Do NOT choose from the 12 subject areas (reserved for Conversation task)</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Topic: "The Instrumentalisation of Higher Education: A Critical Examination of Neoliberal Paradigms"</strong><br><br>
+                        <strong>Structure:</strong><br>
+                        1. Introduction - Define instrumentalisation and neoliberal context<br>
+                        2. Theoretical Framework - Drawing on Habermas (lifeworld colonisation) and Ball (performativity)<br>
+                        3. Critical Analysis - Marketisation effects on knowledge production, academic autonomy, student subjectivity<br>
+                        4. Counter-arguments - Economic necessity, accessibility, accountability<br>
+                        5. Synthesis - Propose alternative model based on capabilities approach<br>
+                        6. Conclusion - Invite critical questions<br><br>
+                        <strong>Handout content:</strong> Theoretical framework, key empirical studies, conceptual diagram, discussion questions
+                    </div>
+
+                    <h4>C2 Language Functions to Demonstrate:</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Function</th>
+                                <th>Example Language</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Advocating and persuading</td>
+                                <td>"It is imperative that..." / "One cannot overstate the significance of..."</td>
+                            </tr>
+                            <tr>
+                                <td>Speculating with nuance</td>
+                                <td>"Were this trend to continue..." / "Should such policies be implemented..."</td>
+                            </tr>
+                            <tr>
+                                <td>Evaluating critically</td>
+                                <td>"While compelling, this argument overlooks..." / "The evidence is not unequivocal..."</td>
+                            </tr>
+                            <tr>
+                                <td>Defending and justifying</td>
+                                <td>"This contention is substantiated by..." / "The theoretical coherence is evident in..."</td>
+                            </tr>
+                            <tr>
+                                <td>Conceding and countering</td>
+                                <td>"Admittedly, X is valid; however, Y remains problematic because..."</td>
+                            </tr>
+                            <tr>
+                                <td>Hypothesising with precision</td>
+                                <td>"In the hypothetical scenario where..." / "Presupposing that X obtains..."</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="mastery-box">
+                        <strong>Key Strategies:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Structure with sophisticated signposting and theoretical framing</li>
+                            <li>Use academic register consistently with appropriate terminology</li>
+                            <li>At the end, explicitly invite critical engagement: "I welcome your critical reflections on..."</li>
+                            <li>Defend arguments with evidence while acknowledging limitations</li>
+                            <li>Engage with examiner's challenges using concession-counter patterns</li>
+                            <li>Demonstrate metacognitive awareness: "Reflecting on my own position..."</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Collaborative Task (4 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> The examiner presents a complex, abstract scenario. You must <strong>immediately initiate, lead, and sustain</strong> sophisticated interaction, demonstrating critical thinking and collaborative problem-solving at C2 level.
+                    </div>
+
+                    <h4>Task Structure:</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 1 - Complex Prompt:</strong> Examiner presents an abstract dilemma (e.g., ethical paradox, policy trade-off, philosophical tension)<br><br>
+                        <strong>Phase 2 - Your Leadership:</strong> You must immediately demonstrate critical engagement and lead the exploration<br><br>
+                        <strong>Phase 3 - Sophisticated Development:</strong> Analyse multiple perspectives, evaluate trade-offs, propose nuanced solutions
+                    </div>
+
+                    <div class="example-box">
+                        <strong>Sample Prompt:</strong><br>
+                        "A renowned university is considering implementing a policy where admission decisions are made entirely by an AI algorithm that claims to eliminate human bias. The algorithm has demonstrated higher predictive validity for academic success than human admissions officers. However, critics argue this represents a form of 'algorithmic governmentality' that fundamentally alters the nature of educational judgment and may reproduce hidden biases. The university has asked for your consultation on this policy."<br><br>
+                        <strong>Your opening:</strong> "This presents a profound tension between epistemic and ethical rationality. Shall we begin by interrogating the assumption that predictive validity equates to educational justice? I would suggest we first examine the theoretical framework - are we conceiving of education as credentialing or capability development?"
+                    </div>
+
+                    <h4>Sophisticated Collaborative Language:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li><strong>Critical opening:</strong> "This raises fundamental questions about..." / "Shall we interrogate the premise that...?"</li>
+                        <li><strong>Analytical suggestions:</strong> "Perhaps we might conceptualise this as..." / "I propose we distinguish between X and Y..."</li>
+                        <li><strong>Evaluative questioning:</strong> "To what extent does...?" / "How might we weigh...against...?"</li>
+                        <li><strong>Critical response:</strong> "That's a compelling perspective; however, one might counter that..." / "While valid, that overlooks..."</li>
+                        <li><strong>Sophisticated negotiation:</strong> "We might reconcile these positions by..." / "A synthesis could be achieved through..."</li>
+                        <li><strong>Meta-discursive closing:</strong> "To recapitulate our analytical trajectory..." / "We have established that..."</li>
+                    </ul>
+
+                    <div class="warning-box">
+                        <strong>Mandatory Requirements:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Demonstrate immediate critical engagement with abstract concepts</li>
+                            <li>Lead with sophisticated questions that probe assumptions</li>
+                            <li>Propose analytical frameworks for understanding the problem</li>
+                            <li>Evaluate multiple perspectives with evidence</li>
+                            <li>Negotiate toward nuanced, qualified conclusions</li>
+                            <li>Maintain academic register throughout</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Conversation Task (3 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> The examiner chooses <strong>one subject area</strong> from the 12 listed areas. You must engage in sophisticated, spontaneous discussion demonstrating deep knowledge, critical thinking, and C2 language control.
+                    </div>
+
+                    <h4>Key Requirements:</h4>
+                    <ul style="margin-left: 2rem; margin-bottom: 1rem;">
+                        <li>Respond with extended, sophisticated, theoretically-informed answers</li>
+                        <li>Demonstrate deep knowledge of abstract concepts and current debates</li>
+                        <li>Ask examiner questions that demonstrate critical engagement</li>
+                        <li>Use C2 language functions (advocating, speculating, evaluating with nuance)</li>
+                        <li>Handle topic shifts and abstract questions with ease</li>
+                    </ul>
+
+                    <div class="example-box">
+                        <strong>Sample Conversation about "The Nature of Knowledge":</strong><br><br>
+                        <strong>Examiner:</strong> "To what extent can we claim that scientific knowledge is objective?"<br>
+                        <strong>Candidate:</strong> "This touches on fundamental epistemological debates. From a realist perspective, scientific knowledge aspires to objective truth through methodological rigour. However, the strong programme in sociology of science compellingly demonstrates how social factors shape scientific consensus. Kuhn's paradigm shifts suggest that scientific progress is not purely cumulative. I would contend that while methods aim at objectivity, the interpretation of data is invariably theory-laden. What is your position on the demarcation between science and other knowledge systems?"<br>
+                        <strong>Examiner:</strong> "I think there's a distinction between the method and the social practice."<br>
+                        <strong>Candidate:</strong> "Precisely. That distinction is crucial yet problematic. The method's normative ideal of objectivity is often undermined by the institutional practices of science - funding priorities, publication biases, disciplinary gatekeeping. This suggests that epistemic norms and social structures are dialectically related. Would you accept that the sociology of scientific knowledge has undermined the authority of science, or merely complicated our understanding of it?"
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Speaking Assessment Criteria (C2)</div>
+                <div class="card-body">
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Criterion</th>
+                                <th>C2 Mastery Indicators</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Communicative Effectiveness</td>
+                                <td>Flawless task fulfilment, sophisticated turn-taking, seamless initiation and maintenance, elaborate responses with theoretical depth, full range of C2 functions deployed</td>
+                            </tr>
+                            <tr>
+                                <td>Interactive Listening</td>
+                                <td>Complete understanding of complex questions, appropriate responses with elaboration, requests for clarification when needed (rarely)</td>
+                            </tr>
+                            <tr>
+                                <td>Language Control</td>
+                                <td>Consistent grammatical accuracy with complex structures, precise vocabulary including idioms and colloquialisms, C2 structures (inversion, subjunctive, clefting) used naturally</td>
+                            </tr>
+                            <tr>
+                                <td>Delivery</td>
+                                <td>Natural pronunciation and intonation, effortless fluency, appropriate speed with sophisticated pacing for emphasis</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- LISTENING SECTION -->
+        <section id="listening" class="section">
+            <div class="card">
+                <div class="card-header">Independent Listening Task (8 minutes)</div>
+                <div class="card-body">
+                    <div class="instruction-box">
+                        <strong>Task Overview:</strong> Listen twice to a complex, academic recording (approximately 3 minutes 30 seconds) with sophisticated argumentation. First, report the <strong>gist</strong> with critical evaluation. Second, answer <strong>analytical questions</strong>. Finally, engage in <strong>critical discussion</strong> evaluating the content and implications.
+                    </div>
+
+                    <h4>Task Structure:</h4>
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 1 - First Listening:</strong><br>
+                        Listen for argument structure and theoretical stance. The examiner will ask: "What is the speaker's main argument and theoretical position?"<br><br>
+                        <strong>Your response:</strong> A sophisticated summary identifying the thesis, methodology, and critical stance.<br>
+                        <em>Example: "The speaker advances a post-colonial critique of development economics, arguing that mainstream GDP-centric models perpetuate epistemic violence by marginalising indigenous knowledge systems. Drawing on Escobar and Spivak, the speaker advocates for pluriversal approaches to development that recognise ontological diversity."</em>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 2 - Second Listening:</strong><br>
+                        Listen for specific arguments, evidence, and rhetorical strategies. Take analytical notes.<br><br>
+                        <strong>After listening:</strong> Answer examiner's questions about theoretical frameworks, evidence quality, and implications.<br>
+                        <em>Example: "What evidence does the speaker provide for the claim that GDP measures are epistemically violent?" / "How does the speaker distinguish between development and post-development approaches?"</em>
+                    </div>
+
+                    <div style="margin: 1rem 0; padding: 1rem; background: #f5f5f5;">
+                        <strong>Phase 3 - Critical Discussion:</strong><br>
+                        The examiner asks follow-up questions requiring critical evaluation of the speaker's arguments and their implications.<br><br>
+                        <em>Example: "To what extent do you find the speaker's critique of development economics persuasive?" / "How might these arguments be applied to policy in your context?" / "What are the potential limitations of the pluriversal approach the speaker advocates?"</em>
+                    </div>
+
+                    <h4>Assessment Criteria (Independent Listening - C2):</h4>
+                    <table class="grammar-table">
+                        <thead>
+                            <tr>
+                                <th>Score</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>4</td>
+                                <td>Identifies complex argument structure, understands nuanced theoretical positions, responds with critical sophistication, evaluates speaker's stance independently</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Identifies main argument and most details, responds appropriately with minor analytical gaps</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Identifies partial argument, understands some details, requires clarification of complex points</td>
+                            </tr>
+                            <tr>
+                                <td>1</td>
+                                <td>Identifies minimal information, struggles with theoretical content</td>
+                            </tr>
+                            <tr>
+                                <td>0</td>
+                                <td>No performance to assess or task not attempted</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="warning-box">
+                        <strong>Critical Listening Strategies:</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li>Identify the speaker's theoretical framework and methodological approach</li>
+                            <li>Track the argument structure: thesis, evidence, counter-arguments, conclusion</li>
+                            <li>Note hedging language that indicates epistemic stance ("arguably," "tentatively")</li>
+                            <li>Recognise rhetorical devices: irony, understatement, appeals to authority</li>
+                            <li>Evaluate evidence quality: statistical, anecdotal, theoretical, empirical</li>
+                            <li>Prepare to critique: identify strengths, limitations, and alternative perspectives</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- EXERCISES SECTION -->
+        <section id="exercises" class="section">
+            <div class="card">
+                <div class="card-header">Practice Exercises</div>
+                <div class="card-body">
+                    <p>Test your understanding of ISE IV requirements with these interactive exercises.</p>
+
+                    <!-- Exercise 1 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 1: Task Identification</div>
+                        <p><strong>How long is the ISE IV Speaking & Listening interview?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 20 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) 22 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) 25 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 30 minutes</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 2 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 2: Word Count</div>
+                        <p><strong>What is the correct word count for ISE IV writing tasks?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 200-230 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 250-300 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 150-180 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 300-350 words</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 3 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 3: Reading Text Length</div>
+                        <p><strong>How long is the Task 1 (Long Reading) text at ISE IV?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 700 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 900+ words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 500 words</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 600 words</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 4 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 4: C2 Grammar</div>
+                        <p><strong>Which sentence demonstrates C2-level grammar?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) If the government had acted sooner, the crisis would have been avoided.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) Were the government to implement such policies, significant opposition would inevitably arise.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) The government should take action to solve this problem.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Many people think the government has made mistakes.</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 5 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 5: Subject Areas</div>
+                        <p><strong>How many subject areas are there for the ISE IV Conversation task?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 10 subject areas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 12 subject areas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 8 subject areas</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 15 subject areas</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 6 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 6: Writing Time</div>
+                        <p><strong>How much time is allocated for the ISE IV Reading & Writing module?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) 2 hours</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) 2 hours 30 minutes</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) 3 hours</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) 1 hour 45 minutes</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 7 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 7: Language Function</div>
+                        <p><strong>Which language function is specific to ISE IV (C2) level?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) Giving personal opinions</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">B) Describing past experiences</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">C) Advocating and persuading with sophistication</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) Asking for information</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <!-- Exercise 8 -->
+                    <div class="exercise-box">
+                        <div class="exercise-title">📝 Exercise 8: Academic Register</div>
+                        <p><strong>Which phrase best exemplifies C2 academic register?</strong></p>
+
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">A) This is a big problem that affects many people.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, true)">B) The commodification of knowledge represents a fundamental restructuring of epistemic relations.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">C) Many experts say this is important.</div>
+                        <div class="quiz-option" onclick="checkAnswer(this, false)">D) We need to think about this carefully.</div>
+
+                        <div class="feedback" style="display: none; margin-top: 1rem; padding: 0.75rem; border-radius: 4px;"></div>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Exercise Tips:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li>Click on the option you think is correct</li>
+                            <li>Green indicates correct; red indicates incorrect</li>
+                            <li>Review the relevant sections if you get questions wrong</li>
+                            <li>C2 level requires near-native proficiency with academic sophistication</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VIDEO SECTION -->
+        <section id="video" class="section">
+            <div class="card">
+                <div class="card-header">Official ISE IV Sample Exam Video</div>
+                <div class="card-body">
+                    <p>Watch this official Trinity College London video to see a real ISE IV (C2) Speaking & Listening exam. This demonstrates the sophisticated academic presentation, critical discussion, collaborative task, and independent listening at mastery level.</p>
+
+                    <div class="video-container">
+                        <iframe 
+                            src="https://www.youtube.com/embed/7D1ZwX4S7Vk" 
+                            title="Trinity ISE IV (C2) Sample Exam" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen>
+                        </iframe>
+                    </div>
+
+                    <div class="instruction-box">
+                        <strong>What to observe in this video:</strong>
+                        <ul style="margin-left: 2rem; margin-top: 0.5rem;">
+                            <li><strong>Topic Presentation (0:00-4:00):</strong> Notice the sophisticated academic register, theoretical framework, and discursive structure</li>
+                            <li><strong>Critical Discussion:</strong> How the candidate defends arguments while acknowledging complexity and limitations</li>
+                            <li><strong>Language Sophistication:</strong> C2 structures (subjunctive, inversion, nominalisation), academic collocations</li>
+                            <li><strong>Collaborative Task:</strong> Immediate critical engagement with abstract scenario, analytical leadership</li>
+                            <li><strong>Conversation Task:</strong> Philosophical depth, theoretical references, spontaneous sophisticated discussion</li>
+                            <li><strong>Independent Listening:</strong> Critical summary with theoretical framing, analytical note-taking</li>
+                        </ul>
+                    </div>
+
+                    <div class="mastery-box">
+                        <strong>Key Differences from ISE III (C1):</strong>
+                        <ul style="margin-left: 1.5rem;">
+                            <li><strong>Academic sophistication:</strong> Theoretical frameworks, methodological awareness, critical stance</li>
+                            <li><strong>Abstract complexity:</strong> Epistemology, ontology, social theory, philosophical concepts</li>
+                            <li><strong>Language precision:</strong> Nuanced modality, sophisticated hedging, idiomatic academic expressions</li>
+                            <li><strong>Critical independence:</strong> Original analytical contributions, not just synthesis of sources</li>
+                            <li><strong>Meta-cognitive awareness:</strong> Reflection on one's own argumentation and limitations</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Video Analysis Checklist</div>
+                <div class="card-body">
+                    <p>While watching the video, check off these C2-level observations:</p>
+                    <ul class="checklist">
+                        <li>Candidate brings a sophisticated handout with theoretical framework</li>
+                        <li>Presentation demonstrates discursive academic argumentation</li>
+                        <li>Candidate uses C2 grammar structures naturally (subjunctive, inversion)</li>
+                        <li>Academic vocabulary is precise and sophisticated (nominalisation)</li>
+                        <li>Candidate invites critical questions with meta-discursive awareness</li>
+                        <li>Discussion involves defending arguments with evidence and concession</li>
+                        <li>Candidate demonstrates epistemic humility (acknowledging limitations)</li>
+                        <li>Collaborative task shows immediate analytical leadership</li>
+                        <li>Candidate proposes analytical frameworks for complex problems</li>
+                        <li>Conversation demonstrates philosophical depth and theoretical knowledge</li>
+                        <li>Listening summary includes critical evaluation of speaker's stance</li>
+                        <li>Fluency is effortless with sophisticated pacing and emphasis</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">Additional Resources</div>
+                <div class="card-body">
+                    <ul style="margin-left: 2rem;">
+                        <li><strong>Official Trinity Website:</strong> <a href="https://www.trinitycollege.com/ISEIV">trinitycollege.com/ISEIV</a></li>
+                        <li><strong>Guide for Students:</strong> Download the ISE IV Guide for detailed preparation advice</li>
+                        <li><strong>Sample Papers:</strong> Practice with official sample Reading & Writing papers</li>
+                        <li><strong>Speaking Activities:</strong> C2 Activity Worksheets for advanced practice</li>
+                        <li><strong>Academic Writing:</strong> Resources for developing C2-level academic writing skills</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background: var(--light); border-top: 1px solid var(--border); padding: 2rem; margin-top: 3rem; text-align: center; color: var(--secondary);">
+        <div style="max-width: 1200px; margin: 0 auto;">
+            <p>© 2024 Trinity College London ISE IV (C2) Preparation Guide</p>
+            <p style="font-size: 0.9rem; margin-top: 0.5rem;">Based on official Trinity College London specifications</p>
+        </div>
+    </footer>
+
+    <script>
+        function showSection(id, btn) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            document.querySelectorAll('.nav-tab').forEach(b => b.classList.remove('active'));
+            if(btn) btn.classList.add('active');
+        }
+
+        function checkAnswer(element, isCorrect) {
+            const parent = element.parentElement;
+            const siblings = parent.querySelectorAll('.quiz-option');
+            siblings.forEach(sib => {
+                sib.classList.remove('correct', 'incorrect');
+                sib.style.pointerEvents = 'none';
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct');
+                showFeedback(parent, '✓ Correct! Well done.', 'success');
+            } else {
+                element.classList.add('incorrect');
+                siblings.forEach(sib => {
+                    if (sib.onclick.toString().includes('true')) {
+                        sib.classList.add('correct');
+                    }
+                });
+                showFeedback(parent, '✗ Incorrect. The correct answer is highlighted in green.', 'error');
+            }
+        }
+
+        function showFeedback(parent, message, type) {
+            const feedback = parent.querySelector('.feedback');
+            feedback.textContent = message;
+            feedback.style.display = 'block';
+            if (type === 'success') {
+                feedback.style.background = '#a5d6a7';
+                feedback.style.color = '#1b5e20';
+                feedback.style.border = '1px solid #81c784';
+            } else {
+                feedback.style.background = '#ef9a9a';
+                feedback.style.color = '#b71c1c';
+                feedback.style.border = '1px solid #e57373';
+            }
+        }
+    </script>
+</body>
+</html>
