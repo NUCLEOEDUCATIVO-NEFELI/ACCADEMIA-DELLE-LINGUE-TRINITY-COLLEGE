@@ -204,8 +204,20 @@
             </div>
 
             <div class="menu-category">ISE Foundation (A2 - B1)</div>
-            <div class="nav-item" onclick="loadModule('trinity_ise_foundation.html', 'ISE Foundation')" id="nav-ise-f">
-                <span>📚</span><span>ISE Foundation</span><span class="nav-level level-a2">A2-B1</span>
+            <div class="nav-item" onclick="loadModule('trinity_ise_foundation_interview.html', 'ISE Foundation Interview')" id="nav-ise-f-int">
+                <span>🎤</span><span>Interview</span><span class="nav-level level-a2">A2-B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise_foundation_portfolio.html', 'ISE Foundation Portfolio')" id="nav-ise-f-port">
+                <span>📁</span><span>Portfolio</span><span class="nav-level level-a2">A2-B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise_foundation_task.html', 'ISE Foundation Task')" id="nav-ise-f-task">
+                <span>✏️</span><span>Task</span><span class="nav-level level-a2">A2-B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise_foundation_reading.html', 'ISE Foundation Reading')" id="nav-ise-f-read">
+                <span>📖</span><span>Reading</span><span class="nav-level level-a2">A2-B1</span>
+            </div>
+            <div class="nav-item" onclick="loadModule('trinity_ise_foundation_writing.html', 'ISE Foundation Writing')" id="nav-ise-f-write">
+                <span>✍️</span><span>Writing</span><span class="nav-level level-a2">A2-B1</span>
             </div>
 
             <div class="menu-category">ISE I (B1)</div>
@@ -286,40 +298,77 @@
             <!-- HOME -->
             <div id="home" class="section active">
                 <div class="breadcrumbs">
-                    <strong>Seleziona Livello CEFR</strong>
+                    <strong>Cruscotto - Panoramica Livelli</strong>
                 </div>
                 <div style="margin-bottom:32px;">
                     <h1 class="section-title">Benvenuto, <span id="welcomeName">Studente</span></h1>
-                    <p class="section-subtitle">Seleziona il livello di competenza linguistico per accedere ai moduli didattici</p>
+                    <p class="section-subtitle">Seleziona un modulo dalla sidebar per iniziare lo studio</p>
                 </div>
 
-                <div class="exam-type-tabs">
-                    <button class="exam-tab active" onclick="showExamType('gese')">GESE (Spoken)</button>
-                    <button class="exam-tab" onclick="showExamType('ise')">ISE (Integrated Skills)</button>
+                <!-- GESE Descrizioni -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--trinity-red); color: white;">🗣️ GESE - Graded Examinations in Spoken English</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 20px; color: var(--text-secondary);">Esami orali focalizzati sulla comunicazione parlata, dal livello principiante a quello madrelingua.</p>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+                            <div style="padding: 16px; background: #f0fdf4; border-left: 4px solid var(--level-a1); border-radius: 0 8px 8px 0;">
+                                <h4 style="color: var(--level-a1); margin-bottom: 8px;">🌱 Grades 1-3 (A1 - A2.1)</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);"><strong>Initial Stage:</strong> Presentazioni personali, descrizione di persone e luoghi, routine quotidiane. Focus su vocabolario base e strutture semplici.</p>
+                            </div>
+                            <div style="padding: 16px; background: #eff6ff; border-left: 4px solid var(--level-a2); border-radius: 0 8px 8px 0;">
+                                <h4 style="color: var(--level-a2); margin-bottom: 8px;">🌿 Grades 4-6 (A2.2 - B1.2)</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);"><strong>Elementary Stage:</strong> Narrazione al passato, espressione di opinioni, situazioni ipotetiche. Sviluppo della fluency e accuratezza.</p>
+                            </div>
+                            <div style="padding: 16px; background: #fef2f2; border-left: 4px solid var(--level-b2); border-radius: 0 8px 8px 0;">
+                                <h4 style="color: var(--level-b2); margin-bottom: 8px;">🌳 Grades 7-9 (B2.1 - B2.3)</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);"><strong>Intermediate Stage:</strong> Analisi critica, argomentazione complessa, temi astratti. Capacità di negoziare significato.</p>
+                            </div>
+                            <div style="padding: 16px; background: #faf5ff; border-left: 4px solid var(--level-c1); border-radius: 0 8px 8px 0;">
+                                <h4 style="color: var(--level-c1); margin-bottom: 8px;">🏆 Grades 10-12 (C1 - C2)</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);"><strong>Advanced Stage:</strong> Discorso accademico, ricerca indipendente, competenza pragmatica. Livello professionale/madrelingua.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <div id="gese-levels" class="level-selector" style="display: grid;">
-                    <div class="level-card active" onclick="showLevel('gese-initial')">
-                        <div class="level-icon" style="color: var(--level-a1);">🌱</div>
-                        <div class="level-name" style="color: var(--level-a1);">Grades 1-3</div>
-                        <div class="level-desc">Initial Stage<br>A1 - A2.1</div>
-                    </div>
-                    <div class="level-card" onclick="showLevel('gese-elementary')">
-                        <div class="level-icon" style="color: var(--level-a2);">🌿</div>
-                        <div class="level-name" style="color: var(--level-a2);">Grades 4-6</div>
-                        <div class="level-desc">Elementary Stage<br>A2.2 - B1.2</div>
-                    </div>
-                    <div class="level-card" onclick="showLevel('gese-intermediate')">
-                        <div class="level-icon" style="color: var(--level-b2);">🌳</div>
-                        <div class="level-name" style="color: var(--level-b2);">Grades 7-9</div>
-                        <div class="level-desc">Intermediate Stage<br>B2.1 - B2.3</div>
-                    </div>
-                    <div class="level-card" onclick="showLevel('gese-advanced')">
-                        <div class="level-icon" style="color: var(--level-c1);">🏆</div>
-                        <div class="level-name" style="color: var(--level-c1);">Grades 10-12</div>
-                        <div class="level-desc">Advanced Stage<br>C1 - C2</div>
+                <!-- ISE Descrizioni -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--trinity-blue); color: white;">📚 ISE - Integrated Skills in English</div>
+                    <div class="card-body">
+                        <p style="margin-bottom: 20px; color: var(--text-secondary);">Esami integrati che valutano lettura, scrittura, ascolto e produzione orale attraverso task autentici.</p>
+
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                            <div style="padding: 16px; background: #eff6ff; border-left: 4px solid #2563eb; border-radius: 0 8px 8px 0;">
+                                <h4 style="color: #2563eb; margin-bottom: 8px;">📘 ISE Foundation (A2-B1)</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">Comprensione di testi semplici, scrittura di email e brevi testi, conversazioni quotidiane.</p>
+                            </div>
+                            <div style="padding: 16px; background: #fefce8; border-left: 4px solid #c9a227; border-radius: 0 8px 8px 0;">
+                                <h4 style="color: #c9a227; margin-bottom: 8px;">📗 ISE I (B1)</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">Lettura di articoli, scrittura di saggi brevi, espressione di opinioni, task integrati.</p>
+                            </div>
+                            <div style="padding: 16px; background: #fef2f2; border-left: 4px solid var(--level-b2); border-radius: 0 8px 8px 0;">
+                                <h4 style="color: var(--level-b2); margin-bottom: 8px;">📕 ISE II (B2)</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">Testi complessi, scrittura argomentativa, analisi critica, presentazioni strutturate.</p>
+                            </div>
+                            <div style="padding: 16px; background: #faf5ff; border-left: 4px solid var(--level-c1); border-radius: 0 8px 8px 0;">
+                                <h4 style="color: var(--level-c1); margin-bottom: 8px;">📙 ISE III (C1)</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">Letteratura specialistica, scrittura accademica, inferenze complesse, fluency elevata.</p>
+                            </div>
+                            <div style="padding: 16px; background: #f1f5f9; border-left: 4px solid var(--level-c2); border-radius: 0 8px 8px 0;">
+                                <h4 style="color: var(--level-c2); margin-bottom: 8px;">📓 ISE IV (C2)</h4>
+                                <p style="font-size: 0.9rem; color: var(--text-secondary);">Livello madrelingua, manipolazione sofisticata del linguaggio, consapevolezza pragmatica.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
+
+                <!-- Istruzioni -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 24px; border-radius: 12px; text-align: center;">
+                    <h3 style="margin-bottom: 12px;">🎯 Come Iniziare</h3>
+                    <p>Utilizza la sidebar a sinistra per navigare tra i moduli. Ogni sezione contiene materiali didattici specifici per il tuo livello di preparazione.</p>
+                </div>
+            </div>
 
                 <div id="dashboard-gese-initial" class="level-dashboard">
                     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px;margin-bottom:32px;">
@@ -498,21 +547,149 @@
                 </div>
                 <div style="margin:24px 0;">
                     <h1 class="section-title">Registro Valutazioni</h1>
-                    <p class="section-subtitle">Riepilogo dei punteggi e del progresso formativo</p>
+                    <p class="section-subtitle">Riepilogo completo dei punteggi e del progresso formativo su tutti i livelli</p>
                 </div>
-                <div class="card">
+
+                <!-- Statistiche Generali -->
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
+                    <div class="stat-card">
+                        <div class="stat-label">Moduli Completati</div>
+                        <div class="stat-value" id="statCompleted">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Media Generale</div>
+                        <div class="stat-value" id="statAverage">0%</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Livello Più Alto</div>
+                        <div class="stat-value" id="statHighest">-</div>
+                    </div>
+                </div>
+
+                <!-- GESE Results -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--trinity-red); color: white;">🗣️ GESE - Risultati</div>
                     <div class="card-body">
-                        <table style="width: 100%; border-collapse: collapse;">
+                        <table style="width: 100%; border-collapse: collapse;" id="geseTable">
                             <thead>
                                 <tr style="border-bottom: 2px solid var(--border);">
-                                    <th style="text-align: left; padding: 12px;">Modulo</th>
-                                    <th style="text-align: center; padding: 12px;">Livello</th>
+                                    <th style="text-align: left; padding: 12px;">Grade</th>
+                                    <th style="text-align: center; padding: 12px;">Livello CEFR</th>
                                     <th style="text-align: center; padding: 12px;">Data</th>
                                     <th style="text-align: center; padding: 12px;">Punteggio</th>
                                     <th style="text-align: center; padding: 12px;">Stato</th>
                                 </tr>
                             </thead>
-                            <tbody id="resultsTableBody"></tbody>
+                            <tbody id="geseResultsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ISE Foundation Results -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: #2563eb; color: white;">📚 ISE Foundation - Risultati</div>
+                    <div class="card-body">
+                        <table style="width: 100%; border-collapse: collapse;" id="iseFTable">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border);">
+                                    <th style="text-align: left; padding: 12px;">Modulo</th>
+                                    <th style="text-align: center; padding: 12px;">Data</th>
+                                    <th style="text-align: center; padding: 12px;">Punteggio</th>
+                                    <th style="text-align: center; padding: 12px;">Stato</th>
+                                </tr>
+                            </thead>
+                            <tbody id="iseFResultsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ISE I Results -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: #c9a227; color: #000;">📗 ISE I (B1) - Risultati</div>
+                    <div class="card-body">
+                        <table style="width: 100%; border-collapse: collapse;" id="ise1Table">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border);">
+                                    <th style="text-align: left; padding: 12px;">Modulo</th>
+                                    <th style="text-align: center; padding: 12px;">Data</th>
+                                    <th style="text-align: center; padding: 12px;">Punteggio</th>
+                                    <th style="text-align: center; padding: 12px;">Stato</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ise1ResultsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ISE II Results -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-b2); color: white;">📕 ISE II (B2) - Risultati</div>
+                    <div class="card-body">
+                        <table style="width: 100%; border-collapse: collapse;" id="ise2Table">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border);">
+                                    <th style="text-align: left; padding: 12px;">Modulo</th>
+                                    <th style="text-align: center; padding: 12px;">Data</th>
+                                    <th style="text-align: center; padding: 12px;">Punteggio</th>
+                                    <th style="text-align: center; padding: 12px;">Stato</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ise2ResultsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ISE III Results -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-c1); color: white;">📙 ISE III (C1) - Risultati</div>
+                    <div class="card-body">
+                        <table style="width: 100%; border-collapse: collapse;" id="ise3Table">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border);">
+                                    <th style="text-align: left; padding: 12px;">Modulo</th>
+                                    <th style="text-align: center; padding: 12px;">Data</th>
+                                    <th style="text-align: center; padding: 12px;">Punteggio</th>
+                                    <th style="text-align: center; padding: 12px;">Stato</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ise3ResultsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- ISE IV Results -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: var(--level-c2); color: white;">📓 ISE IV (C2) - Risultati</div>
+                    <div class="card-body">
+                        <table style="width: 100%; border-collapse: collapse;" id="ise4Table">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border);">
+                                    <th style="text-align: left; padding: 12px;">Modulo</th>
+                                    <th style="text-align: center; padding: 12px;">Data</th>
+                                    <th style="text-align: center; padding: 12px;">Punteggio</th>
+                                    <th style="text-align: center; padding: 12px;">Stato</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ise4ResultsBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Simulazioni Results -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <div class="card-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">🎯 Simulazioni Esami - Risultati</div>
+                    <div class="card-body">
+                        <table style="width: 100%; border-collapse: collapse;" id="simTable">
+                            <thead>
+                                <tr style="border-bottom: 2px solid var(--border);">
+                                    <th style="text-align: left; padding: 12px;">Simulazione</th>
+                                    <th style="text-align: center; padding: 12px;">Tipo</th>
+                                    <th style="text-align: center; padding: 12px;">Data</th>
+                                    <th style="text-align: center; padding: 12px;">Punteggio</th>
+                                    <th style="text-align: center; padding: 12px;">Stato</th>
+                                </tr>
+                            </thead>
+                            <tbody id="simResultsBody"></tbody>
                         </table>
                     </div>
                 </div>
@@ -675,20 +852,283 @@ function showLevel(level) {
     if (event && event.currentTarget) event.currentTarget.classList.add('active');
 }
 
-function loadResults() {
-    const tbody = document.getElementById('resultsTableBody');
-    if (!tbody) return;
+// Struttura dati per tutti i moduli
+const allModules = {
+    gese: [
+        { grade: 1, name: 'GESE Grade 1', level: 'A1', levelClass: 'level-a1' },
+        { grade: 2, name: 'GESE Grade 2', level: 'A1', levelClass: 'level-a1' },
+        { grade: 3, name: 'GESE Grade 3', level: 'A2.1', levelClass: 'level-a2' },
+        { grade: 4, name: 'GESE Grade 4', level: 'A2.2', levelClass: 'level-a2' },
+        { grade: 5, name: 'GESE Grade 5', level: 'B1.1', levelClass: 'level-b1' },
+        { grade: 6, name: 'GESE Grade 6', level: 'B1.2', levelClass: 'level-b1' },
+        { grade: 7, name: 'GESE Grade 7', level: 'B2.1', levelClass: 'level-b2' },
+        { grade: 8, name: 'GESE Grade 8', level: 'B2.2', levelClass: 'level-b2' },
+        { grade: 9, name: 'GESE Grade 9', level: 'B2.3', levelClass: 'level-b2' },
+        { grade: 10, name: 'GESE Grade 10', level: 'C1.1', levelClass: 'level-c1' },
+        { grade: 11, name: 'GESE Grade 11', level: 'C1.2', levelClass: 'level-c1' },
+        { grade: 12, name: 'GESE Grade 12', level: 'C2', levelClass: 'level-c2' }
+    ],
+    iseF: [
+        { name: 'Interview', icon: '🎤' },
+        { name: 'Portfolio', icon: '📁' },
+        { name: 'Task', icon: '✏️' },
+        { name: 'Reading', icon: '📖' },
+        { name: 'Writing', icon: '✍️' }
+    ],
+    ise1: [
+        { name: 'Interview', icon: '🎤' },
+        { name: 'Portfolio', icon: '📁' },
+        { name: 'Task', icon: '✏️' },
+        { name: 'Reading', icon: '📖' },
+        { name: 'Writing', icon: '✍️' }
+    ],
+    ise2: [
+        { name: 'Interview', icon: '🎤' },
+        { name: 'Portfolio', icon: '📁' },
+        { name: 'Task', icon: '✏️' },
+        { name: 'Reading', icon: '📖' },
+        { name: 'Writing', icon: '✍️' }
+    ],
+    ise3: [
+        { name: 'Interview', icon: '🎤' },
+        { name: 'Portfolio', icon: '📁' },
+        { name: 'Task', icon: '✏️' },
+        { name: 'Reading', icon: '📖' },
+        { name: 'Writing', icon: '✍️' }
+    ],
+    ise4: [
+        { name: 'Interview', icon: '🎤' },
+        { name: 'Portfolio', icon: '📁' },
+        { name: 'Task', icon: '✏️' },
+        { name: 'Reading', icon: '📖' },
+        { name: 'Writing', icon: '✍️' }
+    ],
+    simulazioni: [
+        { name: 'GESE 1', type: 'GESE', level: 'A1' },
+        { name: 'GESE 2', type: 'GESE', level: 'A1' },
+        { name: 'GESE 3', type: 'GESE', level: 'A2.1' },
+        { name: 'GESE 4', type: 'GESE', level: 'A2.2' },
+        { name: 'GESE 5', type: 'GESE', level: 'B1.1' },
+        { name: 'GESE 6', type: 'GESE', level: 'B1.2' },
+        { name: 'GESE 7', type: 'GESE', level: 'B2.1' },
+        { name: 'GESE 8', type: 'GESE', level: 'B2.2' },
+        { name: 'GESE 9', type: 'GESE', level: 'B2.3' },
+        { name: 'GESE 10', type: 'GESE', level: 'C1.1' },
+        { name: 'GESE 11', type: 'GESE', level: 'C1.2' },
+        { name: 'GESE 12', type: 'GESE', level: 'C2' },
+        { name: 'ISE Foundation', type: 'ISE-F', level: 'A2-B1' },
+        { name: 'ISE I', type: 'ISE-I', level: 'B1' },
+        { name: 'ISE II', type: 'ISE-II', level: 'B2' },
+        { name: 'ISE III', type: 'ISE-III', level: 'C1' },
+        { name: 'ISE IV', type: 'ISE-IV', level: 'C2' }
+    ]
+};
 
-    // Dati demo per esempio
-    tbody.innerHTML = `
-        <tr style="border-bottom: 1px solid var(--border);">
-            <td style="padding: 12px;">GESE Grade 1 - Introduction</td>
-            <td style="padding: 12px; text-align: center;"><span class="nav-level level-a1">A1</span></td>
-            <td style="padding: 12px; text-align: center; color: var(--text-secondary);">-</td>
-            <td style="padding: 12px; text-align: center;">-</td>
-            <td style="padding: 12px; text-align: center;"><span class="status-badge status-pending">In corso</span></td>
-        </tr>
-    `;
+// Funzione per salvare un risultato
+function saveResult(moduleName, score, status) {
+    if (!currentUser) return;
+
+    const result = {
+        module: moduleName,
+        score: score,
+        status: status,
+        date: new Date().toLocaleDateString('it-IT'),
+        timestamp: new Date().toISOString()
+    };
+
+    // Inizializza scores se non esiste
+    if (!db.scores) db.scores = [];
+
+    // Cerca se esiste già un risultato per questo modulo e utente
+    const existingIndex = db.scores.findIndex(s => 
+        s.userEmail === currentUser.email && s.module === moduleName
+    );
+
+    if (existingIndex >= 0) {
+        // Aggiorna risultato esistente
+        db.scores[existingIndex] = { ...result, userEmail: currentUser.email };
+    } else {
+        // Aggiungi nuovo risultato
+        db.scores.push({ ...result, userEmail: currentUser.email });
+    }
+
+    saveDB();
+    loadResults(); // Ricarica la visualizzazione
+}
+
+// Funzione per ottenere risultati dell'utente corrente
+function getUserResults() {
+    if (!currentUser || !db.scores) return [];
+    return db.scores.filter(s => s.userEmail === currentUser.email);
+}
+
+function loadResults() {
+    const userResults = getUserResults();
+
+    // GESE Results
+    const geseBody = document.getElementById('geseResultsBody');
+    if (geseBody) {
+        geseBody.innerHTML = allModules.gese.map(g => {
+            const result = userResults.find(r => r.module === g.name);
+            return `
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 12px;">${g.name}</td>
+                    <td style="padding: 12px; text-align: center;"><span class="nav-level ${g.levelClass}">${g.level}</span></td>
+                    <td style="padding: 12px; text-align: center; color: var(--text-secondary);">${result ? result.date : '-'}</td>
+                    <td style="padding: 12px; text-align: center; font-weight: 600;">${result ? result.score + '%' : '-'}</td>
+                    <td style="padding: 12px; text-align: center;">
+                        <span class="status-badge ${result ? (result.status === 'Completato' ? 'status-completed' : 'status-pending') : 'status-pending'}">
+                            ${result ? result.status : 'Da iniziare'}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // ISE Foundation Results
+    const iseFBody = document.getElementById('iseFResultsBody');
+    if (iseFBody) {
+        iseFBody.innerHTML = allModules.iseF.map(m => {
+            const result = userResults.find(r => r.module === `ISE Foundation ${m.name}`);
+            return `
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 12px;">${m.icon} ${m.name}</td>
+                    <td style="padding: 12px; text-align: center; color: var(--text-secondary);">${result ? result.date : '-'}</td>
+                    <td style="padding: 12px; text-align: center; font-weight: 600;">${result ? result.score + '%' : '-'}</td>
+                    <td style="padding: 12px; text-align: center;">
+                        <span class="status-badge ${result ? (result.status === 'Completato' ? 'status-completed' : 'status-pending') : 'status-pending'}">
+                            ${result ? result.status : 'Da iniziare'}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // ISE I Results
+    const ise1Body = document.getElementById('ise1ResultsBody');
+    if (ise1Body) {
+        ise1Body.innerHTML = allModules.ise1.map(m => {
+            const result = userResults.find(r => r.module === `ISE I ${m.name}`);
+            return `
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 12px;">${m.icon} ${m.name}</td>
+                    <td style="padding: 12px; text-align: center; color: var(--text-secondary);">${result ? result.date : '-'}</td>
+                    <td style="padding: 12px; text-align: center; font-weight: 600;">${result ? result.score + '%' : '-'}</td>
+                    <td style="padding: 12px; text-align: center;">
+                        <span class="status-badge ${result ? (result.status === 'Completato' ? 'status-completed' : 'status-pending') : 'status-pending'}">
+                            ${result ? result.status : 'Da iniziare'}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // ISE II Results
+    const ise2Body = document.getElementById('ise2ResultsBody');
+    if (ise2Body) {
+        ise2Body.innerHTML = allModules.ise2.map(m => {
+            const result = userResults.find(r => r.module === `ISE II ${m.name}`);
+            return `
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 12px;">${m.icon} ${m.name}</td>
+                    <td style="padding: 12px; text-align: center; color: var(--text-secondary);">${result ? result.date : '-'}</td>
+                    <td style="padding: 12px; text-align: center; font-weight: 600;">${result ? result.score + '%' : '-'}</td>
+                    <td style="padding: 12px; text-align: center;">
+                        <span class="status-badge ${result ? (result.status === 'Completato' ? 'status-completed' : 'status-pending') : 'status-pending'}">
+                            ${result ? result.status : 'Da iniziare'}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // ISE III Results
+    const ise3Body = document.getElementById('ise3ResultsBody');
+    if (ise3Body) {
+        ise3Body.innerHTML = allModules.ise3.map(m => {
+            const result = userResults.find(r => r.module === `ISE III ${m.name}`);
+            return `
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 12px;">${m.icon} ${m.name}</td>
+                    <td style="padding: 12px; text-align: center; color: var(--text-secondary);">${result ? result.date : '-'}</td>
+                    <td style="padding: 12px; text-align: center; font-weight: 600;">${result ? result.score + '%' : '-'}</td>
+                    <td style="padding: 12px; text-align: center;">
+                        <span class="status-badge ${result ? (result.status === 'Completato' ? 'status-completed' : 'status-pending') : 'status-pending'}">
+                            ${result ? result.status : 'Da iniziare'}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // ISE IV Results
+    const ise4Body = document.getElementById('ise4ResultsBody');
+    if (ise4Body) {
+        ise4Body.innerHTML = allModules.ise4.map(m => {
+            const result = userResults.find(r => r.module === `ISE IV ${m.name}`);
+            return `
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 12px;">${m.icon} ${m.name}</td>
+                    <td style="padding: 12px; text-align: center; color: var(--text-secondary);">${result ? result.date : '-'}</td>
+                    <td style="padding: 12px; text-align: center; font-weight: 600;">${result ? result.score + '%' : '-'}</td>
+                    <td style="padding: 12px; text-align: center;">
+                        <span class="status-badge ${result ? (result.status === 'Completato' ? 'status-completed' : 'status-pending') : 'status-pending'}">
+                            ${result ? result.status : 'Da iniziare'}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // Simulazioni Results
+    const simBody = document.getElementById('simResultsBody');
+    if (simBody) {
+        simBody.innerHTML = allModules.simulazioni.map(s => {
+            const result = userResults.find(r => r.module === `Simulazione ${s.name}`);
+            return `
+                <tr style="border-bottom: 1px solid var(--border);">
+                    <td style="padding: 12px;">🎯 Simulazione ${s.name}</td>
+                    <td style="padding: 12px; text-align: center;"><span class="nav-level level-${s.level.toLowerCase().replace('.', '')}">${s.type}</span></td>
+                    <td style="padding: 12px; text-align: center; color: var(--text-secondary);">${result ? result.date : '-'}</td>
+                    <td style="padding: 12px; text-align: center; font-weight: 600;">${result ? result.score + '%' : '-'}</td>
+                    <td style="padding: 12px; text-align: center;">
+                        <span class="status-badge ${result ? (result.status === 'Completato' ? 'status-completed' : 'status-pending') : 'status-pending'}">
+                            ${result ? result.status : 'Da iniziare'}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+    }
+
+    // Aggiorna statistiche
+    updateStats(userResults);
+}
+
+function updateStats(userResults) {
+    const completed = userResults.filter(r => r.status === 'Completato').length;
+    const total = userResults.length;
+    const average = total > 0 ? Math.round(userResults.reduce((sum, r) => sum + parseInt(r.score), 0) / total) : 0;
+
+    // Trova livello più alto completato
+    const levels = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+    let highest = '-';
+    for (let i = levels.length - 1; i >= 0; i--) {
+        if (userResults.some(r => r.module.includes(levels[i]) && r.status === 'Completato')) {
+            highest = levels[i];
+            break;
+        }
+    }
+
+    document.getElementById('statCompleted').textContent = completed;
+    document.getElementById('statAverage').textContent = average + '%';
+    document.getElementById('statHighest').textContent = highest;
 }
 </script>
 
