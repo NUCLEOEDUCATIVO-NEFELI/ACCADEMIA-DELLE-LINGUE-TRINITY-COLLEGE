@@ -358,6 +358,32 @@
             border-left: 4px solid var(--primary);
         }
 
+        /* Video Section Styles */
+        .video-container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        .video-wrapper {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            background: #000;
+            border-radius: 8px;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
         @media (max-width: 768px) {
             .header-container {
                 flex-direction: column;
@@ -372,8 +398,12 @@
             .infographic-grid {
                 grid-template-columns: 1fr;
             }
+            .video-container {
+                padding: 0 1rem;
+            }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
     <header class="header">
@@ -385,6 +415,30 @@
             <div class="timer" id="timer">120:00</div>
         </div>
     </header>
+
+    <!-- VIDEO SECTION -->
+    <section class="video-container">
+        <div class="card">
+            <div class="card-header">
+                <span>📹 Video Resource</span>
+                <span style="font-size: 0.9rem; font-weight: normal;">Listening Practice</span>
+            </div>
+            <div class="card-body">
+                <div class="instructions">
+                    <strong>Watch this video for additional listening practice before starting the exam.</strong>
+                </div>
+                <div class="video-wrapper">
+                    <iframe 
+                        src="https://www.youtube.com/embed/3fQKQugpfrg" 
+                        title="YouTube video player" 
+                        frameborder="0" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <div class="exam-container">
         <div class="progress-bar">
